@@ -296,7 +296,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* Duplicate report list */
 .nr-dup-list{display:flex;flex-direction:column;gap:0;}
-.nr-dup-item{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-bottom:1px solid var(--platform-10);cursor:pointer;transition:background .08s;border-radius:6px;margin:0;}
+.nr-dup-item{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-bottom:1px solid var(--platform-10);cursor:pointer;transition:background .08s;border-radius:0;margin:0;}
 .nr-dup-item:hover{background:var(--platform-5);}
 .nr-dup-item:last-child{border-bottom:none;}
 .nr-dup-name{font-size:15px;font-weight:700;color:var(--platform-100);}
@@ -1627,7 +1627,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <p class="nr-blank-p">Pick any saved report to copy. You'll land in the editor with the original filters and columns pre-populated.</p>
             <div class="tb-search" style="max-width:none;margin-bottom:16px;height:48px;border-radius:4px;">
               <svg class="nav-svg-icon" aria-hidden="true" style="width:14px;height:14px;color:var(--platform-60);"><use href="#icon-magnifying-glass"/></svg>
-              <input type="text" placeholder="Search 44 saved reports…">
+              <input type="text" placeholder="Search saved reports...">
             </div>
             <div class="nr-dup-list">
               <div class="nr-dup-item" onclick="showView('editor')">

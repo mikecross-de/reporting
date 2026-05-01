@@ -137,6 +137,8 @@ input,select,textarea{font-family:var(--font);}
 .tb-search:focus-within{border-color:var(--crm-100);border-width:2px;padding:0 11px;}
 .tb-search input{flex:1;border:none;outline:none;font-size:16px;color:var(--platform-100);background:transparent;}
 .tb-search input::placeholder{color:var(--platform-40);}
+.tb-search-clear{display:none;background:none;border:none;cursor:pointer;padding:2px;color:var(--platform-60);flex-shrink:0;align-items:center;justify-content:center;transition:color .12s;}
+.tb-search-clear:hover{color:var(--platform-100);}
 .tb-pills{display:inline-flex;gap:6px;flex-shrink:0;}
 .tb-pill{background:var(--white);border:1px solid var(--platform-20);padding:7px 14px;font-size:14px;font-weight:700;color:var(--platform-80);cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:all .12s;border-radius:44px;}
 .tb-pill:hover{background:var(--platform-5);color:var(--platform-100);border-color:var(--platform-40);}
@@ -711,7 +713,10 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
           <div class="rep-toolbar-1">
             <div class="tb-search">
               <svg class="nav-svg-icon" aria-hidden="true" style="width:14px;height:14px;color:var(--platform-60);"><use href="#icon-magnifying-glass"/></svg>
-              <input type="text" placeholder="Search reports…">
+              <input type="text" placeholder="Search reports…" oninput="searchReportsList(this.value)">
+              <button class="tb-search-clear" id="reportsSearchClear" onclick="clearReportsSearch()">
+                <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-xmark"/></svg>
+              </button>
             </div>
             <div class="tb-pills">
               <button class="tb-pill active" data-filter="active" onclick="togglePill(this)">Active</button>
@@ -1974,10 +1979,25 @@ document.addEventListener('click', function(e){
 
 // ─── Filter state ───
 let activeFilters = { pills:['active'], creator:'all', type:'all', folder:'all' };
+let reportsSearchQuery = '';
+
+function searchReportsList(query){
+  reportsSearchQuery = query.toLowerCase().trim();
+  var clearBtn = document.getElementById('reportsSearchClear');
+  if(clearBtn) clearBtn.style.display = reportsSearchQuery ? 'flex' : 'none';
+  applyAllFilters();
+}
+function clearReportsSearch(){
+  var input = document.querySelector('.rep-toolbar-1 .tb-search input');
+  if(input){ input.value = ''; searchReportsList(''); input.focus(); }
+}
 
 function applyAllFilters(){
   const rows = document.querySelectorAll('#tbody1 tr[data-status]');
   let visible = 0;
+  // Remove existing no-results row
+  var existingEmpty = document.getElementById('reportsNoResults');
+  if(existingEmpty) existingEmpty.remove();
   rows.forEach(r => {
     let show = false;
     // Pill filters (OR logic — match any active pill)
@@ -1993,9 +2013,27 @@ function applyAllFilters(){
     if(show && activeFilters.creator !== 'all') show = r.dataset.creator === activeFilters.creator;
     if(show && activeFilters.type !== 'all') show = r.dataset.type === activeFilters.type;
     if(show && activeFilters.folder !== 'all') show = r.dataset.folder === activeFilters.folder;
+    // Search filter
+    if(show && reportsSearchQuery){
+      var name = r.querySelector('.dg-name');
+      var meta = r.querySelector('.dg-name-meta');
+      var nameText = name ? name.textContent.toLowerCase() : '';
+      var metaText = meta ? meta.textContent.toLowerCase() : '';
+      show = nameText.indexOf(reportsSearchQuery) > -1 || metaText.indexOf(reportsSearchQuery) > -1;
+    }
     r.style.display = show ? '' : 'none';
     if(show) visible++;
   });
+  // No results state
+  if(visible === 0){
+    var tbody = document.getElementById('tbody1');
+    var colCount = tbody.closest('table').querySelectorAll('thead th').length;
+    var tr = document.createElement('tr');
+    tr.id = 'reportsNoResults';
+    tr.style.cssText = 'pointer-events:none;';
+    tr.innerHTML = '<td colspan="' + colCount + '" style="text-align:center;padding:48px 24px;color:var(--platform-80);font-size:15px;">No reports found</td>';
+    tbody.appendChild(tr);
+  }
   updatePagination(visible, rows.length);
   // Mark last visible row
   rows.forEach(r => r.classList.remove('last-visible'));

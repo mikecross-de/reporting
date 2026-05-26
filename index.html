@@ -133,6 +133,8 @@ input,select,textarea{font-family:var(--font);}
 .penny-banner-input::placeholder{color:#4E5555;}
 .penny-banner-btn{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);line-height:20px;transition:background .15s;}
 .penny-banner-btn:hover{background:var(--penny-200);}
+.penny-banner-btn:disabled{opacity:.5;cursor:default;}
+.penny-banner-btn:disabled:hover{background:var(--penny-100);}
 
 /* Toolbar row 1 — search + segmented tabs + dropdowns */
 .rep-panel{background:var(--white);border-radius:10px;margin-bottom:18px;padding:0 24px 24px;}
@@ -430,12 +432,16 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .ed-penny-context svg{color:var(--penny-100);}
 
 /* Editor Penny NL input */
-.ed-penny-input{display:flex;align-items:center;gap:10px;border:1px solid var(--platform-20);border-radius:6px;padding:4px 5px 4px 16px;margin:4px 0 16px;transition:border-color .15s,box-shadow .15s;background:var(--white);}
-.ed-penny-input:focus-within{border-color:var(--penny-100);box-shadow:0 0 0 3px rgba(103,94,249,.15);}
+.ed-penny-input{display:flex;align-items:center;gap:12px;margin:4px 0 16px;}
+.ed-penny-field-wrap{flex:1;display:flex;align-items:center;gap:10px;border:1px solid var(--platform-40);border-radius:6px;padding:4px 16px;transition:border-color .15s;background:var(--white);}
+.ed-penny-field-wrap:hover{border-color:var(--platform-100);}
+.ed-penny-field-wrap:focus-within{border-color:var(--penny-100);border-width:2px;padding:3px 15px;}
 .ed-penny-field{flex:1;border:none;outline:none;font-size:15px;color:var(--platform-100);background:transparent;padding:10px 0;min-width:0;font-family:var(--font);}
 .ed-penny-field::placeholder{color:#4E5555;}
-.ed-penny-send{background:var(--penny-100);color:var(--white);border:none;border-radius:44px;padding:8px 16px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex-shrink:0;font-family:var(--font);}
+.ed-penny-send{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);line-height:20px;transition:background .15s,opacity .15s;}
 .ed-penny-send:hover{background:var(--penny-200);}
+.ed-penny-send:disabled{opacity:.5;cursor:default;}
+.ed-penny-send:disabled:hover{background:var(--penny-100);}
 
 /* Filter toggle */
 .ed-filter-link{background:none;border:none;font-family:var(--font);font-size:16px;font-weight:600;color:var(--platform-100);cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:4px;transition:all .12s;}
@@ -478,7 +484,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .filter-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;padding:5px 6px 5px 0;}
 .filter-chip-chev{color:var(--platform-40);font-size:9px;margin-left:2px;padding:0 2px;}
 
-.filter-add{display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;padding:0;font-size:16px;color:var(--crm-100);cursor:pointer;font-weight:600;font-family:var(--font);}
+.filter-add{display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;padding:0;font-size:16px;color:var(--crm-100);cursor:pointer;font-weight:600;font-family:var(--font);margin-left:6px;}
 .filter-add:hover{text-decoration:underline;}
 
 .ed-filter-edit-row{margin-top:10px;padding-top:10px;border-top:1px solid var(--platform-10);}
@@ -766,8 +772,8 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <h2 class="penny-banner-head-title">Describe your report and watch it come to life</h2>
           </div>
           <div class="penny-banner-input-wrap">
-            <input id="pennyBannerInput" class="penny-banner-input penny-typewriter" type="text" placeholder="" aria-label="Describe your report" onkeydown="if(event.key==='Enter'){event.preventDefault();buildReportFromBanner();}">
-            <button class="penny-banner-btn" onclick="buildReportFromBanner()">
+            <input id="pennyBannerInput" class="penny-banner-input penny-typewriter" type="text" placeholder="" aria-label="Describe your report" oninput="document.getElementById('pennyBannerBtn').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'){event.preventDefault();buildReportFromBanner();}">
+            <button class="penny-banner-btn" id="pennyBannerBtn" disabled onclick="buildReportFromBanner()">
               <svg class="nav-svg-icon" aria-hidden="true" style="width:13px;height:13px;"><use href="#icon-sparkles"/></svg>
               Build Report
             </button>
@@ -848,7 +854,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name"><svg class="nav-svg-icon" style="width:12px;height:12px;color:var(--penny-100);fill:currentColor;vertical-align:-2px;margin-right:6px;"><use href="#icon-sparkles"/></svg>Lapsing high-value donors</span>
                   </div>
-                  <div class="dg-name-meta">12 rows · $42,800 at risk</div>
+                  <div class="dg-name-meta">12 constituents · $42,800 at risk</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">—</span></td>
@@ -880,7 +886,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name"><svg class="nav-svg-icon" style="width:12px;height:12px;color:var(--penny-100);fill:currentColor;vertical-align:-2px;margin-right:6px;"><use href="#icon-sparkles"/></svg>Recurring gifts expiring</span>
                   </div>
-                  <div class="dg-name-meta">8 rows · $3,200/mo at risk</div>
+                  <div class="dg-name-meta">8 transactions · $3,200/mo at risk</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">—</span></td>
@@ -913,7 +919,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name">Major Donors FY26 YTD</span>
                   </div>
-                  <div class="dg-name-meta">142 rows · $1.2M total</div>
+                  <div class="dg-name-meta">142 transactions · $1.2M total</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">Weekly</span></td>
@@ -945,7 +951,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name">Lapsing donors $1k+</span>
                   </div>
-                  <div class="dg-name-meta">38 rows · $94,250 in FY25</div>
+                  <div class="dg-name-meta">38 constituents · $94,250 in FY25</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
@@ -977,7 +983,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="mailing-lists">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Spring Appeal — Follow-up List</span></div>
-                  <div class="dg-name-meta">342 rows · 7 columns</div>
+                  <div class="dg-name-meta">342 constituents · Last run May 14</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
@@ -1009,7 +1015,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name">Year-End Campaign Revenue</span>
                   </div>
-                  <div class="dg-name-meta">$428,912 · 6 columns</div>
+                  <div class="dg-name-meta">1,204 transactions · $428,912 total</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">Daily</span></td>
@@ -1039,7 +1045,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="no" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Recurring Gifts — Q4</span></div>
-                  <div class="dg-name-meta">$52,340/mo · 10 columns</div>
+                  <div class="dg-name-meta">86 transactions · $52,340/mo</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">On demand</span></td>
@@ -1069,7 +1075,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Unengaged — Last 12 Months</span></div>
-                  <div class="dg-name-meta">1,803 rows · 7 columns</div>
+                  <div class="dg-name-meta">1,803 constituents · Last run Apr 28</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
@@ -1099,7 +1105,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="cam-p" data-folder="compliance">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Grant Reporting — 501(c)(3)</span></div>
-                  <div class="dg-name-meta">Annual totals · 4 columns</div>
+                  <div class="dg-name-meta">48 transactions · $156,200 total</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">Quarterly</span></td>
@@ -1129,7 +1135,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Missing Primary Email</span></div>
-                  <div class="dg-name-meta">412 rows · 5 columns</div>
+                  <div class="dg-name-meta">412 constituents · Last run Mar 10</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
@@ -1346,11 +1352,13 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             </div>
           </div>
           <div class="ed-penny-input">
-            <svg class="nav-svg-icon" style="width:14px;height:14px;color:var(--penny-100);fill:currentColor;flex-shrink:0;"><use href="#icon-sparkles"/></svg>
-            <input type="text" placeholder="Ask Penny to modify this report…" class="ed-penny-field" id="ed-penny-field" onkeydown="if(event.key==='Enter'){event.preventDefault();modifyReport();}">
-            <button class="ed-penny-send" id="ed-penny-send" onclick="modifyReport()">
+            <div class="ed-penny-field-wrap">
+              <svg class="nav-svg-icon" style="width:14px;height:14px;color:var(--penny-100);fill:currentColor;flex-shrink:0;"><use href="#icon-sparkles"/></svg>
+              <input type="text" placeholder="Ask Penny to refine this report..." class="ed-penny-field" id="ed-penny-field" oninput="document.getElementById('ed-penny-send').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'){event.preventDefault();refineReport();}">
+            </div>
+            <button class="ed-penny-send" id="ed-penny-send" disabled onclick="refineReport()">
               <svg class="nav-svg-icon" style="width:14px;height:14px;"><use href="#icon-sparkles"/></svg>
-              Update
+              Refine Report
             </button>
           </div>
           <div class="ed-table-wrap">
@@ -1918,9 +1926,11 @@ function showView(id){
 }
 function openEditorAsPenny(title, reason){
   editorHasChanges = false;
+  currentEditorCreator = 'penny';
   document.querySelector('.ed-head-title').textContent = title;
   document.getElementById('ed-penny-context-text').textContent = reason;
   document.getElementById('ed-penny-context').style.display = 'flex';
+  document.getElementById('ed-delete-btn').style.display = 'none';
   setInsightForReport(title);
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-editor').classList.add('active');
@@ -1928,9 +1938,12 @@ function openEditorAsPenny(title, reason){
 }
 function openEditorRow(row){
   editorHasChanges = false;
+  var creator = row.dataset.creator || '';
+  currentEditorCreator = creator;
   var name = row.querySelector('.dg-name');
   var title = name ? name.textContent : 'Report';
   document.querySelector('.ed-head-title').textContent = title;
+  document.getElementById('ed-delete-btn').style.display = creator === 'mike-cross' ? '' : 'none';
   setInsightForReport(title);
   showView('editor');
 }
@@ -2146,6 +2159,9 @@ function toggleActionsMenu(e, btn){
       var isActive = row.dataset.status === 'active';
       var deactBtn = menu.querySelector('[onclick*="deactivate"]');
       if(deactBtn) deactBtn.textContent = isActive ? 'Deactivate Report' : 'Activate Report';
+      // Only show Delete if user owns the report
+      var deleteBtn = menu.querySelector('[onclick*="delete"]');
+      if(deleteBtn) deleteBtn.style.display = row.dataset.creator === 'mike-cross' ? '' : 'none';
     }
     // Flip upward if near bottom of viewport
     var btnRect = btn.getBoundingClientRect();
@@ -2683,6 +2699,30 @@ function applyNLRReport(report){
 }
 
 // ─── Modify report via Penny conversational input ───
+function refineReport(){
+  var input = document.getElementById('ed-penny-field');
+  var prompt = input.value.trim();
+  if(!prompt) return;
+  var btn = document.getElementById('ed-penny-send');
+  var origHTML = btn.innerHTML;
+  btn.innerHTML = '<div class="toast-spinner" style="width:14px;height:14px;border-width:2px;"></div> Refining...';
+  btn.disabled = true;
+  // Show processing toast
+  var toast = document.getElementById('export-toast');
+  var iconWrap = document.getElementById('toast-icon-wrap');
+  var msg = document.getElementById('toast-msg');
+  iconWrap.innerHTML = '<div class="toast-spinner"></div>';
+  msg.textContent = 'Processing';
+  toast.classList.add('visible');
+  setTimeout(function(){
+    btn.innerHTML = origHTML;
+    btn.disabled = true;
+    input.value = '';
+    iconWrap.innerHTML = '<svg class="toast-icon" viewBox="0 0 512 512" fill="#357A06"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369.2 198.6L232.6 335.2c-12.5 12.5-32.8 12.5-45.3 0l-68.3-68.3c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L210 267.2l91.3-91.3c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3z"/></svg>';
+    msg.textContent = 'Report updated';
+    setTimeout(function(){ toast.classList.remove('visible'); }, 2000);
+  }, 3500);
+}
 async function modifyReport(){
   var input = document.getElementById('ed-penny-field');
   var prompt = input ? input.value.trim() : '';
@@ -2849,6 +2889,7 @@ function dismissPennyInsight(){
 
 // ─── Report Details modal ───
 var editorHasChanges = false;
+var currentEditorCreator = '';
 var pendingDeleteRow = null;
 var pendingDeleteName = '';
 var pendingDeleteSource = 'list';

@@ -107,7 +107,10 @@ input,select,textarea{font-family:var(--font);}
 .btn-ghost-link{background:transparent;color:var(--platform-80);border:none;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;border-radius:4px;transition:background .12s;}
 .btn-ghost-link:hover{color:var(--platform-100);background:var(--platform-5);}
 .btn-tertiary{background:transparent;border:none;color:var(--crm-100);font-family:var(--font);font-size:16px;font-weight:700;padding:4px 8px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;line-height:21px;transition:background .12s;white-space:nowrap;}
+.btn-secondary-sm{background:var(--white);border:1px solid var(--platform-100);color:var(--platform-100);font-family:var(--font);font-size:16px;font-weight:700;padding:4px 8px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:21px;transition:background .12s;white-space:nowrap;height:28px;box-sizing:border-box;}
+.btn-secondary-sm:hover{background:var(--platform-20);}
 .btn-tertiary:hover{background:var(--crm-20);}
+.btn-tertiary.active{background:var(--crm-20);color:var(--crm-200);}
 .btn-tertiary.sm{font-size:14px;line-height:18px;gap:6px;}
 .btn-tertiary .nav-svg-icon{fill:currentColor;}
 .btn-ghost-link.back{padding:6px 4px;font-size:13px;color:var(--platform-60);font-weight:500;margin-bottom:14px;}
@@ -240,17 +243,25 @@ input,select,textarea{font-family:var(--font);}
 .avatar{width:30px;height:30px;border-radius:50%;background:var(--platform-10);display:inline-flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--platform-80);flex-shrink:0;}
 
 /* Filter chip menus */
-.fc-menu{min-width:220px;padding:0;}
-.fc-edit-field{padding:12px 14px;}
-.fc-edit-label{display:block;font-size:11px;font-weight:700;color:var(--platform-60);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;}
-.fc-edit-row{display:flex;gap:6px;}
-.fc-select{border:1px solid var(--platform-20);border-radius:4px;padding:6px 10px;font-size:14px;font-family:var(--font);color:var(--platform-100);background:var(--white);cursor:pointer;transition:border-color .15s;}
-.fc-select:focus{outline:none;border-color:var(--crm-100);border-width:2px;padding:5px 9px;}
-.fc-input{flex:1;border:1px solid var(--platform-20);border-radius:4px;padding:6px 10px;font-size:14px;font-family:var(--font);color:var(--platform-100);min-width:0;transition:border-color .15s;}
-.fc-input:focus{outline:none;border-color:var(--crm-100);border-width:2px;padding:5px 9px;}
-.fc-edit-checks{display:flex;flex-direction:column;gap:6px;}
-.fc-check{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--platform-100);cursor:pointer;}
-.fc-check input{width:15px;height:15px;accent-color:var(--crm-100);cursor:pointer;}
+.fc-menu{min-width:270px;padding:0;}
+.fc-edit-field{padding:16px;}
+.fc-edit-label{display:block;font-size:14px;font-weight:700;color:var(--platform-100);margin-bottom:8px;}
+.fc-edit-row{display:flex;gap:8px;}
+.fc-select{appearance:none;-webkit-appearance:none;border:1px solid var(--platform-40);border-radius:4px;padding:8px 36px 8px 12px;font-size:14px;font-family:var(--font);color:var(--platform-100);background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' fill='%237D8183'%3E%3Cpath d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9S303.1 192 288 192L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.3 25.7 6.9 34.9l128 128z'/%3E%3C/svg%3E") no-repeat right 12px center/10px 10px;cursor:pointer;transition:border-color .15s;height:40px;box-sizing:border-box;flex:1;}
+select.fc-sm{height:28px;font-size:12px;padding:2px 24px 2px 8px;background-position:right 6px center;background-size:8px 8px;}
+input.fc-sm{height:28px;font-size:12px;padding:4px 8px;}
+.fc-select:hover{border-color:var(--platform-100);}
+.fc-select:focus{outline:none;border-color:var(--crm-100);}
+.fc-input{flex:1;border:1px solid var(--platform-40);border-radius:4px;padding:8px 12px;font-size:14px;font-family:var(--font);color:var(--platform-100);min-width:0;transition:border-color .15s;height:40px;box-sizing:border-box;}
+.fc-input:hover{border-color:var(--platform-100);}
+.fc-input:focus{outline:none;border-color:var(--crm-100);}
+.fc-edit-checks{display:flex;flex-direction:column;gap:10px;}
+.fc-check{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--platform-100);cursor:pointer;position:relative;}
+.fc-check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:2px solid var(--platform-60);border-radius:2px;cursor:pointer;position:relative;flex-shrink:0;margin:0;background:none;background-color:transparent;transition:background .1s,border-color .1s;z-index:1;}
+.fc-check input:checked{background:var(--crm-100);background-color:var(--crm-100);border-color:var(--crm-100);}
+.fc-check input:checked::after{content:'';position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid white;border-width:0 2px 2px 0;transform:rotate(45deg);}
+.fc-check::before{content:'';position:absolute;left:0;width:32px;height:32px;border-radius:50%;background:transparent;transition:background .1s;transform:translateX(-7px);}
+.fc-check:hover::before{background:var(--platform-20);}
 
 /* Table pagination (MUI-style) */
 .tbl-pag{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:12px 16px;margin:0 -24px -24px;border-bottom:1px solid var(--platform-20);background:var(--white);font-size:14px;color:var(--platform-80);border-radius:0 0 10px 10px;line-height:18px;}
@@ -283,7 +294,7 @@ input,select,textarea{font-family:var(--font);}
 .grove-check{display:flex;align-items:center;gap:12px;cursor:pointer;font-size:16px;color:var(--platform-100);line-height:21px;position:relative;}
 .grove-check-box{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .1s;margin:-7px;}
 .grove-check:hover .grove-check-box{background:var(--platform-20);}
-.grove-check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:2px solid var(--platform-60);border-radius:2px;cursor:pointer;position:relative;flex-shrink:0;margin:0;background:var(--white);transition:background .1s,border-color .1s;}
+.grove-check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:2px solid var(--platform-60);border-radius:2px;cursor:pointer;position:relative;flex-shrink:0;margin:0;background:none;background-color:transparent;transition:background .1s,border-color .1s;}
 .grove-check input:checked{background:var(--crm-100);border-color:var(--crm-100);}
 .grove-check input:checked::after{content:'';position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid white;border-width:0 2px 2px 0;transform:rotate(45deg);}
 .toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--platform-100);color:var(--white);padding:14px 16px;border-radius:4px;font-family:var(--font);font-size:17px;font-weight:400;display:flex;align-items:center;gap:8px;z-index:9999;min-width:320px;max-width:480px;opacity:0;transition:transform .3s ease,opacity .3s ease;white-space:nowrap;line-height:20px;}
@@ -447,9 +458,125 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .ed-filter-link{background:none;border:none;font-family:var(--font);font-size:16px;font-weight:600;color:var(--platform-100);cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:4px 8px;border-radius:4px;transition:all .12s;}
 .ed-filter-link:hover{background:var(--platform-5);}
 .ed-filter-link.active{color:var(--crm-200);}
-.ed-filter-expand{display:none;padding:4px 0 16px;}
+.ed-filter-expand{display:none;padding:0;}
 .ed-filter-expand.open{display:block;}
-.ed-filter-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+/* Chip row (collapsed view) */
+.ed-filter-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:4px 0 12px;}
+/* Filter panel (inline expandable) */
+.fd-overlay{display:none;}
+.fd-panel{display:none;padding:8px 0;}
+.fd-panel.open{display:block;}
+.fd-nl-section{display:flex;align-items:flex-start;gap:12px;}
+.fd-nl-label{font-size:16px;font-weight:700;line-height:18px;white-space:nowrap;flex-shrink:0;padding:4px 0;}
+.fd-nl-col{display:flex;flex-direction:column;flex:1;gap:4px;}
+.fd-nl-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px;}
+.fd-nl-tok{display:inline-flex;align-items:center;padding:4px 8px;background:var(--white);border:1px solid #d4d5d6;border-radius:4px;font-size:14px;font-weight:700;color:#272d30;white-space:nowrap;line-height:18px;}
+.fd-nl-plus{font-size:16px;font-weight:600;color:var(--platform-80);flex-shrink:0;margin:0 2px;}
+.fd-nl-or{font-size:14px;font-weight:600;color:var(--platform-80);text-transform:uppercase;flex-shrink:0;margin:0 4px;}
+.fd-nl-edit{font-size:14px;font-weight:600;color:var(--crm-100);text-decoration:none;white-space:nowrap;flex-shrink:0;margin-left:6px;}
+.fd-nl-edit:hover{text-decoration:underline;}
+.fd-chip-summary{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:4px 0 8px;}
+/* Read-only filter chips */
+.filter-chip-ro{display:inline-flex;align-items:center;gap:5px;padding:4px 6px 4px 10px;background:#E8F4EA;border:1px solid #C8E6C9;border-radius:14px;font-size:12px;color:#2E7D32;white-space:nowrap;line-height:1.3;}
+.filter-chip-ro.fc-exc{border-color:#FFCDD2;background:#FDECEA;color:#C62828;}
+.fc-ro-x{background:none;border:none;cursor:pointer;color:currentColor;font-size:14px;line-height:1;padding:0 0 0 1px;display:flex;align-items:center;opacity:0.5;}
+.fc-ro-x:hover{opacity:1;}
+.filter-chip-ro:hover{border-color:#A5D6A7;}
+.filter-chip-ro.fc-exc:hover{border-color:#EF9A9A;}
+.fc-section-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.4px;flex-shrink:0;}
+.fc-section-sep{width:1px;height:18px;background:var(--platform-10);flex-shrink:0;margin:0 2px;}
+.fc-plus{font-size:16px;font-weight:600;color:var(--platform-80);flex-shrink:0;margin:0 4px;user-select:none;}
+.fc-or-row{display:flex;align-items:center;gap:8px;width:100%;padding:8px 0;}
+.fc-or-label{font-size:14px;font-weight:600;color:var(--platform-80);text-transform:uppercase;flex-shrink:0;}
+.fc-or-line{flex:1;height:1px;background:var(--platform-10);}
+.fc-or-btn{background:none;border:none;cursor:pointer;color:var(--platform-60);font-size:13px;font-weight:600;padding:6px 0 0;display:inline-flex;align-items:center;transition:color 0.12s;}
+.fc-or-btn:hover{color:var(--crm-100);}
+.fc-add-btn{background:none;border:1px dashed var(--platform-20);border-radius:4px;cursor:pointer;color:var(--crm-100);font-size:13px;font-weight:500;padding:5px 10px;white-space:nowrap;transition:border-color 0.12s,background 0.12s;height:34px;display:inline-flex;align-items:center;}
+.fc-add-btn:hover{border-color:var(--crm-100);background:var(--crm-20);}
+.fc-edit-btn{flex-shrink:0;}
+/* Filter builder panel */
+.fb-group{border:1px solid var(--platform-10);border-radius:8px;padding:10px 12px;background:var(--white);}
+.fb-row{display:flex;align-items:center;gap:6px;min-height:36px;}
+.fb-remove{background:none;border:none;cursor:pointer;color:var(--platform-60);padding:0;flex-shrink:0;display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;transition:background .12s,color .12s;margin-left:auto;}
+.fb-remove:hover{background:var(--platform-5);color:var(--platform-100);}
+#fb-tooltip-global{position:fixed;background:black;color:white;font-size:14px;font-weight:400;font-family:var(--font);line-height:18px;padding:8px 16px;border-radius:3px;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .12s;z-index:9999;transform:translateX(-50%);}
+.fb-and-label{font-size:10px;font-weight:600;color:var(--platform-30);text-transform:uppercase;letter-spacing:0.3px;padding:2px 0 2px 8px;}
+.fb-or-sep{display:flex;align-items:center;gap:10px;padding:12px 0;font-size:14px;font-weight:600;color:var(--platform-80);text-transform:uppercase;}
+.fb-or-sep::before,.fb-or-sep::after{content:'';flex:1;height:1px;background:var(--platform-20);}
+.fb-add-condition{background:var(--white);border:1px solid #272d30;border-radius:4px;cursor:pointer;color:#272d30;font-size:14px;font-weight:700;font-family:var(--font);padding:4px 8px;display:inline-flex;align-items:center;margin-top:12px;transition:background .12s,border-color .12s;}
+.fb-add-condition:hover{background:#d4d5d6;border-color:#dad7d9;}
+.fb-add-group{background:var(--white);border:1px solid #272d30;border-radius:4px;cursor:pointer;color:#272d30;font-size:14px;font-weight:700;font-family:var(--font);padding:4px 8px;display:inline-flex;align-items:center;margin-top:12px;transition:background .12s,border-color .12s;}
+.fb-add-group:hover{background:#d4d5d6;border-color:#dad7d9;}
+.fb-add-row{display:flex;gap:12px;margin-top:12px;}
+.fm-picker-wrap{position:relative;}
+.fm-picker-input{appearance:none;-webkit-appearance:none;border:1px solid var(--platform-40);border-radius:4px;padding:8px 12px;font-size:14px;font-family:var(--font);color:var(--platform-100);background:var(--white);cursor:text;transition:border-color .15s;height:40px;box-sizing:border-box;width:100%;outline:none;}
+.fm-picker-input:hover{border-color:var(--platform-100);}
+.fm-picker-input:focus{border-color:var(--crm-100);}
+.fm-picker-input::placeholder{color:var(--platform-60);}
+.fm-picker-list{position:fixed;background:var(--white);border:1px solid var(--platform-20);border-radius:4px;box-shadow:0 4px 12px rgba(0,0,0,.12);max-height:200px;overflow-y:auto;z-index:9999;min-width:200px;}
+.fm-picker-item{padding:8px 12px;font-size:14px;font-family:var(--font);color:var(--platform-100);cursor:pointer;transition:background .1s;}
+.fm-picker-item:hover{background:var(--platform-5);}
+.fm-picker-item.disabled{color:var(--platform-40);cursor:default;pointer-events:none;}
+.fm-picker-empty{padding:8px 12px;font-size:14px;color:var(--platform-60);font-family:var(--font);}
+.fm-card{display:flex;flex-direction:column;gap:16px;border:1px solid var(--platform-20);border-radius:4px;padding:12px 16px;background:var(--white);position:relative;}
+.fm-card-row{display:flex;align-items:center;gap:8px;}
+.fm-card-row .fc-select{flex:0 0 auto;width:auto;}
+.fm-card-row .fc-input{flex:0 0 auto;width:auto;}
+.fm-field{font-size:14px;font-weight:600;color:var(--platform-100);white-space:nowrap;}
+.fm-card.is-picker .fm-field{color:var(--platform-60);font-weight:400;font-style:italic;}
+.fm-static{font-size:14px;color:var(--platform-100);white-space:nowrap;flex-shrink:0;}
+.fm-card .fc-select{flex:0 0 auto;width:auto;}
+.fm-card .fc-input{flex:0 0 auto;width:auto;}
+.fm-card > .fb-remove{position:absolute;top:10px;right:12px;}
+.fm-logic{font-size:14px;font-weight:600;color:var(--platform-80);text-transform:uppercase;padding:12px 0;}
+.fd-chip-x{background:none;border:none;color:var(--platform-40);cursor:pointer;padding:2px;display:inline-flex;align-items:center;border-radius:50%;transition:color .1s;margin-left:2px;}
+.fd-chip-x:hover{color:var(--platform-100);}
+.fd-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px 12px;flex-shrink:0;}
+.fd-title{font-size:18px;font-weight:700;color:var(--platform-100);}
+.fd-header-actions{display:flex;align-items:center;gap:12px;}
+.fd-close{background:none;border:none;color:var(--platform-40);cursor:pointer;padding:4px;border-radius:4px;display:flex;align-items:center;transition:color .1s;}
+.fd-close:hover{color:var(--platform-100);}
+.fd-search-bar{padding:0 24px 16px;position:relative;}
+.fd-body{flex:1;overflow-y:auto;padding:0 24px 24px;}
+.fd-modal-footer{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-top:1px solid var(--platform-20);flex-shrink:0;}
+.fd-section{margin-bottom:24px;}
+.fd-section:last-child{margin-bottom:0;}
+.fd-section-hd{font-size:14px;font-weight:700;color:var(--platform-100);margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--platform-20);}
+.fd-row{display:flex;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid var(--platform-5);}
+.fd-row:last-child{border-bottom:none;}
+.fd-field{font-size:14px;font-weight:600;color:var(--platform-100);flex-shrink:0;min-width:120px;}
+.fd-controls{display:flex;align-items:center;gap:8px;flex:1;min-width:0;}
+.fd-select{appearance:none;-webkit-appearance:none;border:1px solid var(--platform-40);border-radius:4px;padding:8px 32px 8px 12px;font-size:14px;font-family:var(--font);color:var(--platform-100);background:var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' fill='%237D8183'%3E%3Cpath d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9S303.1 192 288 192L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.3 25.7 6.9 34.9l128 128z'/%3E%3C/svg%3E") no-repeat right 10px center/10px 10px;cursor:pointer;height:40px;box-sizing:border-box;transition:border-color .15s;}
+.fd-select:hover{border-color:var(--platform-100);}
+.fd-select:focus{outline:none;border-color:var(--crm-100);border-width:2px;padding:7px 31px 7px 11px;}
+.fd-input{border:1px solid var(--platform-40);border-radius:4px;padding:8px 12px;font-size:14px;font-family:var(--font);color:var(--platform-100);height:40px;box-sizing:border-box;flex:1;min-width:0;transition:border-color .15s;}
+.fd-input:hover{border-color:var(--platform-100);}
+.fd-input:focus{outline:none;border-color:var(--crm-100);border-width:2px;padding:7px 11px;}
+.fd-remove{background:none;border:none;color:var(--platform-40);cursor:pointer;padding:4px;border-radius:4px;display:flex;align-items:center;transition:color .1s;flex-shrink:0;margin-left:auto;}
+.fd-remove:hover{color:var(--platform-100);}
+.fd-scope{appearance:none;-webkit-appearance:none;border:none;background:transparent;font-size:12px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;padding:2px 14px 2px 0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' fill='%23357A06'%3E%3Cpath d='M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9S303.1 192 288 192L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.3 25.7 6.9 34.9l128 128z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0 center;background-size:8px 8px;flex-shrink:0;}
+.fd-scope:focus{outline:none;}
+/* Grove Chips */
+.fd-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.fd-chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--platform-40);border-radius:39px;padding:4px 10px;font-size:13px;font-family:var(--font);color:var(--platform-100);cursor:pointer;transition:all .12s;font-weight:400;white-space:nowrap;background:var(--white);line-height:18px;}
+.fd-chip:hover{background:var(--platform-10);}
+.fd-chip.active{background:var(--crm-100);border-color:var(--crm-100);color:var(--white);font-weight:700;}
+.fd-chip.active::before{content:'';display:inline-block;width:14px;height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='white'%3E%3Cpath d='M173.9 439.4l-166.4-166.4c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.7 432.1 72.6c10-10 26.2-10 36.2 0l36.2 36.2c10 10 10 26.2 0 36.2l-294.4 294.4c-10 10-26.2 10-36.2 0z'/%3E%3C/svg%3E") no-repeat center/10px 10px;}
+/* Inline controls */
+.fd-inline-controls{display:flex;gap:8px;flex:1;min-width:0;align-items:center;}
+/* Add filter picker */
+.fd-add-row{padding:12px 0;display:flex;align-items:center;gap:8px;}
+.fd-add-search-wrap{position:relative;flex:1;}
+.fd-add-search{width:100%;border:1px solid var(--platform-40);border-radius:4px;padding:8px 12px 8px 36px;font-size:14px;font-family:var(--font);color:var(--platform-100);height:40px;box-sizing:border-box;transition:border-color .15s;outline:none;}
+.fd-add-search:hover{border-color:var(--platform-100);}
+.fd-add-search:focus{border-color:var(--crm-100);border-width:2px;padding:7px 11px 7px 35px;}
+.fd-add-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--platform-60);pointer-events:none;}
+.fd-field-list{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--platform-20);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:260px;overflow-y:auto;z-index:10;padding:8px 0;}
+.fd-field-group{font-size:12px;font-weight:700;color:var(--platform-60);text-transform:uppercase;letter-spacing:.5px;padding:10px 16px 4px;}
+.fd-field-group:first-child{padding-top:8px;}
+.fd-field-item{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:14px;color:var(--platform-100);cursor:pointer;transition:background .08s;}
+.fd-field-item:hover{background:var(--platform-5);}
+.fd-field-item-type{font-size:11px;color:var(--platform-60);margin-left:auto;}
 
 /* Column modal */
 .col-modal-body{display:flex;gap:0;min-height:380px;max-height:60vh;}
@@ -476,12 +603,13 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .col-row-add:hover{background:var(--crm-20);}
 .col-empty{padding:24px 16px;font-size:13px;color:var(--platform-60);text-align:center;}
 
-.filter-chip{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-10);border-radius:4px;padding:2px 8px 2px 2px;cursor:pointer;font-size:13px;color:var(--platform-80);font-weight:500;transition:border-color .12s;overflow:hidden;}
-.filter-chip:hover{border-color:var(--platform-40);}
-.filter-chip-tag{display:inline-flex;align-items:center;font-size:10px;font-weight:700;padding:3px 6px;margin-left:3px;margin-right:8px;border-radius:3px;letter-spacing:.5px;text-transform:uppercase;}
-.filter-chip-tag.inc{background:var(--crm-20);color:var(--crm-300);}
-.filter-chip-tag.exc{background:var(--red-20);color:var(--red-200);}
-.filter-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;padding:5px 6px 5px 0;}
+.filter-chip{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:2px 8px 2px 2px;cursor:pointer;font-size:13px;color:var(--platform-80);font-weight:500;transition:border-color .12s;overflow:hidden;}
+.dd-wrap:has(.dd-menu.open) > .filter-chip{border-color:var(--crm-100);}
+.filter-chip:hover{border-color:var(--platform-100);}
+.filter-chip-tag{display:inline-flex;align-items:center;font-size:14px;font-weight:700;padding:3px 6px;margin-right:6px;border-radius:4px;line-height:18px;white-space:nowrap;}
+.filter-chip-tag.inc{background:#d9e9cd;color:#296401;}
+.filter-chip-tag.exc{background:#e9eaea;color:#525759;}
+.filter-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;padding:5px 6px 5px 8px;}
 .filter-chip-chev{color:var(--platform-40);font-size:9px;margin-left:2px;padding:0 2px;}
 
 .filter-add{display:inline-flex;align-items:center;gap:5px;background:transparent;border:none;padding:0;font-size:16px;color:var(--crm-100);cursor:pointer;font-weight:600;font-family:var(--font);margin-left:6px;}
@@ -519,7 +647,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* Result summary row */
 .ed-summary{display:flex;align-items:center;justify-content:space-between;padding:20px 0 12px;}
-.ed-summary-l{font-size:16px;color:var(--platform-80);display:flex;align-items:center;gap:10px;}
+.ed-summary-l{font-size:16px;color:var(--platform-80);display:flex;align-items:center;gap:8px;}
 .ed-summary-l strong{color:var(--platform-100);font-weight:700;}
 .ed-summary-r{display:flex;align-items:center;gap:8px;}
 .ed-sum-btn{display:inline-flex;align-items:center;gap:6px;background:var(--white);border:1px solid var(--platform-20);border-radius:6px;padding:7px 12px;font-size:13px;font-weight:600;color:var(--platform-80);cursor:pointer;}
@@ -688,7 +816,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 <div class="app-body">
   <!-- LEFT NAV -->
-  <nav class="left-nav" id="leftNav" aria-label="Primary navigation">
+  <nav class="left-nav collapsed" id="leftNav" aria-label="Primary navigation">
     <div class="left-nav-items" role="list">
       <a class="nav-item" href="#" onclick="event.preventDefault()" role="listitem">
         <span class="nav-item-icon"><svg class="nav-svg-icon" aria-hidden="true"><use href="#icon-house"/></svg></span>
@@ -1247,106 +1375,43 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
         <div class="ed-result">
           <div class="ed-summary">
-            <div class="ed-summary-l" style="display:flex;align-items:center;gap:8px;"><span><strong>38 constituents</strong> <span style="color:var(--platform-40);margin:0 6px;">·</span> <strong>$94,250</strong> in FY25</span> <button class="btn-tertiary" onclick="toggleAdvFilters()"><svg class="nav-svg-icon" style="width:12px;height:12px;"><use href="#icon-filter"/></svg> 4 filters</button></div>
+            <div class="ed-summary-l" style="display:flex;align-items:center;gap:8px;">
+              <span><strong>38 constituents</strong> <span style="color:var(--platform-40);margin:0 8px;">·</span> <strong>$94,250</strong> in FY25</span>
+              <span style="color:var(--platform-20);margin:0 0 0 8px;">·</span>
+              <button class="btn-tertiary" id="btn-filter-toggle" onclick="toggleFilterDrawer()"><svg class="nav-svg-icon" style="width:12px;height:12px;"><use href="#icon-filter"/></svg> 6 filters</button>
+            </div>
             <div class="ed-summary-r">
-              <button class="btn-tertiary" onclick="openColModal()">
-                <svg class="nav-svg-icon" style="width:14px;height:14px;"><use href="#icon-table"/></svg>
-                Edit columns
-              </button>
+              <button class="btn-tertiary" onclick="openColModal()">Edit columns</button>
               <span style="color:var(--platform-20);">·</span>
-              <button class="btn-tertiary" onclick="refreshReport()"><svg class="nav-svg-icon" style="width:14px;height:14px;"><use href="#icon-refresh"/></svg> Refresh</button>
+              <button class="btn-tertiary" onclick="refreshReport()">Refresh</button>
             </div>
           </div>
-          <div class="ed-filter-expand" id="ed-filter-expand">
-            <div class="ed-filter-chips" id="ed-filters">
-              <div class="dd-wrap">
-                <button class="filter-chip" onclick="toggleDd('fc-0')">
-                  <span class="filter-chip-tag inc">Include</span>
-                  <span class="filter-chip-body">Gift amount ≥ $1,000</span>
-                  <span class="filter-chip-chev"><svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></span>
-                </button>
-                <div class="dd-menu fc-menu" id="fc-0">
-                  <div class="fc-edit-field">
-                    <label class="fc-edit-label">Gift amount</label>
-                    <div class="fc-edit-row">
-                      <select class="fc-select"><option>≥</option><option>≤</option><option>=</option><option>≠</option></select>
-                      <input class="fc-input" type="text" value="$1,000">
-                    </div>
-                  </div>
-                  <div class="dd-sep"></div>
-                  <button class="dd-item" onclick="toggleChipType(this)">Switch to Exclude</button>
-                  <button class="dd-item" onclick="removeFilter(this)">Remove filter</button>
+          <!-- Filter NL expression view (read-only) -->
+          <div class="fd-panel" id="filter-panel">
+            <div class="fd-nl-section">
+              <span class="fd-nl-label" style="color:#296401;">Include</span>
+              <div class="fd-nl-col">
+                <div class="fd-nl-row">
+                  <span class="fd-nl-tok">Status is Active</span>
+                  <span class="fd-nl-plus">+</span>
+                  <span class="fd-nl-tok">is Head of Household</span>
+                  <span class="fd-nl-plus">+</span>
+                  <span class="fd-nl-tok">Birthdate is this fiscal year</span>
+                  <span class="fd-nl-or">OR</span>
+                  <span class="fd-nl-tok">has any Transactions</span>
+                  <a class="fd-nl-edit" href="javascript:void(0)" onclick="openFilterModal()">Edit filters</a>
                 </div>
               </div>
-              <div class="dd-wrap">
-                <button class="filter-chip" onclick="toggleDd('fc-1')">
-                  <span class="filter-chip-tag inc">Include</span>
-                  <span class="filter-chip-body">Gift date · FY25</span>
-                  <span class="filter-chip-chev"><svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></span>
-                </button>
-                <div class="dd-menu fc-menu" id="fc-1">
-                  <div class="fc-edit-field">
-                    <label class="fc-edit-label">Gift date</label>
-                    <div class="fc-edit-row">
-                      <select class="fc-select"><option selected>FY25</option><option>FY24</option><option>FY26</option><option>Last 90 days</option><option>Last 12 months</option><option>Custom range</option></select>
-                    </div>
-                  </div>
-                  <div class="dd-sep"></div>
-                  <button class="dd-item" onclick="toggleChipType(this)">Switch to Exclude</button>
-                  <button class="dd-item" onclick="removeFilter(this)">Remove filter</button>
-                </div>
-              </div>
-              <div class="dd-wrap">
-                <button class="filter-chip" onclick="toggleDd('fc-2')">
-                  <span class="filter-chip-tag exc">Exclude</span>
-                  <span class="filter-chip-body">Any gift since Jul 1, 2025</span>
-                  <span class="filter-chip-chev"><svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></span>
-                </button>
-                <div class="dd-menu fc-menu" id="fc-2">
-                  <div class="fc-edit-field">
-                    <label class="fc-edit-label">Gift date after</label>
-                    <div class="fc-edit-row">
-                      <input class="fc-input" type="text" value="Jul 1, 2025">
-                    </div>
-                  </div>
-                  <div class="dd-sep"></div>
-                  <button class="dd-item" onclick="toggleChipType(this)">Switch to Include</button>
-                  <button class="dd-item" onclick="removeFilter(this)">Remove filter</button>
-                </div>
-              </div>
-              <div class="dd-wrap">
-                <button class="filter-chip" onclick="toggleDd('fc-3')">
-                  <span class="filter-chip-tag exc">Exclude</span>
-                  <span class="filter-chip-body">Status: Inactive, Deceased</span>
-                  <span class="filter-chip-chev"><svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></span>
-                </button>
-                <div class="dd-menu fc-menu" id="fc-3">
-                  <div class="fc-edit-field">
-                    <label class="fc-edit-label">Constituent status</label>
-                    <div class="fc-edit-checks">
-                      <label class="fc-check"><input type="checkbox" checked> Inactive</label>
-                      <label class="fc-check"><input type="checkbox" checked> Deceased</label>
-                      <label class="fc-check"><input type="checkbox"> Do not contact</label>
-                    </div>
-                  </div>
-                  <div class="dd-sep"></div>
-                  <button class="dd-item" onclick="toggleChipType(this)">Switch to Include</button>
-                  <button class="dd-item" onclick="removeFilter(this)">Remove filter</button>
-                </div>
-              </div>
-              <div class="dd-wrap">
-                <button class="filter-add" onclick="toggleDd('fc-add')">
-                  Add filter
-                </button>
-                <div class="dd-menu" id="fc-add">
-                  <button class="dd-item" onclick="addFilter('Constituent name')">Constituent name</button>
-                  <button class="dd-item" onclick="addFilter('Gift amount')">Gift amount</button>
-                  <button class="dd-item" onclick="addFilter('Gift date')">Gift date</button>
-                  <button class="dd-item" onclick="addFilter('Fund / Campaign')">Fund / Campaign</button>
-                  <button class="dd-item" onclick="addFilter('Appeal')">Appeal</button>
-                  <button class="dd-item" onclick="addFilter('State / Region')">State / Region</button>
-                  <button class="dd-item" onclick="addFilter('Constituent status')">Constituent status</button>
-                  <button class="dd-item" onclick="addFilter('Last contact date')">Last contact date</button>
+            </div>
+            <div style="border-top:1px solid var(--platform-10);margin:4px 0 12px;"></div>
+            <div class="fd-nl-section">
+              <span class="fd-nl-label" style="color:#525759;">Exclude</span>
+              <div class="fd-nl-col">
+                <div class="fd-nl-row">
+                  <span class="fd-nl-tok">Name contains "Smith"</span>
+                  <span class="fd-nl-plus">+</span>
+                  <span class="fd-nl-tok">Website Visits between 5 and 20</span>
+                  <a class="fd-nl-edit" href="javascript:void(0)" onclick="openFilterModal()">Edit filters</a>
                 </div>
               </div>
             </div>
@@ -1684,7 +1749,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
         </div>
       </div>
     </div>
-    <!-- New Folder Modal -->
+    <!-- Filter Modal -->
     <div class="modal-overlay" id="modal-new-folder">
       <div class="modal" role="dialog" aria-labelledby="folder-modal-title">
         <button class="modal-close" onclick="closeFolderModal()" aria-label="Close">
@@ -1896,6 +1961,112 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
         <div class="modal-footer">
           <button class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
           <button class="btn-primary" onclick="confirmDelete()">Delete</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Advanced Filter Modal -->
+    <div class="modal-overlay" id="modal-filters">
+      <div class="modal" role="dialog" style="max-width:680px;max-height:80vh;display:flex;flex-direction:column;">
+        <button class="modal-close" onclick="closeFilterModal()" aria-label="Close">
+          <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
+        </button>
+        <div class="modal-title" style="margin-bottom:24px;">Edit filters</div>
+        <div style="flex:1;overflow-y:auto;padding-right:4px;">
+          <!-- INCLUDE -->
+          <div id="fm-section-include" data-section="include" style="margin-bottom:20px;">
+            <div style="font-size:16px;font-weight:700;color:#296401;margin-bottom:16px;">Include</div>
+            <!-- Status -->
+            <div class="fm-card">
+              <span class="fm-field">Status</span>
+              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+              <div class="fm-card-row">
+                <span class="fm-static">is</span>
+                <div class="fd-chips" data-mode="multi" style="gap:4px;display:flex;flex-wrap:wrap;">
+                  <button class="fd-chip active" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Active</button>
+                  <button class="fd-chip" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Inactive</button>
+                  <button class="fd-chip" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Deceased</button>
+                </div>
+              </div>
+            </div>
+            <div class="fm-logic">AND</div>
+            <!-- Is Head of Household -->
+            <div class="fm-card">
+              <span class="fm-field">Is Head of Household</span>
+              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+              <div class="fm-card-row">
+                <select class="fc-select" style="width:auto;"><option selected>Is</option><option>Is not</option></select>
+                <span class="fm-field">a head of household</span>
+              </div>
+            </div>
+            <div class="fm-logic">AND</div>
+            <!-- Birthdate -->
+            <div class="fm-card">
+              <span class="fm-field">Birthdate</span>
+              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+              <div class="fm-card-row" id="fm-bday-controls">
+                <span class="fm-static">is</span>
+                <select class="fc-select" style="width:auto;" onchange="var p=document.getElementById('fm-bday-controls');p.querySelector('.fm-date-between').style.display=this.value==='between'?'flex':'none';p.querySelector('.fm-date-during').style.display=this.value==='during'?'inline':'none';p.querySelector('.fm-date-daymonth').style.display=this.value==='on day or month'?'flex':'none';">
+                  <option>between</option><option selected>during</option><option>on day or month</option><option>empty</option>
+                </select>
+                <select class="fc-select fm-date-during" style="width:auto;"><option>Last fiscal year</option><option selected>This fiscal year</option><option>Next fiscal year</option><option>This year</option><option>Last year</option><option>This month</option><option>Last month</option></select>
+                <div class="fm-date-between" style="display:none;gap:8px;align-items:center;">
+                  <input class="fc-input" type="date" style="width:140px;">
+                  <span class="fm-static">and</span>
+                  <input class="fc-input" type="date" style="width:140px;">
+                </div>
+                <div class="fm-date-daymonth" style="display:none;gap:8px;align-items:center;">
+                  <select class="fc-select" style="width:auto;"><option>Day of week</option><option selected>Month</option></select>
+                  <select class="fc-select" style="width:auto;"><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
+                </div>
+              </div>
+            </div>
+            <div class="fb-add-row"><div class="fb-add-condition" onclick="addFilterCard('include',false)">And...</div></div>
+            <div class="fb-or-sep"><span>OR</span></div>
+            <!-- Has Transactions -->
+            <div class="fm-card">
+              <span class="fm-field">Has Transactions</span>
+              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+              <div class="fm-card-row">
+                <select class="fc-select" style="width:auto;" onchange="var c=this.closest('.fm-card').querySelector('.fm-count');var needs=['Has at least','Has at most','The first','The last'];c.style.display=needs.indexOf(this.value)>=0?'inline':'none';">
+                  <option>All</option><option selected>Has any</option><option>Has no</option><option>Has at least</option><option>Has at most</option><option>The first</option><option>The last</option>
+                </select>
+                <input class="fc-input fm-count" type="number" value="1" min="1" style="width:56px;display:none;">
+                <select class="fc-select" style="width:auto;"><option selected>Transactions</option><option>Specific Transactions</option></select>
+              </div>
+            </div>
+            <div class="fb-add-row"><div class="fb-add-condition" onclick="addFilterCard('include',false)">And...</div><div class="fb-add-group" onclick="addFilterCard('include',true)">Or...</div></div>
+          </div>
+          <!-- EXCLUDE -->
+          <div id="fm-section-exclude" data-section="exclude" style="border-top:1px solid var(--platform-20);padding-top:16px;">
+            <div style="font-size:16px;font-weight:700;color:#525759;margin-bottom:16px;">Exclude</div>
+            <!-- Name -->
+            <div class="fm-card">
+              <span class="fm-field">Name</span>
+              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+              <div class="fm-card-row">
+                <select class="fc-select" style="width:auto;"><option>Is equal to</option><option selected>Contains</option><option>Starts with</option><option>Ends with</option></select>
+                <input class="fc-input" type="text" value="Smith" style="flex:1;">
+              </div>
+            </div>
+            <div class="fm-logic">AND</div>
+            <!-- Website Visits -->
+            <div class="fm-card">
+              <span class="fm-field">Website Visits Last 30 Days</span>
+              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+              <div class="fm-card-row">
+                <span class="fm-static">between</span>
+                <input class="fc-input" type="number" value="5" style="width:60px;text-align:center;">
+                <span class="fm-static">and</span>
+                <input class="fc-input" type="number" value="20" style="width:60px;text-align:center;">
+              </div>
+            </div>
+            <div class="fb-add-row"><div class="fb-add-condition" onclick="addFilterCard('exclude',false)">And...</div><div class="fb-add-group" onclick="addFilterCard('exclude',true)">Or...</div></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="closeFilterModal()">Cancel</button>
+          <button class="btn-primary" onclick="closeFilterModal();showToast('Filters applied')">Apply filters</button>
         </div>
       </div>
     </div>
@@ -3411,72 +3582,340 @@ function applyColChanges(){
 
 // ─── Advanced filters collapse ───
 function toggleAdvFilters(){
-  var expand = document.getElementById('ed-filter-expand');
-  var link = document.querySelector('.ed-filter-link');
-  expand.classList.toggle('open');
-  if(link) link.classList.toggle('active', expand.classList.contains('open'));
+  toggleFilterDrawer();
 }
-
-// ─── Editor filter chips ───
-function toggleChipType(btn){
-  const wrap = btn.closest('.dd-wrap');
-  const tag = wrap.querySelector('.filter-chip-tag');
-  if(tag.classList.contains('inc')){
-    tag.classList.remove('inc');
-    tag.classList.add('exc');
-    tag.textContent = 'Exclude';
-    btn.textContent = 'Switch to Include';
+function toggleFilterDrawer(){
+  var panel = document.getElementById('filter-panel');
+  panel.classList.toggle('open');
+  var btn = document.getElementById('btn-filter-toggle');
+  if (btn) btn.classList.toggle('active', panel.classList.contains('open'));
+}
+function fdSingle(btn){ fdChipSingle(btn); }
+function fdMulti(btn){ fdChipMulti(btn); }
+function fdChipSingle(btn){
+  btn.closest('.fd-chips').querySelectorAll('.fd-chip').forEach(function(c){ c.classList.remove('active'); });
+  btn.classList.add('active');
+}
+function fdChipMulti(btn){
+  btn.classList.toggle('active');
+}
+function fdMoveRow(sel){
+  var row = sel.closest('.fd-row');
+  var target = sel.value === 'Include' ? 'fd-include-section' : 'fd-exclude-section';
+  var section = document.getElementById(target);
+  row.style.animation = 'modalIn .2s ease';
+  section.appendChild(row);
+}
+function toggleLogic(btn){
+  btn.textContent = btn.textContent.trim()==='and' ? 'or' : 'and';
+}
+function handleDateType(sel){
+  var v=sel.value;
+  var between=document.getElementById('fc2-between');
+  var during=document.getElementById('fc2-during');
+  var daymonth=document.getElementById('fc2-daymonth');
+  between.style.display=v==='Between'?'flex':'none';
+  during.style.display=v==='During'?'block':'none';
+  daymonth.style.display=v==='On day or month'?'flex':'none';
+}
+function toggleFilterBuilder(){
+  var p=document.getElementById('filter-builder');
+  if(p){var isOpen=p.style.display!=='none';p.style.display=isOpen?'none':'block';}
+}
+function openFilterModal(){
+  document.getElementById('modal-filters').classList.add('open');
+}
+function closeFilterModal(){
+  document.getElementById('modal-filters').classList.remove('open');
+}
+function removeFbRow(btn){
+  var row=btn.closest('.fb-row');
+  var group=row.closest('.fb-group');
+  // Remove preceding AND label if exists
+  var prev=row.previousElementSibling;
+  if(prev && prev.classList.contains('fb-and-label'))prev.remove();
+  else{var next=row.nextElementSibling;if(next && next.classList.contains('fb-and-label'))next.remove();}
+  row.remove();
+  // If group is empty (no more fb-row), remove the group and preceding OR sep
+  if(!group.querySelector('.fb-row')){
+    var prevSib=group.previousElementSibling;
+    if(prevSib && prevSib.classList.contains('fb-or-sep'))prevSib.remove();
+    else{var nextSib=group.nextElementSibling;if(nextSib && nextSib.classList.contains('fb-or-sep'))nextSib.remove();}
+    group.remove();
+  }
+}
+function handleEntityType(sel){
+  var link=document.getElementById('fc5-edit-link');
+  link.style.display=sel.value==='Specific Transactions'?'block':'none';
+  if(sel.value!=='Specific Transactions'){closeTxnPanel();}
+}
+function toggleTxnPanel(){
+  var p=document.getElementById('txn-filter-panel');
+  p.style.display=p.style.display==='none'?'block':'none';
+}
+function closeTxnPanel(){
+  document.getElementById('txn-filter-panel').style.display='none';
+}
+function closeDd(id){
+  var el=document.getElementById(id);
+  if(el)el.classList.remove('open');
+}
+function addTxnFilterRow(sel,containerId){
+  var name=sel.value;
+  if(!name)return;
+  var container=document.getElementById(containerId);
+  var row=document.createElement('div');
+  row.style.cssText='display:flex;align-items:center;gap:8px;margin-bottom:6px;padding:8px 12px;background:var(--platform-02);border-radius:6px;';
+  row.innerHTML='<span style="font-size:13px;font-weight:600;color:var(--platform-80);flex-shrink:0;">'+name+'</span>'
+    +'<select class="fc-select" style="flex:0 0 auto;width:auto;"><option selected>is</option><option>is empty</option><option>contains</option><option>starts with</option><option>ends with</option></select>'
+    +'<input class="fc-input" type="text" placeholder="Value..." style="flex:1;">'
+    +'<button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;color:var(--platform-40);padding:2px;display:flex;align-items:center;flex-shrink:0;" title="Remove"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M10.5 3.5L3.5 10.5M3.5 3.5l7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>';
+  container.appendChild(row);
+}
+function handleCompoundOperator(sel){
+  var v=sel.value;
+  var countInput=document.getElementById('fc5-count');
+  var aggSection=document.getElementById('fc5-aggregate');
+  // Show count input for Has at least/most, The first/last
+  var needsCount=['Has at least','Has at most','The first','The last'];
+  countInput.style.display=needsCount.indexOf(v)>=0?'block':'none';
+  // Show aggregate for "The calculated"
+  aggSection.style.display=v==='The calculated'?'block':'none';
+}
+// Helper: remove a chip from its group, clean up adjacent + separators
+function removeChipFromGroup(wrap){
+  var prev = wrap.previousElementSibling;
+  var next = wrap.nextElementSibling;
+  // If there's a + before AND after, remove one
+  if(prev && prev.classList.contains('fc-plus') && next && next.classList.contains('fc-plus')){
+    prev.remove(); wrap.remove();
+  } else if(prev && prev.classList.contains('fc-plus')){
+    prev.remove(); wrap.remove();
+  } else if(next && next.classList.contains('fc-plus')){
+    next.remove(); wrap.remove();
   } else {
-    tag.classList.remove('exc');
-    tag.classList.add('inc');
-    tag.textContent = 'Include';
-    btn.textContent = 'Switch to Exclude';
-  }
-  closeAllDd();
-}
-function removeFilter(btn){
-  const wrap = btn.closest('.dd-wrap');
-  wrap.style.transition = 'opacity .15s, transform .15s';
-  wrap.style.opacity = '0';
-  wrap.style.transform = 'scale(.95)';
-  setTimeout(()=>{
     wrap.remove();
-    updateFilterCount();
-  }, 160);
-  closeAllDd();
-}
-function addFilter(fieldName){
-  closeAllDd();
-  const row = document.getElementById('ed-filters');
-  const addWrap = row.querySelector('.filter-add').closest('.dd-wrap');
-  const id = 'fc-' + Date.now();
-  const newWrap = document.createElement('div');
-  newWrap.className = 'dd-wrap';
-  newWrap.style.animation = 'modalIn .15s ease';
-  newWrap.innerHTML = '<button class="filter-chip" onclick="toggleDd(\'' + id + '\')">'
-    + '<span class="filter-chip-tag inc">Include</span>'
-    + '<span class="filter-chip-body">' + fieldName + '</span>'
-    + '<span class="filter-chip-chev"><svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></span>'
-    + '</button>'
-    + '<div class="dd-menu fc-menu" id="' + id + '">'
-    + '<div class="fc-edit-field">'
-    + '<label class="fc-edit-label">' + fieldName + '</label>'
-    + '<div class="fc-edit-row"><input class="fc-input" type="text" placeholder="Enter value…"></div>'
-    + '</div>'
-    + '<div class="dd-sep"></div>'
-    + '<button class="dd-item" onclick="toggleChipType(this)">Switch to Exclude</button>'
-    + '<button class="dd-item" onclick="removeFilter(this)">Remove filter</button>'
-    + '</div>';
-  row.insertBefore(newWrap, addWrap);
-  updateFilterCount();
-}
-function updateFilterCount(){
-  var count = document.querySelectorAll('#ed-filters .filter-chip').length;
-  var link = document.querySelector('.ed-filter-link');
-  if(link){
-    link.innerHTML = '<svg class="nav-svg-icon" style="width:11px;height:11px;fill:currentColor;"><use href="#icon-filter"/></svg> ' + count + ' filter' + (count !== 1 ? 's' : '');
   }
 }
+// Helper: insert a chip into a group row (before the Add filter button)
+function insertChipIntoGroup(wrap, groupRow){
+  var addBtn = groupRow.querySelector('.fc-add-btn');
+  if(!addBtn){ groupRow.appendChild(wrap); return; }
+  var addWrap = addBtn.closest('.dd-wrap');
+  var plusBeforeAdd = addWrap.previousElementSibling;
+  if(plusBeforeAdd && plusBeforeAdd.classList.contains('fc-plus')){
+    // Group has chips. Goal: ... lastChip [new+] [newChip] [existing+] [Add filter]
+    var newPlus = document.createElement('span');
+    newPlus.className='fc-plus'; newPlus.textContent='+';
+    groupRow.insertBefore(wrap, plusBeforeAdd);   // chip before existing +
+    groupRow.insertBefore(newPlus, wrap);          // new + before chip
+  } else {
+    // Empty group. Goal: [newChip] [new+] [Add filter]
+    var newPlus = document.createElement('span');
+    newPlus.className='fc-plus'; newPlus.textContent='+';
+    groupRow.insertBefore(wrap, addWrap);
+    groupRow.insertBefore(newPlus, addWrap);
+  }
+}
+function switchChipScope(btn, target){
+  var wrap = btn.closest('.dd-wrap');
+  var sourceGroup = wrap.parentElement;
+  closeAllDd();
+  removeChipFromGroup(wrap);
+  // If source group is now empty of filter chips, remove group + OR separator
+  if(!sourceGroup.querySelector('.filter-chip')){
+    var prevSib = sourceGroup.previousElementSibling;
+    if(prevSib && prevSib.classList.contains('fc-or-row')) prevSib.remove();
+    sourceGroup.remove();
+  }
+  // Find target section
+  var panels = document.querySelectorAll('#filter-panel .fd-chip-summary');
+  var targetPanel = target === 'exclude' ? panels[1] : panels[0];
+  var colWrap = targetPanel.querySelector('div[style*="flex-direction:column"]') || targetPanel;
+  // Find first AND group row (first div with flex-wrap)
+  var firstGroup = colWrap.querySelector('div[style*="flex-wrap"]');
+  insertChipIntoGroup(wrap, firstGroup);
+  // Update dropdown labels
+  wrap.querySelectorAll('.dd-item').forEach(function(item){
+    var t = item.textContent.trim();
+    if(t==='Switch to Include'||t==='Switch to Exclude'){
+      item.textContent = target==='exclude' ? 'Switch to Include' : 'Switch to Exclude';
+      item.setAttribute('onclick', target==='exclude' ? "switchChipScope(this,'include')" : "switchChipScope(this,'exclude')");
+    }
+  });
+  wrap.style.animation='modalIn .15s ease';
+  showToast('Moved to '+(target==='exclude'?'Exclude':'Include'));
+}
+function switchChipLogic(btn, target){
+  var wrap = btn.closest('.dd-wrap');
+  var sourceGroup = wrap.parentElement;
+  var colWrap = sourceGroup.parentElement;
+  closeAllDd();
+  if(target==='or'){
+    removeChipFromGroup(wrap);
+    // Create new OR row + group
+    var orRow = document.createElement('div');
+    orRow.className='fc-or-row';
+    orRow.innerHTML='<span class="fc-or-label">OR</span><span class="fc-or-line"></span>';
+    var newGroup = document.createElement('div');
+    newGroup.style.cssText='display:flex;flex-wrap:wrap;gap:6px;align-items:center;';
+    newGroup.appendChild(wrap);
+    // Add + and Add filter button
+    var addId='fc-add-'+Date.now();
+    var plus=document.createElement('span');plus.className='fc-plus';plus.textContent='+';
+    newGroup.appendChild(plus);
+    var addW=document.createElement('div');addW.className='dd-wrap';
+    addW.innerHTML='<button class="fc-add-btn" onclick="toggleDd(\''+addId+'\')">Add filter</button><div class="dd-menu" id="'+addId+'" style="min-width:200px;max-height:280px;overflow-y:auto;"><div class="dd-item" onclick="showToast(\'Add filter\');closeAllDd();">Status</div><div class="dd-item" onclick="showToast(\'Add filter\');closeAllDd();">Name</div><div class="dd-item" onclick="showToast(\'Add filter\');closeAllDd();">Birthdate</div><div class="dd-sep"></div><div class="dd-item" onclick="openFilterModal();closeAllDd();" style="color:var(--crm-100);font-weight:600;">All filters...</div></div>';
+    newGroup.appendChild(addW);
+    // Insert before the last OR empty state
+    var orRows = colWrap.querySelectorAll('.fc-or-row');
+    var lastOr = orRows[orRows.length-1];
+    colWrap.insertBefore(orRow, lastOr);
+    colWrap.insertBefore(newGroup, lastOr);
+    // Update dropdown
+    wrap.querySelectorAll('.dd-item').forEach(function(item){
+      if(item.textContent.trim()==='Switch to Or'){
+        item.textContent='Switch to And';
+        item.setAttribute('onclick',"switchChipLogic(this,'and')");
+      }
+    });
+    // Clean up source if empty
+    if(!sourceGroup.querySelector('.filter-chip')){
+      var prevSib = sourceGroup.previousElementSibling;
+      if(prevSib && prevSib.classList.contains('fc-or-row')) prevSib.remove();
+      sourceGroup.remove();
+    }
+    wrap.style.animation='modalIn .15s ease';
+    showToast('Moved to new OR group');
+  } else {
+    // Switch to AND: merge into previous AND group
+    var prevGroup = null;
+    var prevSib = sourceGroup.previousElementSibling;
+    if(prevSib && prevSib.classList.contains('fc-or-row')){
+      var orSep = prevSib;
+      prevGroup = orSep.previousElementSibling;
+    }
+    if(prevGroup){
+      removeChipFromGroup(wrap);
+      insertChipIntoGroup(wrap, prevGroup);
+      // Clean up source if empty
+      if(!sourceGroup.querySelector('.filter-chip')){
+        var orBefore = sourceGroup.previousElementSibling;
+        if(orBefore && orBefore.classList.contains('fc-or-row')) orBefore.remove();
+        sourceGroup.remove();
+      }
+      // Update dropdown
+      wrap.querySelectorAll('.dd-item').forEach(function(item){
+        if(item.textContent.trim()==='Switch to And'){
+          item.textContent='Switch to Or';
+          item.setAttribute('onclick',"switchChipLogic(this,'or')");
+        }
+      });
+      wrap.style.animation='modalIn .15s ease';
+      showToast('Merged into AND group');
+    }
+  }
+}
+function removeChipFilter(btn){
+  var wrap = btn.closest('.dd-wrap');
+  var groupRow = wrap.parentElement;
+  closeAllDd();
+  wrap.style.transition='opacity .15s,transform .15s';wrap.style.opacity='0';wrap.style.transform='scale(.95)';
+  setTimeout(function(){
+    removeChipFromGroup(wrap);
+    // If group has no more filter chips, remove group + OR separator
+    if(!groupRow.querySelector('.filter-chip')){
+      var prevSib = groupRow.previousElementSibling;
+      if(prevSib && prevSib.classList.contains('fc-or-row')) prevSib.remove();
+      groupRow.remove();
+    }
+  },160);
+}
+function addChipFilter(el, scope, name){
+  var id = 'fc-' + Date.now();
+  var tag = scope === 'exclude' ? 'exc' : 'inc';
+  var label = scope === 'exclude' ? 'Exclude' : 'Include';
+  var switchLabel = scope === 'exclude' ? 'Switch to Include' : 'Switch to Exclude';
+  var wrap = document.createElement('div');
+  wrap.className = 'dd-wrap';
+  wrap.style.animation = 'modalIn .15s ease';
+  wrap.innerHTML = '<button class="filter-chip" onclick="toggleDd(\'' + id + '\')"><span class="filter-chip-tag ' + tag + '">' + label + '</span><span class="filter-chip-body">' + name + '</span><span class="filter-chip-chev"><svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></span></button>'
+    + '<div class="dd-menu fc-menu" id="' + id + '"><div class="fc-edit-field"><label class="fc-edit-label">' + name + '</label><div class="fc-edit-row" style="margin-top:8px;"><input class="fc-input" type="text" placeholder="Enter value..."></div></div><div class="dd-sep"></div><button class="dd-item" onclick="toggleChipScope(this)">' + switchLabel + '</button><button class="dd-item" onclick="removeChipFilter(this)">Remove filter</button></div>';
+  // Insert before the "Add filter" dd-wrap (last dd-wrap in summary)
+  var allWraps = document.querySelectorAll('.fd-chip-summary > .dd-wrap');
+  var addWrap = allWraps[allWraps.length - 1];
+  if(addWrap) addWrap.parentNode.insertBefore(wrap, addWrap);
+}
+function filterFieldPicker(q){
+  var query = q.toLowerCase();
+  var items = document.querySelectorAll('#fd-field-list .fd-field-item');
+  var groups = document.querySelectorAll('#fd-field-list .fd-field-group');
+  var visibleGroups = {};
+  items.forEach(function(item){
+    var match = item.textContent.toLowerCase().indexOf(query) >= 0;
+    item.style.display = match ? '' : 'none';
+    if(match) visibleGroups[item.dataset.group] = true;
+  });
+  groups.forEach(function(g){
+    g.style.display = visibleGroups[g.dataset.group] ? '' : 'none';
+  });
+  document.getElementById('fd-field-list').style.display = 'block';
+}
+function addNewFilter(name, type){
+  document.getElementById('fd-field-list').style.display = 'none';
+  document.getElementById('fd-add-search').value = '';
+  // Build the new filter row based on type
+  var controls = '';
+  if(type === 'bool'){
+    controls = '<div class="fd-chips" data-mode="single"><button class="fd-chip active" onclick="fdChipSingle(this)">Has</button><button class="fd-chip" onclick="fdChipSingle(this)">Does not have</button></div>';
+  } else if(type === 'pick'){
+    controls = '<div class="fd-chips" data-mode="multi"><button class="fd-chip" onclick="fdChipMulti(this)">Option 1</button><button class="fd-chip" onclick="fdChipMulti(this)">Option 2</button><button class="fd-chip" onclick="fdChipMulti(this)">Option 3</button></div>';
+  } else if(type === 'date'){
+    controls = '<div class="fd-chips" data-mode="single"><button class="fd-chip active" onclick="fdChipSingle(this)">This FY</button><button class="fd-chip" onclick="fdChipSingle(this)">Last FY</button><button class="fd-chip" onclick="fdChipSingle(this)">This quarter</button><button class="fd-chip" onclick="fdChipSingle(this)">Custom</button></div>';
+  } else if(type === 'currency'){
+    controls = '<div class="fd-inline-controls"><select class="fd-select" style="max-width:80px;"><option selected>≥</option><option>≤</option><option>=</option><option>Between</option></select><input class="fd-input" type="text" placeholder="$0"></div>';
+  } else if(type === 'managed'){
+    controls = '<div class="fd-inline-controls"><select class="fd-select" style="max-width:80px;"><option selected>Is</option><option>Contains</option><option>Is empty</option></select><select class="fd-select"><option>Select...</option></select></div>';
+  } else {
+    controls = '<div class="fd-inline-controls"><select class="fd-select" style="max-width:110px;"><option selected>Contains</option><option>Is equal to</option><option>Starts with</option><option>Ends with</option><option>Is empty</option></select><input class="fd-input" type="text" placeholder="Enter value..."></div>';
+  }
+  var row = document.createElement('div');
+  row.className = 'fd-row';
+  row.style.animation = 'modalIn .2s ease';
+  row.innerHTML = '<span class="fd-field">' + name + '</span><div class="fd-controls">' + controls + '<button class="fd-remove" onclick="this.closest(\'.fd-row\').remove()"><svg class="nav-svg-icon" style="width:14px;height:14px;"><use href="#icon-xmark"/></svg></button></div>';
+  // Add to the section where the "Add filter" was clicked
+  var section = el.closest('.fd-section');
+  var addWrap = section.querySelector('.fd-add-wrap');
+  section.insertBefore(row, addWrap);
+}
+// Close field picker on click outside
+document.addEventListener('click', function(e){
+  var list = document.getElementById('fd-field-list');
+  var wrap = document.querySelector('.fd-add-search-wrap');
+  if(list && wrap && !wrap.contains(e.target)){
+    list.style.display = 'none';
+  }
+});
+document.addEventListener('click', function(e){
+  var fd = document.getElementById('filter-drawer');
+  if(fd && fd.classList.contains('open')){
+    var popover = fd;
+    var trigger = fd.previousElementSibling || fd.closest('div').querySelector('.btn-tertiary');
+    if(!popover.contains(e.target) && !e.target.closest('[onclick*="toggleFilterDrawer"]')){
+      fd.classList.remove('open');
+    }
+  }
+});
+function openFilterPanel(){}
+function closeFilterPanel(){}
+function removeFilterRow(){}
+function addFilterRow(){}
+
+// ─── Legacy filter functions (kept for compatibility) ───
+function toggleChipType(){}
+function removeFilter(){}
+function addFilter(){}
+function updateFilterCount(){}
 
 // ─── New Folder modal ───
 function openFolderModal(){
@@ -3581,6 +4020,288 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 
+</script>
+<div id="fb-tooltip-global">Delete</div>
+<script>
+(function(){
+  var tip = document.getElementById('fb-tooltip-global');
+  document.addEventListener('mouseover', function(e){
+    var btn = e.target.closest('.fb-remove');
+    if(btn){
+      var r = btn.getBoundingClientRect();
+      tip.style.left = (r.left + r.width/2) + 'px';
+      tip.style.top = (r.bottom + 6) + 'px';
+      tip.style.opacity = '1';
+    }
+  });
+  document.addEventListener('mouseout', function(e){
+    var btn = e.target.closest('.fb-remove');
+    if(btn) tip.style.opacity = '0';
+  });
+})();
+</script>
+<script>
+// ── Constituent filter definitions ──────────────────────────────────────────
+var FM_FILTERS = [
+  {key:'Status', type:'pick', values:['Active','Inactive','Deceased']},
+  {key:'Type', type:'pick', values:['Individual','Organization']},
+  {key:'Gender', type:'pick', values:['Male','Female','Other','Unknown']},
+  {key:'Engagement Level', type:'pick', values:['Cold','Cool','Warm','Hot','On Fire!']},
+  {key:'Communication Restrictions', type:'pick', values:['Do Not Call','Do Not Mail','Do Not Solicit']},
+  {key:'Email Interest Type', type:'pick', values:['All','Custom','Opted Out']},
+  {key:'Email Interests', type:'pick', values:['Newsletter','Event','Volunteer Information','Donor Surveys']},
+  {key:'Preferred Communication Channel', type:'pick', values:['Phone','Text Message','Email','Mail']},
+  {key:'Giving Level', type:'pick', values:['General','Mid','Major']},
+  {key:'Giving Level Source', type:'pick', values:['System Generated','Manual Override']},
+  {key:'Relationship Manager', type:'pick', values:['Mike Cross','Jordan Luevano']},
+  {key:'Groups', type:'pick', values:['Current','Lapsed','New','Prospective','Recaptured','Recurring','Retained','Board Member','Former Board Member','Staff','Volunteer']},
+  {key:'Attributes', type:'pick', values:['Prospect','Volunteer','Member','Puppy Parent']},
+  {key:'Organization Type', type:'pick', values:['Church','Business','Foundation','Government']},
+  {key:'Board Membership', type:'pick', values:['Current','Former']},
+  {key:'Committees', type:'pick', values:['Executive','Finance','Fundraising','Marketing','Planning']},
+  {key:'Giving Capacity', type:'pick', values:['$1-$1000','$1001-$5000','$5001-$10,000','$10,001-$25,000','$25,001-$50,000','$50,000+']},
+  {key:'Solicitor', type:'pick', values:['Jason Oliver','Jay Love','Melissa Signorelli']},
+  {key:'Membership Type', type:'pick', values:['Bronze','Silver','Gold','Platinum']},
+  {key:'Interests', type:'pick', values:['Data Entry','Cleaning','Events','Fundraising']},
+  {key:'Availability', type:'pick', values:['Day','Evening','Weekends']},
+  {key:'Name', type:'string'},
+  {key:'Employer', type:'string'},
+  {key:'Job Title', type:'string'},
+  {key:'Created By', type:'string'},
+  {key:'Last Modified By', type:'string'},
+  {key:'Birthdate', type:'date'},
+  {key:'Created Date', type:'date'},
+  {key:'Last Modified Date', type:'date'},
+  {key:'Last Website Visit', type:'date'},
+  {key:'Membership Expiration Date', type:'date'},
+  {key:'Member Since', type:'date'},
+  {key:'Website Visits Last 30 Days', type:'number'},
+  {key:'Number of Puppies', type:'number'},
+  {key:'Is Head of Household', type:'boolean', isText:'Is', nameText:'a head of household'},
+  {key:'Is in a Household', type:'boolean', isText:'Is', nameText:'in a household'},
+  {key:'Is A Fundraiser', type:'boolean', isText:'Is', nameText:'a fundraiser'},
+  {key:'Has Facebook ID', type:'boolean', isText:'Has', nameText:'a Facebook ID'},
+  {key:'Has LinkedIn ID', type:'boolean', isText:'Has', nameText:'a LinkedIn ID'},
+  {key:'Has Twitter ID', type:'boolean', isText:'Has', nameText:'a Twitter ID'},
+  {key:'Has First-Time Donor Thank You Call', type:'boolean', isText:'Has', nameText:'a first-time donor thank you call'},
+  {key:'Has Transactions', type:'compound'},
+  {key:'Has Interactions', type:'compound'},
+  {key:'Has Notes', type:'compound'},
+  {key:'Has Addresses', type:'compound'},
+  {key:'Has Email Addresses', type:'compound'},
+  {key:'Has Phone Numbers', type:'compound'},
+  {key:'Has Relationships', type:'compound'},
+  {key:'Has Tasks', type:'compound'},
+  {key:'Find Constituents', type:'special'},
+  {key:'Matches Multiple Filters', type:'special'},
+  {key:'Is in a Constituent Report', type:'special'},
+  {key:'Generosity', type:'pick', values:['Cold','Cool','Warm','Hot','On Fire!','Not Scanned']},
+  {key:'Generosity Details', type:'special'},
+];
+
+// ── Helper: get used filter keys in a section ────────────────────────────────
+function getFmUsedKeys(sectionId) {
+  var section = document.getElementById('fm-section-' + sectionId);
+  if (!section) return [];
+  return Array.from(section.querySelectorAll('.fm-card:not(.is-picker)'))
+    .filter(function(c){ return c.style.display !== 'none'; })
+    .map(function(c){ return (c.dataset.filterKey || '').toLowerCase(); });
+}
+
+// ── Build controls HTML for a filter def ────────────────────────────────────
+function buildFilterControls(def) {
+  switch(def.type) {
+    case 'pick':
+      var chips = def.values.map(function(v){
+        return '<button class="fd-chip" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">'+v+'</button>';
+      }).join('');
+      return '<div class="fm-card-row"><span class="fm-static">is</span><div class="fd-chips" data-mode="multi" style="gap:4px;display:flex;flex-wrap:wrap;">'+chips+'</div></div>';
+    case 'string':
+      return '<div class="fm-card-row"><select class="fc-select" style="width:auto;"><option selected>Contains</option><option>Is equal to</option><option>Starts with</option><option>Ends with</option></select><input class="fc-input" type="text" placeholder="Enter value..." style="flex:1;"></div>';
+    case 'date':
+      return '<div class="fm-card-row"><span class="fm-static">is</span><select class="fc-select" style="width:auto;"><option>between</option><option selected>during</option><option>empty</option></select><select class="fc-select" style="width:auto;"><option>Last fiscal year</option><option selected>This fiscal year</option><option>Next fiscal year</option><option>This year</option><option>Last year</option><option>This month</option><option>Last month</option></select></div>';
+    case 'number':
+      return '<div class="fm-card-row"><span class="fm-static">between</span><input class="fc-input" type="number" style="width:60px;text-align:center;" placeholder="0"><span class="fm-static">and</span><input class="fc-input" type="number" style="width:60px;text-align:center;" placeholder="0"></div>';
+    case 'boolean':
+      return '<div class="fm-card-row"><select class="fc-select" style="width:auto;"><option>'+def.isText+'</option><option>'+def.isText+' not</option></select><span class="fm-static">'+def.nameText+'</span></div>';
+    case 'compound':
+      var label = def.key.replace('Has ','');
+      return '<div class="fm-card-row"><select class="fc-select" style="width:auto;"><option>All</option><option selected>Has any</option><option>Has no</option><option>Has at least</option><option>Has at most</option></select><select class="fc-select" style="width:auto;"><option selected>'+label+'</option></select></div>';
+    default:
+      return '<div class="fm-card-row"><span class="fm-static" style="color:var(--platform-60);font-style:italic;">Configure in full editor</span></div>';
+  }
+}
+
+// ── Remove card + preceding AND label if present ─────────────────────────────
+function fmRemoveCard(btn) {
+  var card = btn.closest('.fm-card');
+  var prev = card.previousElementSibling;
+  var next = card.nextElementSibling;
+
+  // Remove an adjacent AND label (fm-logic) — prefer the one before, fall back to after
+  if (prev && prev.classList.contains('fm-logic')) {
+    prev.remove();
+  } else if (next && next.classList.contains('fm-logic')) {
+    next.remove();
+  }
+
+  // Re-read siblings after possible AND removal
+  prev = card.previousElementSibling;
+  next = card.nextElementSibling;
+
+  // Remove an adjacent OR separator (fb-or-sep) if this card is the only one in the OR group
+  // A card "belongs" to an OR group if the element directly before it is an fb-or-sep,
+  // or it's the first card and the element after is an fb-or-sep
+  if (prev && prev.classList.contains('fb-or-sep')) {
+    // Only remove the sep if there's no other card immediately after this one in the same OR group
+    // i.e. next is another sep, an add-row, or nothing
+    if (!next || next.classList.contains('fb-or-sep') || next.classList.contains('fb-add-row')) {
+      prev.remove();
+    }
+  } else if (next && next.classList.contains('fb-or-sep')) {
+    // Card is before a sep — only remove if nothing meaningful precedes this card
+    if (!prev || prev.classList.contains('fb-or-sep') || prev.classList.contains('fm-logic')) {
+      next.remove();
+    }
+  }
+
+  card.remove();
+  document.querySelectorAll('.fm-picker-list').forEach(function(l){ l.remove(); });
+}
+
+// ── Picker: show/filter list ─────────────────────────────────────────────────
+function fmShowPickerList(input, sectionId) {
+  var wrap = input.closest('.fm-picker-wrap');
+  document.querySelectorAll('.fm-picker-list').forEach(function(l){ l.remove(); });
+
+  var q = input.value.trim().toLowerCase();
+  var used = getFmUsedKeys(sectionId);
+  var matches = FM_FILTERS.filter(function(f){
+    return !q || f.key.toLowerCase().includes(q);
+  });
+
+  var list = document.createElement('div');
+  list.className = 'fm-picker-list';
+
+  if (!matches.length) {
+    list.innerHTML = '<div class="fm-picker-empty">No filters found</div>';
+  } else {
+    matches.forEach(function(def) {
+      var isUsed = used.indexOf(def.key.toLowerCase()) >= 0;
+      var item = document.createElement('div');
+      item.className = 'fm-picker-item' + (isUsed ? ' disabled' : '');
+      item.textContent = def.key + (isUsed ? ' (already added)' : '');
+      if (!isUsed) {
+        item.addEventListener('mousedown', function(e){
+          e.preventDefault();
+          fmSelectFilter(input, def, sectionId);
+        });
+      }
+      list.appendChild(item);
+    });
+  }
+
+  // Position using fixed coords — smart up/down
+  document.body.appendChild(list);
+  var rect = input.getBoundingClientRect();
+  var listH = Math.min(200, matches.length * 37 + 8);
+  var spaceBelow = window.innerHeight - rect.bottom - 8;
+  var spaceAbove = rect.top - 8;
+
+  list.style.width = rect.width + 'px';
+  if (spaceBelow >= listH || spaceBelow >= spaceAbove) {
+    list.style.top = (rect.bottom + 4) + 'px';
+    list.style.left = rect.left + 'px';
+  } else {
+    list.style.bottom = (window.innerHeight - rect.top + 4) + 'px';
+    list.style.left = rect.left + 'px';
+  }
+}
+
+// ── Picker: commit selection → transform card ────────────────────────────────
+function fmSelectFilter(input, def, sectionId) {
+  var card = input.closest('.fm-card');
+  card.classList.remove('is-picker');
+  card.dataset.filterKey = def.key.toLowerCase();
+
+  // Replace the entire picker-wrap with controls
+  var pickerWrap = card.querySelector('.fm-picker-wrap');
+
+  // Update the "Select filter" span to the real field name
+  var fieldSpan = card.querySelector('.fm-field');
+  fieldSpan.textContent = def.key;
+
+  // Build controls and replace picker wrap
+  var controls = document.createElement('div');
+  controls.innerHTML = buildFilterControls(def);
+  card.replaceChild(controls.firstElementChild, pickerWrap);
+}
+
+// ── Main: add a new filter card ───────────────────────────────────────────────
+function addFilterCard(sectionId, isOrGroup) {
+  var section = document.getElementById('fm-section-' + sectionId);
+  if (!section) return;
+
+  // Find the LAST fb-add-row in this section (not using :last-of-type which doesn't work on divs)
+  var addRows = section.querySelectorAll('.fb-add-row');
+  var addRow = addRows[addRows.length - 1];
+  if (!addRow) return;
+
+  // If OR group, insert a separator first
+  if (isOrGroup) {
+    var sep = document.createElement('div');
+    sep.className = 'fb-or-sep';
+    sep.innerHTML = '<span>OR</span>';
+    section.insertBefore(sep, addRow);
+  } else {
+    // AND: add logic label if there are existing visible non-picker cards
+    var existingCards = Array.from(section.querySelectorAll('.fm-card:not(.is-picker)')).filter(function(c){
+      return c.style.display !== 'none';
+    });
+    if (existingCards.length > 0) {
+      var logic = document.createElement('div');
+      logic.className = 'fm-logic';
+      logic.textContent = 'AND';
+      section.insertBefore(logic, addRow);
+    }
+  }
+
+  // Build the picker card
+  var uid = 'fmp-' + Date.now();
+  var card = document.createElement('div');
+  card.className = 'fm-card is-picker';
+  card.innerHTML =
+    '<span class="fm-field">Select filter</span>' +
+    '<button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter">' +
+      '<svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg>' +
+    '</button>' +
+    '<div class="fm-picker-wrap">' +
+      '<input class="fm-picker-input" id="'+uid+'" type="text" placeholder="Search filters..." autocomplete="off">' +
+    '</div>';
+
+  section.insertBefore(card, addRow);
+
+  // Wire up the search input
+  var inp = card.querySelector('.fm-picker-input');
+  inp.addEventListener('focus', function(){ fmShowPickerList(inp, sectionId); });
+  inp.addEventListener('input', function(){ fmShowPickerList(inp, sectionId); });
+  inp.addEventListener('blur', function(){
+    setTimeout(function(){
+      // list is appended to body, not inside card
+      document.querySelectorAll('.fm-picker-list').forEach(function(l){ l.remove(); });
+    }, 150);
+  });
+
+  // Auto-focus
+  setTimeout(function(){ inp.focus(); }, 50);
+}
+
+// Close picker lists when clicking outside
+document.addEventListener('click', function(e){
+  if (!e.target.closest('.fm-picker-wrap') && !e.target.closest('.fm-picker-list')) {
+    document.querySelectorAll('.fm-picker-list').forEach(function(l){ l.remove(); });
+  }
+});
 </script>
 </body>
 </html>

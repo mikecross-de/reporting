@@ -185,7 +185,7 @@ input,select,textarea{font-family:var(--font);}
 .dd-item.destructive{color:var(--red-200);}
 .dd-item.destructive:hover{background:var(--red-5);}
 .dd-sep{height:1px;background:var(--platform-10);margin:4px 0;}
-.tb-dd.filtered{border-color:var(--platform-40);color:var(--platform-100);background:var(--white);font-weight:600;}
+.tb-dd.filtered{border-color:var(--platform-100);color:var(--platform-100);background:var(--white);}
 .tb-reset-filters{background:none;border:none;font-family:var(--font);font-size:14px;color:var(--crm-100);cursor:pointer;padding:0;font-weight:500;white-space:nowrap;transition:opacity .12s;}
 .tb-reset-filters:disabled{color:var(--platform-40);cursor:default;}
 .tb-reset-filters:not(:disabled):hover{text-decoration:underline;}
@@ -1204,10 +1204,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <h1 class="rep-title">Reports</h1>
           </div>
           <div class="rep-head-actions">
-            <button class="btn-tertiary" onclick="openFolderModal()">
-              New Folder
-            </button>
-            <button class="btn-primary" onclick="openNewReportModal()">
+<button class="btn-primary" onclick="openNewReportModal()">
               New Report
             </button>
           </div>
@@ -1319,6 +1316,8 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
               </button>
               <div class="dd-menu right" id="dd-folder">
+                <button class="dd-item" onclick="closeAllDd();openFolderModal()"><svg class="nav-svg-icon" style="width:13px;height:13px;fill:currentColor;margin-right:4px;vertical-align:-1px;"><use href="#icon-plus"/></svg>New folder</button>
+                <div class="dd-divider"></div>
                 <button class="dd-item active" onclick="filterFolder('all',this)">All folders</button>
                 <button class="dd-item" onclick="filterFolder('development-fy26',this)">Development / FY26</button>
                 <button class="dd-item" onclick="filterFolder('mailing-lists',this)">Mailing Lists</button>

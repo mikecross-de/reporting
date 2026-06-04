@@ -133,6 +133,8 @@ input,select,textarea{font-family:var(--font);}
 .penny-banner-input-wrap{display:flex;align-items:center;gap:12px;}
 .penny-banner-input{flex:1;border:1px solid var(--platform-40);border-radius:6px;padding:12px 14px;font-size:15px;color:var(--platform-100);background:var(--white);outline:none;font-family:var(--font);transition:border-color .15s,box-shadow .15s;}
 .penny-banner-input:focus{border-color:var(--penny-100);border-width:2px;padding:11px 13px;}
+.penny-banner-input.error{border-color:#F93A57;border-width:2px;padding:11px 13px;}
+.penny-banner-error{display:none;color:#F93A57;font-size:14px;line-height:18px;padding:4px 0 0 0;font-family:var(--font);}
 .penny-banner-input::placeholder{color:#4E5555;}
 .penny-banner-btn{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);line-height:20px;transition:background .15s;}
 .penny-banner-btn:hover{background:var(--penny-200);}
@@ -1216,12 +1218,13 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <h2 class="penny-banner-head-title">Describe your report and watch it come to life</h2>
           </div>
           <div class="penny-banner-input-wrap">
-            <input id="convInput" class="penny-banner-input penny-typewriter" type="text" placeholder="" aria-label="Describe your report" oninput="document.getElementById('convSubmitBtn').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'){event.preventDefault();convSubmit();}">
+            <input id="convInput" class="penny-banner-input penny-typewriter" type="text" placeholder="" aria-label="Describe your report" oninput="document.getElementById('convSubmitBtn').disabled=!this.value.trim();this.classList.remove('error');var e=document.getElementById('convError');if(e)e.style.display='none';" onkeydown="if(event.key==='Enter'){event.preventDefault();convSubmit();}">
             <button class="penny-banner-btn" id="convSubmitBtn" disabled onclick="convSubmit()">
               <svg class="nav-svg-icon" aria-hidden="true" style="width:13px;height:13px;"><use href="#icon-sparkles"/></svg>
               Build Report
             </button>
           </div>
+          <div class="penny-banner-error" id="convError">We couldn&#39;t build a report from that. Please try again.</div>
         </div>
 
               <div class="clar-scrim" id="clarScrim"></div>
@@ -4963,8 +4966,13 @@ async function convSubmit(){
     input.disabled = false;
     btn.disabled = false;
     btn.innerHTML = origHTML;
-    input.style.borderColor = 'var(--red-100)';
-    setTimeout(function(){ input.style.borderColor = ''; }, 2500);
+    input.classList.add('error');
+    var errEl = document.getElementById('convError');
+    if(errEl) errEl.style.display = 'block';
+    setTimeout(function(){
+      input.classList.remove('error');
+      if(errEl) errEl.style.display = 'none';
+    }, 3000);
   }
 }
 
@@ -5065,7 +5073,12 @@ function clarBuildQuestions(prompt){
     return questions;
   }
 
-  // Generic fallback
+  // Only show questions if we recognized something meaningful
+  if(!isDonor && !isVolunteer && !isConstituent && !isLapsed){
+    return null;
+  }
+
+  // Generic fallback for vague but recognizable prompts
   questions.push({
     question: 'What type of records should this report include?',
     options: ['Constituents (people)', 'Transactions (gifts)', 'Interactions (touchpoints)', 'All record types']

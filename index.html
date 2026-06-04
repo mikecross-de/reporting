@@ -4940,10 +4940,16 @@ async function convSubmit(){
   // Try direct build first
   var report = getDemoReport(prompt);
   if(report){
+    // Already showing toast — just wait then go to report
+    await new Promise(function(r){setTimeout(r, 1500);});
     toast.classList.remove('visible');
-    clarOpenProcessing(prompt);
-    await new Promise(function(r){setTimeout(r, 2000);});
-    clarFinish(report);
+    input.disabled = false;
+    input.value = '';
+    btn.disabled = true;
+    btn.innerHTML = origHTML;
+    var title = (report.title && report.title !== 'New Report') ? report.title : 'New Constituent Report';
+    document.querySelector('.ed-head-title').textContent = title;
+    showView('editor');
     return;
   }
 

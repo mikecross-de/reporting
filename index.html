@@ -143,7 +143,7 @@ input,select,textarea{font-family:var(--font);}
 .rep-panel{background:var(--white);border-radius:10px;margin-bottom:18px;padding:0 24px 24px;}
 .rep-toolbars-wrap{background:var(--white);padding:24px 0 24px;}
 .rep-toolbar-1{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;}
-.tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;min-width:200px;flex:1 1 260px;max-width:350px;transition:border-color .15s;}
+.tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);min-width:350px;border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:1 1 260px;max-width:350px;transition:border-color .15s;}
 .tb-search:focus-within{border-color:var(--crm-100);border-width:2px;padding:0 11px;}
 .tb-search input{flex:1;border:none;outline:none;font-size:16px;color:var(--platform-100);background:transparent;}
 .tb-search input::placeholder{color:var(--platform-40);}
@@ -297,7 +297,6 @@ input.fc-sm{height:28px;font-size:12px;padding:4px 8px;}
 .grove-check input{appearance:none;-webkit-appearance:none;width:18px;height:18px;border:2px solid var(--platform-60);border-radius:2px;cursor:pointer;position:relative;flex-shrink:0;margin:0;background:none;background-color:transparent;transition:background .1s,border-color .1s;}
 .grove-check input:checked{background:var(--crm-100);border-color:var(--crm-100);}
 .grove-check input:checked::after{content:'';position:absolute;left:5px;top:1px;width:5px;height:10px;border:solid white;border-width:0 2px 2px 0;transform:rotate(45deg);}
-.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--platform-100);color:var(--white);padding:14px 16px;border-radius:4px;font-family:var(--font);font-size:17px;font-weight:400;display:flex;align-items:center;gap:8px;z-index:9999;min-width:320px;max-width:480px;opacity:0;transition:transform .3s ease,opacity .3s ease;white-space:nowrap;line-height:20px;}
 .toast.visible{transform:translateX(-50%) translateY(0);opacity:1;}
 .toast-icon-wrap{width:24px;height:24px;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
 .toast-icon{width:24px;height:24px;flex-shrink:0;display:block;}
@@ -646,7 +645,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .penny-insight-dismiss:hover{background:var(--platform-10);color:var(--platform-100);}
 
 /* Result summary row */
-.ed-summary{display:flex;align-items:center;justify-content:space-between;padding:20px 0 12px;}
+.ed-summary{display:flex;align-items:center;justify-content:space-between;padding:24px 0 20px;}
 .ed-summary-l{font-size:16px;color:var(--platform-80);display:flex;align-items:center;gap:8px;}
 .ed-summary-l strong{color:var(--platform-100);font-weight:700;}
 .ed-summary-r{display:flex;align-items:center;gap:8px;}
@@ -717,6 +716,326 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* Utility */
 .hidden{display:none!important;}
+
+/* ─── NL FLOW CSS ─── */
+.conv-panel{background:var(--white);border-radius:4px;margin-bottom:20px;padding:20px 24px;}
+.conv-panel-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+.conv-panel-row svg{width:20px;height:20px;fill:var(--penny-100);flex-shrink:0;}
+.conv-panel-title{font-size:20px;font-weight:700;color:var(--platform-100);flex:1;}
+.conv-dismiss{background:none;border:none;font-size:13px;font-weight:600;color:var(--platform-60);cursor:pointer;font-family:var(--font);padding:4px 0;}
+.conv-dismiss:hover{color:var(--platform-100);}
+.conv-input-row{display:flex;align-items:center;gap:12px;}
+.conv-input-wrap{display:flex;align-items:center;gap:10px;border:1px solid var(--platform-20);border-radius:4px;padding:4px 14px;transition:border-color .15s,box-shadow .15s;flex:1;}
+.conv-input-wrap:focus-within{border-color:var(--penny-100);box-shadow:0 0 0 3px rgba(103,94,249,.15);}
+.conv-input-wrap input{flex:1;border:none;outline:none;font-size:16px;color:var(--platform-100);background:transparent;padding:10px 0;min-width:0;font-family:var(--font);}
+.conv-input-wrap input::placeholder{color:var(--platform-60);}
+.conv-input-wrap input:disabled{opacity:.5;}
+.conv-btn{background:var(--penny-100);color:var(--white);border:none;border-radius:44px;padding:10px 24px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;font-family:var(--font);}
+.conv-btn:hover{background:var(--penny-200);}
+.conv-btn svg{width:16px;height:16px;fill:currentColor;}
+.conv-btn:disabled{opacity:.6;cursor:default;pointer-events:none;}
+
+/* ─────────── CLARIFICATION BOTTOM SHEET ─────────── */
+/* Scrim */
+.clar-scrim{position:fixed;inset:0;background:rgba(0,0,0,0);z-index:300;pointer-events:none;transition:background .25s,opacity .25s;}
+.clar-scrim.active{background:rgba(0,0,0,0.4);pointer-events:auto;}
+
+/* Sheet */
+.clar-sheet{position:fixed;bottom:0;left:0;right:0;z-index:301;background:var(--white);border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);transform:translateY(100%);transition:transform .3s cubic-bezier(.32,.72,0,1);max-width:720px;margin:0 auto;left:50%;transform:translateX(-50%) translateY(100%);pointer-events:none;}
+.clar-sheet.active{transform:translateX(-50%) translateY(-16px);pointer-events:auto;}
+
+/* Sheet header */
+.clar-sheet-head{display:flex;align-items:center;gap:16px;padding:24px 24px 6px;}
+.clar-sheet-penny{display:none;}
+.clar-sheet-meta{flex:1;min-width:0;}
+.clar-sheet-label{display:none;}
+.clar-sheet-question-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.clar-sheet-counter{font-size:16px;font-weight:400;color:var(--platform-60);white-space:nowrap;flex-shrink:0;}
+.clar-sheet-question{font-size:20px;font-weight:600;color:var(--platform-100);line-height:24px;flex:1;}
+.clar-sheet-close{width:32px;height:32px;border:none;background:none;cursor:pointer;color:var(--platform-60);font-size:16px;display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;transition:background .12s,color .12s;}
+.clar-sheet-close:hover{background:var(--platform-10);color:var(--platform-100);}
+
+
+
+
+/* Options */
+.clar-options{padding:0 24px;display:flex;flex-direction:column;}
+.clar-option{display:flex;align-items:center;border:none;border-bottom:1px solid var(--platform-20);padding:0;cursor:pointer;background:var(--white);font-family:var(--font);text-align:left;width:100%;outline:none;}
+.clar-option-inner{display:flex;align-items:center;gap:12px;padding:12px 0;width:100%;}
+.clar-option-radio{width:32px;height:32px;flex-shrink:0;display:flex;align-items:center;justify-content:center;position:relative;border-radius:50%;transition:background .12s;}
+.clar-option:hover .clar-option-radio{background:var(--platform-20);}
+.clar-option-radio::before{content:'';width:20px;height:20px;border-radius:50%;border:2px solid var(--platform-60);box-sizing:border-box;}
+.clar-option.selected .clar-option-radio::before{border-color:var(--penny-100);}
+.clar-option.selected .clar-option-radio::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--penny-100);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.clar-option-text{font-size:16px;color:var(--platform-100);font-weight:400;flex:1;line-height:1;}
+
+/* "Other / type your own" option */
+.clar-other-wrap{display:block;padding:0 24px;}
+.clar-other-wrap .clar-option-radio{cursor:text;}
+.clar-other-wrap:hover .clar-option-radio{background:var(--platform-20);}
+.clar-other-wrap.other-selected .clar-option-radio{background:none;}
+.clar-other-wrap.other-selected .clar-option-radio::before{border-color:var(--penny-100);}
+.clar-other-wrap.other-selected .clar-option-radio::after{content:'';width:10px;height:10px;border-radius:50%;background:var(--penny-100);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);}
+.clar-other-row{display:flex;align-items:center;gap:12px;padding:16px 0;border-bottom:1px solid var(--platform-20);}
+.clar-other-input{flex:1;border:none;padding:0;font-size:16px;font-family:var(--font);color:var(--platform-100);outline:none;background:transparent;}
+.clar-other-input::placeholder{color:var(--platform-60);}
+
+/* Footer actions */
+.clar-footer{display:flex;align-items:center;padding:24px;}
+.clar-footer-r{display:flex;align-items:center;gap:8px;margin-left:auto;}
+.clar-cancel{background:none;border:none;font-size:15px;font-weight:600;color:var(--platform-60);cursor:pointer;font-family:var(--font);padding:10px 0;}
+.clar-cancel:hover{color:var(--platform-100);}
+.clar-back{background:none;border:1px solid var(--platform-100);border-radius:44px;padding:10px 20px;font-size:16px;font-weight:700;color:var(--platform-100);cursor:pointer;font-family:var(--font);}
+.clar-back:hover{border-color:var(--platform-20);background:var(--platform-20);}
+.clar-skip{background:none;border:1px solid var(--platform-100);border-radius:44px;padding:10px 20px;font-size:16px;font-weight:700;color:var(--platform-100);cursor:pointer;font-family:var(--font);}
+.clar-skip:hover{border-color:var(--platform-20);background:var(--platform-20);}
+.clar-next{background:var(--penny-100);color:var(--white);border:none;border-radius:44px;padding:10px 20px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:8px;justify-content:center;transition:background .12s;}
+.clar-next:hover{background:var(--penny-200);}
+.clar-next:disabled{opacity:.45;cursor:default;pointer-events:none;}
+.clar-next svg{width:14px;height:14px;fill:currentColor;}
+
+/* Processing overlay inside sheet */
+.clar-processing{display:none !important;}
+.clar-processing.active{display:none !important;}
+.clar-processing-spinner{width:36px;height:36px;border:3px solid var(--penny-10);border-top-color:var(--penny-100);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.clar-processing-text{font-size:16px;font-weight:700;color:var(--platform-100);}
+.clar-processing-sub{font-size:14px;color:var(--platform-60);}
+
+/* Thinking dots (inside answer summary) */
+@keyframes think{0%,80%,100%{transform:scale(0.6);opacity:.4;}40%{transform:scale(1);opacity:1;}}
+
+/* ─────────── TOOLBAR ─────────── */
+.toolbar{background:var(--white);border-radius:4px 4px 0 0;padding:16px 20px;margin-bottom:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.tb-search{display:flex;align-items:center;gap:8px;border:1px solid var(--platform-20);border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:0 1 280px;transition:border-color .15s;}
+.tb-search:focus-within{border-color:var(--crm-100);border-width:2px;padding:0 11px;}
+.tb-search input{flex:1;border:none;outline:none;font-size:15px;color:var(--platform-100);background:transparent;}
+.tb-search input::placeholder{color:var(--platform-40);}
+.tb-search-clear{display:none;background:none;border:none;cursor:pointer;padding:2px;color:var(--platform-60);flex-shrink:0;align-items:center;justify-content:center;transition:color .12s;}
+.tb-search-clear:hover{color:var(--platform-100);}
+.tb-pills{display:flex;gap:6px;align-items:center;}
+.tb-pill{background:var(--white);border:1px solid #A9ABAC;padding:6px 12px;font-size:14px;font-weight:400;color:var(--platform-100);cursor:pointer;display:inline-flex;align-items:center;gap:4px;transition:all .12s;border-radius:39px;font-family:var(--font);line-height:18px;}
+.tb-pill:hover{background:#E9EAEA;color:var(--platform-100);border-color:#A9ABAC;}
+.tb-pill.active{background:#357A06;color:var(--white);border-color:#357A06;font-weight:700;}
+.tb-pill.active svg{fill:white;}
+.tb-spacer{flex:1;}
+.tb-filter-btn{display:inline-flex;align-items:center;gap:4px;background:var(--white);border:1px solid var(--platform-20);border-radius:4px;padding:0 14px;font-size:14px;font-weight:600;color:var(--platform-100);cursor:pointer;font-family:var(--font);transition:border-color .12s;min-width:215px;height:38px;}
+.tb-filter-btn:hover{border-color:var(--platform-40);}
+.tb-filter-btn svg{width:10px;height:10px;fill:currentColor;margin-left:auto;flex-shrink:0;}
+.tb-filter-btn.has-value{color:var(--platform-100);}
+.tb-dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border:1px solid var(--platform-10);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.10);min-width:180px;z-index:100;padding:4px 0;}
+.tb-dd-menu.open{display:block;}
+.tb-filter-pill{display:inline-flex;align-items:center;gap:3px;background:var(--platform-5);border:1px solid var(--platform-20);border-radius:12px;padding:1px 7px;font-size:11px;color:var(--platform-100);font-family:var(--font);font-weight:600;white-space:nowrap;line-height:18px;}
+.tb-filter-pill .pill-x{cursor:pointer;font-size:12px;font-weight:700;color:var(--platform-60);}
+.tb-filter-pill .pill-x:hover{color:var(--platform-100);}
+.tb-filter-btn.has-pills{flex-wrap:wrap;gap:4px;}
+.tb-reset.active{color:var(--crm-100);cursor:pointer;}
+.tb-reset.active:hover{color:var(--crm-200);text-decoration:underline;}
+.dd-item.selected{background:var(--crm-10);color:var(--crm-200);}
+.tb-reset{background:none;border:none;font-family:var(--font);font-size:14px;color:var(--platform-40);padding:4px 8px;white-space:nowrap;cursor:default;}
+
+
+/* ─────────── TABS ─────────── */
+.rep-tabs{display:flex;align-items:stretch;background:var(--white);padding:0;border-bottom:1px solid #D4D5D6;position:relative;}
+.rep-tab{background:transparent;border:none;border-bottom:3px solid transparent;margin-bottom:-1px;padding:12px 52px;height:48px;font-family:var(--font);font-size:16px;font-weight:400;color:#7D8183;cursor:pointer;display:inline-flex;align-items:center;transition:color .12s;position:relative;z-index:1;}
+.rep-tab:hover{color:var(--platform-100);}
+.rep-tab.active{font-weight:600;color:#272D30;border-bottom:3px solid #357A06;}
+.rep-tab.active:hover{background:transparent;color:#272D30;}
+
+/* ─────────── TABLE ─────────── */
+.rep-table-wrap{background:var(--white);border-radius:0;overflow:hidden;}
+.rep-table{width:100%;border-collapse:collapse;}
+.rep-table thead th{text-align:left;padding:14px 20px;font-size:13px;font-weight:600;color:var(--platform-60);background:var(--white);border-bottom:1px solid var(--platform-10);white-space:nowrap;user-select:none;}
+.rep-table thead th .sort-icon{font-size:10px;margin-left:4px;color:var(--platform-40);}
+.rep-table tbody tr{cursor:pointer;transition:background .08s;}
+.rep-table tbody tr:hover{background:#F9F9F9;}
+.rep-table tbody td{padding:20px 20px;border-bottom:1px solid var(--platform-10);color:var(--platform-100);vertical-align:middle;font-size:15px;}
+.rep-table tbody tr:last-child td{border-bottom:none;}
+.td-name{font-weight:700;font-size:16px;transition:color .12s;}
+.rep-table tbody tr:hover .td-name{color:var(--crm-100);}
+.td-freq{color:var(--platform-60);}
+.td-folder{color:var(--platform-60);}
+.td-date{font-size:14px;color:var(--platform-100);}
+.td-date-sub{font-size:13px;color:var(--platform-60);}
+.action-btn{display:inline-flex;align-items:center;gap:6px;background:var(--white);border:1px solid var(--platform-20);border-radius:4px;padding:8px 14px;font-size:14px;font-weight:600;color:var(--platform-100);cursor:pointer;font-family:var(--font);transition:border-color .12s;}
+.action-btn:hover{border-color:var(--platform-40);}
+.action-btn svg{width:10px;height:10px;fill:currentColor;}
+
+/* ─────────── ACTION DROPDOWN ─────────── */
+.dd-wrap{position:relative;}
+.dd-menu{display:none;position:absolute;top:calc(100% + 4px);right:0;background:var(--white);border:1px solid var(--platform-10);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.10);min-width:180px;z-index:100;padding:4px 0;}
+.dd-menu.open{display:block;}
+.dd-menu.open-up{top:auto;bottom:calc(100% + 4px);}
+.dd-item{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:15px;color:var(--platform-100);cursor:pointer;white-space:nowrap;border:none;background:none;width:100%;text-align:left;font-family:var(--font);}
+.dd-item:hover{background:var(--platform-5);}
+.dd-item.disabled{color:var(--platform-40);cursor:default;}
+.dd-item.disabled:hover{background:none;}
+.dd-item.destructive{color:var(--red-200);}
+
+/* ─────────── PAGINATION ─────────── */
+.rep-pag{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:12px 20px;background:var(--white);border-radius:0 0 4px 4px;font-size:14px;color:var(--platform-60);}
+.rep-pag select{border:1px solid var(--platform-20);border-radius:4px;padding:4px 24px 4px 8px;font-size:14px;font-family:var(--font);color:var(--platform-100);cursor:pointer;background:var(--white);}
+.rep-pag-btn{width:32px;height:32px;border:none;border-radius:4px;background:transparent;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--platform-60);font-size:14px;}
+.rep-pag-btn:hover{background:var(--platform-5);color:var(--platform-100);}
+
+/* ─────────── LOADING STATE ─────────── */
+.nlr-loading{background:var(--white);border-radius:4px;padding:90px 24px;text-align:center;max-width:500px;min-width:450px;position:fixed;top:50%;left:calc(50% + var(--nav-collapsed)/2);transform:translate(-50%,-50%);z-index:10;display:none;}
+.nlr-loading-inner{display:flex;flex-direction:column;align-items:center;gap:24px;}
+.nlr-loading-spinner{width:40px;height:40px;border:3px solid var(--platform-10);border-top-color:var(--penny-100);border-radius:50%;animation:spin .8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.nlr-loading-text{font-size:20px;color:var(--platform-100);font-weight:700;}
+
+/* ─────────── REPORT VIEW ─────────── */
+.report-view{display:none;padding:24px 32px;}
+.report-view.active{display:block;}
+
+/* RV Header */
+
+.rv-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;}
+.rv-title{font-size:32px;font-weight:700;color:var(--platform-100);}
+.rv-actions{display:flex;align-items:center;gap:8px;}
+.rv-cancel{background:#F4F5F6;border:1px solid #ccc;border-radius:6px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--platform-100);cursor:pointer;padding:8px 12px;line-height:1;}
+.rv-btn-group{display:flex;}
+.rv-btn-group .rv-cancel{border-radius:6px 0 0 6px;border-right:none;}
+.rv-cancel:hover{background:var(--platform-5);border-color:#aaa;}
+.rv-save{background:#298BAB;color:var(--white);border:none;border-radius:0 6px 6px 0;padding:8px 12px;position:relative;font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;line-height:1;}
+.rv-save-wrap{position:relative;display:inline-flex;}
+.rv-save-dd{display:none;position:absolute;top:calc(100% + 4px);right:0;background:var(--white);border:1px solid var(--platform-10);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.10);min-width:200px;z-index:100;padding:4px 0;}
+.rv-save-dd.open{display:block;}
+.rv-save:hover{background:#237a97;}
+.rv-save svg{width:10px;height:10px;fill:currentColor;}
+
+/* RV Tabs */
+.rv-tabs{display:flex;gap:0;margin-bottom:16px;}
+.rv-tab{padding:7px 20px 9px;font-size:16px;font-weight:600;border:1px solid var(--platform-20);cursor:pointer;font-family:var(--font);background:var(--white);color:var(--platform-80);position:relative;}
+.rv-tab:first-child{border-radius:4px 0 0 4px;}
+.rv-tab:not(.active){background:#F4F5F6;}
+.rv-tab:not(.active):hover{background:#cbcbcb;}
+.rv-tab:last-child{border-radius:0 4px 4px 0;border-left:none;}
+.rv-tab.active{background:#5BB033;color:var(--white);border-color:#5BB033;}
+.rv-tab.active::after{content:'';position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-top:8px solid #5BB033;}
+.rv-tab i{margin-right:5px;}
+
+/* RV Filters Card */
+
+.rv-filters-card{background:var(--white);border:none;border-radius:4px;padding:20px 24px;margin-bottom:0;margin-top:8px;}
+.rv-filters-head{font-size:20px;font-weight:700;color:var(--platform-100);padding-bottom:20px;}
+
+.rv-filter-row{display:flex;align-items:center;gap:8px;padding-bottom:12px;margin-bottom:10px;flex-wrap:wrap;border-bottom:1px solid var(--platform-20);position:relative;}
+.rv-filter-label{font-size:13px;font-weight:600;color:#5BB033;flex-shrink:0;min-width:48px;}
+.rv-filter-label.exclude{color:#8ab9cf;}
+.rv-filter-chip{display:inline-flex;align-items:center;gap:6px;background:#e4e4e4;border:1px solid rgba(0,0,0,0.15);border-radius:2px;max-width:345px;padding:2px 6px;font-size:13px;color:var(--platform-80);font-family:var(--font);}
+
+.rv-filter-chip .chip-x{color:var(--platform-100);cursor:pointer;font-size:18px;font-weight:700;margin-left:2px;}
+.rv-filter-chip .chip-x:hover{color:var(--platform-100);}
+.rv-and-btn{background:#5BB033;color:var(--white);border:none;border-radius:4px;padding:4px 12px;font-size:13px;font-weight:400;cursor:pointer;font-family:var(--font);}
+.rv-or-btn{background:#5BB033;color:var(--white);border:none;border-radius:4px;padding:4px 10px;font-size:13px;font-weight:400;cursor:pointer;font-family:var(--font);margin-bottom:8px;display:inline-block;}
+.rv-exclude-row{display:flex;align-items:center;gap:8px;padding-top:12px;margin-bottom:16px;border-top:1px solid var(--platform-20);flex-wrap:wrap;position:relative;}
+.rv-add-filter{background:#8ab9cf;color:var(--white);border:none;border-radius:4px;padding:4px 12px;font-size:13px;font-weight:400;cursor:pointer;font-family:var(--font);}
+
+.rv-penny-row{display:flex;align-items:center;gap:12px;margin-top:20px;}
+
+.rv-penny-wrap{display:flex;align-items:center;gap:10px;border:1px solid var(--platform-20);border-radius:4px;padding:4px 14px;flex:1;transition:border-color .15s,box-shadow .15s;}
+.rv-penny-wrap:focus-within{border-color:var(--penny-100);box-shadow:0 0 0 3px rgba(103,94,249,.15);}
+.rv-penny-input{flex:1;border:none;outline:none;font-size:16px;color:var(--platform-100);font-family:var(--font);background:transparent;padding:10px 0;min-width:0;}
+.rv-penny-input::placeholder{color:var(--platform-60);}
+
+.rv-refine-btn{background:var(--penny-100);color:var(--white);border:none;border-radius:44px;padding:10px 24px;font-size:16px;font-weight:600;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:8px;white-space:nowrap;flex-shrink:0;}
+.rv-refine-btn:hover{background:var(--penny-200);}
+.rv-refine-btn svg{width:16px;height:16px;fill:white;}
+
+/* RV Summary bar */
+.rv-summary{display:flex;align-items:center;justify-content:space-between;padding:12px 0;font-size:14px;color:var(--platform-60);}
+.rv-summary-l{display:flex;align-items:center;gap:16px;font-weight:400;color:var(--platform-80);}
+
+.rv-refresh{background:none;border:1px solid #272D3019;border-radius:4px;font-family:var(--font);font-size:14px;color:#272D30;cursor:pointer;display:inline-flex;align-items:center;gap:4px;padding:4px 10px;}
+.rv-refresh:hover{background:var(--platform-5);}
+.rv-add-col{background:none;border:1px solid #272D3019;border-radius:4px;font-family:var(--font);font-size:14px;color:#272D30;cursor:pointer;padding:4px 10px;}
+.rv-add-col:hover{background:var(--platform-5);}
+
+/* RV Table */
+.rv-table-wrap{background:var(--white);border-radius:0;overflow-x:auto;}
+.rv-table{width:100%;border-collapse:collapse;}
+.rv-table thead th{text-align:left;padding:8px 16px;font-size:13px;font-weight:700;color:var(--white);background:#298BAB;white-space:nowrap;border-right:1px solid rgba(255,255,255,.15);max-width:160px;overflow:hidden;text-overflow:ellipsis;position:relative;}
+.rv-table thead th .th-inner{display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;}
+.rv-table thead th .th-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.rv-table thead th .th-sort{margin-left:auto;opacity:.7;font-size:10px;flex-shrink:0;}
+.rv-table thead th:hover .th-tip{display:block;}
+.th-tip{display:none;position:absolute;top:calc(100% + 4px);left:8px;background:var(--white);color:var(--platform-100);border:1px solid var(--platform-10);border-radius:4px;padding:4px 8px;font-size:12px;font-weight:400;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.1);z-index:10;}
+.rv-table thead th:last-child{border-right:none;}
+.rv-table thead th i{margin-left:6px;font-size:10px;opacity:.7;}
+.rv-table tbody tr{transition:background .08s;}
+.rv-table tbody tr:hover{background:#F9F9F9;}
+.rv-table tbody td{padding:15px 16px;border-bottom:1px solid var(--platform-10);border-right:1px solid var(--platform-10);color:var(--platform-100);font-size:13px;vertical-align:middle;}
+.rv-table tbody td:last-child{border-right:none;}
+.rv-table tbody tr:last-child td{border-bottom:none;}
+.rv-table .td-name{font-weight:600;}
+.rv-table .td-amount{font-weight:600;}
+
+/* RV Pagination */
+.rv-pag{display:flex;align-items:center;justify-content:flex-end;gap:16px;padding:12px 16px;background:var(--white);font-size:14px;color:var(--platform-60);border-top:1px solid rgb(224,224,224);}
+
+/* Filter detail expanded view */
+.rv-filter-detail{display:none;margin-top:12px;padding:16px 0 12px 0;width:100%;border-top:1px solid var(--platform-20);}
+.rv-filter-detail.open{display:block;}
+.rv-filter-detail-head{display:flex;align-items:center;justify-content:space-between;padding-bottom:16px;}
+.rv-filter-detail-head-l{display:flex;align-items:center;gap:8px;font-size:20px;font-weight:700;color:var(--platform-100);}
+.rv-filter-detail-head-l i{color:var(--platform-60);}
+.rv-filter-detail-head-r{display:flex;gap:0;}
+.rv-fd-cancel{background:#F4F5F6;border:1px solid #ccc;border-radius:6px 0 0 6px;font-family:var(--font);font-size:13px;font-weight:600;color:var(--platform-100);cursor:pointer;padding:6px 14px;}
+.rv-fd-ok{background:#298BAB;color:var(--white);border:none;border-radius:0 6px 6px 0;font-family:var(--font);font-size:13px;font-weight:600;cursor:pointer;padding:6px 14px;}
+.rv-fd-type{display:flex;align-items:center;gap:6px;font-size:15px;color:var(--platform-100);padding-bottom:16px;}
+.rv-fd-type .fd-green{color:#5BB033;font-weight:600;cursor:pointer;}
+.rv-fd-type .fd-green svg{width:10px;height:10px;fill:currentColor;}
+.rv-fd-type i{color:var(--platform-60);}
+.rv-fd-card{border:1px solid var(--platform-20);border-radius:4px;padding:20px 24px;}
+.rv-fd-card-title{font-size:20px;font-weight:700;color:var(--platform-100);padding-bottom:16px;font-style:normal;}
+.rv-fd-sub-row{display:flex;align-items:center;gap:8px;padding-bottom:10px;flex-wrap:wrap;border-bottom:1px solid var(--platform-20);}
+.rv-fd-sub-chip{display:inline-flex;align-items:center;gap:6px;background:#e4e4e4;border:1px solid rgba(0,0,0,0.15);border-radius:2px;padding:2px 6px;font-size:13px;color:var(--platform-80);font-family:var(--font);}
+.rv-fd-sub-chip .chip-x{color:var(--platform-100);cursor:pointer;font-size:18px;font-weight:700;margin-left:2px;}
+.rv-fd-or{margin:10px 0;}
+.rv-fd-exclude{display:flex;align-items:center;gap:8px;padding-top:10px;border-top:1px solid var(--platform-20);}
+.rv-filter-chip.disabled{opacity:0.4;pointer-events:none;}
+
+/* Details tab view */
+.rv-details{display:none;}
+.rv-details.active{display:block;}
+.rv-details-card{background:var(--white);border:1px solid var(--platform-10);border-radius:4px;padding:24px;margin-bottom:16px;}
+.rv-field{margin-bottom:20px;}
+.rv-field-label{font-size:13px;font-weight:600;color:var(--platform-60);margin-bottom:6px;}
+.rv-field-label.required{color:#5BB033;}
+.rv-field input[type="text"]{width:100%;max-width:480px;border:1px solid var(--platform-20);border-radius:4px;padding:8px 12px;font-size:15px;font-family:var(--font);color:var(--platform-100);}
+.rv-field input[type="text"]:focus{outline:none;border-color:#357A06;}
+.rv-field textarea{width:100%;max-width:480px;border:1px solid var(--platform-20);border-radius:4px;padding:8px 12px;font-size:15px;font-family:var(--font);color:var(--platform-100);resize:vertical;min-height:80px;}
+.rv-field textarea:focus{outline:none;border-color:#357A06;}
+.rv-field select{width:100%;max-width:480px;border:1px solid var(--platform-20);border-radius:4px;padding:8px 12px;font-size:15px;font-family:var(--font);color:var(--platform-100);background:var(--white);-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23525759' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:12px 8px;}
+.rv-checkbox-wrap{display:flex;align-items:center;gap:8px;}
+.rv-checkbox{width:24px;height:24px;border-radius:4px;border:none;background:#5BB033;color:white;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;}
+.rv-meta-card{background:var(--white);border:1px solid var(--platform-10);border-radius:4px;overflow:hidden;}
+.rv-meta-row{padding:10px 16px;border-bottom:1px solid var(--platform-10);}
+.rv-meta-row:last-child{border-bottom:none;}
+.rv-meta-label{font-size:14px;font-weight:700;color:var(--platform-100);margin-bottom:2px;}
+.rv-meta-value{font-size:14px;color:var(--platform-80);}
+
+/* Processing toast */
+.toast{position:fixed;bottom:32px;left:calc(50% + var(--nav-collapsed)/2);transform:translateX(-50%) translateY(80px);background:var(--platform-100);color:var(--white);padding:14px 16px;border-radius:4px;font-family:var(--font);font-size:17px;font-weight:400;display:flex;align-items:center;gap:8px;z-index:9999;min-width:320px;max-width:480px;opacity:0;pointer-events:none;transition:transform .3s ease,opacity .3s ease;white-space:nowrap;line-height:20px;}
+.toast.visible{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1;pointer-events:auto;}
+.toast-spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .6s linear infinite;flex-shrink:0;}
+
+/* ─────────── NO RESULTS ─────────── */
+.no-results{text-align:center;padding:48px 24px;color:var(--platform-60);font-size:15px;}
+
+/* ─── conv input style ─── */
+.conv-input-wrap input{width:100%;border:1px solid var(--platform-40);border-radius:6px;padding:12px 14px;font-size:15px;color:var(--platform-100);background:var(--white);outline:none;font-family:var(--font);transition:border-color .15s;box-sizing:border-box;}
+.conv-input-wrap input:hover{border-color:var(--platform-100);}
+.conv-input-wrap input:focus{border-color:var(--penny-100);box-shadow:0 0 0 3px rgba(103,94,249,.15);}
+.conv-input-wrap input::placeholder{color:#4E5555;}
+.conv-input-wrap input:disabled{opacity:.5;}
+.conv-btn{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);line-height:20px;transition:background .15s;}
+.conv-btn:hover{background:var(--penny-200);}
+.conv-btn svg{width:13px;height:13px;fill:white;}
+.conv-btn:disabled{opacity:.5;cursor:default;pointer-events:none;}
 </style>
 </head>
 <body>
@@ -894,19 +1213,70 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
           </div>
         </div>
 
-        <div class="penny-banner">
+        <div class="penny-banner" id="convPanel">
           <div class="penny-banner-head">
             <svg class="penny-banner-head-icon" aria-hidden="true"><use href="#icon-sparkles"/></svg>
             <h2 class="penny-banner-head-title">Describe your report and watch it come to life</h2>
           </div>
           <div class="penny-banner-input-wrap">
-            <input id="pennyBannerInput" class="penny-banner-input penny-typewriter" type="text" placeholder="" aria-label="Describe your report" oninput="document.getElementById('pennyBannerBtn').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'){event.preventDefault();buildReportFromBanner();}">
-            <button class="penny-banner-btn" id="pennyBannerBtn" disabled onclick="buildReportFromBanner()">
+            <input id="convInput" class="penny-banner-input penny-typewriter" type="text" placeholder="" aria-label="Describe your report" oninput="document.getElementById('convSubmitBtn').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'){event.preventDefault();convSubmit();}">
+            <button class="penny-banner-btn" id="convSubmitBtn" disabled onclick="convSubmit()">
               <svg class="nav-svg-icon" aria-hidden="true" style="width:13px;height:13px;"><use href="#icon-sparkles"/></svg>
               Build Report
             </button>
           </div>
         </div>
+
+              <div class="clar-scrim" id="clarScrim"></div>
+
+      <!-- Clarification bottom sheet -->
+      <div class="clar-sheet" id="clarSheet" role="dialog" aria-modal="true" aria-labelledby="clarQuestion">
+
+        <!-- Main question content (hidden during processing) -->
+        <div id="clarContent">
+          <div class="clar-sheet-head">
+            <div class="clar-sheet-meta">
+              <div class="clar-sheet-question-row">
+                <div class="clar-sheet-question" id="clarQuestion"></div>
+                <div class="clar-sheet-counter" id="clarCounter">1 of 3</div>
+              </div>
+            </div>
+            <button class="clar-sheet-close" onclick="clarCancel()" aria-label="Cancel">
+              <svg class="nav-svg-icon" style="width:16px;height:16px;fill:currentColor;"><use href="#icon-xmark"/></svg>
+            </button>
+          </div>
+
+          <!-- Option list -->
+          <div class="clar-options" id="clarOptions"></div>
+
+          <!-- Other / free text -->
+          <div class="clar-other-wrap" id="clarOtherWrap">
+            <div class="clar-other-row">
+              <div class="clar-option-radio" id="clarOtherRadio"></div>
+              <input class="clar-other-input" id="clarOtherInput" type="text" placeholder="Describe something else..." onfocus="clarOtherFocus()" oninput="clarOtherTyped()" onkeydown="if(event.key==='Enter'){event.preventDefault();clarAdvance();}">
+            </div>
+          </div>
+
+          <!-- Footer -->
+          <div class="clar-footer">
+            <button class="clar-back" id="clarBackBtn" onclick="clarBack()" style="display:none;">Back</button>
+            <div class="clar-footer-r">
+              <button class="clar-skip" onclick="clarSkip()">Skip</button>
+              <button class="clar-next" id="clarNextBtn" onclick="clarAdvance()" disabled>
+                <span id="clarNextLabel">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Processing state (shown after final answer) -->
+        <div class="clar-processing" id="clarProcessing">
+          <div class="clar-processing-spinner"></div>
+          <div class="clar-processing-text">Building your report…</div>
+          <div class="clar-processing-sub" id="clarProcessingSub">Applying your filters</div>
+        </div>
+
+      </div>
 
         <div class="rep-panel">
         <div class="rep-toolbars-wrap">
@@ -941,7 +1311,6 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <button class="dd-item" onclick="filterCreator('jessica-lin',this)">Jessica Lin</button>
                 <button class="dd-item" onclick="filterCreator('heidi-a',this)">Heidi A.</button>
                 <button class="dd-item" onclick="filterCreator('cam-p',this)">Cam P.</button>
-                <button class="dd-item" onclick="filterCreator('penny',this)"><svg class="nav-svg-icon" style="width:12px;height:12px;color:var(--penny-100);fill:currentColor;"><use href="#icon-sparkles"/></svg> Penny</button>
               </div>
             </div>
             <div class="dd-wrap">
@@ -963,6 +1332,10 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
         </div>
 
         <div class="rep-table-card">
+          <div class="rep-tabs">
+            <button class="rep-tab active" onclick="switchTab(this)">All</button>
+            <button class="rep-tab" onclick="switchTab(this)">Recent</button>
+          </div>
           <table class="dg-table">
             <thead>
               <tr>
@@ -976,71 +1349,6 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               </tr>
             </thead>
             <tbody id="tbody1">
-
-              <tr onclick="openEditorAsPenny('Lapsing high-value donors','Created because 12 donors who gave $1k+ in FY25 have no recorded gift in FY26')" class="penny-row" data-status="active" data-scheduled="no" data-type="constituent" data-creator="penny" data-folder="none">
-                <td class="dg-name-cell">
-                  <div class="dg-name-row">
-                    <span class="dg-name"><svg class="nav-svg-icon" style="width:12px;height:12px;color:var(--penny-100);fill:currentColor;vertical-align:-2px;margin-right:6px;"><use href="#icon-sparkles"/></svg>Lapsing high-value donors</span>
-                  </div>
-                  <div class="dg-name-meta">12 constituents · $42,800 at risk</div>
-                </td>
-                <td>Constituent</td>
-                <td><span class="dg-freq">—</span></td>
-                <td style="color:var(--platform-100)">—</td>
-                <td>
-                  <div class="dg-date-main">Just now</div>
-                  <div class="dg-date-sub">by <svg class="nav-svg-icon" style="width:10px;height:10px;color:var(--penny-100);fill:currentColor;vertical-align:-1px;margin-right:4px;margin-left:2px;"><use href="#icon-sparkles"/></svg>Penny</div>
-                </td>
-                <td>
-                  <div class="dg-date-main">Today</div>
-                  <div class="dg-date-sub">by <svg class="nav-svg-icon" style="width:10px;height:10px;color:var(--penny-100);fill:currentColor;vertical-align:-1px;margin-right:4px;margin-left:2px;"><use href="#icon-sparkles"/></svg>Penny</div>
-                </td>
-                <td class="col-actions" onclick="event.stopPropagation()">
-                  <div class="dd-wrap">
-                    <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
-                    <div class="dd-menu right">
-                      <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
-                      <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
-                      <button class="dd-item" onclick="doAction(event,'move',this)">Add to Folder</button>
-                      <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
-                      <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-              <tr onclick="openEditorAsPenny('Recurring gifts expiring','Created because 8 recurring donors have payment methods expiring within 60 days')" class="penny-row" data-status="active" data-scheduled="no" data-type="transaction" data-creator="penny" data-folder="none">
-                <td class="dg-name-cell">
-                  <div class="dg-name-row">
-                    <span class="dg-name"><svg class="nav-svg-icon" style="width:12px;height:12px;color:var(--penny-100);fill:currentColor;vertical-align:-2px;margin-right:6px;"><use href="#icon-sparkles"/></svg>Recurring gifts expiring</span>
-                  </div>
-                  <div class="dg-name-meta">8 transactions · $3,200/mo at risk</div>
-                </td>
-                <td>Transaction</td>
-                <td><span class="dg-freq">—</span></td>
-                <td style="color:var(--platform-100)">—</td>
-                <td>
-                  <div class="dg-date-main">Just now</div>
-                  <div class="dg-date-sub">by <svg class="nav-svg-icon" style="width:10px;height:10px;color:var(--penny-100);fill:currentColor;vertical-align:-1px;margin-right:4px;margin-left:2px;"><use href="#icon-sparkles"/></svg>Penny</div>
-                </td>
-                <td>
-                  <div class="dg-date-main">Today</div>
-                  <div class="dg-date-sub">by <svg class="nav-svg-icon" style="width:10px;height:10px;color:var(--penny-100);fill:currentColor;vertical-align:-1px;margin-right:4px;margin-left:2px;"><use href="#icon-sparkles"/></svg>Penny</div>
-                </td>
-                <td class="col-actions" onclick="event.stopPropagation()">
-                  <div class="dd-wrap">
-                    <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
-                    <div class="dd-menu right">
-                      <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
-                      <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
-                      <button class="dd-item" onclick="doAction(event,'move',this)">Add to Folder</button>
-                      <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
-                      <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
-                    </div>
-                  </div>
-                </td>
-              </tr>
 
               <tr onclick="openEditorRow(this)" data-recent="yes" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="mike-cross" data-folder="development-fy26">
                 <td class="dg-name-cell">
@@ -1066,7 +1374,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Change Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1098,7 +1406,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Add to Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1108,10 +1416,10 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               </tr>
 
 
-              <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="mailing-lists">
+              <tr onclick="openEditorRow(this)" data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="mailing-lists">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Spring Appeal — Follow-up List</span></div>
-                  <div class="dg-name-meta">342 constituents · Last run May 14</div>
+                  <div class="dg-name-meta">342 constituents</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
@@ -1130,7 +1438,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Change Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1162,7 +1470,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Change Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1192,7 +1500,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Change Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1222,7 +1530,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Add to Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1252,7 +1560,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Change Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1282,7 +1590,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                     <div class="dd-menu right">
                       <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
                       <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export to Excel</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
                       <button class="dd-item" onclick="doAction(event,'move',this)">Add to Folder</button>
                       <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
                       <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
@@ -1334,23 +1642,23 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               </button>
               <div class="dd-menu right" id="dd-editor-menu">
                 <button class="dd-item" onclick="closeAllDd();openDetailsModal()">Details</button>
-                <button class="dd-item" onclick="closeAllDd();openScheduleModal()">Schedule</button>
-                <button class="dd-item" onclick="closeAllDd();exportReport()">Export to Excel</button>
+                <button class="dd-item" id="ed-schedule-action" onclick="closeAllDd();openScheduleModal()">Schedule</button>
+                <button class="dd-item" onclick="closeAllDd();exportReport()">Export</button>
                 <button class="dd-item" id="ed-delete-btn" onclick="closeAllDd();openDeleteModal()">Delete</button>
               </div>
             </div>
-            <button class="btn-secondary" onclick="cancelEditor()">
-              Cancel
-            </button>
-            <button class="btn-primary" onclick="saveReport()">
-              Save
-            </button>
+            <button class="btn-secondary" onclick="cancelEditor()">Cancel</button>
+            <button class="btn-primary" onclick="saveReport()">Save</button>
           </div>
         </div>
         <!-- Penny context: only shown on Penny-generated reports -->
         <div class="ed-penny-context" id="ed-penny-context" style="display:none;">
           <svg class="nav-svg-icon" style="width:13px;height:13px;fill:currentColor;flex-shrink:0;"><use href="#icon-sparkles"/></svg>
           <span id="ed-penny-context-text">Created because 12 donors who gave $1k+ in FY25 have no recorded gift in FY26</span>
+        </div>
+        <!-- Schedule subtext -->
+        <div id="ed-schedule-wrap" style="display:none;margin:8px 0 0 0;">
+          <span id="ed-schedule-text" style="font-size:16px;color:var(--platform-80);line-height:22px;display:block;"></span>
         </div>
         </div>
 
@@ -1361,29 +1669,30 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <div class="ed-loading-text" id="ed-loading-text">Penny is building your report…</div>
           </div>
         </div>
-        <div class="penny-insight" id="penny-insight">
-          <div class="penny-insight-inner">
-            <svg class="nav-svg-icon penny-insight-icon" style="width:14px;height:14px;"><use href="#icon-sparkles"/></svg>
-            <span class="penny-insight-text">6 high-value donors at risk (<strong>$18,500</strong>) · 14 not contacted in 90+ days</span>
-            <button class="penny-insight-action" onclick="alert('Drafting outreach…')">Draft outreach</button>
-            <button class="penny-insight-action" onclick="alert('Creating group…')">Create a group</button>
-            <button class="penny-insight-dismiss" onclick="dismissPennyInsight()">
-              <svg class="nav-svg-icon" style="width:16px;height:16px;"><use href="#icon-xmark"/></svg>
-            </button>
-          </div>
-        </div>
 
         <div class="ed-result">
           <div class="ed-summary">
-            <div class="ed-summary-l" style="display:flex;align-items:center;gap:8px;">
-              <span><strong>38 constituents</strong> <span style="color:var(--platform-40);margin:0 8px;">·</span> <strong>$94,250</strong> in FY25</span>
-              <span style="color:var(--platform-20);margin:0 0 0 8px;">·</span>
-              <button class="btn-tertiary" id="btn-filter-toggle" onclick="toggleFilterDrawer()"><svg class="nav-svg-icon" style="width:12px;height:12px;"><use href="#icon-filter"/></svg> 6 filters</button>
+            <div class="ed-summary-l" style="display:flex;align-items:center;gap:12px;">
+              <span><strong>38 constituents</strong></span>
+              <span style="color:var(--platform-40);">·</span>
+              <span><strong>$94,250</strong> in FY25</span>
+              <span style="color:var(--platform-40);">·</span>
+              <button onclick="refreshReport()" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Refresh</button>
             </div>
-            <div class="ed-summary-r">
-              <button class="btn-tertiary" onclick="openColModal()">Edit columns</button>
+            <div class="ed-summary-r" style="gap:12px;">
+              <button id="btn-filter-toggle" onclick="toggleFilterDrawer()" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'"><svg class="nav-svg-icon" style="width:12px;height:12px;fill:var(--crm-100);"><use href="#icon-filter"/></svg> 6 filters</button>
               <span style="color:var(--platform-20);">·</span>
-              <button class="btn-tertiary" onclick="refreshReport()">Refresh</button>
+              <button onclick="openColModal()" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Columns</button>
+              <span style="color:var(--platform-20);">·</span>
+              <div class="dd-wrap">
+                <button onclick="toggleActionsMenu(event,this)" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;fill:var(--crm-100);"><use href="#icon-caret-down"/></svg></button>
+                <div class="dd-menu right">
+                  <button class="dd-item" onclick="closeAllDd()">Add New Group</button>
+                  <button class="dd-item" onclick="closeAllDd()">Add to Group</button>
+                  <button class="dd-item" onclick="closeAllDd()">Remove from Group</button>
+                  <button class="dd-item" onclick="closeAllDd()">Create Bulk Task</button>
+                </div>
+              </div>
             </div>
           </div>
           <!-- Filter NL expression view (read-only) -->
@@ -2071,6 +2380,169 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
       </div>
     </div>
 
+
+    <!-- Loading state (hidden by default) -->
+    <div class="nlr-loading" id="nlrLoading">
+      <div class="nlr-loading-inner">
+        <div class="nlr-loading-spinner"></div>
+        <div class="nlr-loading-text" id="nlrLoadingText">Penny is building your report&hellip;</div>
+      </div>
+    </div>
+
+
+
+    <!-- Processing toast -->
+
+    <!-- Report View (hidden by default) -->
+    <div class="report-view" id="reportView">
+
+      <div class="rv-header">
+        <h1 class="rv-title" id="rvTitle">New Report</h1>
+        <div class="rv-actions">
+          <button class="rv-cancel" id="rvDeleteBtn" onclick="void(0)">Delete</button>
+          <div class="rv-btn-group"><button class="rv-cancel" onclick="backToList()">Cancel</button><div class="rv-save-wrap"><button class="rv-save" onclick="toggleSaveDd()">Save And <svg viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg></button><div class="rv-save-dd" id="rvSaveDd"><button class="dd-item" onclick="closeSaveDd()">Keep Editing</button><button class="dd-item" onclick="closeSaveDd()">Export</button><button class="dd-item" onclick="closeSaveDd()">Schedule Report</button><button class="dd-item" onclick="saveAndGoToList()">Go to Reports List</button></div></div></div>
+        </div>
+      </div>
+      <div class="rv-tabs">
+        <button class="rv-tab active" onclick="switchRvTab(this,'report')"><i class="fa-solid fa-gear"></i> Report</button>
+        <button class="rv-tab" onclick="switchRvTab(this,'details')"><i class="fa-solid fa-gear"></i> Details</button>
+      </div>
+
+      <!-- Report Content (toggled by tab) -->
+      <div class="rv-report-content" id="rvReportContent">
+      <!-- Filters Card -->
+      <div class="rv-filters-card">
+          <div class="rv-filters-head" id="rvEntityType">Constituent Filters</div>
+          <div class="rv-filter-row">
+            <span class="rv-filter-label">Include</span>
+            <div id="rvFilters" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"></div>
+            <button class="rv-and-btn">And...</button>
+          </div>
+          <button class="rv-or-btn">Or...</button>
+          <div class="rv-exclude-row">
+            <span class="rv-filter-label exclude">Exclude</span>
+            <div id="rvExcludeFilters" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"></div>
+            <button class="rv-add-filter">Add filter...</button>
+          </div>
+          
+          <div class="rv-penny-row">
+            <svg viewBox="0 0 20 21" style="width:18px;height:18px;fill:var(--penny-100);flex-shrink:0;"><use href="#icon-sparkles-3"/></svg>
+            <div class="rv-penny-wrap">
+              <input class="rv-penny-input" id="rvRefineInput" type="text" placeholder="How you'd like to adjust this report..." onkeydown="if(event.key==='Enter'){event.preventDefault();refineReport();}">
+            </div>
+            <button type="button" class="rv-refine-btn" id="rvRefineBtn" onclick="refineReport()"><svg class="penny-banner-head-icon" aria-hidden="true"><use href="#icon-sparkles"/></svg> Refine Report</button>
+          </div>
+
+          <!-- Filter detail template (hidden, cloned by JS) -->
+          <template id="rvFilterDetailTpl">
+            <div class="rv-filter-detail" id="rvFilterDetail">
+              <div class="rv-filter-detail-head">
+                <div class="rv-filter-detail-head-l">
+                  <i class="fa-solid fa-user"></i>
+                  Constituent
+                </div>
+                <div class="rv-filter-detail-head-r">
+                  <button class="rv-fd-cancel" onclick="closeFilterDetail()">Cancel</button>
+                  <button class="rv-fd-ok" onclick="closeFilterDetail()">OK</button>
+                </div>
+              </div>
+              <div class="rv-fd-type" id="rvFdType"></div>
+              <div class="rv-fd-card">
+                <div class="rv-fd-card-title" id="rvFdCardTitle">Transaction Filters</div>
+                <div class="rv-fd-sub-row">
+                  <span class="rv-filter-label">Include</span>
+                  <div id="rvFdSubFilters" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;"></div>
+                  <button class="rv-and-btn">And...</button>
+                </div>
+                <div class="rv-fd-or">
+                  <button class="rv-or-btn">Or...</button>
+                </div>
+                <div class="rv-fd-exclude">
+                  <span class="rv-filter-label exclude">Exclude</span>
+                  <button class="rv-add-filter">Add filter...</button>
+                </div>
+              </div>
+              <div class="rv-fd-amount-row" id="rvFdAmountRow" style="display:none;margin-top:16px;align-items:center;gap:8px;font-size:14px;color:var(--platform-100);">
+                is <span class="fd-green" style="font-weight:600;">Between <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span>
+                <input type="text" value="$1,000.00" style="border:1px solid var(--platform-20);border-radius:4px;padding:6px 10px;font-size:14px;font-family:var(--font);width:120px;color:var(--platform-100);" readonly>
+                and
+                <input type="text" value="Infinity" style="border:1px solid var(--platform-20);border-radius:4px;padding:6px 10px;font-size:14px;font-family:var(--font);width:120px;color:var(--platform-40);font-style:italic;" readonly>
+              </div>
+            </div>
+          </template>
+
+        </div>
+
+        <!-- Summary bar -->
+        <div class="rv-summary">
+          <div class="rv-summary-l">
+            <span id="rvCount">0 constituents found (last run 2 hours ago)</span>
+            <button class="rv-refresh"><i class="fa-solid fa-arrows-rotate" style="font-size:12px;"></i> Refresh</button>
+          </div>
+          <button class="rv-add-col">Add Column</button>
+        </div>
+
+        <!-- Table -->
+        <div class="rv-table-wrap">
+          <table class="rv-table">
+            <thead id="rvThead"><tr></tr></thead>
+            <tbody id="rvTbody"></tbody>
+          </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="rv-pag">
+          <span>Rows per page:</span>
+          <select style="border:1px solid var(--platform-20);border-radius:4px;padding:4px 24px 4px 8px;font-size:14px;font-family:var(--font);color:var(--platform-100);cursor:pointer;background:var(--white);"><option>25</option></select>
+          <span id="rvPagRange">1-10 of 10</span>
+          <button class="rep-pag-btn" disabled style="opacity:0.35;cursor:default;"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="rep-pag-btn" disabled style="opacity:0.35;cursor:default;"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+      </div>
+
+      <!-- Details View (toggled by tab) -->
+      <div class="rv-details" id="rvDetails">
+        <div class="rv-details-card">
+          <div class="rv-field">
+            <div class="rv-field-label required">Name</div>
+            <input type="text" id="rvDetailsName" value="" oninput="this.parentElement.classList.remove('rv-field-error')">
+          </div>
+          <div class="rv-field">
+            <div class="rv-field-label">Description</div>
+            <textarea></textarea>
+          </div>
+          <div class="rv-field">
+            <div class="rv-field-label">Folder</div>
+            <select disabled style="opacity:0.6;cursor:default;"><option value="">Select a folder...</option><option>Development / FY26</option><option>Board</option><option>Mailing Lists</option></select>
+          </div>
+          <div class="rv-field">
+            <div class="rv-field-label">Active?</div>
+            <div class="rv-checkbox-wrap">
+              <div class="rv-checkbox"><i class="fa-solid fa-check"></i></div>
+            </div>
+          </div>
+        </div>
+        <div class="rv-meta-card">
+          <div class="rv-meta-row">
+            <div class="rv-meta-label">Created</div>
+            <div class="rv-meta-value" id="rvMetaCreated"></div>
+          </div>
+          <div class="rv-meta-row">
+            <div class="rv-meta-label">Last Modified</div>
+            <div class="rv-meta-value" id="rvMetaModified"></div>
+          </div>
+          <div class="rv-meta-row">
+            <div class="rv-meta-label">Last Used</div>
+            <div class="rv-meta-value" id="rvMetaUsed"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Processing toast -->
+    <div class="toast" id="processingToast"><div class="toast-spinner"></div><span>Processing</span></div>
+
   </main>
   <div class="toast" id="export-toast">
     <div class="toast-icon-wrap" id="toast-icon-wrap"><div class="toast-spinner"></div></div>
@@ -2086,9 +2558,13 @@ function showView(id){
   // Close new report modal if open
   var nrm = document.getElementById('modal-new-report');
   if(nrm) nrm.classList.remove('open');
+  if(id === 'reports-list'){
+    if(window.restartTypewriter) window.restartTypewriter();
+  }
   // Hide penny context when navigating to editor from non-penny source
   if(id === 'editor'){
-    document.getElementById('ed-penny-context').style.display = 'none';
+    var pennyCtx = document.getElementById('ed-penny-context');
+    if(pennyCtx) pennyCtx.style.display = 'none';
     var currentTitle = document.querySelector('.ed-head-title').textContent;
     if(!reportInsights[currentTitle]){
       setInsightForReport(currentTitle);
@@ -2108,6 +2584,7 @@ function openEditorAsPenny(title, reason){
   document.getElementById('main').scrollTop = 0;
 }
 function openEditorRow(row){
+  try{
   editorHasChanges = false;
   var creator = row.dataset.creator || '';
   currentEditorCreator = creator;
@@ -2116,7 +2593,24 @@ function openEditorRow(row){
   document.querySelector('.ed-head-title').textContent = title;
   document.getElementById('ed-delete-btn').style.display = creator === 'mike-cross' ? '' : 'none';
   setInsightForReport(title);
+  // Show/hide schedule based on row data
+  var schedWrap = document.getElementById('ed-schedule-wrap');
+  var schedText = document.getElementById('ed-schedule-text');
+  if(schedWrap && schedText){
+    var freq = row.querySelector('.dg-freq');
+    var freqText = freq ? freq.textContent.trim() : '';
+    if(row.dataset.scheduled === 'yes' && freqText && freqText !== 'On demand'){
+      schedText.textContent = 'Scheduled weekly on Monday at 12:00 AM';
+      schedWrap.style.display = 'block';
+    } else {
+      schedWrap.style.display = 'none';
+    }
+  }
+  // Update Schedule/Edit Schedule in actions menu
+  var schedAction = document.getElementById('ed-schedule-action');
+  if(schedAction) schedAction.textContent = row.dataset.scheduled === 'yes' ? 'Edit Schedule' : 'Schedule';
   showView('editor');
+  }catch(e){alert('Error: '+e.message+'\n\n'+e.stack);}
 }
 
 var reportInsights = {
@@ -2155,29 +2649,7 @@ var defaultInsight = {
 };
 
 function setInsightForReport(title){
-  var insight = reportInsights[title] || defaultInsight;
-  var el = document.getElementById('penny-insight');
-  var textEl = el.querySelector('.penny-insight-text');
-  var actionsContainer = el.querySelector('.penny-insight-inner');
-  if(textEl) textEl.innerHTML = insight.text;
-  // Rebuild action buttons
-  var oldActions = actionsContainer.querySelectorAll('.penny-insight-action');
-  oldActions.forEach(function(a){ a.remove(); });
-  var dismiss = actionsContainer.querySelector('.penny-insight-dismiss');
-  insight.actions.forEach(function(label){
-    var btn = document.createElement('button');
-    btn.className = 'penny-insight-action';
-    btn.textContent = label;
-    btn.onclick = function(){ alert(label + '…'); };
-    actionsContainer.insertBefore(btn, dismiss);
-  });
-  // Reset dismiss styles and show
-  el.style.display = '';
-  el.style.opacity = '';
-  el.style.maxHeight = '';
-  el.style.overflow = '';
-  el.style.padding = '';
-  el.style.transition = '';
+  // penny-insight removed from scope
 }
 function toggleNav(){document.getElementById('leftNav').classList.toggle('collapsed');}
 function toggleSub(e,id){e.preventDefault();document.getElementById(id).classList.toggle('open');}
@@ -2268,41 +2740,55 @@ function nrTab(id,btn){
     "Recurring donors with cards expiring soon",
     "First-time donors from Spring Appeal"
   ];
-  function animate(input, startIdx){
-    let idx = startIdx || 0, pos = 0, mode = 'type', paused = false;
+  var twState = { paused: false, idx: 0, pos: 0, mode: 'type', timer: null };
+  function animate(input){
     function step(){
-      if (paused || input.value) return;
-      const text = prompts[idx];
-      if (mode === 'type'){
-        pos++;
-        input.placeholder = text.substring(0, pos);
-        if (pos >= text.length){ mode = 'pause'; setTimeout(step, 1800); return; }
-        setTimeout(step, 28 + Math.random() * 30);
-      } else if (mode === 'pause'){
-        mode = 'erase';
-        setTimeout(step, 200);
+      if(twState.paused || input.value) return;
+      var text = prompts[twState.idx];
+      if(twState.mode === 'type'){
+        twState.pos++;
+        input.placeholder = text.substring(0, twState.pos);
+        if(twState.pos >= text.length){ twState.mode = 'pause'; twState.timer = setTimeout(step, 1800); return; }
+        twState.timer = setTimeout(step, 28 + Math.random() * 30);
+      } else if(twState.mode === 'pause'){
+        twState.mode = 'erase';
+        twState.timer = setTimeout(step, 200);
       } else {
-        pos--;
-        input.placeholder = text.substring(0, pos);
-        if (pos <= 0){ mode = 'type'; idx = (idx + 1) % prompts.length; setTimeout(step, 400); return; }
-        setTimeout(step, 14);
+        twState.pos--;
+        input.placeholder = text.substring(0, twState.pos);
+        if(twState.pos <= 0){ twState.mode = 'type'; twState.idx = (twState.idx + 1) % prompts.length; twState.timer = setTimeout(step, 400); return; }
+        twState.timer = setTimeout(step, 14);
       }
     }
     input.addEventListener('focus', function(){
-      paused = true;
+      twState.paused = true;
       input.placeholder = '';
     });
     input.addEventListener('blur', function(){
       if(!input.value){
-        paused = false;
-        pos = 0;
-        mode = 'type';
+        twState.paused = false;
+        twState.pos = 0;
+        twState.mode = 'type';
         step();
       }
     });
     step();
   }
-  document.querySelectorAll('.penny-typewriter').forEach((input, i) => animate(input, i * 2));
+  var twInput = document.querySelector('.penny-typewriter');
+  if(twInput) animate(twInput);
+  window.restartTypewriter = function(){
+    var input = document.getElementById('convInput');
+    if(!input || input.value) return;
+    // Cancel any running timer and reset state
+    if(twState.timer) clearTimeout(twState.timer);
+    twState.paused = false;
+    twState.pos = 0;
+    twState.mode = 'type';
+    twState.idx = (twState.idx + 1) % prompts.length;
+    input.placeholder = '';
+    // Small delay so the input is visible before starting
+    twState.timer = setTimeout(function(){ if(!input.value) animate(input); }, 300);
+  };
 })();
 
 // ─── Dropdown toggle ───
@@ -2378,6 +2864,8 @@ function clearReportsSearch(){
 
 function applyAllFilters(){
   const rows = document.querySelectorAll('#tbody1 tr[data-status]');
+  var activeTab = document.querySelector('.rep-tab.active');
+  var isRecentTab = activeTab && activeTab.textContent.trim() === 'Recent';
   let visible = 0;
   // Remove existing no-results row
   var existingEmpty = document.getElementById('reportsNoResults');
@@ -2400,6 +2888,8 @@ function applyAllFilters(){
       var metaText = meta ? meta.textContent.toLowerCase() : '';
       show = nameText.indexOf(reportsSearchQuery) > -1 || metaText.indexOf(reportsSearchQuery) > -1;
     }
+    // Tab filter
+    if(show && isRecentTab) show = r.dataset.recent === 'yes';
     r.style.display = show ? '' : 'none';
     if(show) visible++;
   });
@@ -2672,7 +3162,7 @@ async function runNLR(prompt){
 
   // Show loading, hide report content
   document.getElementById('ed-loading').style.display = '';
-  document.getElementById('penny-insight').style.display = 'none';
+  (document.getElementById('penny-insight')||document.createElement('div')).style.display = 'none';
   document.querySelector('.ed-result').style.display = 'none';
   document.querySelector('.ed-head-actions').style.visibility = 'hidden';
   document.querySelector('.ed-head-title').textContent = '';
@@ -2842,9 +3332,9 @@ function applyNLRReport(report){
 
   // Update penny insight
   setInsightForReport('__nlr__');
-  var insightText = document.querySelector('.penny-insight-text');
+  var insightText = (document.querySelector('.penny-insight-text')||{});
   if(insightText) insightText.innerHTML = report.insight || '';
-  var insightInner = document.querySelector('.penny-insight-inner');
+  var insightInner = (document.querySelector('.penny-insight-inner')||null);
   if(insightInner && report.insightActions){
     var oldActions = insightInner.querySelectorAll('.penny-insight-action');
     oldActions.forEach(function(a){ a.remove(); });
@@ -2860,12 +3350,12 @@ function applyNLRReport(report){
 
   // Hide loading, show content
   document.getElementById('ed-loading').style.display = 'none';
-  document.getElementById('penny-insight').style.display = '';
-  document.getElementById('penny-insight').style.opacity = '';
-  document.getElementById('penny-insight').style.maxHeight = '';
-  document.getElementById('penny-insight').style.overflow = '';
-  document.getElementById('penny-insight').style.padding = '';
-  document.getElementById('penny-insight').style.transition = '';
+  (document.getElementById('penny-insight')||document.createElement('div')).style.display = '';
+  (document.getElementById('penny-insight')||document.createElement('div')).style.opacity = '';
+  (document.getElementById('penny-insight')||document.createElement('div')).style.maxHeight = '';
+  (document.getElementById('penny-insight')||document.createElement('div')).style.overflow = '';
+  (document.getElementById('penny-insight')||document.createElement('div')).style.padding = '';
+  (document.getElementById('penny-insight')||document.createElement('div')).style.transition = '';
   document.querySelector('.ed-result').style.display = '';
 }
 
@@ -2979,9 +3469,9 @@ async function modifyReport(){
     }
   }
 
-  var insightText = document.querySelector('.penny-insight-text');
+  var insightText = (document.querySelector('.penny-insight-text')||{});
   if(insightText) insightText.innerHTML = report.insight || '';
-  var insightInner = document.querySelector('.penny-insight-inner');
+  var insightInner = (document.querySelector('.penny-insight-inner')||null);
   if(insightInner && report.insightActions){
     var oldActions = insightInner.querySelectorAll('.penny-insight-action');
     oldActions.forEach(function(a){ a.remove(); });
@@ -2994,7 +3484,7 @@ async function modifyReport(){
       insightInner.insertBefore(btn, dismiss);
     });
   }
-  var pennyInsight = document.getElementById('penny-insight');
+  var pennyInsight = (document.getElementById('penny-insight')||{});
   pennyInsight.style.display = '';
   pennyInsight.style.opacity = '';
   pennyInsight.style.maxHeight = '';
@@ -3049,7 +3539,7 @@ function hidePennyTip(el){
 
 // ─── Penny insight dismiss ───
 function dismissPennyInsight(){
-  const el = document.getElementById('penny-insight');
+  const el = (document.getElementById('penny-insight')||{});
   el.style.transition = 'opacity .15s, max-height .2s';
   el.style.opacity = '0';
   el.style.maxHeight = '0';
@@ -4302,6 +4792,1037 @@ document.addEventListener('click', function(e){
     document.querySelectorAll('.fm-picker-list').forEach(function(l){ l.remove(); });
   }
 });
+
+// ─── NL FLOW JS ───
+// [removed dupe]
+
+
+// ─── Recent reports tracker ───
+var recentReports = [];
+
+// ─── Nav ───
+function nav(e){e.preventDefault();document.querySelectorAll('.nav-item').forEach(function(n){n.classList.remove('active');});e.currentTarget.classList.add('active');}
+// [removed: toggleNav]
+// [removed: toggleSub]
+
+// ─── Search ───
+var searchQuery='';
+function searchReports(val){
+  searchQuery=val.toLowerCase().trim();
+  document.getElementById('searchClear').style.display=searchQuery?'flex':'none';
+  filterReports();
+}
+function clearSearch(){
+  var input=document.querySelector('.tb-search input');
+  input.value='';searchReports('');input.focus();
+}
+
+// ─── Pill toggles ───
+function togglePill(btn){btn.classList.toggle('active');filterReports();}
+
+// ─── Tab switch ───
+function switchTab(btn){
+  document.querySelectorAll('.rep-tab').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  applyAllFilters();
+}
+function filterReports(){ applyAllFilters(); }
+
+function toggleCreatorFilter(val, itemEl){
+  var idx = window._creatorFilters.indexOf(val);
+  if(idx > -1){ window._creatorFilters.splice(idx,1); itemEl.classList.remove('selected'); }
+  else { window._creatorFilters.push(val); itemEl.classList.add('selected'); }
+  renderFilterBtn('creatorBtn', 'Created/Modified By', window._creatorFilters);
+  updateResetState();
+  filterReports();
+}
+
+function renderFilterBtn(btnId, label, filters){
+  var btn = document.getElementById(btnId);
+  if(filters.length === 0){
+    btn.innerHTML = label + ' <svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;" viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg>';
+  } else {
+    var pills = filters.map(function(f){
+      return '<span class="tb-filter-pill">' + f + ' <span class="pill-x" onclick="event.stopPropagation();removeFilter' + (btnId === 'typeBtn' ? 'Type' : 'Creator') + '(\'' + f.replace(/'/g,"\\'") + '\')">&times;</span></span>';
+    }).join('');
+    btn.innerHTML = pills + ' <svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;" viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg>';
+  }
+}
+
+function removeFilterType(val){
+  var idx = window._typeFilters.indexOf(val);
+  if(idx > -1) window._typeFilters.splice(idx,1);
+  renderFilterBtn('typeBtn', 'Types', window._typeFilters);
+  document.querySelectorAll('#typeDd .dd-item').forEach(function(it){ if(it.textContent.trim()===val) it.classList.remove('selected'); });
+  updateResetState();
+  filterReports();
+}
+
+function removeFilterCreator(val){
+  var idx = window._creatorFilters.indexOf(val);
+  if(idx > -1) window._creatorFilters.splice(idx,1);
+  renderFilterBtn('creatorBtn', 'Created/Modified By', window._creatorFilters);
+  document.querySelectorAll('#creatorDd .dd-item').forEach(function(it){ if(it.textContent.trim()===val || it.textContent.trim()===val+' (me)') it.classList.remove('selected'); });
+  updateResetState();
+  filterReports();
+}
+
+function updateResetState(){
+  var btn = document.querySelector('.tb-reset');
+  if(window._typeFilters.length > 0 || window._creatorFilters.length > 0){
+    btn.classList.add('active');
+  } else {
+    btn.classList.remove('active');
+  }
+}
+
+// ─── Reset ───
+function resetFilters(){
+  window._typeFilters=[];window._creatorFilters=[];
+  renderFilterBtn('typeBtn','Types',[]);
+  renderFilterBtn('creatorBtn','Created/Modified By',[]);
+  document.querySelectorAll('#typeDd .dd-item, #creatorDd .dd-item').forEach(function(it){it.classList.remove('selected');});
+  document.querySelector('.tb-reset').classList.remove('active');
+  document.querySelectorAll('.tb-pill').forEach(function(p){p.classList.remove('active');});
+  document.querySelector('.tb-pill').classList.add('active');
+  searchQuery='';
+  var input=document.querySelector('.tb-search input');
+  if(input)input.value='';
+  document.getElementById('searchClear').style.display='none';
+  filterReports();
+}
+
+// ─── Action dropdown ───
+function toggleAction(btn){
+  var menu=btn.nextElementSibling;
+  document.querySelectorAll('.dd-menu.open').forEach(function(m){if(m!==menu){m.classList.remove('open');m.classList.remove('open-up');}});
+  menu.classList.remove('open-up');
+  menu.classList.toggle('open');
+  if(menu.classList.contains('open')){
+    var rect=menu.getBoundingClientRect();
+    if(rect.bottom>window.innerHeight-20){
+      menu.classList.add('open-up');
+    }
+  }
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.dd-wrap') && !e.target.closest('.rv-save-wrap'))document.querySelectorAll('.dd-menu.open,.tb-dd-menu.open,.rv-save-dd.open').forEach(function(m){m.classList.remove('open');});
+});
+
+// ─── Dismiss panel ───
+function convDismiss(){
+  document.getElementById('convPanel').style.display='none';
+}
+
+// ─── Main submit: assess prompt, open sheet or build directly ───
+async function convSubmit(){
+  var input = document.getElementById('convInput');
+  var prompt = input ? input.value.trim() : '';
+  if(!prompt) return;
+
+  // Button → "Building..." with spinner
+  var btn = document.getElementById('convSubmitBtn');
+  var origHTML = btn.innerHTML;
+  btn.innerHTML = '<div class="toast-spinner" style="width:13px;height:13px;border-width:2px;flex-shrink:0;"></div>Building...';
+  btn.disabled = true;
+  input.disabled = true;
+
+  // Show processing toast
+  var toast = document.getElementById('export-toast');
+  var iconWrap = document.getElementById('toast-icon-wrap');
+  var msg = document.getElementById('toast-msg');
+  iconWrap.innerHTML = '<div class="toast-spinner"></div>';
+  msg.textContent = 'Processing';
+  toast.classList.add('visible');
+
+  // Brief pause for effect
+  await new Promise(function(r){ setTimeout(r, 2500); });
+
+  // Try direct build first
+  var report = getDemoReport(prompt);
+  if(report){
+    toast.classList.remove('visible');
+    clarOpenProcessing(prompt);
+    await new Promise(function(r){setTimeout(r, 2000);});
+    clarFinish(report);
+    return;
+  }
+
+  // Need clarification — open sheet and dismiss toast immediately
+  var questions = clarBuildQuestions(prompt);
+  if(questions && questions.length){
+    toast.classList.remove('visible');
+    clarOpen(prompt, questions);
+  } else {
+    toast.classList.remove('visible');
+    input.disabled = false;
+    btn.disabled = false;
+    btn.innerHTML = origHTML;
+    input.style.borderColor = 'var(--red-100)';
+    setTimeout(function(){ input.style.borderColor = ''; }, 2500);
+  }
+}
+
+// ─── Clarification state ───
+var _clar = {
+  originalPrompt: '',
+  questions: [],       // [{question, options, allowOther, otherPlaceholder}]
+  answers: [],         // [{question, answer}]
+  currentStep: 0
+};
+
+// ─── Build a question set from the prompt ───
+function clarBuildQuestions(prompt){
+  var p = prompt.toLowerCase();
+
+  var isDonor = p.indexOf('donor') > -1 || p.indexOf('gave') > -1 || p.indexOf('given') > -1 || p.indexOf('contribut') > -1 || p.indexOf('gift') > -1;
+  var isVolunteer = p.indexOf('volunteer') > -1;
+  var isConstituent = p.indexOf('constituent') > -1 || p.indexOf('contact') > -1 || p.indexOf('person') > -1 || p.indexOf('people') > -1;
+  var hasTimeframe = p.indexOf('last year') > -1 || p.indexOf('this year') > -1 || p.indexOf('90 day') > -1 || p.indexOf('12 month') > -1 || p.indexOf('fiscal') > -1 || p.indexOf('fy') > -1;
+  var hasAmount = p.indexOf('$') > -1 || p.indexOf('major') > -1 || p.indexOf('top') > -1 || p.indexOf('largest') > -1;
+  var isLapsed = p.indexOf('lapsed') > -1 || p.indexOf('haven') > -1 || p.indexOf('inactive') > -1 || p.indexOf('not given') > -1 || p.indexOf('didn') > -1;
+
+  var questions = [];
+
+  if(isLapsed && isDonor){
+    if(!hasTimeframe) questions.push({
+      question: 'What giving period defines lapsed for this report?',
+      options: ['Gave in FY2025, no gift in FY2026', 'No gift in the last 12 months', 'No gift in the last 18 months', 'No gift in the last 24 months']
+    });
+    if(!hasAmount) questions.push({
+      question: 'Should I filter by minimum gift amount?',
+      options: ['Any amount', '$100 or more', '$250 or more', '$500 or more']
+    });
+    questions.push({
+      question: 'What contact information should be included?',
+      options: ['Email only', 'Email and phone', 'Full mailing address', 'All contact fields']
+    });
+    return questions;
+  }
+
+  if(isDonor && (p.indexOf('major') > -1 || p.indexOf('top') > -1 || p.indexOf('largest') > -1) && !hasAmount){
+    questions.push({
+      question: 'What giving threshold defines a major donor?',
+      options: ['$500 or more', '$1,000 or more', '$2,500 or more', '$5,000 or more']
+    });
+    if(!hasTimeframe) questions.push({
+      question: 'Over what time period?',
+      options: ['This fiscal year (FY2026)', 'Last 12 months', 'Last 3 years', 'Lifetime giving']
+    });
+    questions.push({
+      question: 'Should I include soft credits and pledges?',
+      options: ['Hard credits only', 'Include soft credits', 'Include pledges', 'Include both soft credits and pledges']
+    });
+    return questions;
+  }
+
+  if(isVolunteer){
+    questions.push({
+      question: 'What volunteer activity window should this cover?',
+      options: ['Last 90 days', 'Last 6 months', 'This fiscal year', 'All time']
+    });
+    if(isDonor) questions.push({
+      question: 'Should this include only volunteers who have also donated?',
+      options: ['Volunteers who have donated', 'Volunteers who have never donated', 'All volunteers regardless of giving']
+    });
+    else questions.push({
+      question: 'Which fund or campaign should this be scoped to?',
+      options: ['All funds', 'Annual Fund', 'Capital Campaign', 'Unrestricted only']
+    });
+    questions.push({
+      question: 'What contact information should be included?',
+      options: ['Email only', 'Email and phone', 'Full mailing address', 'All contact fields']
+    });
+    return questions;
+  }
+
+  if(isDonor || isConstituent){
+    if(!hasTimeframe) questions.push({
+      question: 'What time period should this report cover?',
+      options: ['This fiscal year (FY2026)', 'Last 12 months', 'Last 90 days', 'All time']
+    });
+    else questions.push({
+      question: 'Which fund or campaign should this be scoped to?',
+      options: ['All funds', 'Annual Fund', 'Capital Campaign', 'Unrestricted only']
+    });
+    if(!hasAmount) questions.push({
+      question: 'Should I filter by gift amount?',
+      options: ['Any amount', '$100 or more', '$250 or more', '$500 or more']
+    });
+    else questions.push({
+      question: 'Should I include soft credits and pledges?',
+      options: ['Hard credits only', 'Include soft credits', 'Include pledges', 'Include both']
+    });
+    questions.push({
+      question: 'What contact information should be included?',
+      options: ['Email only', 'Email and phone', 'Full mailing address', 'All contact fields']
+    });
+    return questions;
+  }
+
+  // Generic fallback
+  questions.push({
+    question: 'What type of records should this report include?',
+    options: ['Constituents (people)', 'Transactions (gifts)', 'Interactions (touchpoints)', 'All record types']
+  });
+  questions.push({
+    question: 'What time period should this report cover?',
+    options: ['This fiscal year (FY2026)', 'Last 12 months', 'Last 90 days', 'All time']
+  });
+  questions.push({
+    question: 'What contact information should be included?',
+    options: ['Email only', 'Email and phone', 'Full mailing address', 'All contact fields']
+  });
+  return questions;
+}
+
+// ─── Open the sheet (with questions) ───
+function clarOpen(originalPrompt, questions){
+  _clar.originalPrompt = originalPrompt;
+  // Pad to exactly 3 questions
+  var _padQs = [
+    {question:'What time period should this cover?',options:['This fiscal year (FY2026)','Last 12 months','Last 90 days','All time'],allowOther:true},
+    {question:'What should this report show about each result?',options:['Giving history','Contact information','Recent activity','All fields'],allowOther:true},
+    {question:'What is the primary goal of this report?',options:['Outreach / contact list','Stewardship review','Data cleanup','Leadership presentation'],allowOther:true}
+  ];
+  while(questions.length < 3){ questions.push(_padQs[questions.length % _padQs.length]); }
+  _clar.questions = questions;
+  _clar.answers = [];
+  _clar.currentStep = 0;
+
+  document.getElementById('clarProcessing').classList.remove('active');
+  document.getElementById('clarContent').style.display = '';
+
+  clarRenderStep(0);
+
+  document.getElementById('clarScrim').classList.add('active');
+  document.getElementById('clarSheet').classList.add('active');
+  // Focus first option or other input after animation
+  // intentionally not auto-focusing options to avoid browser highlight
+}
+
+// ─── Open the sheet in processing-only mode (no questions) ───
+function clarOpenProcessing(prompt){
+  _clar.originalPrompt = prompt;
+  document.getElementById('clarContent').style.display = 'none';
+  document.getElementById('clarProcessing').classList.add('active');
+  document.getElementById('clarScrim').classList.add('active');
+  document.getElementById('clarSheet').classList.add('active');
+  clarAnimateProcessingText();
+}
+
+// ─── Animate the processing sub-text ───
+var _clarProcessingMsgs = [
+  'Reading your request…',
+  'Identifying the right filters…',
+  'Applying your criteria…',
+  'Assembling the report…'
+];
+function clarAnimateProcessingText(){
+  var el = document.getElementById('clarProcessingSub');
+  if(!el) return;
+  var i = 0;
+  var iv = setInterval(function(){
+    i++;
+    if(i < _clarProcessingMsgs.length) el.textContent = _clarProcessingMsgs[i];
+    else clearInterval(iv);
+  }, 600);
+}
+
+// ─── Render a given step ───
+function clarRenderStep(stepIdx){
+  var q = _clar.questions[stepIdx];
+  var total = _clar.questions.length;
+
+  // Question text + counter
+  document.getElementById('clarQuestion').textContent = q.question;
+  var counter = document.getElementById('clarCounter');
+  if(counter) counter.textContent = (stepIdx+1) + ' of 3';
+
+  // Build options
+  var optWrap = document.getElementById('clarOptions');
+  optWrap.innerHTML = '';
+  q.options.forEach(function(opt){
+    var btn = document.createElement('button');
+    btn.className = 'clar-option';
+    btn.setAttribute('tabindex', '0');
+    btn.innerHTML = '<div class="clar-option-inner"><div class="clar-option-radio"></div><span class="clar-option-text">' + opt + '</span></div>';
+    btn.onclick = function(){
+      document.querySelectorAll('.clar-option').forEach(function(b){ b.classList.remove('selected'); });
+      btn.classList.add('selected');
+      document.getElementById('clarOtherInput').value = '';
+      document.getElementById('clarOtherWrap').classList.remove('other-selected');
+      document.getElementById('clarNextBtn').disabled = false;
+    };
+    optWrap.appendChild(btn);
+  });
+
+  // Reset all selection state after options are in DOM
+  document.querySelectorAll('.clar-option').forEach(function(b){ b.classList.remove('selected'); });
+  var otherInput = document.getElementById('clarOtherInput');
+  otherInput.value = '';
+  document.getElementById('clarOtherWrap').classList.remove('other-selected');
+  document.getElementById('clarNextBtn').disabled = true;
+
+  // Restore answer if navigating back
+  var prevAnswer = _clar.answers[stepIdx];
+  if(prevAnswer && prevAnswer.answer && prevAnswer.answer !== 'Skipped'){
+    var restored = false;
+    document.querySelectorAll('.clar-option').forEach(function(btn){
+      if(btn.querySelector('.clar-option-text').textContent === prevAnswer.answer){
+        btn.classList.add('selected');
+        restored = true;
+      }
+    });
+    if(!restored){
+      otherInput.value = prevAnswer.answer;
+      document.getElementById('clarOtherWrap').classList.add('other-selected');
+    }
+    document.getElementById('clarNextBtn').disabled = false;
+  }
+
+  // Next / Submit label
+  var isLast = stepIdx === total - 1;
+  document.getElementById('clarNextLabel').textContent = isLast ? 'Submit' : 'Next';
+
+  // Back button: hidden on step 1, visible from step 2
+  var backBtn = document.getElementById('clarBackBtn');
+  if(backBtn) backBtn.style.display = stepIdx > 0 ? '' : 'none';
+}
+
+// ─── Other input typed ───
+function clarOtherFocus(){
+  // Select the radio when focused
+  document.querySelectorAll('.clar-option').forEach(function(b){ b.classList.remove('selected'); });
+  document.getElementById('clarOtherWrap').classList.add('other-selected');
+  // Don't enable Next until they actually type
+}
+function clarOtherTyped(){
+  var val = document.getElementById('clarOtherInput').value.trim();
+  if(val.length > 0){
+    document.querySelectorAll('.clar-option').forEach(function(b){ b.classList.remove('selected'); });
+    document.getElementById('clarNextBtn').disabled = false;
+  } else {
+    var hasSelected = document.querySelector('.clar-option.selected');
+    document.getElementById('clarNextBtn').disabled = !hasSelected;
+  }
+}
+
+// ─── Advance to next step or submit ───
+async function clarAdvance(){
+  // Capture the answer for this step
+  var q = _clar.questions[_clar.currentStep];
+  var selectedOpt = document.querySelector('.clar-option.selected .clar-option-text');
+  var otherVal = document.getElementById('clarOtherInput').value.trim();
+  var answer = '';
+
+  if(otherVal && document.getElementById('clarOtherWrap').classList.contains('visible')){
+    answer = otherVal;
+  } else if(selectedOpt){
+    answer = selectedOpt.textContent.replace("Other — I will describe it", '').trim();
+    if(!answer) answer = otherVal;
+  }
+  if(!answer) return;
+
+  _clar.answers.push({ question: q.question, answer: answer });
+
+  var nextStep = _clar.currentStep + 1;
+
+  if(nextStep < _clar.questions.length){
+    // More questions — advance
+    _clar.currentStep = nextStep;
+    clarRenderStep(nextStep);
+    document.getElementById('clarNextBtn').disabled = true;
+  } else {
+    // All answered — build the report
+    clarRunBuild();
+  }
+}
+
+// ─── Run the build after all answers collected ───
+async function clarRunBuild(){
+  // Close sheet and scrim immediately
+  document.getElementById('clarSheet').classList.remove('active');
+  document.getElementById('clarScrim').classList.remove('active');
+
+  // Show processing toast right away
+  var toast = document.getElementById('export-toast');
+  var iconWrap = document.getElementById('toast-icon-wrap');
+  var msg = document.getElementById('toast-msg');
+  iconWrap.innerHTML = '<div class="toast-spinner"></div>';
+  msg.textContent = 'Processing';
+  toast.classList.add('visible');
+
+  // Build a synthetic prompt from original + answers
+  var syntheticContext = _clar.originalPrompt + ' — ' + _clar.answers.map(function(a){
+    return a.answer;
+  }).join(', ');
+
+  await new Promise(function(r){ setTimeout(r, 2000); });
+  toast.classList.remove('visible');
+
+  // Resolve to a report and open editor
+  var report = clarResolveReport(syntheticContext);
+
+  // Re-enable input and restore button
+  var input = document.getElementById('convInput');
+  var btn = document.getElementById('convSubmitBtn');
+  input.disabled = false;
+  input.value = '';
+  btn.disabled = true;
+  btn.innerHTML = '<svg class="nav-svg-icon" aria-hidden="true" style="width:13px;height:13px;"><use href="#icon-sparkles"/></svg> Build Report';
+
+  document.getElementById('clarProcessing').classList.remove('active');
+  document.getElementById('clarContent').style.display = '';
+
+  var title = (report && report.title && report.title !== 'New Report')
+    ? report.title
+    : 'New Constituent Report';
+  document.querySelector('.ed-head-title').textContent = title;
+  showView('editor');
+}
+
+// ─── Resolve answers to a demo report ───
+function clarResolveReport(context){
+  var c = context.toLowerCase();
+
+  // Volunteer / no donation path
+  if(c.indexOf('volunteer') > -1 && (c.indexOf('never') > -1 || c.indexOf('not donated') > -1 || c.indexOf('never donated') > -1)){
+    return getDemoReport('volunteers who never donated');
+  }
+  // Major / top donors
+  if(c.indexOf('major') > -1 || c.indexOf('top') > -1 || c.indexOf('largest') > -1 || c.indexOf('1,000') > -1 || c.indexOf('2,500') > -1 || c.indexOf('5,000') > -1){
+    return getDemoReport('donors who gave more than $1,000');
+  }
+  // Lapsed
+  if(c.indexOf('lapsed') > -1 || c.indexOf('no gift') > -1 || c.indexOf('haven') > -1 || c.indexOf('fy2025') > -1 || c.indexOf('fy2026') > -1){
+    return getDemoReport('donors who gave last year but not this year');
+  }
+  // Any donors fallback
+  if(c.indexOf('donor') > -1 || c.indexOf('gave') > -1 || c.indexOf('given') > -1){
+    return getDemoReport('donors who gave last year but not this year');
+  }
+  // Generic fallback
+  return getDemoReport('donors who gave more than $1,000');
+}
+
+// ─── Close sheet and open the report ───
+async function clarFinish(report){
+  // Close sheet and scrim immediately
+  document.getElementById('clarSheet').classList.remove('active');
+  document.getElementById('clarScrim').classList.remove('active');
+
+  // Show processing toast right away
+  var toast = document.getElementById('export-toast');
+  var iconWrap = document.getElementById('toast-icon-wrap');
+  var msg = document.getElementById('toast-msg');
+  iconWrap.innerHTML = '<div class="toast-spinner"></div>';
+  msg.textContent = 'Processing';
+  toast.classList.add('visible');
+
+  await new Promise(function(r){ setTimeout(r, 2000); });
+  toast.classList.remove('visible');
+
+  // Re-enable input and restore button
+  var input = document.getElementById('convInput');
+  var btn = document.getElementById('convSubmitBtn');
+  input.disabled = false;
+  input.value = '';
+  btn.disabled = true;
+  btn.innerHTML = '<svg class="nav-svg-icon" aria-hidden="true" style="width:13px;height:13px;"><use href="#icon-sparkles"/></svg> Build Report';
+
+  // Reset processing state for next time
+  document.getElementById('clarProcessing').classList.remove('active');
+  document.getElementById('clarContent').style.display = '';
+
+  // Use report title if available, otherwise a generic name
+  var title = (report && report.title && report.title !== 'New Report')
+    ? report.title
+    : 'New Constituent Report';
+  document.querySelector('.ed-head-title').textContent = title;
+  showView('editor');
+}
+
+// ─── Cancel / close sheet ───
+function clarCancel(){
+  document.getElementById('clarSheet').classList.remove('active');
+  document.getElementById('clarScrim').classList.remove('active');
+  var input = document.getElementById('convInput');
+  var btn = document.getElementById('convSubmitBtn');
+  input.disabled = false;
+  setTimeout(function(){
+    btn.disabled = !input.value.trim();
+    btn.innerHTML = '<svg class="nav-svg-icon" aria-hidden="true" style="width:13px;height:13px;"><use href="#icon-sparkles"/></svg> Build Report';
+  }, 350);
+  setTimeout(function(){
+    document.getElementById('clarProcessing').classList.remove('active');
+    document.getElementById('clarContent').style.display = '';
+    _clar = {originalPrompt:'',questions:[],answers:[],currentStep:0};
+  }, 300);
+}
+
+// ─── Go back to previous question ───
+function clarBack(){
+  if(_clar.currentStep > 0){
+    _clar.currentStep--;
+    // Remove the answer for the current step we're going back to
+    // (so they can change it — keep answers before it)
+    _clar.answers = _clar.answers.slice(0, _clar.currentStep);
+    clarRenderStep(_clar.currentStep);
+  }
+}
+
+// ─── Skip current question ───
+function clarSkip(){
+  var q = _clar.questions[_clar.currentStep];
+  _clar.answers.push({ question: q.question, answer: 'Skipped' });
+  var nextStep = _clar.currentStep + 1;
+  if(nextStep < _clar.questions.length){
+    _clar.currentStep = nextStep;
+    clarRenderStep(nextStep);
+    document.getElementById('clarNextBtn').disabled = true;
+  } else {
+    clarRunBuild();
+  }
+}
+
+// ─── Demo report data ───
+function getDemoReport(prompt){
+  var p = prompt.toLowerCase();
+
+  // Prompt 1: donors who gave last year but haven't donated yet this year
+  if((p.indexOf('gave') > -1 || p.indexOf('donated') > -1 || p.indexOf('donor') > -1 || p.indexOf('lapsed') > -1 || p.indexOf('lapsing') > -1 || p.indexOf('gave last year') > -1) && (p.indexOf('haven') > -1 || p.indexOf('not yet') > -1 || p.indexOf('not donated') > -1 || p.indexOf('not this year') > -1 || p.indexOf('but not') > -1 || p.indexOf('didn') > -1 || p.indexOf('did not') > -1 || p.indexOf('no gift') > -1 || p.indexOf('no donation') > -1 || (p.indexOf('last year') > -1 && p.indexOf('this year') > -1)) || (p.indexOf('lapsed') > -1 || p.indexOf('lapsing') > -1)){
+    return {
+      title: 'New Report',
+      includeFilters: ['Has any Specific Transactions','Has no Specific Transactions'],
+      excludeFilters: [],
+      columns: ['Name','Primary Street','Primary City','Primary State','Primary Zip Code','Primary Email Address','Latest Transaction Amount','Latest Transaction Date'],
+      rows: [
+        ['Anderson, Margaret','412 Oak Valley Dr','Indianapolis','IN','46220','m.anderson@gmail.com','$750.00','Dec 14, 2025'],
+        ['Chen, Robert','8821 Lakeshore Blvd','Carmel','IN','46032','robert.chen@outlook.com','$1,200.00','Nov 3, 2025'],
+        ['Davis, Patricia','1505 Meridian St','Fishers','IN','46038','pdavis@yahoo.com','$500.00','Oct 28, 2025'],
+        ['Franklin, James','2290 College Ave','Bloomington','IN','47401','jfranklin@iupui.edu','$2,500.00','Sep 15, 2025'],
+        ['Garcia, Elena','776 Washington St','Columbus','IN','47201','egarcia@hotmail.com','$350.00','Dec 22, 2025'],
+        ['Hoffman, William','3344 Broad Ripple Ave','Indianapolis','IN','46220','whoffman@gmail.com','$1,000.00','Nov 19, 2025'],
+        ['Jackson, Denise','901 Main St','Zionsville','IN','46077','djackson@comcast.net','$600.00','Aug 30, 2025'],
+        ['Kim, Susan','4520 Fall Creek Pkwy','Indianapolis','IN','46205','skim@gmail.com','$425.00','Dec 1, 2025'],
+        ['Lopez, Maria','667 Rangeline Rd','Carmel','IN','46032','mlopez@outlook.com','$1,500.00','Oct 10, 2025'],
+        ['Mitchell, Thomas','1128 Pennsylvania St','Indianapolis','IN','46204','tmitchell@aol.com','$800.00','Nov 25, 2025']
+      ]
+    };
+  }
+
+  // Prompt 2: donors who gave more than $1,000 in the past year
+  if(p.indexOf('1,000') > -1 || p.indexOf('1000') > -1 || p.indexOf('$1k') > -1 || p.indexOf('$1,0') > -1 || (p.indexOf('more than') > -1 && p.indexOf('year') > -1) || (p.indexOf('over') > -1 && (p.indexOf('1000') > -1 || p.indexOf('1,000') > -1)) || (p.indexOf('above') > -1 && (p.indexOf('1000') > -1 || p.indexOf('1,000') > -1)) || (p.indexOf('given') > -1 && p.indexOf('1') > -1 && p.indexOf('000') > -1)){
+    return {
+      title: 'New Report',
+      includeFilters: ['Sum of Amount of Specific Transactions'],
+      excludeFilters: [],
+      columns: ['Name','Primary Email Address','Latest Transaction Date','Latest Transaction Amount'],
+      rows: [
+        ['Bennett, Richard','rbennett@gmail.com','Mar 22, 2026','$2,500.00'],
+        ['Chang, Jennifer','jchang@outlook.com','Jan 15, 2026','$1,500.00'],
+        ['Dawson, Keith','kdawson@yahoo.com','Feb 8, 2026','$3,000.00'],
+        ['Espinoza, Carmen','cespinoza@gmail.com','Apr 2, 2026','$1,250.00'],
+        ['Foster, Gregory','gfoster@comcast.net','Dec 19, 2025','$5,000.00'],
+        ['Haynes, Brenda','bhaynes@icloud.com','Mar 1, 2026','$1,800.00'],
+        ['Irving, Marcus','mirving@hotmail.com','Jan 28, 2026','$2,200.00'],
+        ['Kelley, Diane','dkelley@gmail.com','Feb 14, 2026','$1,100.00'],
+        ['Nguyen, David','dnguyen@outlook.com','Apr 10, 2026','$4,000.00'],
+        ['Patel, Anita','apatel@gmail.com','Mar 15, 2026','$1,750.00'],
+        ['Reynolds, Charles','creynolds@aol.com','Dec 30, 2025','$2,000.00'],
+        ['Sullivan, Karen','ksullivan@yahoo.com','Jan 5, 2026','$1,350.00']
+      ]
+    };
+  }
+
+  // Prompt 3: volunteers who volunteered in last 180 days but never donated
+  if(p.indexOf('volunteer') > -1 && (p.indexOf('never') > -1 || p.indexOf('no ') > -1 || p.indexOf('not ') > -1 || p.indexOf('without') > -1 || p.indexOf('haven') > -1) && (p.indexOf('donation') > -1 || p.indexOf('donated') > -1 || p.indexOf('donat') > -1 || p.indexOf('gift') > -1 || p.indexOf('gave') > -1 || p.indexOf('given') > -1 || p.indexOf('contribut') > -1)){
+    return {
+      title: 'New Report',
+      includeFilters: ['Has any Specific Interactions'],
+      excludeFilters: ['Has any Specific Transactions'],
+      columns: ['Name','Primary Street','Primary City','Primary State','Primary Zip Code','Primary Email Address'],
+      rows: [
+        ['Alvarez, Sofia','1820 Keystone Ave','Indianapolis','IN','46202','salvarez@gmail.com'],
+        ['Brooks, Tyler','305 E Carmel Dr','Carmel','IN','46032','tbrooks@outlook.com'],
+        ['Coleman, Jasmine','4412 N Illinois St','Indianapolis','IN','46208','jcoleman@yahoo.com'],
+        ['Dunn, Ethan','990 Rangeline Rd','Carmel','IN','46032','edunn@gmail.com'],
+        ['Fitzgerald, Megan','2217 Broad Ripple Ave','Indianapolis','IN','46220','mfitzgerald@icloud.com'],
+        ['Gonzalez, Carlos','557 Main St','Greenwood','IN','46142','cgonzalez@hotmail.com'],
+        ['Harper, Lindsay','1034 Fall Creek Pkwy','Indianapolis','IN','46205','lharper@gmail.com'],
+        ['Jordan, Marcus','8801 Southeastern Ave','Fishers','IN','46038','mjordan@outlook.com'],
+        ['Kowalski, Anna','623 3rd Ave SW','Carmel','IN','46032','akowalski@gmail.com'],
+        ['Morris, Deshawn','1455 Massachusetts Ave','Indianapolis','IN','46204','dmorris@yahoo.com'],
+        ['Ortiz, Valentina','2780 E 116th St','Carmel','IN','46032','vortiz@gmail.com'],
+        ['Parker, Brittany','410 W Main St','Plainfield','IN','46168','bparker@comcast.net'],
+        ['Robinson, Andre','1892 Central Ave','Indianapolis','IN','46202','arobinson@gmail.com'],
+        ['Torres, Isabel','5534 N Meridian St','Indianapolis','IN','46208','itorres@outlook.com']
+      ]
+    };
+  }
+
+  // Default fallback - no match
+  return null;
+}
+
+// ─── Show report view ───
+function showReportView(report){
+  currentReport = report;
+  (function(){var _r=document.querySelector('.rep-page');if(_r)_r.style.display='none';})();
+  var rv=document.getElementById('reportView');
+  rv.classList.add('active');
+  document.getElementById('main').scrollTop=0;
+  closeFilterDetail();
+  // Reset to Report tab
+  document.querySelectorAll('.rv-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.rv-tab')[0].classList.add('active');
+  var rc=document.getElementById('rvReportContent');if(rc)rc.style.display='';
+  var rd=document.getElementById('rvDetails');if(rd)rd.classList.remove('active');
+
+  // Title
+  document.getElementById('rvTitle').textContent=report.title;
+  document.getElementById('rvDeleteBtn').style.display = report.isSaved ? '' : 'none';
+
+  // Entity type
+  var entityType = report.entityType || 'Constituent';
+  document.getElementById('rvEntityType').textContent = entityType + ' Filters';
+
+  // Include filters
+  var includeEl=document.getElementById('rvFilters');
+  includeEl.innerHTML='';
+  var incFilters = report.includeFilters || report.filters || [];
+  incFilters.forEach(function(f){
+    var chipDiv=document.createElement('div');
+    chipDiv.className='rv-filter-chip';
+    chipDiv.style.cursor='pointer';
+    chipDiv.dataset.filter=f;
+    chipDiv.dataset.section='include';
+    chipDiv.innerHTML=f+' <span class="chip-x">&times;</span>';
+    chipDiv.addEventListener('click',function(){openFilterDetail(this,this.dataset.filter);});
+    includeEl.appendChild(chipDiv);
+  });
+
+  // Exclude filters
+  var excludeEl=document.getElementById('rvExcludeFilters');
+  if(excludeEl){
+    excludeEl.innerHTML='';
+    var excFilters = report.excludeFilters || [];
+    if(excFilters.length > 0){
+      excFilters.forEach(function(f){
+        var chipDiv=document.createElement('div');
+        chipDiv.className='rv-filter-chip';
+        chipDiv.style.cursor='pointer';
+        chipDiv.dataset.filter=f;
+        chipDiv.dataset.section='exclude';
+        chipDiv.innerHTML=f+' <span class="chip-x">&times;</span>';
+        chipDiv.addEventListener('click',function(){openFilterDetail(this,this.dataset.filter);});
+        excludeEl.appendChild(chipDiv);
+      });
+      excludeEl.parentElement.querySelector('.rv-add-filter').style.display='none';
+    } else {
+      excludeEl.parentElement.querySelector('.rv-add-filter').style.display='';
+    }
+  }
+
+  // Table header
+  var thead=document.getElementById('rvThead');
+  thead.innerHTML='<tr>'+report.columns.map(function(c,idx){var icon=idx===0?'fa-caret-up':'fa-sort';return '<th><span class="th-inner"><span class="th-text">'+c+'</span><i class="fa-solid '+icon+' th-sort"></i></span><span class="th-tip">'+c+'</span></th>';}).join('')+'</tr>';
+
+  // Table body
+  var tbody=document.getElementById('rvTbody');
+  tbody.innerHTML='';
+  report.rows.forEach(function(row){
+    var cells=row.map(function(val,idx){
+      var cls='';
+      if(idx===0)cls=' class="td-name"';
+      if(report.columns[idx] && report.columns[idx].indexOf('Amount')>-1)cls=' class="td-amount"';
+      return '<td'+cls+'>'+val+'</td>';
+    }).join('');
+    tbody.insertAdjacentHTML('beforeend','<tr>'+cells+'</tr>');
+  });
+
+  document.getElementById('rvCount').textContent=report.rows.length+' constituents found (last run 2 hours ago)';
+  document.getElementById('rvPagRange').textContent='1\u2013'+report.rows.length+' of '+report.rows.length;
+}
+
+
+// ─── Open report from list ───
+function openListReport(row){
+  var name = row.dataset.name;
+  if(recentReports.indexOf(name) === -1) recentReports.unshift(name);
+  if(recentReports.length > 20) recentReports.pop();
+  var report = {
+    isSaved: true,
+    title: name,
+    includeFilters: ['Has any Specific Transactions'],
+    excludeFilters: [],
+    columns: ['Name','Primary Email Address','Primary Street','Primary City','Primary State','Latest Transaction Amount','Latest Transaction Date'],
+    rows: [
+      ['Anderson, Margaret','m.anderson@gmail.com','412 Oak Valley Dr','Indianapolis','IN','$750.00','Dec 14, 2025'],
+      ['Chen, Robert','robert.chen@outlook.com','8821 Lakeshore Blvd','Carmel','IN','$1,200.00','Nov 3, 2025'],
+      ['Davis, Patricia','pdavis@yahoo.com','1505 Meridian St','Fishers','IN','$500.00','Oct 28, 2025'],
+      ['Franklin, James','jfranklin@iupui.edu','2290 College Ave','Bloomington','IN','$2,500.00','Sep 15, 2025'],
+      ['Garcia, Elena','egarcia@hotmail.com','776 Washington St','Columbus','IN','$350.00','Dec 22, 2025'],
+      ['Hoffman, William','whoffman@gmail.com','3344 Broad Ripple Ave','Indianapolis','IN','$1,000.00','Nov 19, 2025'],
+      ['Jackson, Denise','djackson@comcast.net','901 Main St','Zionsville','IN','$600.00','Aug 30, 2025'],
+      ['Kim, Susan','skim@gmail.com','4520 Fall Creek Pkwy','Indianapolis','IN','$425.00','Dec 1, 2025']
+    ]
+  };
+  showReportView(report);
+}
+
+
+function toggleSaveDd(){
+  var dd=document.getElementById('rvSaveDd');
+  dd.classList.toggle('open');
+}
+function closeSaveDd(){
+  document.getElementById('rvSaveDd').classList.remove('open');
+}
+
+// ─── Filter detail expand ───
+function openFilterDetail(chipEl, filterText){
+  // Close any existing detail first
+  closeFilterDetail();
+  // Reset to Report tab
+  document.querySelectorAll('.rv-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.rv-tab')[0].classList.add('active');
+  var rc=document.getElementById('rvReportContent');if(rc)rc.style.display='';
+  var rd=document.getElementById('rvDetails');if(rd)rd.classList.remove('active');
+
+  // Disable all chips
+  document.querySelectorAll('#rvFilters .rv-filter-chip, #rvExcludeFilters .rv-filter-chip').forEach(function(c){
+    if(c !== chipEl) c.classList.add('disabled');
+  });
+
+  // Clone the template
+  var tpl = document.getElementById('rvFilterDetailTpl');
+  var detail = tpl.content.cloneNode(true).firstElementChild;
+
+  var subFilters = detail.querySelector('#rvFdSubFilters');
+  var fdType = detail.querySelector('#rvFdType');
+  var fdTitle = detail.querySelector('#rvFdCardTitle');
+  var amountRow = detail.querySelector('#rvFdAmountRow');
+
+  var ft = filterText.toLowerCase();
+
+  if(ft === 'has any specific transactions'){
+    fdType.innerHTML = '<span class="fd-green">Has any <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span> <i class="fa-solid fa-gift" style="color:var(--platform-60);"></i> <span>Specific Transactions <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:var(--platform-60);"><use href="#icon-chevron-down"/></svg></span>';
+    fdTitle.textContent = 'Transaction Filters';
+    subFilters.innerHTML = '<div class="rv-fd-sub-chip">Date is last year <span class="chip-x">\u00d7</span></div><div class="rv-fd-sub-chip">Type is \u2018Donation\u2019 <span class="chip-x">\u00d7</span></div>';
+  } else if(ft === 'has no specific transactions'){
+    fdType.innerHTML = '<span class="fd-green">Has no <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span> <i class="fa-solid fa-gift" style="color:var(--platform-60);"></i> <span>Specific Transactions <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:var(--platform-60);"><use href="#icon-chevron-down"/></svg></span>';
+    fdTitle.textContent = 'Transaction Filters';
+    subFilters.innerHTML = '<div class="rv-fd-sub-chip">Date is this year <span class="chip-x">\u00d7</span></div>';
+  } else if(ft.indexOf('sum') > -1 || ft.indexOf('amount') > -1){
+    fdType.innerHTML = '<span class="fd-green">The calculated <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span> <span class="fd-green">Sum <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span> of the <span class="fd-green">Amount <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span> of <i class="fa-solid fa-gift" style="color:var(--platform-60);"></i> <span>Specific Transactions <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:var(--platform-60);"><use href="#icon-chevron-down"/></svg></span>';
+    fdTitle.textContent = 'Transaction Filters';
+    subFilters.innerHTML = '<div class="rv-fd-sub-chip">Date is in the previous 365 days <span class="chip-x">\u00d7</span></div>';
+    amountRow.style.display = 'flex';
+  } else if(ft.indexOf('address') > -1){
+    fdType.innerHTML = '<span class="fd-green">Has any <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span> <i class="fa-solid fa-location-dot" style="color:var(--platform-60);"></i> <span>Specific Addresses <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:var(--platform-60);"><use href="#icon-chevron-down"/></svg></span>';
+    fdTitle.textContent = 'Address Filters';
+    subFilters.innerHTML = '<div class="rv-fd-sub-chip">State is \u2018California\u2019 or \u2018New York\u2019 <span class="chip-x">\u00d7</span></div>';
+  } else if(ft.indexOf('interaction') > -1){
+    fdType.innerHTML = '<span class="fd-green">Has any <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></span> <i class="fa-solid fa-comment" style="color:var(--platform-60);"></i> <span>Specific Interactions <svg viewBox="0 0 512 512" style="width:10px;height:10px;fill:var(--platform-60);"><use href="#icon-chevron-down"/></svg></span>';
+    fdTitle.textContent = 'Interaction Filters';
+    subFilters.innerHTML = '<div class="rv-fd-sub-chip">Date is in the previous 180 days <span class="chip-x">\u00d7</span></div>';
+  }
+
+  detail.style.display = 'block';
+
+  // Insert into the parent row of the clicked chip
+  var parentRow = chipEl.closest('.rv-filter-row') || chipEl.closest('.rv-exclude-row');
+  if(parentRow){
+    parentRow.appendChild(detail);
+  }
+}
+
+function closeFilterDetail(){
+  var existing = document.querySelector('.rv-filter-detail');
+  if(existing) existing.remove();
+  document.querySelectorAll('#rvFilters .rv-filter-chip, #rvExcludeFilters .rv-filter-chip').forEach(function(c){
+    c.classList.remove('disabled');
+  });
+}
+
+
+
+// ─── Save and go to reports list ───
+async function saveAndGoToList(){
+  closeSaveDd();
+  
+  // If viewing a saved report, just process and go back
+  if(currentReport && currentReport.isSaved){
+    var toast = document.getElementById('processingToast');
+    toast.classList.add('show');
+    await new Promise(function(r){setTimeout(r,2500);});
+    toast.classList.remove('show');
+    backToList();
+    return;
+  }
+  
+  // New report - need a name
+  var detailsName = document.getElementById('rvDetailsName').value.trim();
+  var title = detailsName || document.getElementById('rvTitle').textContent;
+  
+  // Clear any previous error
+  document.getElementById('rvDetailsName').parentElement.classList.remove('rv-field-error');
+  
+  if(!title || title === 'New Report'){
+    var detailsTab = document.querySelectorAll('.rv-tab')[1];
+    switchRvTab(detailsTab, 'details');
+    document.getElementById('rvDetailsName').parentElement.classList.add('rv-field-error');
+    document.getElementById('rvDetailsName').focus();
+    return;
+  }
+
+  document.getElementById('rvTitle').textContent = title;
+  document.getElementById('rvDetailsName').value = title;
+
+  var toast = document.getElementById('processingToast');
+  toast.classList.add('show');
+  await new Promise(function(r){setTimeout(r,2500);});
+  toast.classList.remove('show');
+
+  addReportToList(title);
+  backToList();
+}
+
+function addReportToList(title){
+  var tbody = document.getElementById('tbody1');
+  // Check if already added
+  var exists = false;
+  tbody.querySelectorAll('tr').forEach(function(r){
+    if(r.dataset.name === title) exists = true;
+  });
+  if(exists) return;
+
+  var today = new Date();
+  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  var dateStr = (today.getMonth()+1)+'/'+today.getDate()+'/'+today.getFullYear();
+
+  var tr = document.createElement('tr');
+  tr.dataset.name = title;
+  tr.dataset.type = 'Constituent';
+  tr.dataset.creator = 'Dennis Fois';
+  tr.dataset.status = 'active';
+  tr.setAttribute('onclick', 'openListReport(this)');
+  tr.innerHTML = '<td class="td-name">'+title+'</td>'+
+    '<td class="td-freq">&mdash;</td>'+
+    '<td>Constituent</td>'+
+    '<td class="td-folder">&mdash;</td>'+
+    '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
+    '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
+    '<td onclick="event.stopPropagation()"><div class="dd-wrap"><button class="action-btn" onclick="toggleAction(this)">Action <svg viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg></button><div class="dd-menu"><button class="dd-item">View Report</button><button class="dd-item">Copy Report</button><button class="dd-item">Export</button><button class="dd-item disabled">Move to Folder</button><button class="dd-item">Deactivate Report</button><button class="dd-item destructive">Delete Report</button></div></div></td>';
+
+  // Insert in alphabetical order
+  var rows = Array.from(tbody.querySelectorAll('tr[data-name]'));
+  var inserted = false;
+  for(var i = 0; i < rows.length; i++){
+    if(rows[i].dataset.name.toLowerCase() > title.toLowerCase()){
+      tbody.insertBefore(tr, rows[i]);
+      inserted = true;
+      break;
+    }
+  }
+  if(!inserted) tbody.appendChild(tr);
+
+  // Update pagination
+  var rows = tbody.querySelectorAll('tr[data-status]');
+  var count = 0;
+  rows.forEach(function(r){ if(r.style.display !== 'none') count++; });
+  (document.getElementById('pagRange')||document.getElementById('rep-pag-range')||{}).textContent = '1\u2013'+count+' of '+count;
+}
+
+
+// ─── Report/Details tab switching ───
+function switchRvTab(btn, tab){
+  document.querySelectorAll('.rv-tab').forEach(function(t){t.classList.remove('active');});
+  btn.classList.add('active');
+  var reportContent = document.getElementById('rvReportContent');
+  var detailsContent = document.getElementById('rvDetails');
+  if(tab === 'details'){
+    reportContent.style.display = 'none';
+    detailsContent.classList.add('active');
+    // Populate meta dates
+    var now = new Date();
+    var dateStr = (now.getMonth()+1) + '/' + now.getDate() + '/' + now.getFullYear() + ' ' + now.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}) + ' by Dennis Fois';
+    document.getElementById('rvMetaCreated').textContent = dateStr;
+    document.getElementById('rvMetaModified').textContent = dateStr;
+    document.getElementById('rvMetaUsed').textContent = dateStr;
+    // Set name field
+    var title = document.getElementById('rvTitle').textContent;
+    document.getElementById('rvDetailsName').value = (title === 'New Report') ? '' : title;
+  } else {
+    reportContent.style.display = '';
+    detailsContent.classList.remove('active');
+    // Sync name back if changed
+    var nameVal = document.getElementById('rvDetailsName').value.trim();
+    if(nameVal) document.getElementById('rvTitle').textContent = nameVal;
+  }
+}
+
+
+// ─── Refine Report ───
+var currentReport = null;
+
+// [removed dupe]
+
+
+function getRefineResult(prompt){
+  var p = prompt.toLowerCase();
+
+  // Prompt 1 refine: average donation column
+  if(p.indexOf('average') > -1 || p.indexOf('avg') > -1 || p.indexOf('lifetime') > -1 || p.indexOf('mean') > -1 || (p.indexOf('calculated') > -1 && p.indexOf('column') > -1)){
+    return {
+      addColumns: [{
+        name: 'Avg Amount of Transactions',
+        values: ['$425.00','$600.00','$250.00','$833.33','$175.00','$500.00','$300.00','$212.50','$750.00','$400.00']
+      }]
+    };
+  }
+
+  // Prompt 2 refine: state filter + phone column
+  if(p.indexOf('california') > -1 || p.indexOf('new york') > -1 || (p.indexOf('state') > -1 && (p.indexOf('only') > -1 || p.indexOf('include') > -1 || p.indexOf('filter') > -1 || p.indexOf('california') > -1 || p.indexOf('new york') > -1)) || (p.indexOf('phone') > -1 && (p.indexOf('state') > -1 || p.indexOf('california') > -1 || p.indexOf('new york') > -1 || p.indexOf('include') > -1 || p.indexOf('add') > -1))){
+    return {
+      addIncludeFilters: ['Has any Specific Addresses'],
+      addColumns: [{
+        name: 'Primary Phone Number',
+        values: ['(415) 555-0142','(212) 555-0198','(415) 555-0267','(212) 555-0334','(415) 555-0411','(212) 555-0523','(415) 555-0687']
+      }],
+      newRows: [
+        ['Bennett, Richard','rbennett@gmail.com','Mar 22, 2026','$2,500.00','(415) 555-0142'],
+        ['Dawson, Keith','kdawson@yahoo.com','Feb 8, 2026','$3,000.00','(212) 555-0198'],
+        ['Foster, Gregory','gfoster@comcast.net','Dec 19, 2025','$5,000.00','(415) 555-0267'],
+        ['Irving, Marcus','mirving@hotmail.com','Jan 28, 2026','$2,200.00','(212) 555-0334'],
+        ['Nguyen, David','dnguyen@outlook.com','Apr 10, 2026','$4,000.00','(415) 555-0411'],
+        ['Patel, Anita','apatel@gmail.com','Mar 15, 2026','$1,750.00','(212) 555-0523'],
+        ['Reynolds, Charles','creynolds@aol.com','Dec 30, 2025','$2,000.00','(415) 555-0687']
+      ]
+    };
+  }
+
+  // Prompt 3 refine: volunteer hours column
+  if(p.indexOf('hours') > -1 || (p.indexOf('volunteer') > -1 && p.indexOf('number') > -1) || (p.indexOf('volunteer') > -1 && p.indexOf('time') > -1) || (p.indexOf('volunteer') > -1 && p.indexOf('add') > -1)){
+    return {
+      addColumns: [{
+        name: 'Sum of Volunteer Hours of Interactions',
+        values: ['24','18','42','12','36','8','30','15','22','45','16','20','28','10']
+      }]
+    };
+  }
+
+  return null;
+}
+
+// ─── Back to list ───
+function backToList(){
+  document.getElementById('reportView').classList.remove('active');
+  (function(){var _r=document.querySelector('.rep-page');if(_r)_r.style.display='';})();
+}
+-e 
 </script>
 </body>
 </html>

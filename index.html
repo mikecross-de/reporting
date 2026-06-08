@@ -217,10 +217,9 @@ input,select,textarea{font-family:var(--font);}
 
 .dg-chk{width:46px;padding-left:20px!important;padding-right:0!important;}
 .dg-chk input{width:16px;height:16px;cursor:pointer;accent-color:var(--crm-100);}
-.dg-name-cell{min-width:280px;}
+.dg-name-cell{}
 .dg-name-row{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
 .dg-name{font-size:14px;font-weight:600;color:var(--platform-100);}
-.dg-name-meta{font-size:14px;color:var(--platform-60);font-weight:400;}
 .badge-recency{display:inline-flex;align-items:center;background:#D9E9CD;color:#317005;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;}
 .badge-recency.muted{background:#E9EAEA;color:#525759;}
 .badge-penny{display:inline-flex;align-items:center;gap:4px;background:#E3D3E6;color:#521B65;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;}
@@ -1301,6 +1300,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               </div>
             </div>
             <div class="dd-wrap">
+              <button class="tb-dd" id="dd-type-btn" onclick="toggleDd('dd-type')">
+                <span id="dd-type-label">All types</span>
+                <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
+              </button>
+              <div class="dd-menu" id="dd-type">
+                <button class="dd-item active" onclick="filterType('all',this)">All types</button>
+                <button class="dd-item" onclick="filterType('constituent',this)">Constituent</button>
+                <button class="dd-item" onclick="filterType('transaction',this)">Transaction</button>
+                <button class="dd-item" onclick="filterType('interaction',this)">Interaction</button>
+                <button class="dd-item" onclick="filterType('note',this)">Note</button>
+                <button class="dd-item" onclick="filterType('task',this)">Task</button>
+              </div>
+            </div>
+            <div class="dd-wrap">
               <button class="tb-dd" id="dd-creator-btn" onclick="toggleDd('dd-creator')">
                 <span id="dd-creator-label">Created by anyone</span>
                 <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
@@ -1345,8 +1358,9 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Type <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
                 <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Frequency <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
                 <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Folder <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Last run <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
                 <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Created <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
+                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Last run <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
+                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Last modified <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
                 <th class="col-actions"></th>
               </tr>
             </thead>
@@ -1357,19 +1371,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name">Major Donors FY26 YTD</span>
                   </div>
-                  <div class="dg-name-meta">142 transactions · $1.2M total</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">Weekly</span></td>
                 <td style="color:var(--platform-100)">Development / FY26</td>
                 <td>
-                  <div class="dg-date-main">Today, 11:02 AM</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Jan 28, 2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Today, 11:02 AM</div>
+                  <div class="dg-date-sub">by you</div>
+                </td>
+                
+                <td><div class="dg-date-main">Jun 2, 2026</div><div class="dg-date-sub">by Heidi A.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1389,19 +1404,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name">Lapsing donors $1k+</span>
                   </div>
-                  <div class="dg-name-meta">38 constituents · $94,250 in FY25</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
                 <td style="color:var(--platform-100)">—</td>
                 <td>
-                  <div class="dg-date-main">Today, 10:15 AM</div>
-                  <div class="dg-date-sub">by Jessica Lin</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Apr 14, 2026</div>
                   <div class="dg-date-sub">by Jessica Lin</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Today, 10:15 AM</div>
+                  <div class="dg-date-sub">by Jessica Lin</div>
+                </td>
+                
+                <td><div class="dg-date-main">Jun 3, 2026</div><div class="dg-date-sub">by Jessica L.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1421,19 +1437,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="mailing-lists">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Spring Appeal — Follow-up List</span></div>
-                  <div class="dg-name-meta">342 constituents</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
                 <td style="color:var(--platform-100)">Mailing Lists</td>
                 <td>
-                  <div class="dg-date-main">Apr 18</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Mar 14, 2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Apr 18</div>
+                  <div class="dg-date-sub">by you</div>
+                </td>
+                
+                <td><div class="dg-date-main">May 28, 2026</div><div class="dg-date-sub">by Mike C.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1453,19 +1470,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   <div class="dg-name-row">
                     <span class="dg-name">Year-End Campaign Revenue</span>
                   </div>
-                  <div class="dg-name-meta">1,204 transactions · $428,912 total</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">Daily</span></td>
                 <td style="color:var(--platform-100)">Development / FY26</td>
                 <td>
-                  <div class="dg-date-main">Apr 20, 6:00 AM</div>
-                  <div class="dg-date-sub">by system</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Feb 3, 2026</div>
                   <div class="dg-date-sub">by Heidi A.</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Apr 20, 6:00 AM</div>
+                  <div class="dg-date-sub">by system</div>
+                </td>
+                
+                <td><div class="dg-date-main">May 15, 2026</div><div class="dg-date-sub">by Heidi A.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1483,19 +1501,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="no" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Recurring Gifts — Q4</span></div>
-                  <div class="dg-name-meta">86 transactions · $52,340/mo</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">On demand</span></td>
                 <td style="color:var(--platform-100)">Development / FY26</td>
                 <td>
-                  <div class="dg-date-main">Apr 15</div>
-                  <div class="dg-date-sub">by Jessica Lin</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Jan 18, 2026</div>
                   <div class="dg-date-sub">by Heidi A.</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Apr 15</div>
+                  <div class="dg-date-sub">by Jessica Lin</div>
+                </td>
+                
+                <td><div class="dg-date-main">Apr 30, 2026</div><div class="dg-date-sub">by Heidi A.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1513,19 +1532,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Unengaged — Last 12 Months</span></div>
-                  <div class="dg-name-meta">1,803 constituents · Last run Apr 28</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
                 <td style="color:var(--platform-100)">—</td>
                 <td>
-                  <div class="dg-date-main">Apr 10</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Oct 15, 2025</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Apr 10</div>
+                  <div class="dg-date-sub">by you</div>
+                </td>
+                
+                <td><div class="dg-date-main">Apr 12, 2026</div><div class="dg-date-sub">by Mike C.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1543,19 +1563,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="cam-p" data-folder="compliance">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Grant Reporting — 501(c)(3)</span></div>
-                  <div class="dg-name-meta">48 transactions · $156,200 total</div>
                 </td>
                 <td>Transaction</td>
                 <td><span class="dg-freq">Quarterly</span></td>
                 <td style="color:var(--platform-100)">Compliance</td>
                 <td>
-                  <div class="dg-date-main">Apr 1</div>
-                  <div class="dg-date-sub">by system</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Sep 30, 2025</div>
                   <div class="dg-date-sub">by Cam P.</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Apr 1</div>
+                  <div class="dg-date-sub">by system</div>
+                </td>
+                
+                <td><div class="dg-date-main">Mar 22, 2026</div><div class="dg-date-sub">by Cam P.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1573,19 +1594,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr onclick="openEditorRow(this)" data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
                   <div class="dg-name-row"><span class="dg-name">Missing Primary Email</span></div>
-                  <div class="dg-name-meta">412 constituents · Last run Mar 10</div>
                 </td>
                 <td>Constituent</td>
                 <td><span class="dg-freq">On demand</span></td>
                 <td style="color:var(--platform-100)">—</td>
                 <td>
-                  <div class="dg-date-main">Mar 28</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
-                <td>
                   <div class="dg-date-main">Sep 28, 2025</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
+                <td>
+                  <div class="dg-date-main">Mar 28</div>
+                  <div class="dg-date-sub">by you</div>
+                </td>
+                
+                <td><div class="dg-date-main">Mar 10, 2026</div><div class="dg-date-sub">by Mike C.</div></td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1644,8 +1666,9 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               </button>
               <div class="dd-menu right" id="dd-editor-menu">
                 <button class="dd-item" onclick="closeAllDd();openDetailsModal()">Details</button>
-                <button class="dd-item" id="ed-schedule-action" onclick="closeAllDd();openScheduleModal()">Schedule</button>
                 <button class="dd-item" onclick="closeAllDd();exportReport()">Export</button>
+                <button class="dd-item" id="ed-schedule-action" onclick="closeAllDd();openScheduleModal()">Schedule</button>
+                <div class="dd-divider"></div>
                 <button class="dd-item" id="ed-delete-btn" onclick="closeAllDd();openDeleteModal()">Delete</button>
               </div>
             </div>
@@ -1675,9 +1698,11 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
         <div class="ed-result">
           <div class="ed-summary">
             <div class="ed-summary-l" style="display:flex;align-items:center;gap:12px;">
-              <span><strong>38 constituents</strong></span>
+              <span id="ed-type-label" style="color:var(--platform-100);font-weight:400;"><strong>Constituent</strong> report</span>
               <span style="color:var(--platform-40);">·</span>
-              <span><strong>$94,250</strong> in FY25</span>
+              <span id="ed-stat-count"><strong>38 constituents</strong></span>
+              <span id="ed-stat-dot" style="color:var(--platform-40);">·</span>
+              <span id="ed-stat-amount"><strong>$94,250</strong> in FY25</span>
               <span style="color:var(--platform-40);">·</span>
               <button onclick="refreshReport()" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Refresh</button>
             </div>
@@ -2594,6 +2619,36 @@ function openEditorRow(row){
   var title = name ? name.textContent : 'Report';
   document.querySelector('.ed-head-title').textContent = title;
   document.getElementById('ed-delete-btn').style.display = creator === 'mike-cross' ? '' : 'none';
+  var typeMap = {constituent:'Constituent',transaction:'Transaction',interaction:'Interaction',note:'Note',task:'Task'};
+  var t = row.dataset.type || 'constituent';
+  var typeLabel = document.getElementById('ed-type-label');
+  if(typeLabel) typeLabel.innerHTML = '<strong>' + (typeMap[t] || 'Constituent') + '</strong> report';
+  // Set summary stats based on report
+  var statsMap = {
+    'Major Donors FY26 YTD':            {count:'<strong>142 transactions</strong>', amount:'<strong>$1.2M</strong> in FY26'},
+    'Lapsing donors $1k+':              {count:'<strong>38 constituents</strong>', amount:'<strong>$94,250</strong> in FY25'},
+    'Spring Appeal — Follow-up List':     {count:'<strong>214 constituents</strong>', amount:null},
+    'Year-End Campaign Revenue':         {count:'<strong>892 transactions</strong>', amount:'<strong>$342,800</strong> in FY25'},
+    'Recurring Gifts — Q4':         {count:'<strong>67 transactions</strong>', amount:'<strong>$18,450</strong> total'},
+    'Unengaged — Last 12 Months':   {count:'<strong>156 constituents</strong>', amount:null},
+    'Grant Reporting — 501(c)(3)':  {count:'<strong>28 transactions</strong>', amount:'<strong>$185,000</strong> total'},
+    'Missing Primary Email':             {count:'<strong>412 constituents</strong>', amount:null},
+  };
+  var stats = statsMap[title] || {count:'<strong>—</strong>', amount:null};
+  var countEl = document.getElementById('ed-stat-count');
+  var amountEl = document.getElementById('ed-stat-amount');
+  var dotEl = document.getElementById('ed-stat-dot');
+  if(countEl) countEl.innerHTML = stats.count;
+  if(amountEl && dotEl){
+    if(stats.amount){
+      amountEl.innerHTML = stats.amount;
+      amountEl.style.display = '';
+      dotEl.style.display = '';
+    } else {
+      amountEl.style.display = 'none';
+      dotEl.style.display = 'none';
+    }
+  }
   setInsightForReport(title);
   // Show/hide schedule based on row data
   var schedWrap = document.getElementById('ed-schedule-wrap');
@@ -2885,7 +2940,7 @@ function applyAllFilters(){
     // Search filter
     if(show && reportsSearchQuery){
       var name = r.querySelector('.dg-name');
-      var meta = r.querySelector('.dg-name-meta');
+      var meta = null;
       var nameText = name ? name.textContent.toLowerCase() : '';
       var metaText = meta ? meta.textContent.toLowerCase() : '';
       show = nameText.indexOf(reportsSearchQuery) > -1 || metaText.indexOf(reportsSearchQuery) > -1;

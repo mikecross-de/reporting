@@ -1700,7 +1700,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <div class="ed-summary-l" style="display:flex;align-items:center;gap:12px;">
               <span id="ed-type-label" style="color:var(--platform-100);font-weight:400;"><strong>Constituent</strong> report</span>
               <span style="color:var(--platform-40);">·</span>
-              <span id="ed-stat-count"><strong>38 constituents</strong></span>
+              <span id="ed-stat-count"><strong>38</strong> constituents</span>
               <span id="ed-stat-dot" style="color:var(--platform-40);">·</span>
               <span id="ed-stat-amount"><strong>$94,250</strong> in FY25</span>
               <span style="color:var(--platform-40);">·</span>
@@ -2625,14 +2625,14 @@ function openEditorRow(row){
   if(typeLabel) typeLabel.innerHTML = '<strong>' + (typeMap[t] || 'Constituent') + '</strong> report';
   // Set summary stats based on report
   var statsMap = {
-    'Major Donors FY26 YTD':            {count:'<strong>142 transactions</strong>', amount:'<strong>$1.2M</strong> in FY26'},
-    'Lapsing donors $1k+':              {count:'<strong>38 constituents</strong>', amount:'<strong>$94,250</strong> in FY25'},
-    'Spring Appeal — Follow-up List':     {count:'<strong>214 constituents</strong>', amount:null},
-    'Year-End Campaign Revenue':         {count:'<strong>892 transactions</strong>', amount:'<strong>$342,800</strong> in FY25'},
-    'Recurring Gifts — Q4':         {count:'<strong>67 transactions</strong>', amount:'<strong>$18,450</strong> total'},
-    'Unengaged — Last 12 Months':   {count:'<strong>156 constituents</strong>', amount:null},
-    'Grant Reporting — 501(c)(3)':  {count:'<strong>28 transactions</strong>', amount:'<strong>$185,000</strong> total'},
-    'Missing Primary Email':             {count:'<strong>412 constituents</strong>', amount:null},
+    'Major Donors FY26 YTD':            {count:'<strong>142</strong> transactions', amount:'<strong>$1.2M</strong> in FY26'},
+    'Lapsing donors $1k+':              {count:'<strong>38</strong> constituents', amount:'<strong>$94,250</strong> in FY25'},
+    'Spring Appeal — Follow-up List':     {count:'<strong>214</strong> constituents', amount:null},
+    'Year-End Campaign Revenue':         {count:'<strong>892</strong> transactions', amount:'<strong>$342,800</strong> in FY25'},
+    'Recurring Gifts — Q4':         {count:'<strong>67</strong> transactions', amount:'<strong>$18,450</strong> total'},
+    'Unengaged — Last 12 Months':   {count:'<strong>156</strong> constituents', amount:null},
+    'Grant Reporting — 501(c)(3)':  {count:'<strong>28</strong> transactions', amount:'<strong>$185,000</strong> total'},
+    'Missing Primary Email':             {count:'<strong>412</strong> constituents', amount:null},
   };
   var stats = statsMap[title] || {count:'<strong>—</strong>', amount:null};
   var countEl = document.getElementById('ed-stat-count');

@@ -102,7 +102,7 @@ input,select,textarea{font-family:var(--font);}
 .btn-primary.penny:hover{background:var(--penny-200);}
 .btn-secondary{background:var(--white);color:var(--platform-100);border:1px solid var(--platform-100);border-radius:4px;padding:8px 12px;font-size:16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .15s,border-color .15s;line-height:21px;white-space:nowrap;}
 .btn-secondary:hover{background:var(--platform-20);border-color:#DAD7D9;}
-.ed-more-btn{padding:9px 12px;line-height:23px;}
+.ed-more-btn{gap:8px;padding:8px 12px;font-size:16px;font-weight:700;display:inline-flex;align-items:center;}
 .ed-more-btn.open{background:var(--platform-20);border-color:#DAD7D9;}
 .btn-ghost-link{background:transparent;color:var(--platform-80);border:none;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;border-radius:4px;transition:background .12s;}
 .btn-ghost-link:hover{color:var(--platform-100);background:var(--platform-5);}
@@ -435,7 +435,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .ed-head-title{font-size:36px;font-weight:700;color:var(--platform-100);line-height:1.1;letter-spacing:-0.5px;padding:0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto;}
 .chip-entity{display:inline-flex;align-items:center;background:#D9E9CD;color:#317005;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;flex-shrink:0;}
 .ed-head-spacer{flex:1;min-width:8px;}
-.ed-head-actions{display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.ed-head-actions{display:flex;gap:10px;align-items:center;flex-shrink:0;}
 
 /* Filter builder */
 /* Editor Penny context subtitle (only on Penny-created reports) */
@@ -1661,9 +1661,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               Back to Reports
             </button>
             <div class="dd-wrap" style="position:relative;">
-              <button class="btn-secondary ed-more-btn" id="btn-editor-more" onclick="toggleEditorMenu(event)">
-                <svg class="nav-svg-icon" style="width:18px;height:19px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
-              </button>
+              <button class="btn-secondary ed-more-btn" id="btn-editor-more" onclick="toggleEditorMenu(event)">More <svg class="nav-svg-icon" style="width:12px;height:12px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></button>
               <div class="dd-menu right" id="dd-editor-menu">
                 <button class="dd-item" onclick="closeAllDd();openDetailsModal()">Details</button>
                 <button class="dd-item" onclick="closeAllDd();exportReport()">Export</button>

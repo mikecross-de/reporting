@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bloomerang CRM — Reports Redesign</title>
 <link rel="stylesheet" href="https://use.typekit.net/ete4szq.css">
+<script src="https://kit.fontawesome.com/9b51659ddd.js" crossorigin="anonymous"></script>
 <style>
 /* ═══ TOKENS (Grove / Flora) ═══ */
 :root {
@@ -161,9 +162,11 @@ input,select,textarea{font-family:var(--font);}
 .tb-pill-check{width:14px;height:14px;fill:currentColor;display:none;flex-shrink:0;}
 .tb-pill.active .tb-pill-check{display:block;}
 .tb-spacer{flex:1;}
-.tb-dd{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:9px 16px;font-size:14px;color:var(--platform-100);cursor:pointer;font-weight:400;height:40px;transition:border-color .15s;}
+.tb-dd{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:9px 16px;font-size:14px;color:var(--platform-100);cursor:pointer;font-weight:400;height:40px;transition:border-color .15s;min-width:130px;max-width:200px;}
 .tb-dd:hover{border-color:var(--platform-100);}
 .tb-dd.open{border-color:var(--crm-100);}
+.tb-dd > span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}
+.tb-dd .tb-dd-icon{flex-shrink:0;margin-left:auto;}
 .tb-dd-icon{color:var(--platform-60);font-size:12px;}
 
 /* Toolbar row 2 — created by + density */
@@ -187,7 +190,7 @@ input,select,textarea{font-family:var(--font);}
 .dd-item.destructive{color:var(--red-200);}
 .dd-item.destructive:hover{background:var(--red-5);}
 .dd-sep{height:1px;background:var(--platform-10);margin:4px 0;}
-.tb-dd.filtered{border-color:var(--platform-100);color:var(--platform-100);background:var(--white);}
+.tb-dd.filtered{border-color:var(--platform-40);}
 .tb-reset-filters{background:none;border:none;font-family:var(--font);font-size:14px;color:var(--crm-100);cursor:pointer;padding:0;font-weight:500;white-space:nowrap;transition:opacity .12s;}
 .tb-reset-filters:disabled{color:var(--platform-40);cursor:default;}
 .tb-reset-filters:not(:disabled):hover{text-decoration:underline;}
@@ -206,6 +209,7 @@ input,select,textarea{font-family:var(--font);}
 .dg-table thead th .sort-icon{width:12px;height:12px;fill:var(--platform-60);flex-shrink:0;opacity:0;transition:opacity .1s;}
 .dg-table thead th.sort:hover .sort-icon{opacity:1;}
 .dg-table thead th.sorted .sort-icon{opacity:1;}
+.dg-table thead th.sorted .th-sort-indicator{opacity:1;color:var(--platform-80);}
 .dg-table thead th.col-actions{text-align:left;padding-right:16px;}
 
 .dg-table tbody tr{transition:background .08s;cursor:pointer;position:relative;}
@@ -826,13 +830,13 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .tb-filter-btn.has-value{color:var(--platform-100);}
 .tb-dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border:1px solid var(--platform-10);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.10);min-width:180px;z-index:100;padding:4px 0;}
 .tb-dd-menu.open{display:block;}
-.tb-filter-pill{display:inline-flex;align-items:center;gap:3px;background:var(--platform-5);border:1px solid var(--platform-20);border-radius:12px;padding:1px 7px;font-size:11px;color:var(--platform-100);font-family:var(--font);font-weight:600;white-space:nowrap;line-height:18px;}
-.tb-filter-pill .pill-x{cursor:pointer;font-size:12px;font-weight:700;color:var(--platform-60);}
-.tb-filter-pill .pill-x:hover{color:var(--platform-100);}
+
+
+
 .tb-filter-btn.has-pills{flex-wrap:wrap;gap:4px;}
 .tb-reset.active{color:var(--crm-100);cursor:pointer;}
 .tb-reset.active:hover{color:var(--crm-200);text-decoration:underline;}
-.dd-item.selected{background:var(--crm-10);color:var(--crm-200);}
+.dd-item.selected{font-weight:700;color:var(--platform-100);background:var(--crm-20);}
 .tb-reset{background:none;border:none;font-family:var(--font);font-size:14px;color:var(--platform-40);padding:4px 8px;white-space:nowrap;cursor:default;}
 
 
@@ -1037,6 +1041,29 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .conv-btn:hover{background:var(--penny-200);}
 .conv-btn svg{width:13px;height:13px;fill:white;}
 .conv-btn:disabled{opacity:.5;cursor:default;pointer-events:none;}
+
+/* ── Column header menus ─────────────────────────────────────────── */
+.th-wrap{display:flex;align-items:center;width:100%;}
+.th-label-group{display:inline-flex;align-items:center;gap:4px;flex:1;min-width:0;overflow:hidden;}
+.th-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
+.th-kebab{opacity:0;background:none;border:none;padding:0;cursor:pointer;color:var(--platform-60);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;margin:-6px 0;transition:opacity .15s,background .1s,color .1s;position:relative;z-index:1;}
+
+#ed-table thead tr th.sorted .th-sort-indicator{opacity:1 !important;color:var(--platform-80);}
+.th-kebab.active{opacity:1;}
+.th-kebab:hover,.th-kebab.active{background:var(--platform-20);color:var(--platform-100);}
+
+#th-col-menu{display:none;position:fixed;background:white;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);z-index:9999;min-width:180px;padding:8px 0;}
+#th-col-menu.open{display:block;}
+#th-col-menu .th-dd-item{display:flex;align-items:center;gap:8px;width:100%;padding:8px 16px;font-size:16px;font-weight:400;color:var(--platform-100);background:none;border:none;cursor:pointer;text-align:left;font-family:var(--font);white-space:nowrap;line-height:21px;}
+#th-col-menu .th-dd-item:hover{background:var(--platform-10);}
+#th-col-menu .th-dd-divider{height:1px;background:var(--platform-10);margin:8px 0;}
+#th-col-menu .th-dd-item.danger{color:var(--red-100);}
+
+.th-col-hidden{display:none !important;}
+.th-rename-input{border:none;border-bottom:1px solid var(--penny-100);outline:none;font-size:inherit;font-weight:inherit;font-family:var(--font);color:var(--platform-100);background:transparent;min-width:60px;padding:0;}
+
+
+.th-sort-indicator{font-size:12px;opacity:0;transition:opacity .15s;color:var(--platform-60);flex-shrink:0;}
 </style>
 </head>
 <body>
@@ -1293,10 +1320,9 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
               </button>
               <div class="dd-menu" id="dd-status">
-                <button class="dd-item active" onclick="filterStatus('all',this)">All statuses</button>
-                <button class="dd-item" onclick="filterStatus('active',this)">Active</button>
-                <button class="dd-item" onclick="filterStatus('inactive',this)">Inactive</button>
-                <button class="dd-item" onclick="filterStatus('scheduled',this)">Scheduled</button>
+                <button class="dd-item" onclick="toggleStatusFilter('Active',this,event)">Active</button>
+                <button class="dd-item" onclick="toggleStatusFilter('Inactive',this,event)">Inactive</button>
+                <button class="dd-item" onclick="toggleStatusFilter('Scheduled',this,event)">Scheduled</button>
               </div>
             </div>
             <div class="dd-wrap">
@@ -1305,12 +1331,11 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
               </button>
               <div class="dd-menu" id="dd-type">
-                <button class="dd-item active" onclick="filterType('all',this)">All types</button>
-                <button class="dd-item" onclick="filterType('constituent',this)">Constituent</button>
-                <button class="dd-item" onclick="filterType('transaction',this)">Transaction</button>
-                <button class="dd-item" onclick="filterType('interaction',this)">Interaction</button>
-                <button class="dd-item" onclick="filterType('note',this)">Note</button>
-                <button class="dd-item" onclick="filterType('task',this)">Task</button>
+                <button class="dd-item" onclick="toggleTypeFilter('Constituent',this,event)">Constituent</button>
+                <button class="dd-item" onclick="toggleTypeFilter('Transaction',this,event)">Transaction</button>
+                <button class="dd-item" onclick="toggleTypeFilter('Interaction',this,event)">Interaction</button>
+                <button class="dd-item" onclick="toggleTypeFilter('Note',this,event)">Note</button>
+                <button class="dd-item" onclick="toggleTypeFilter('Task',this,event)">Task</button>
               </div>
             </div>
             <div class="dd-wrap">
@@ -1319,11 +1344,10 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
               </button>
               <div class="dd-menu" id="dd-creator">
-                <button class="dd-item active" onclick="filterCreator('all',this)">Anyone</button>
-                <button class="dd-item" onclick="filterCreator('mike-cross',this)">Mike Cross <span style="color:var(--platform-100);">(me)</span></button>
-                <button class="dd-item" onclick="filterCreator('jessica-lin',this)">Jessica Lin</button>
-                <button class="dd-item" onclick="filterCreator('heidi-a',this)">Heidi A.</button>
-                <button class="dd-item" onclick="filterCreator('cam-p',this)">Cam P.</button>
+                <button class="dd-item" onclick="toggleCreatorFilter('Mike Cross',this,event)">Mike Cross <span style="color:var(--platform-60);">(me)</span></button>
+                <button class="dd-item" onclick="toggleCreatorFilter('Jessica Lin',this,event)">Jessica Lin</button>
+                <button class="dd-item" onclick="toggleCreatorFilter('Heidi A.',this,event)">Heidi A.</button>
+                <button class="dd-item" onclick="toggleCreatorFilter('Cam P.',this,event)">Cam P.</button>
               </div>
             </div>
             <div class="dd-wrap">
@@ -1354,13 +1378,13 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
           <table class="dg-table">
             <thead>
               <tr>
-                <th class="sort sorted" data-sort="asc" onclick="toggleSort(this)"><span class="th-inner">Name <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Type <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Frequency <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Folder <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Created <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Last run <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" onclick="toggleSort(this)"><span class="th-inner">Last modified <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
+                <th class="sort sorted" data-sort="asc"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Name</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Type</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Frequency</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Folder</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Created</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Last run</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Last modified</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
                 <th class="col-actions"></th>
               </tr>
             </thead>
@@ -1762,17 +1786,62 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
           </div>
           <div class="ed-table-wrap">
           <table id="ed-table">
-            <thead>
+                        <thead>
               <tr>
-                <th class="sort" data-col="name" onclick="toggleSort(this)"><span class="th-inner">Name <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" data-col="email" onclick="toggleSort(this)"><span class="th-inner">Primary email <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" data-col="state" onclick="toggleSort(this)"><span class="th-inner">State <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort right" data-col="lastgift" onclick="toggleSort(this)"><span class="th-inner">Last gift <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" data-col="lastgiftdate" onclick="toggleSort(this)"><span class="th-inner">Last gift date <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort right" data-col="lifetime" onclick="toggleSort(this)"><span class="th-inner">Lifetime <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort right" data-col="lapsed" onclick="toggleSort(this)"><span class="th-inner">Lapsed days <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" data-col="churn" onclick="toggleSort(this)"><span class="th-inner">Churn risk <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
-                <th class="sort" data-col="lastcontact" onclick="toggleSort(this)"><span class="th-inner">Last contact <svg class="sort-icon" aria-hidden="true"><use href="#icon-caret-up"/></svg></span></th>
+                <th class="sort" data-col="name">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Name</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="email">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Primary email</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="state">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">State</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="last-gift">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Last gift</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="last-gift-date">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Last gift date</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="lifetime">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Lifetime</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="lapsed-days">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Lapsed days</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="churn-risk">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Churn risk</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
+                <th class="sort" data-col="lastcontact">
+                  <div class="th-wrap">
+                    <div class="th-label-group"><span class="th-label" onclick="colSortToggle(this)">Last contact</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div><button class="th-kebab" onclick="openThMenu(event,this)" aria-label="Column options">
+                      <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-ellipsis-v"/></svg>
+                    </button></div>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -2904,6 +2973,9 @@ document.addEventListener('click', function(e){
 
 // ─── Filter state ───
 let activeFilters = { status:'all', creator:'all', folder:'all' };
+window._typeFilters = window._typeFilters || [];
+window._creatorFilters = window._creatorFilters || [];
+window._statusFilters = window._statusFilters || [];
 let reportsSearchQuery = '';
 
 function searchReportsList(query){
@@ -2927,13 +2999,24 @@ function applyAllFilters(){
   if(existingEmpty) existingEmpty.remove();
   rows.forEach(r => {
     let show = true;
-    // Status filter
-    if(activeFilters.status !== 'all'){
-      if(activeFilters.status === 'scheduled') show = r.dataset.scheduled === 'yes';
-      else show = r.dataset.status === activeFilters.status;
+    // Status filter (multi-select)
+    if(window._statusFilters && window._statusFilters.length > 0){
+      show = window._statusFilters.some(function(s){
+        var sl = s.toLowerCase();
+        if(sl === 'scheduled') return r.dataset.scheduled === 'yes';
+        return r.dataset.status === sl;
+      });
     }
     // Dropdown filters (AND logic)
-    if(show && activeFilters.creator !== 'all') show = r.dataset.creator === activeFilters.creator;
+    if(show && window._typeFilters && window._typeFilters.length > 0){
+      var rowType = (r.querySelector('td:nth-child(2)') || {}).textContent.trim();
+      show = window._typeFilters.indexOf(rowType) > -1;
+    }
+    if(show && window._creatorFilters && window._creatorFilters.length > 0){
+      var creatorCell = r.querySelector('td:nth-child(5) .dg-date-sub');
+      var rowCreator = creatorCell ? creatorCell.textContent.replace('by ','').trim() : r.dataset.creator;
+      show = window._creatorFilters.some(function(f){ return rowCreator.indexOf(f.split(' ')[0]) > -1; });
+    }
     if(show && activeFilters.folder !== 'all') show = r.dataset.folder === activeFilters.folder;
     // Search filter
     if(show && reportsSearchQuery){
@@ -2999,62 +3082,9 @@ function edPagNext(){
   if(edPagState.page < maxPage){ edPagState.page++; edPagRender(); }
 }
 
-function toggleSort(th){
-  if(th.closest('#view-editor')) editorHasChanges = true;
-  var wasSorted = th.classList.contains('sorted');
-  var wasAsc = th.getAttribute('data-sort') === 'asc';
-  var thead = th.closest('thead');
-  var table = th.closest('table');
-  var tbody = table.querySelector('tbody');
-  var ths = Array.from(thead.querySelectorAll('th'));
-  var colIdx = ths.indexOf(th);
 
-  // Store original order on first interaction
-  if(!tbody._originalOrder){
-    tbody._originalOrder = Array.from(tbody.querySelectorAll('tr'));
-  }
 
-  // Clear all sorted states
-  thead.querySelectorAll('th.sorted').forEach(function(h){
-    h.classList.remove('sorted');
-    h.removeAttribute('data-sort');
-    var ico = h.querySelector('.sort-icon use');
-    if(ico) ico.setAttribute('href','#icon-caret-up');
-  });
 
-  var direction = null;
-  if(!wasSorted){
-    direction = 'asc';
-  } else if(wasAsc){
-    direction = 'desc';
-  }
-
-  if(direction){
-    th.classList.add('sorted');
-    th.setAttribute('data-sort', direction);
-    var ico = th.querySelector('.sort-icon use');
-    if(ico) ico.setAttribute('href', direction === 'asc' ? '#icon-caret-up' : '#icon-caret-down');
-
-    var rows = Array.from(tbody.querySelectorAll('tr'));
-    rows.sort(function(a,b){
-      var aCell = a.cells[colIdx];
-      var bCell = b.cells[colIdx];
-      var aText = (aCell.querySelector('.dg-name') || aCell.querySelector('.dg-date-main') || aCell).textContent.trim();
-      var bText = (bCell.querySelector('.dg-name') || bCell.querySelector('.dg-date-main') || bCell).textContent.trim();
-      var aNum = parseFloat(aText.replace(/[^0-9.\-]/g,''));
-      var bNum = parseFloat(bText.replace(/[^0-9.\-]/g,''));
-      if(!isNaN(aNum) && !isNaN(bNum)){
-        return direction === 'asc' ? aNum - bNum : bNum - aNum;
-      }
-      var cmp = aText.localeCompare(bText, undefined, {sensitivity:'base'});
-      return direction === 'asc' ? cmp : -cmp;
-    });
-    rows.forEach(function(r){ tbody.appendChild(r); });
-  } else {
-    // Third click: restore original order
-    tbody._originalOrder.forEach(function(r){ tbody.appendChild(r); });
-  }
-}
 
 function filterStatus(val, item){
   activeFilters.status = val;
@@ -3103,8 +3133,7 @@ function filterFolder(val, item){
   updateResetBtn();
 }
 function updateResetBtn(){
-  var hasFilters = activeFilters.status !== 'all' || activeFilters.creator !== 'all' || activeFilters.folder !== 'all';
-  document.getElementById('resetFiltersBtn').disabled = !hasFilters;
+  updateResetState();
 }
 function resetAllFilters(){
   activeFilters = { status:'all', creator:'all', folder:'all' };
@@ -4883,32 +4912,64 @@ function switchTab(btn){
 }
 function filterReports(){ applyAllFilters(); }
 
-function toggleCreatorFilter(val, itemEl){
-  var idx = window._creatorFilters.indexOf(val);
-  if(idx > -1){ window._creatorFilters.splice(idx,1); itemEl.classList.remove('selected'); }
-  else { window._creatorFilters.push(val); itemEl.classList.add('selected'); }
-  renderFilterBtn('creatorBtn', 'Created/Modified By', window._creatorFilters);
+
+
+function toggleStatusFilter(val, itemEl, e){
+  if(e) e.stopPropagation();
+  var idx = window._statusFilters.indexOf(val);
+  if(idx > -1){ window._statusFilters.splice(idx,1); itemEl.classList.remove('selected'); }
+  else { window._statusFilters.push(val); itemEl.classList.add('selected'); }
+  updateFilterBtnText('dd-status-btn', 'All statuses', window._statusFilters);
   updateResetState();
   filterReports();
 }
 
-function renderFilterBtn(btnId, label, filters){
+function toggleTypeFilter(val, itemEl, e){ if(e) e.stopPropagation();
+  var idx = window._typeFilters.indexOf(val);
+  if(idx > -1){ window._typeFilters.splice(idx,1); itemEl.classList.remove('selected'); }
+  else { window._typeFilters.push(val); itemEl.classList.add('selected'); }
+  updateFilterBtnText('dd-type-btn', 'All types', window._typeFilters);
+  updateResetState();
+  filterReports();
+}
+
+function toggleCreatorFilter(val, itemEl, e){ if(e) e.stopPropagation();
+  var idx = window._creatorFilters.indexOf(val);
+  if(idx > -1){ window._creatorFilters.splice(idx,1); itemEl.classList.remove('selected'); }
+  else { window._creatorFilters.push(val); itemEl.classList.add('selected'); }
+  updateFilterBtnText('dd-creator-btn', 'Created by anyone', window._creatorFilters);
+  updateResetState();
+  filterReports();
+}
+
+function updateFilterBtnText(btnId, defaultLabel, filters){
   var btn = document.getElementById(btnId);
+  if(!btn) return;
+  var labelEl = btn.querySelector('span:first-child');
+  if(!labelEl) return;
   if(filters.length === 0){
-    btn.innerHTML = label + ' <svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;" viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg>';
+    labelEl.textContent = defaultLabel;
+    btn.classList.remove('filtered');
   } else {
-    var pills = filters.map(function(f){
-      return '<span class="tb-filter-pill">' + f + ' <span class="pill-x" onclick="event.stopPropagation();removeFilter' + (btnId === 'typeBtn' ? 'Type' : 'Creator') + '(\'' + f.replace(/'/g,"\\'") + '\')">&times;</span></span>';
-    }).join('');
-    btn.innerHTML = pills + ' <svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;" viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg>';
+    var full = filters.join(', ');
+    var truncated = full.length > 28 ? full.substring(0, 25) + '...' : full;
+    labelEl.textContent = truncated;
+    btn.classList.add('filtered');
   }
+}
+function renderFilterBtn(btnId, defaultLabel, filters){
+  // Map old btnId names to new ones
+  var idMap = {'typeBtn':'dd-type-btn','creatorBtn':'dd-creator-btn'};
+  var realId = idMap[btnId] || btnId;
+  var labelMap = {'dd-type-btn':'All types','dd-creator-btn':'Created by anyone','dd-status-btn':'All statuses'};
+  updateFilterBtnText(realId, labelMap[realId] || defaultLabel, filters);
 }
 
 function removeFilterType(val){
   var idx = window._typeFilters.indexOf(val);
   if(idx > -1) window._typeFilters.splice(idx,1);
   renderFilterBtn('typeBtn', 'Types', window._typeFilters);
-  document.querySelectorAll('#typeDd .dd-item').forEach(function(it){ if(it.textContent.trim()===val) it.classList.remove('selected'); });
+  document.querySelectorAll('#dd-type .dd-item').forEach(function(it){ if(it.textContent.trim()===val) it.classList.remove('selected'); });
   updateResetState();
   filterReports();
 }
@@ -4916,27 +4977,29 @@ function removeFilterType(val){
 function removeFilterCreator(val){
   var idx = window._creatorFilters.indexOf(val);
   if(idx > -1) window._creatorFilters.splice(idx,1);
-  renderFilterBtn('creatorBtn', 'Created/Modified By', window._creatorFilters);
-  document.querySelectorAll('#creatorDd .dd-item').forEach(function(it){ if(it.textContent.trim()===val || it.textContent.trim()===val+' (me)') it.classList.remove('selected'); });
+  updateFilterBtnText('dd-creator-btn', 'Created by anyone', window._creatorFilters);
+  document.querySelectorAll('#dd-creator .dd-item').forEach(function(it){ if(it.textContent.trim().indexOf(val) > -1) it.classList.remove('selected'); });
   updateResetState();
   filterReports();
 }
 
 function updateResetState(){
-  var btn = document.querySelector('.tb-reset');
-  if(window._typeFilters.length > 0 || window._creatorFilters.length > 0){
-    btn.classList.add('active');
-  } else {
-    btn.classList.remove('active');
-  }
+  var btn = document.getElementById('resetFiltersBtn');
+  if(!btn) return;
+  var hasFilters = (window._typeFilters && window._typeFilters.length > 0)
+    || (window._creatorFilters && window._creatorFilters.length > 0)
+    || (window._statusFilters && window._statusFilters.length > 0)
+    || activeFilters.folder !== 'all';
+  btn.disabled = !hasFilters;
 }
 
 // ─── Reset ───
 function resetFilters(){
-  window._typeFilters=[];window._creatorFilters=[];
-  renderFilterBtn('typeBtn','Types',[]);
-  renderFilterBtn('creatorBtn','Created/Modified By',[]);
-  document.querySelectorAll('#typeDd .dd-item, #creatorDd .dd-item').forEach(function(it){it.classList.remove('selected');});
+  window._typeFilters=[];window._creatorFilters=[];window._statusFilters=[];
+  updateFilterBtnText('dd-type-btn','All types',[]);
+  updateFilterBtnText('dd-creator-btn','Created by anyone',[]);
+  updateFilterBtnText('dd-status-btn','All statuses',[]);
+  document.querySelectorAll('#dd-type .dd-item, #dd-creator .dd-item, #dd-status .dd-item').forEach(function(it){it.classList.remove('selected');});
   document.querySelector('.tb-reset').classList.remove('active');
   document.querySelectorAll('.tb-pill').forEach(function(p){p.classList.remove('active');});
   document.querySelector('.tb-pill').classList.add('active');
@@ -5894,6 +5957,129 @@ function backToList(){
   (function(){var _r=document.querySelector('.rep-page');if(_r)_r.style.display='';})();
 }
 -e 
+</script>
+
+<div id="th-col-menu">
+  <button class="th-dd-item" id="thm-sort-asc">Sort A → Z</button>
+  <button class="th-dd-item" id="thm-sort-desc">Sort Z → A</button>
+  <div class="th-dd-divider"></div>
+  <button class="th-dd-item" id="thm-filter">Filter</button>
+  <button class="th-dd-item" id="thm-group">Group</button>
+  <div class="th-dd-divider"></div>
+  <button class="th-dd-item" id="thm-rename">Rename</button>
+  <button class="th-dd-item" id="thm-copy">Copy column</button>
+  <button class="th-dd-item danger" id="thm-delete">Delete</button>
+  <div class="th-dd-divider th-numeric-section" style="display:none;"></div>
+  <div class="th-dd-item th-numeric-section" style="display:none;color:var(--platform-60);font-size:12px;padding:4px 16px 2px;cursor:default;">Numeric</div>
+  <button class="th-dd-item th-numeric-section" id="thm-sum" style="display:none;">Sum</button>
+  <button class="th-dd-item th-numeric-section" id="thm-min" style="display:none;">Min</button>
+  <button class="th-dd-item th-numeric-section" id="thm-max" style="display:none;">Max</button>
+  <button class="th-dd-item th-numeric-section" id="thm-avg" style="display:none;">Average</button>
+</div>
+
+
+<script>
+// ── Sort + hover (global) ─────────────────────────────────────────────────────
+function updateSortIndicator(th, direction){
+  var ind = th.querySelector('.th-sort-indicator');
+  if(!ind) return;
+  if(!direction){
+    ind.style.opacity = '0';
+    ind.className = 'th-sort-indicator fa-solid fa-arrow-up';
+    ind.style.color = '';
+  } else {
+    ind.style.opacity = '1';
+    ind.style.color = 'var(--platform-80)';
+    ind.className = 'th-sort-indicator fa-solid ' + (direction === 'asc' ? 'fa-arrow-up' : 'fa-arrow-down');
+  }
+}
+
+function getCellText(cell){
+  if(!cell) return '';
+  var el = cell.querySelector('.dg-name') || cell.querySelector('.dg-date-main') || cell.querySelector('.dg-freq');
+  return (el || cell).textContent.trim();
+}
+
+function parseDate(str){
+  str = str.replace(/,.*/, '').trim();
+  if(/^today$/i.test(str)) return Date.now();
+  if(/^yesterday$/i.test(str)) return Date.now() - 86400000;
+  var d = new Date(str);
+  return isNaN(d) ? 0 : d.getTime();
+}
+
+function toggleSort(th){
+  if(!th || th.tagName !== 'TH') return;
+  var wasSorted = th.classList.contains('sorted');
+  var wasAsc = th.getAttribute('data-sort') === 'asc';
+  var direction = (wasSorted && wasAsc) ? 'desc' : 'asc';
+  var thead = th.closest('thead');
+  var table = th.closest('table');
+  var ths = Array.from(thead.querySelectorAll('th'));
+  var colIdx = ths.indexOf(th);
+  var tbody = table.querySelector('tbody');
+
+  thead.querySelectorAll('th.sorted').forEach(function(h){
+    h.classList.remove('sorted');
+    h.removeAttribute('data-sort');
+    updateSortIndicator(h, null);
+  });
+
+  th.classList.add('sorted');
+  th.setAttribute('data-sort', direction);
+  updateSortIndicator(th, direction);
+
+  var label = (th.querySelector('.th-label') || th).textContent.trim();
+  var isDate = ['Created','Last run','Last modified'].indexOf(label) > -1;
+
+  var rows = Array.from(tbody.querySelectorAll('tr')).filter(function(r){ return r.style.display !== 'none'; });
+  var hidden = Array.from(tbody.querySelectorAll('tr')).filter(function(r){ return r.style.display === 'none'; });
+
+  rows.sort(function(a, b){
+    var aText = getCellText(a.cells[colIdx]);
+    var bText = getCellText(b.cells[colIdx]);
+    if(isDate) return direction === 'asc' ? parseDate(aText) - parseDate(bText) : parseDate(bText) - parseDate(aText);
+    var cmp = aText.localeCompare(bText, undefined, {sensitivity:'base', numeric:true});
+    return direction === 'asc' ? cmp : -cmp;
+  });
+  rows.forEach(function(r){ tbody.appendChild(r); });
+  hidden.forEach(function(r){ tbody.appendChild(r); });
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  // Overview: click on th or indicator triggers sort
+  document.querySelectorAll('.rep-table-card thead th').forEach(function(th){
+    th.addEventListener('mouseenter', function(){
+      var ind = th.querySelector('.th-sort-indicator');
+      if(ind && !th.classList.contains('sorted')){ ind.style.opacity='1'; ind.style.color='var(--platform-60)'; }
+    });
+    th.addEventListener('mouseleave', function(){
+      var ind = th.querySelector('.th-sort-indicator');
+      if(ind && !th.classList.contains('sorted')){ ind.style.opacity='0'; ind.style.color=''; }
+    });
+    // Make indicator click also trigger sort
+    var ind = th.querySelector('.th-sort-indicator');
+    if(ind) ind.addEventListener('click', function(e){ e.stopPropagation(); toggleSort(th); });
+  });
+
+  // Editor table: ellipsis + arrow on hover, indicator click triggers sort
+  document.querySelectorAll('#ed-table thead th').forEach(function(th){
+    th.addEventListener('mouseenter', function(){
+      var kb = th.querySelector('.th-kebab');
+      if(kb && !kb.classList.contains('active')) kb.style.opacity='1';
+      var ind = th.querySelector('.th-sort-indicator');
+      if(ind && !th.classList.contains('sorted')){ ind.style.opacity='1'; ind.style.color='var(--platform-60)'; }
+    });
+    th.addEventListener('mouseleave', function(){
+      var kb = th.querySelector('.th-kebab');
+      if(kb && !kb.classList.contains('active')) kb.style.opacity='0';
+      var ind = th.querySelector('.th-sort-indicator');
+      if(ind && !th.classList.contains('sorted')){ ind.style.opacity='0'; ind.style.color=''; }
+    });
+    var ind = th.querySelector('.th-sort-indicator');
+    if(ind) ind.addEventListener('click', function(e){ e.stopPropagation(); toggleSort(th); });
+  });
+});
 </script>
 </body>
 </html>

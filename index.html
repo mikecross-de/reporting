@@ -446,6 +446,8 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .ed-head-row{display:flex;align-items:center;gap:16px;flex-wrap:nowrap;}
 .ed-head-back{}
 .ed-head-header{margin-bottom:32px;}
+.ed-head-meta{font-size:15px;color:var(--platform-80);margin-top:6px;line-height:1.5;display:flex;align-items:center;gap:6px;flex-wrap:wrap;width:100%;}
+.ed-head-meta-dot{color:var(--platform-80);}
 .ed-head-title{font-size:36px;font-weight:700;color:var(--platform-100);line-height:1.1;letter-spacing:-0.5px;padding:0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto;}
 .chip-entity{display:inline-flex;align-items:center;background:#D9E9CD;color:#317005;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;flex-shrink:0;}
 .ed-head-spacer{flex:1;min-width:8px;}
@@ -1094,9 +1096,10 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .dg-tooltip-btn:hover{color:white;text-decoration:underline;}
 
 .freq-tooltip{
-  display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:500;
+  display:none;position:fixed;z-index:9999;
   background:#1a1f22;border-radius:3px;padding:6px 12px;
   font-size:13px;color:white;white-space:nowrap;pointer-events:none;
+  transform:translateX(-50%);
 }
 
 /* ── Folder context bar ─────────────────────────────────────────────────── */
@@ -1468,7 +1471,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
                     <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Major Donors FY26 YTD</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
-                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/28/2026 by Mike Cross</span></div>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/28/2026 by Mike Cross</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Sends weekly</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Major Donors FY26 YTD</div>
@@ -1586,7 +1589,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
                     <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Year-End Campaign Revenue</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
-                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 9/3/2025 by Heidi Anderson</span></div>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 9/3/2025 by Heidi Anderson</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Sends monthly</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Year-End Campaign Revenue</div>
@@ -1625,7 +1628,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
                     <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Recurring Gifts — Q4</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
-                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 2/3/2026 by Heidi Anderson</span></div>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 2/3/2026 by Heidi Anderson</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Sends weekly</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Recurring Gifts — Q4</div>
@@ -1702,7 +1705,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
                     <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Grant Reporting — 501(c)(3)</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
-                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/10/2026 by Cam Patterson</span></div>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/10/2026 by Cam Patterson</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Sends monthly</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Grant Reporting — 501(c)(3)</div>
@@ -1828,6 +1831,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <button class="btn-primary" onclick="saveReport()">Save</button>
           </div>
         </div>
+        <div class="ed-head-meta" id="ed-head-meta"></div>
         <!-- Penny context: only shown on Penny-generated reports -->
         <div class="ed-penny-context" id="ed-penny-context" style="display:none;">
           <svg class="nav-svg-icon" style="width:13px;height:13px;fill:currentColor;flex-shrink:0;"><use href="#icon-sparkles"/></svg>
@@ -1850,8 +1854,6 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
         <div class="ed-result">
           <div class="ed-summary">
             <div class="ed-summary-l" style="display:flex;align-items:center;gap:12px;">
-              <span id="ed-type-label" style="color:var(--platform-100);font-weight:400;"><strong>Constituent</strong> report</span>
-              <span style="color:var(--platform-40);">·</span>
               <span id="ed-stat-count"><strong>38</strong> constituents</span>
               <span id="ed-stat-dot" style="color:var(--platform-40);">·</span>
               <span id="ed-stat-amount"><strong>$94,250</strong> in FY25</span>
@@ -2815,11 +2817,28 @@ function openEditorRow(row){
   var name = row.querySelector('.dg-name');
   var title = name ? name.textContent : 'Report';
   document.querySelector('.ed-head-title').textContent = title;
+  // Build meta sub-line
+  var metaEl = document.getElementById('ed-head-meta');
+  if(metaEl){
+    var typeLine = row.querySelector('.dg-type-line');
+    var spans = typeLine ? Array.from(typeLine.querySelectorAll('span')) : [];
+    var typeSpan = spans.find(function(s){ return s.textContent.trim().match(/report$/); });
+    var createdSpan = spans.find(function(s){ return s.textContent.trim().startsWith('Created'); });
+    var freqSpan = spans.find(function(s){ return s.textContent.trim().startsWith('Sends'); });
+    var typeLabel = typeSpan ? typeSpan.textContent.trim() : ((row.dataset.type || 'Constituent').charAt(0).toUpperCase() + (row.dataset.type || 'constituent').slice(1)) + ' report';
+    var createdText = createdSpan ? createdSpan.textContent.trim() : '';
+    var scheduleMap = {'Sends weekly':'Scheduled weekly on Monday at 12:00 AM','Sends monthly':'Scheduled monthly on the 1st at 12:00 AM'};
+    var scheduleText = freqSpan ? (scheduleMap[freqSpan.textContent.trim()] || '') : '';
+    var dot = '<span class="ed-head-meta-dot">·</span>';
+    var parts = ['<span>' + typeLabel + '</span>'];
+    if(createdText) parts.push(dot + '<span>' + createdText + '</span>');
+    if(scheduleText) parts.push(dot + '<span>' + scheduleText + '</span>');
+    metaEl.innerHTML = parts.join('');
+  }
   document.getElementById('ed-delete-btn').style.display = creator === 'mike-cross' ? '' : 'none';
   var typeMap = {constituent:'Constituent',transaction:'Transaction',interaction:'Interaction',note:'Note',task:'Task'};
   var t = row.dataset.type || 'constituent';
-  var typeLabel = document.getElementById('ed-type-label');
-  if(typeLabel) typeLabel.innerHTML = '<strong>' + (typeMap[t] || 'Constituent') + '</strong> report';
+
   // Set summary stats based on report
   var statsMap = {
     'Major Donors FY26 YTD':            {count:'<strong>142</strong> transactions', amount:'<strong>$1.2M</strong> in FY26'},
@@ -6341,15 +6360,21 @@ document.addEventListener('DOMContentLoaded', function(){
     var span = document.createElement('span');
     span.style.position = 'relative';
     span.style.display = 'inline-block';
+    span.style.position = 'relative';
     span.style.cursor = 'default';
     span.textContent = freq;
+    freqTd.textContent = '';
+    freqTd.appendChild(span);
     var tip = document.createElement('div');
     tip.className = 'freq-tooltip';
     tip.textContent = scheduleMap[freq];
-    span.appendChild(tip);
-    freqTd.textContent = '';
-    freqTd.appendChild(span);
-    span.addEventListener('mouseenter', function(){ tip.style.display = 'block'; });
+    document.body.appendChild(tip);
+    span.addEventListener('mouseenter', function(){
+      var r = span.getBoundingClientRect();
+      tip.style.left = (r.left + r.width / 2) + 'px';
+      tip.style.top = (r.bottom + 4) + 'px';
+      tip.style.display = 'block';
+    });
     span.addEventListener('mouseleave', function(){ tip.style.display = 'none'; });
   });
 });
@@ -6465,7 +6490,7 @@ function confirmDeleteFolder(){
     btn.addEventListener('mouseenter', function(){
       var r = btn.getBoundingClientRect();
       tip.style.left = (r.left + r.width / 2) + 'px';
-      tip.style.top = (r.bottom + 6) + 'px';
+      tip.style.top = (r.bottom + 4) + 'px';
       tip.style.display = 'block';
     });
     btn.addEventListener('mouseleave', function(){

@@ -101,6 +101,11 @@ input,select,textarea{font-family:var(--font);}
 .btn-primary:disabled:hover{background:var(--platform-20);}
 .btn-primary.penny{background:var(--penny-100);}
 .btn-primary.penny:hover{background:var(--penny-200);}
+.folder-delete-btn{background:none;border:none;cursor:pointer;color:var(--platform-60);font-size:18px;padding:6px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;transition:background .12s,color .12s;}
+.folder-delete-btn:hover{background:var(--platform-10);color:var(--platform-100);}
+#folder-delete-tip{display:none;position:fixed;background:#1a1f22;color:white;font-size:13px;white-space:nowrap;padding:5px 10px;border-radius:3px;pointer-events:none;z-index:99999;transform:translateX(-50%);}
+.btn-danger{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:4px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);background:none;border:1px solid var(--red-100);color:var(--red-100);}
+.btn-danger:hover{background:#fff0f2;}
 .btn-secondary{background:var(--white);color:var(--platform-100);border:1px solid var(--platform-100);border-radius:4px;padding:8px 12px;font-size:16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .15s,border-color .15s;line-height:21px;white-space:nowrap;}
 .btn-secondary:hover{background:var(--platform-20);border-color:#DAD7D9;}
 .ed-more-btn{gap:8px;padding:8px 12px;font-size:16px;font-weight:700;display:inline-flex;align-items:center;}
@@ -145,6 +150,7 @@ input,select,textarea{font-family:var(--font);}
 /* Toolbar row 1 — search + segmented tabs + dropdowns */
 .rep-panel{background:var(--white);border-radius:10px;margin-bottom:18px;padding:0 24px 24px;}
 .rep-toolbars-wrap{background:var(--white);padding:24px 0 24px;}
+.folder-active .rep-toolbars-wrap{padding:24px 0 16px;}
 .rep-toolbar-1{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;}
 .tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);min-width:350px;border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:1 1 260px;max-width:350px;transition:border-color .15s;}
 .tb-search:focus-within{border-color:var(--crm-100);border-width:2px;padding:0 11px;}
@@ -183,6 +189,7 @@ input,select,textarea{font-family:var(--font);}
 .dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border:none;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);min-width:180px;z-index:100;padding:8px 0;max-height:280px;overflow-y:auto;}
 .dd-menu.open{display:block;}
 .dd-menu.right{left:auto;right:0;}
+.dd-divider{height:1px;background:var(--platform-20);margin:4px 0;}
 .dd-item{display:flex;align-items:center;gap:6px;padding:8px 16px;font-size:16px;color:var(--platform-100);cursor:pointer;white-space:nowrap;border:none;background:none;width:100%;text-align:left;font-family:var(--font);line-height:21px;transition:background .08s;}
 .dd-item:hover{background:var(--platform-10);}
 .dd-item.active{font-weight:700;color:var(--platform-100);background:var(--crm-20);}
@@ -212,7 +219,7 @@ input,select,textarea{font-family:var(--font);}
 .dg-table thead th.sorted .th-sort-indicator{opacity:1;color:var(--platform-80);}
 .dg-table thead th.col-actions{text-align:left;padding-right:16px;}
 
-.dg-table tbody tr{transition:background .08s;cursor:pointer;position:relative;}
+.dg-table tbody tr{transition:background .08s;cursor:default;position:relative;}
 .dg-table tbody tr td{border-bottom:1px solid var(--platform-20);padding:16px;color:var(--platform-100);vertical-align:middle;font-size:14px;line-height:18px;}
 .dg-table tbody tr:hover td{background:var(--platform-5);}
 .dg-table tbody tr.sel td{background:var(--crm-5);}
@@ -223,7 +230,10 @@ input,select,textarea{font-family:var(--font);}
 .dg-chk input{width:16px;height:16px;cursor:pointer;accent-color:var(--crm-100);}
 .dg-name-cell{}
 .dg-name-row{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
-.dg-name{font-size:14px;font-weight:600;color:var(--platform-100);}
+.dg-name{font-size:14px;font-weight:700;color:var(--platform-100);cursor:pointer;}
+.dg-name:hover{color:var(--crm-100);text-decoration:underline;}
+.dg-info-icon{color:var(--platform-60);font-size:14px;cursor:pointer;display:inline-flex;align-items:center;margin-left:6px;}
+.dg-info-icon:hover{color:var(--platform-100);}
 .badge-recency{display:inline-flex;align-items:center;background:#D9E9CD;color:#317005;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;}
 .badge-recency.muted{background:#E9EAEA;color:#525759;}
 .badge-penny{display:inline-flex;align-items:center;gap:4px;background:#E3D3E6;color:#521B65;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;}
@@ -282,7 +292,7 @@ input.fc-sm{height:28px;font-size:12px;padding:4px 8px;}
 /* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--white);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:100%;max-width:480px;padding:24px;position:relative;animation:modalIn .15s ease;max-height:85vh;overflow-y:auto;}
+.modal{background:var(--white);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:100%;max-width:480px;padding:24px;position:relative;animation:modalIn .15s ease;max-height:85vh;overflow-y:auto;overflow-x:visible;}
 @keyframes modalIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .modal-title{font-size:20px;font-weight:700;color:var(--platform-100);margin-bottom:4px;}
 .modal-subtitle{font-size:14px;color:var(--platform-60);margin-bottom:20px;}
@@ -1064,6 +1074,47 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 
 .th-sort-indicator{font-size:11px;opacity:0;transition:opacity .15s;color:var(--platform-60);flex-shrink:0;}
+
+/* ── Name cell tooltip + type sub-line ───────────────────────────────────── */
+.dg-name-cell{position:relative;}
+.dg-name-wrap{position:relative;display:block;max-width:100%;}
+.dg-type-line{font-size:14px;color:var(--platform-80);margin-top:6px;line-height:1.3;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.dg-tooltip{
+  display:none;position:absolute;top:26px;left:0;z-index:500;
+  background:#1a1f22;border-radius:3px;
+  padding:8px 16px;
+  min-width:400px;max-width:450px;white-space:normal;pointer-events:auto;
+}
+
+.dg-tooltip-title{font-size:14px;font-weight:700;color:white;margin-bottom:4px;line-height:18px;}
+.dg-tooltip-desc{font-size:14px;font-weight:400;color:white;line-height:18px;}
+.dg-tooltip-empty{color:rgba(255,255,255,.4);font-style:italic;}
+.dg-tooltip-action{margin-top:4px;}
+.dg-tooltip-btn{background:none;border:none;color:white;font-size:13px;font-family:var(--font);cursor:pointer;padding:0;font-weight:500;}
+.dg-tooltip-btn:hover{color:white;text-decoration:underline;}
+
+.freq-tooltip{
+  display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:500;
+  background:#1a1f22;border-radius:3px;padding:6px 12px;
+  font-size:13px;color:white;white-space:nowrap;pointer-events:none;
+}
+
+/* ── Folder context bar ─────────────────────────────────────────────────── */
+#folder-context-bar{padding-top:0;}
+.folder-ctx-inner{display:flex;align-items:center;justify-content:space-between;padding:0 0px 16px;}
+.folder-ctx-left{font-size:16px;color:var(--platform-80);display:flex;align-items:center;gap:12px;}
+.folder-ctx-breadcrumb-link{background:none;border:none;cursor:pointer;color:var(--crm-100);font-size:16px;font-family:var(--font);font-weight:700;padding:0;}
+.folder-ctx-breadcrumb-link:hover{text-decoration:underline;}
+.folder-ctx-sep{color:var(--platform-40);font-size:16px;}
+.folder-ctx-name{font-size:16px;font-weight:600;color:var(--platform-100);}
+.folder-name-info-group{display:inline-flex;align-items:center;gap:4px;}
+.folder-ctx-icon-btn{background:none;border:none;cursor:pointer;color:var(--platform-60);font-size:14px;padding:2px;display:inline-flex;align-items:center;border-radius:3px;}
+.folder-ctx-icon-btn:hover{color:var(--platform-100);}
+.folder-ctx-icon-btn.active{color:var(--crm-100);}
+
+.folder-ctx-desc{padding:0 20px 12px;font-size:14px;color:var(--platform-80);line-height:1.5;}
+.folder-ctx-tooltip{position:absolute;top:calc(100% + 6px);left:0;z-index:500;min-width:400px;max-width:450px;pointer-events:auto;background:#1a1f22;border-radius:3px;padding:8px 16px;}
+
 </style>
 </head>
 <body>
@@ -1352,21 +1403,46 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             </div>
             <div class="dd-wrap">
               <button class="tb-dd" id="dd-folder-btn" onclick="toggleDd('dd-folder')">
-                <span id="dd-folder-label">All folders</span>
+                <span id="dd-folder-label">Folder</span>
                 <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
               </button>
               <div class="dd-menu right" id="dd-folder">
-                <button class="dd-item" onclick="closeAllDd();openFolderModal()"><svg class="nav-svg-icon" style="width:13px;height:13px;fill:currentColor;margin-right:4px;vertical-align:-1px;"><use href="#icon-plus"/></svg>New folder</button>
+                <button class="dd-item" onclick="closeAllDd();openFolderModal()">New folder</button>
                 <div class="dd-divider"></div>
-                <button class="dd-item active" onclick="filterFolder('all',this)">All folders</button>
-                <button class="dd-item" onclick="filterFolder('development-fy26',this)">Development / FY26</button>
+                
+                <button class="dd-item" onclick="filterFolder('development-fy26',this)">Development (FY26)</button>
                 <button class="dd-item" onclick="filterFolder('mailing-lists',this)">Mailing Lists</button>
                 <button class="dd-item" onclick="filterFolder('board',this)">Board</button>
                 <button class="dd-item" onclick="filterFolder('compliance',this)">Compliance</button>
-                <button class="dd-item" onclick="filterFolder('none',this)">No folder</button>
               </div>
             </div>
-            <button class="tb-reset-filters" id="resetFiltersBtn" onclick="resetAllFilters()" disabled>Reset filters</button>
+            <button class="tb-reset-filters" id="resetFiltersBtn" onclick="resetFilters()" disabled>Reset filters</button>
+          </div>
+        </div>
+
+        <!-- Folder context bar — shown when a folder is active -->
+        <div id="folder-context-bar" style="display:none;">
+          <div class="folder-ctx-inner">
+            <div class="folder-ctx-left">
+              <button class="folder-ctx-breadcrumb-link" onclick="exitFolder()">All reports</button>
+              <span class="folder-ctx-sep">/</span>
+              <span class="folder-name-info-group">
+                <strong class="folder-ctx-name" id="folder-ctx-name">Development (FY26)</strong>
+                <div class="folder-ctx-info-wrap" id="folder-ctx-info-wrap" style="position:relative;display:inline-flex;align-items:center;">
+                  <button class="folder-ctx-icon-btn" id="folder-ctx-info-btn" aria-label="View folder description">
+                    <i class="fa-regular fa-circle-info"></i>
+                  </button>
+                  <div class="folder-ctx-tooltip" id="folder-ctx-tooltip" style="display:none;">
+                      <div class="dg-tooltip-title" id="folder-ctx-tooltip-title"></div>
+                    <div class="dg-tooltip-desc" id="folder-ctx-tooltip-desc"></div>
+                    <div class="dg-tooltip-action"><button class="dg-tooltip-btn" id="folder-ctx-tooltip-action" onclick="openEditFolderModal()">Edit folder</button></div>
+                  </div>
+                </div>
+              </span>
+            </div>
+          </div>
+          <div class="folder-ctx-desc" id="folder-ctx-desc" style="display:none;">
+            <span id="folder-ctx-desc-text"></span>
           </div>
         </div>
 
@@ -1379,36 +1455,40 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <thead>
               <tr>
                 <th class="sort sorted" data-sort="asc"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Name</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
-                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Type</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
-                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Frequency</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
-                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Folder</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
-                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Created</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
                 <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Last run</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
                 <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Last modified</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Frequency</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Folder</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
                 <th class="col-actions"></th>
               </tr>
             </thead>
             <tbody id="tbody1">
 
-              <tr onclick="openEditorRow(this)" data-recent="yes" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="mike-cross" data-folder="development-fy26">
+              <tr data-recent="yes" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="mike-cross" data-folder="development-fy26">
                 <td class="dg-name-cell">
-                  <div class="dg-name-row">
-                    <span class="dg-name">Major Donors FY26 YTD</span>
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Major Donors FY26 YTD</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/28/2026 by Mike Cross</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Major Donors FY26 YTD</div>
+                      <div class="dg-tooltip-desc">Constituents who gave $1,000+ in the current fiscal year. Used for major gifts outreach and board reporting.</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                    </div>
+                  </div>
                   </div>
                 </td>
-                <td>Transaction</td>
-                <td><span class="dg-freq">Weekly</span></td>
-                <td style="color:var(--platform-100)">Development / FY26</td>
                 <td>
-                  <div class="dg-date-main">Jan 28, 2026</div>
+                  <div class="dg-date-main">6/11/2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
-                <td>
-                  <div class="dg-date-main">Today, 11:02 AM</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
                 
-                <td><div class="dg-date-main">Jun 2, 2026</div><div class="dg-date-sub">by Heidi A.</div></td>
+                <td>
+                  <div class="dg-date-main">6/2/2026</div>
+                  <div class="dg-date-sub">by Heidi Anderson</div>
+                </td>
+                <td style="color:var(--platform-100);font-size:14px;">Weekly</td>
+                <td style="color:var(--platform-100)">Development (FY26)</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1423,25 +1503,31 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   </div>
                 </td>
               </tr>
-              <tr onclick="openEditorRow(this)" data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="jessica-lin" data-folder="none">
+              <tr data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="jessica-lin" data-folder="none">
                 <td class="dg-name-cell">
-                  <div class="dg-name-row">
-                    <span class="dg-name">Lapsing donors $1k+</span>
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Lapsing donors $1k+</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 3/12/2026 by Jessica Lin</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Lapsing donors $1k+</div>
+                      <div class="dg-tooltip-desc">Donors who gave $1,000 or more last year but have not yet given this year. Priority for spring re-engagement.</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                    </div>
+                  </div>
                   </div>
                 </td>
-                <td>Constituent</td>
-                <td><span class="dg-freq">On demand</span></td>
-                <td style="color:var(--platform-100)">—</td>
                 <td>
-                  <div class="dg-date-main">Apr 14, 2026</div>
-                  <div class="dg-date-sub">by Jessica Lin</div>
-                </td>
-                <td>
-                  <div class="dg-date-main">Today, 10:15 AM</div>
+                  <div class="dg-date-main">6/11/2026, 10:15 AM</div>
                   <div class="dg-date-sub">by Jessica Lin</div>
                 </td>
                 
-                <td><div class="dg-date-main">Jun 3, 2026</div><div class="dg-date-sub">by Jessica L.</div></td>
+                <td>
+                  <div class="dg-date-main">6/3/2026</div>
+                  <div class="dg-date-sub">by Jessica Lin</div>
+                </td>
+                <td style="color:var(--platform-60);font-size:14px;">—</td>
+                <td style="color:var(--platform-100)">—</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1458,23 +1544,69 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               </tr>
 
 
-              <tr onclick="openEditorRow(this)" data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="mailing-lists">
+              <tr data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="mailing-lists">
                 <td class="dg-name-cell">
-                  <div class="dg-name-row"><span class="dg-name">Spring Appeal — Follow-up List</span></div>
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Spring Appeal — Follow-up List</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 11/5/2025 by Mike Cross</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Spring Appeal — Follow-up List</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Add description</button></div>
+                    </div>
+                  </div>
+                  </div>
                 </td>
-                <td>Constituent</td>
-                <td><span class="dg-freq">On demand</span></td>
+                <td>
+                  <div class="dg-date-main">4/18/2026</div>
+                  <div class="dg-date-sub">by Mike Cross</div>
+                </td>
+                
+                <td>
+                  <div class="dg-date-main">5/28/2026</div>
+                  <div class="dg-date-sub">by Mike Cross</div>
+                </td>
+                <td style="color:var(--platform-60);font-size:14px;">—</td>
                 <td style="color:var(--platform-100)">Mailing Lists</td>
+                <td class="col-actions" onclick="event.stopPropagation()">
+                  <div class="dd-wrap">
+                    <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
+                    <div class="dd-menu right">
+                      <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
+                      <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
+                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
+                      <button class="dd-item" onclick="doAction(event,'move',this)">Change Folder</button>
+                      <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
+                      <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
+                <td class="dg-name-cell">
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Year-End Campaign Revenue</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 9/3/2025 by Heidi Anderson</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Year-End Campaign Revenue</div>
+                      <div class="dg-tooltip-desc">All gifts received between Oct 1 and Dec 31. Filters out in-kind and soft credits. Used for board year-end summary.</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                    </div>
+                  </div>
+                  </div>
+                </td>
                 <td>
-                  <div class="dg-date-main">Mar 14, 2026</div>
+                  <div class="dg-date-main">4/20/2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
-                <td>
-                  <div class="dg-date-main">Apr 18</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
                 
-                <td><div class="dg-date-main">May 28, 2026</div><div class="dg-date-sub">by Mike C.</div></td>
+                <td>
+                  <div class="dg-date-main">5/15/2026</div>
+                  <div class="dg-date-sub">by Heidi Anderson</div>
+                </td>
+                <td style="color:var(--platform-100);font-size:14px;">Monthly</td>
+                <td style="color:var(--platform-100)">Development (FY26)</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1489,56 +1621,31 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   </div>
                 </td>
               </tr>
-              <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
+              <tr data-recent="no" data-status="active" data-scheduled="no" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
                 <td class="dg-name-cell">
-                  <div class="dg-name-row">
-                    <span class="dg-name">Year-End Campaign Revenue</span>
-                  </div>
-                </td>
-                <td>Transaction</td>
-                <td><span class="dg-freq">Daily</span></td>
-                <td style="color:var(--platform-100)">Development / FY26</td>
-                <td>
-                  <div class="dg-date-main">Feb 3, 2026</div>
-                  <div class="dg-date-sub">by Heidi A.</div>
-                </td>
-                <td>
-                  <div class="dg-date-main">Apr 20, 6:00 AM</div>
-                  <div class="dg-date-sub">by system</div>
-                </td>
-                
-                <td><div class="dg-date-main">May 15, 2026</div><div class="dg-date-sub">by Heidi A.</div></td>
-                <td class="col-actions" onclick="event.stopPropagation()">
-                  <div class="dd-wrap">
-                    <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
-                    <div class="dd-menu right">
-                      <button class="dd-item" onclick="doAction(event,'view',this)">View Report</button>
-                      <button class="dd-item" onclick="doAction(event,'copy',this)">Copy Report</button>
-                      <button class="dd-item" onclick="doAction(event,'export',this)">Export</button>
-                      <button class="dd-item" onclick="doAction(event,'move',this)">Change Folder</button>
-                      <button class="dd-item" onclick="doAction(event,'deactivate',this)">Deactivate Report</button>
-                      <button class="dd-item" onclick="doAction(event,'delete',this)">Delete</button>
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Recurring Gifts — Q4</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 2/3/2026 by Heidi Anderson</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Recurring Gifts — Q4</div>
+                      <div class="dg-tooltip-desc">Active recurring donation schedules. Used for processor reconciliation and lapsing schedule outreach.</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
                     </div>
                   </div>
-                </td>
-              </tr>
-              <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="no" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
-                <td class="dg-name-cell">
-                  <div class="dg-name-row"><span class="dg-name">Recurring Gifts — Q4</span></div>
-                </td>
-                <td>Transaction</td>
-                <td><span class="dg-freq">On demand</span></td>
-                <td style="color:var(--platform-100)">Development / FY26</td>
-                <td>
-                  <div class="dg-date-main">Jan 18, 2026</div>
-                  <div class="dg-date-sub">by Heidi A.</div>
+                  </div>
                 </td>
                 <td>
-                  <div class="dg-date-main">Apr 15</div>
+                  <div class="dg-date-main">4/15/2026</div>
                   <div class="dg-date-sub">by Jessica Lin</div>
                 </td>
                 
-                <td><div class="dg-date-main">Apr 30, 2026</div><div class="dg-date-sub">by Heidi A.</div></td>
+                <td>
+                  <div class="dg-date-main">4/30/2026</div>
+                  <div class="dg-date-sub">by Heidi Anderson</div>
+                </td>
+                <td style="color:var(--platform-100);font-size:14px;">Weekly</td>
+                <td style="color:var(--platform-100)">Development (FY26)</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1553,23 +1660,30 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   </div>
                 </td>
               </tr>
-              <tr onclick="openEditorRow(this)" data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
+              <tr data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
-                  <div class="dg-name-row"><span class="dg-name">Unengaged — Last 12 Months</span></div>
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Unengaged — Last 12 Months</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 8/14/2025 by Mike Cross</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Unengaged — Last 12 Months</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Add description</button></div>
+                    </div>
+                  </div>
+                  </div>
                 </td>
-                <td>Constituent</td>
-                <td><span class="dg-freq">On demand</span></td>
-                <td style="color:var(--platform-100)">—</td>
                 <td>
-                  <div class="dg-date-main">Oct 15, 2025</div>
+                  <div class="dg-date-main">4/10/2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
-                <td>
-                  <div class="dg-date-main">Apr 10</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
                 
-                <td><div class="dg-date-main">Apr 12, 2026</div><div class="dg-date-sub">by Mike C.</div></td>
+                <td>
+                  <div class="dg-date-main">4/12/2026</div>
+                  <div class="dg-date-sub">by Mike Cross</div>
+                </td>
+                <td style="color:var(--platform-60);font-size:14px;">—</td>
+                <td style="color:var(--platform-100)">—</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1584,23 +1698,31 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   </div>
                 </td>
               </tr>
-              <tr onclick="openEditorRow(this)" data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="cam-p" data-folder="compliance">
+              <tr data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="cam-p" data-folder="compliance">
                 <td class="dg-name-cell">
-                  <div class="dg-name-row"><span class="dg-name">Grant Reporting — 501(c)(3)</span></div>
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Grant Reporting — 501(c)(3)</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/10/2026 by Cam Patterson</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Grant Reporting — 501(c)(3)</div>
+                      <div class="dg-tooltip-desc">All transactions tagged to grant funds. Used for compliance and progress reporting to funders.</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                    </div>
+                  </div>
+                  </div>
                 </td>
-                <td>Transaction</td>
-                <td><span class="dg-freq">Quarterly</span></td>
-                <td style="color:var(--platform-100)">Compliance</td>
                 <td>
-                  <div class="dg-date-main">Sep 30, 2025</div>
-                  <div class="dg-date-sub">by Cam P.</div>
-                </td>
-                <td>
-                  <div class="dg-date-main">Apr 1</div>
-                  <div class="dg-date-sub">by system</div>
+                  <div class="dg-date-main">4/1/2026</div>
+                  <div class="dg-date-sub">by Mike Cross</div>
                 </td>
                 
-                <td><div class="dg-date-main">Mar 22, 2026</div><div class="dg-date-sub">by Cam P.</div></td>
+                <td>
+                  <div class="dg-date-main">3/22/2026</div>
+                  <div class="dg-date-sub">by Cam Patterson</div>
+                </td>
+                <td style="color:var(--platform-100);font-size:14px;">Monthly</td>
+                <td style="color:var(--platform-100)">Compliance</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1615,23 +1737,31 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                   </div>
                 </td>
               </tr>
-              <tr onclick="openEditorRow(this)" data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
+              <tr data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
-                  <div class="dg-name-row"><span class="dg-name">Missing Primary Email</span></div>
+                  <div class="dg-name-wrap">
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Missing Primary Email</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 10/22/2025 by Mike Cross</span></div>
+                    <div class="dg-tooltip">
+                    <div class="dg-tooltip-inner">
+                      <div class="dg-tooltip-title">Missing Primary Email</div>
+                      <div class="dg-tooltip-desc">Active constituents with no primary email address on file. Run monthly before mass email campaigns.</div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                    </div>
+                  </div>
+                  </div>
                 </td>
-                <td>Constituent</td>
-                <td><span class="dg-freq">On demand</span></td>
-                <td style="color:var(--platform-100)">—</td>
                 <td>
-                  <div class="dg-date-main">Sep 28, 2025</div>
+                  <div class="dg-date-main">3/28/2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
-                <td>
-                  <div class="dg-date-main">Mar 28</div>
-                  <div class="dg-date-sub">by you</div>
-                </td>
                 
-                <td><div class="dg-date-main">Mar 10, 2026</div><div class="dg-date-sub">by Mike C.</div></td>
+                <td>
+                  <div class="dg-date-main">3/10/2026</div>
+                  <div class="dg-date-sub">by Mike Cross</div>
+                </td>
+                <td style="color:var(--platform-60);font-size:14px;">—</td>
+                <td style="color:var(--platform-100)">—</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:9px;height:9px;"><use href="#icon-caret-down"/></svg></button>
@@ -1905,7 +2035,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td data-col="email" class="email">tokafor@example.com</td>
                 <td data-col="state">IL</td>
                 <td data-col="lastgift" class="right money">$1,800</td>
-                <td data-col="lastgiftdate">Apr 12, 2025</td>
+                <td data-col="lastgiftdate">4/1/20262, 2025</td>
                 <td data-col="lifetime" class="right lifetime">$18,400</td>
                 <td data-col="lapsed" class="right">373d</td>
                 <td data-col="churn"><span class="risk-pill med">59%</span></td>
@@ -1927,7 +2057,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td data-col="email" class="email">swhitfield@example.org</td>
                 <td data-col="state">OR</td>
                 <td data-col="lastgift" class="right money">$15,000</td>
-                <td data-col="lastgiftdate">Sep 3, 2025</td>
+                <td data-col="lastgiftdate">9/3/2025</td>
                 <td data-col="lifetime" class="right lifetime">$96,400</td>
                 <td data-col="lapsed" class="right">229d</td>
                 <td data-col="churn"><span class="risk-pill good">48%</span></td>
@@ -2079,7 +2209,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <svg class="nav-svg-icon" style="width:10px;height:10px;fill:var(--platform-60);flex-shrink:0;"><use href="#icon-caret-down"/></svg>
             </button>
             <div class="dd-menu" id="dd-details-folder" style="width:100%;top:calc(100% + 2px);left:0;">
-              <button class="dd-item" onclick="selectFolder('Development / FY26',this)">Development / FY26</button>
+              <button class="dd-item" onclick="selectFolder('Development (FY26)',this)">Development (FY26)</button>
               <button class="dd-item" onclick="selectFolder('Mailing Lists',this)">Mailing Lists</button>
               <button class="dd-item" onclick="selectFolder('Board',this)">Board</button>
               <button class="dd-item" onclick="selectFolder('Compliance',this)">Compliance</button>
@@ -2089,7 +2219,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
         <div class="details-meta">
           <div class="details-meta-row">
             <span class="details-meta-label">Created</span>
-            <span class="details-meta-value">Apr 14, 2026 · Jessica Lin</span>
+            <span class="details-meta-value">4/1/20264, 2026 · Jessica Lin</span>
           </div>
           <div class="details-meta-row">
             <span class="details-meta-label">Last modified</span>
@@ -2097,7 +2227,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
           </div>
           <div class="details-meta-row">
             <span class="details-meta-label">Last run</span>
-            <span class="details-meta-value">Today, 10:15 AM · Jessica Lin</span>
+            <span class="details-meta-value">6/11/2026, 10:15 AM · Jessica Lin</span>
           </div>
         </div>
         <div class="modal-footer">
@@ -2342,7 +2472,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <svg class="nav-svg-icon" style="width:10px;height:10px;fill:var(--platform-60);flex-shrink:0;"><use href="#icon-caret-down"/></svg>
             </button>
             <div class="dd-menu" id="dd-move-folder" style="width:100%;top:calc(100% + 2px);left:0;">
-              <button class="dd-item" onclick="selectMoveFolder('Development / FY26',this)">Development / FY26</button>
+              <button class="dd-item" onclick="selectMoveFolder('Development (FY26)',this)">Development (FY26)</button>
               <button class="dd-item" onclick="selectMoveFolder('Mailing Lists',this)">Mailing Lists</button>
               <button class="dd-item" onclick="selectMoveFolder('Board',this)">Board</button>
               <button class="dd-item" onclick="selectMoveFolder('Compliance',this)">Compliance</button>
@@ -2608,7 +2738,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
           </div>
           <div class="rv-field">
             <div class="rv-field-label">Folder</div>
-            <select disabled style="opacity:0.6;cursor:default;"><option value="">Select a folder...</option><option>Development / FY26</option><option>Board</option><option>Mailing Lists</option></select>
+            <select disabled style="opacity:0.6;cursor:default;"><option value="">Select a folder...</option><option>Development (FY26)</option><option>Board</option><option>Mailing Lists</option></select>
           </div>
           <div class="rv-field">
             <div class="rv-field-label">Active?</div>
@@ -3126,11 +3256,33 @@ function filterFolder(val, item){
   activeFilters.folder = val;
   setDdActive(item.parentElement, item);
   const btn = document.getElementById('dd-folder-btn');
-  document.getElementById('dd-folder-label').textContent = val === 'all' ? 'All folders' : item.textContent.trim();
+  document.getElementById('dd-folder-label').textContent = val === 'all' ? 'Folder' : item.textContent.trim();
   btn.classList.toggle('filtered', val !== 'all');
   closeAllDd();
   applyAllFilters();
   updateResetBtn();
+  // Show/hide folder context bar
+  var bar = document.getElementById('folder-context-bar');
+  var folderDescriptions = {
+    'development-fy26': { name: 'Development (FY26)', desc: 'Major gifts and mid-level donor reports for the current fiscal year. Used by the development team for prospecting and portfolio management.' },
+    'mailing-lists':    { name: 'Mailing Lists', desc: '' },
+    'board-reports':    { name: 'Board Reports', desc: 'Reports prepared for quarterly board meetings and annual reviews.' },
+    'board':            { name: 'Board', desc: 'Reports prepared for quarterly board meetings and annual reviews.' },
+    'compliance':       { name: 'Compliance', desc: '' },
+  };
+  if(val !== 'all' && folderDescriptions[val]){
+    var fd = folderDescriptions[val];
+    document.getElementById('folder-ctx-name').textContent = fd.name;
+    document.getElementById('folder-ctx-desc-text').textContent = fd.desc;
+    document.getElementById('folder-ctx-desc').style.display = 'none';
+    document.getElementById('folder-ctx-info-btn').classList.remove('active');
+    // Hide info btn if no description
+    document.getElementById('folder-ctx-info-wrap').style.display = '';
+    bar.style.display = 'block';
+  var repView = document.getElementById('view-reports-list'); if(repView) repView.classList.add('folder-active');
+  } else {
+    bar.style.display = 'none';
+  }
 }
 function updateResetBtn(){
   updateResetState();
@@ -3146,9 +3298,9 @@ function resetAllFilters(){
   document.getElementById('dd-creator-btn').classList.remove('filtered');
   document.querySelectorAll('#dd-creator .dd-item').forEach(function(i,idx){ i.classList.toggle('active', idx===0); });
   // Reset folder
-  document.getElementById('dd-folder-label').textContent = 'All folders';
+  document.getElementById('dd-folder-label').textContent = 'Folder';
   document.getElementById('dd-folder-btn').classList.remove('filtered');
-  document.querySelectorAll('#dd-folder .dd-item').forEach(function(i,idx){ i.classList.toggle('active', idx===0); });
+  document.querySelectorAll('#dd-folder .dd-item').forEach(function(i){ i.classList.remove('active'); });
   updateResetBtn();
   applyAllFilters();
 }
@@ -4996,18 +5148,26 @@ function updateResetState(){
 // ─── Reset ───
 function resetFilters(){
   window._typeFilters=[];window._creatorFilters=[];window._statusFilters=[];
+  activeFilters.folder = 'all';
   updateFilterBtnText('dd-type-btn','All types',[]);
   updateFilterBtnText('dd-creator-btn','Created by anyone',[]);
   updateFilterBtnText('dd-status-btn','All statuses',[]);
-  document.querySelectorAll('#dd-type .dd-item, #dd-creator .dd-item, #dd-status .dd-item').forEach(function(it){it.classList.remove('selected');});
-  document.querySelector('.tb-reset').classList.remove('active');
-  document.querySelectorAll('.tb-pill').forEach(function(p){p.classList.remove('active');});
-  document.querySelector('.tb-pill').classList.add('active');
-  searchQuery='';
-  var input=document.querySelector('.tb-search input');
-  if(input)input.value='';
-  document.getElementById('searchClear').style.display='none';
-  filterReports();
+  document.querySelectorAll('#dd-type .dd-item, #dd-creator .dd-item, #dd-status .dd-item').forEach(function(it){ it.classList.remove('selected'); });
+  // Reset folder dropdown
+  var folderLabel = document.getElementById('dd-folder-label');
+  if(folderLabel) folderLabel.textContent = 'Folder';
+  var folderBtn = document.getElementById('dd-folder-btn');
+  if(folderBtn) folderBtn.classList.remove('filtered');
+  document.querySelectorAll('#dd-folder .dd-item').forEach(function(it){ it.classList.remove('active'); });
+  // Hide folder context bar
+  var bar = document.getElementById('folder-context-bar');
+  if(bar) bar.style.display = 'none';
+  var repView = document.getElementById('view-reports-list');
+  if(repView) repView.classList.remove('folder-active');
+  // Disable reset button
+  var resetBtn = document.getElementById('resetFiltersBtn');
+  if(resetBtn) resetBtn.disabled = true;
+  applyAllFilters();
 }
 
 // ─── Action dropdown ───
@@ -5554,16 +5714,16 @@ function getDemoReport(prompt){
       excludeFilters: [],
       columns: ['Name','Primary Email Address','Latest Transaction Date','Latest Transaction Amount'],
       rows: [
-        ['Bennett, Richard','rbennett@gmail.com','Mar 22, 2026','$2,500.00'],
+        ['Bennett, Richard','rbennett@gmail.com','3/22/2026','$2,500.00'],
         ['Chang, Jennifer','jchang@outlook.com','Jan 15, 2026','$1,500.00'],
         ['Dawson, Keith','kdawson@yahoo.com','Feb 8, 2026','$3,000.00'],
-        ['Espinoza, Carmen','cespinoza@gmail.com','Apr 2, 2026','$1,250.00'],
+        ['Espinoza, Carmen','cespinoza@gmail.com','4/2/2026','$1,250.00'],
         ['Foster, Gregory','gfoster@comcast.net','Dec 19, 2025','$5,000.00'],
         ['Haynes, Brenda','bhaynes@icloud.com','Mar 1, 2026','$1,800.00'],
-        ['Irving, Marcus','mirving@hotmail.com','Jan 28, 2026','$2,200.00'],
+        ['Irving, Marcus','mirving@hotmail.com','1/28/2026','$2,200.00'],
         ['Kelley, Diane','dkelley@gmail.com','Feb 14, 2026','$1,100.00'],
-        ['Nguyen, David','dnguyen@outlook.com','Apr 10, 2026','$4,000.00'],
-        ['Patel, Anita','apatel@gmail.com','Mar 15, 2026','$1,750.00'],
+        ['Nguyen, David','dnguyen@outlook.com','4/10/2026, 2026','$4,000.00'],
+        ['Patel, Anita','apatel@gmail.com','3/15/2026','$1,750.00'],
         ['Reynolds, Charles','creynolds@aol.com','Dec 30, 2025','$2,000.00'],
         ['Sullivan, Karen','ksullivan@yahoo.com','Jan 5, 2026','$1,350.00']
       ]
@@ -5845,7 +6005,7 @@ function addReportToList(title){
   tr.setAttribute('onclick', 'openListReport(this)');
   tr.innerHTML = '<td class="td-name">'+title+'</td>'+
     '<td class="td-freq">&mdash;</td>'+
-    '<td>Constituent</td>'+
+    ''+
     '<td class="td-folder">&mdash;</td>'+
     '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
     '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
@@ -5927,12 +6087,12 @@ function getRefineResult(prompt){
         values: ['(415) 555-0142','(212) 555-0198','(415) 555-0267','(212) 555-0334','(415) 555-0411','(212) 555-0523','(415) 555-0687']
       }],
       newRows: [
-        ['Bennett, Richard','rbennett@gmail.com','Mar 22, 2026','$2,500.00','(415) 555-0142'],
+        ['Bennett, Richard','rbennett@gmail.com','3/22/2026','$2,500.00','(415) 555-0142'],
         ['Dawson, Keith','kdawson@yahoo.com','Feb 8, 2026','$3,000.00','(212) 555-0198'],
         ['Foster, Gregory','gfoster@comcast.net','Dec 19, 2025','$5,000.00','(415) 555-0267'],
-        ['Irving, Marcus','mirving@hotmail.com','Jan 28, 2026','$2,200.00','(212) 555-0334'],
-        ['Nguyen, David','dnguyen@outlook.com','Apr 10, 2026','$4,000.00','(415) 555-0411'],
-        ['Patel, Anita','apatel@gmail.com','Mar 15, 2026','$1,750.00','(212) 555-0523'],
+        ['Irving, Marcus','mirving@hotmail.com','1/28/2026','$2,200.00','(212) 555-0334'],
+        ['Nguyen, David','dnguyen@outlook.com','4/10/2026, 2026','$4,000.00','(415) 555-0411'],
+        ['Patel, Anita','apatel@gmail.com','3/15/2026','$1,750.00','(212) 555-0523'],
         ['Reynolds, Charles','creynolds@aol.com','Dec 30, 2025','$2,000.00','(415) 555-0687']
       ]
     };
@@ -6080,6 +6240,239 @@ document.addEventListener('DOMContentLoaded', function(){
     if(ind) ind.addEventListener('click', function(e){ e.stopPropagation(); toggleSort(th); });
   });
 });
+</script>
+
+<script>
+var _descTargetRow = null;
+function openDescModal(e, btn){
+  e.stopPropagation();
+  var wrap = btn.closest('.dg-name-wrap');
+  _descTargetRow = wrap;
+  var titleEl = wrap.querySelector('.dg-tooltip-title');
+  var descEl = wrap.querySelector('.dg-tooltip-desc');
+  var reportName = titleEl ? titleEl.textContent.trim() : '';
+  var currentDesc = (descEl && !descEl.classList.contains('dg-tooltip-empty')) ? descEl.textContent.trim() : '';
+  document.getElementById('desc-modal-title').textContent = currentDesc ? 'Edit description' : 'Add description';
+  document.getElementById('desc-modal-input').value = currentDesc;
+  document.getElementById('desc-modal').classList.add('open');
+  setTimeout(function(){ document.getElementById('desc-modal-input').focus(); }, 50);
+}
+function closeDescModal(){
+  document.getElementById('desc-modal').classList.remove('open');
+  _descTargetRow = null;
+}
+function saveDesc(){
+  unfloatLabel('field-desc-input');
+  var val = document.getElementById('desc-modal-input').value.trim();
+  if(_descTargetRow){
+    var descEl = _descTargetRow.querySelector('.dg-tooltip-desc');
+    var actionBtn = _descTargetRow.querySelector('.dg-tooltip-btn');
+    if(descEl){
+      if(val){
+        descEl.textContent = val;
+        descEl.classList.remove('dg-tooltip-empty');
+        if(actionBtn) actionBtn.textContent = 'Edit description';
+      } else {
+        descEl.textContent = 'No description added yet.';
+        descEl.classList.add('dg-tooltip-empty');
+        if(actionBtn) actionBtn.textContent = 'Add description';
+      }
+    }
+  }
+  document.getElementById('desc-modal').classList.remove('open');
+  _descTargetRow = null;
+}
+</script>
+
+<div class="modal-overlay" id="desc-modal" onclick="if(event.target===this)closeDescModal()">
+  <div class="modal" style="max-width:520px;">
+    <button class="modal-close" onclick="closeDescModal()" aria-label="Close">
+      <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
+    </button>
+    <div class="modal-title" id="desc-modal-title">Edit description</div>
+    <div class="modal-subtitle" id="desc-modal-subtitle"></div>
+    <div class="modal-field textarea-field" id="field-desc-input">
+      <label class="modal-label floating-idle" for="desc-modal-input" id="lbl-desc-input">Description (optional)</label>
+      <textarea class="modal-input" id="desc-modal-input" rows="4" onfocus="floatLabel('field-desc-input')" onblur="unfloatLabel('field-desc-input')"></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeDescModal()">Cancel</button>
+      <button class="btn-primary" onclick="saveDesc()">Save</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+// Tooltip hover — dg-name span only
+document.addEventListener('DOMContentLoaded', function(){
+  document.querySelectorAll('.dg-name-wrap').forEach(function(wrap){
+    var tip = wrap.querySelector('.dg-tooltip');
+    var nameSpan = wrap.querySelector('.dg-info-icon');
+    if(!tip || !nameSpan) return;
+    var hideTimer;
+    nameSpan.addEventListener('mouseenter', function(){
+      clearTimeout(hideTimer);
+      tip.style.display = 'block';
+    });
+    nameSpan.addEventListener('mouseleave', function(e){
+      var to = e.relatedTarget;
+      if(tip.contains(to)){ return; }
+      hideTimer = setTimeout(function(){ tip.style.display = 'none'; }, 150);
+    });
+    tip.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); });
+    tip.addEventListener('mouseleave', function(){
+      hideTimer = setTimeout(function(){ tip.style.display = 'none'; }, 150);
+    });
+  });
+});
+</script>
+
+<script>
+// Frequency tooltip
+document.addEventListener('DOMContentLoaded', function(){
+  var scheduleMap = { 'Weekly': 'Scheduled weekly on Monday at 12:00 AM', 'Monthly': 'Scheduled monthly on the 1st at 12:00 AM' };
+  document.querySelectorAll('.dg-table tbody tr').forEach(function(row){
+    var freqTd = row.cells[3];
+    if(!freqTd) return;
+    var freq = freqTd.textContent.trim();
+    if(!scheduleMap[freq]) return;
+    // Wrap text in span for precise anchor
+    var span = document.createElement('span');
+    span.style.position = 'relative';
+    span.style.display = 'inline-block';
+    span.style.cursor = 'default';
+    span.textContent = freq;
+    var tip = document.createElement('div');
+    tip.className = 'freq-tooltip';
+    tip.textContent = scheduleMap[freq];
+    span.appendChild(tip);
+    freqTd.textContent = '';
+    freqTd.appendChild(span);
+    span.addEventListener('mouseenter', function(){ tip.style.display = 'block'; });
+    span.addEventListener('mouseleave', function(){ tip.style.display = 'none'; });
+  });
+});
+</script>
+
+<div class="modal-overlay" id="edit-folder-modal" onclick="if(event.target===this)closeEditFolderModal()">
+  <div class="modal" style="max-width:520px;">
+    <button class="modal-close" onclick="closeEditFolderModal()" aria-label="Close">
+      <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
+    </button>
+    <div class="modal-title">Edit folder</div>
+    <div style="margin-top:24px;" class="modal-field" id="field-edit-folder-name">
+      <label class="modal-label floating-idle" for="edit-folder-name" id="lbl-edit-folder-name">Folder name</label>
+      <input class="modal-input" id="edit-folder-name" type="text" onfocus="floatLabel('field-edit-folder-name')" onblur="unfloatLabel('field-edit-folder-name')">
+    </div>
+    <div class="modal-field textarea-field" id="field-edit-folder-desc">
+      <label class="modal-label floating-idle" for="edit-folder-desc" id="lbl-edit-folder-desc">Description (optional)</label>
+      <textarea class="modal-input" id="edit-folder-desc" rows="4" onfocus="floatLabel('field-edit-folder-desc')" onblur="unfloatLabel('field-edit-folder-desc')"></textarea>
+    </div>
+    <div class="modal-footer" style="justify-content:space-between;">
+      <button class="folder-delete-btn" id="folder-delete-btn" onclick="confirmDeleteFolder()" aria-label="Delete folder">
+        <i class="fa-regular fa-trash-can"></i>
+      </button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn-secondary" onclick="closeEditFolderModal()">Cancel</button>
+        <button class="btn-primary" onclick="saveEditFolder()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+function toggleFolderDesc(){} // no-op, replaced by hover
+// Folder info tooltip hover
+document.addEventListener('DOMContentLoaded', function(){
+  var wrap = document.getElementById('folder-ctx-info-wrap');
+  var tip = document.getElementById('folder-ctx-tooltip');
+  if(!wrap || !tip) return;
+  var hideTimer;
+  wrap.addEventListener('mouseenter', function(){
+    clearTimeout(hideTimer);
+    var name = document.getElementById('folder-ctx-name').textContent;
+    var desc = document.getElementById('folder-ctx-desc-text').textContent;
+    document.getElementById('folder-ctx-tooltip-title').textContent = name;
+    var descEl = document.getElementById('folder-ctx-tooltip-desc');
+    var actionEl = document.getElementById('folder-ctx-tooltip-action');
+    if(desc){
+      descEl.textContent = desc;
+      descEl.style.display = 'block';
+    } else {
+      descEl.style.display = 'none';
+    }
+    actionEl.textContent = 'Edit folder';
+    tip.style.display = 'block';
+  });
+  wrap.addEventListener('mouseleave', function(){
+    hideTimer = setTimeout(function(){ tip.style.display = 'none'; }, 150);
+  });
+  tip.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); });
+  tip.addEventListener('mouseleave', function(){ hideTimer = setTimeout(function(){ tip.style.display = 'none'; }, 150); });
+});
+
+function exitFolder(){
+  activeFilters.folder = 'all';
+  document.getElementById('dd-folder-label').textContent = 'Folder';
+  document.getElementById('dd-folder-btn').classList.remove('filtered');
+  document.querySelectorAll('#dd-folder .dd-item').forEach(function(it){ it.classList.remove('active'); });
+  document.getElementById('folder-context-bar').style.display = 'none';
+  var repView = document.getElementById('view-reports-list'); if(repView) repView.classList.remove('folder-active');
+  updateResetState();
+  applyAllFilters();
+}
+
+function openEditFolderModal(){
+  var name = document.getElementById('folder-ctx-name').textContent;
+  var desc = document.getElementById('folder-ctx-desc-text').textContent;
+  document.getElementById('edit-folder-name').value = name;
+  document.getElementById('edit-folder-desc').value = desc;
+  document.getElementById('edit-folder-modal').classList.add('open');
+  setTimeout(function(){ document.getElementById('edit-folder-name').focus(); }, 50);
+}
+
+function closeEditFolderModal(){
+  document.getElementById('edit-folder-modal').classList.remove('open');
+}
+
+function saveEditFolder(){
+  var name = document.getElementById('edit-folder-name').value.trim();
+  var desc = document.getElementById('edit-folder-desc').value.trim();
+  if(!name) return;
+  document.getElementById('folder-ctx-name').textContent = name;
+  document.getElementById('folder-ctx-desc-text').textContent = desc;
+  document.getElementById('folder-ctx-info-wrap').style.display = '';
+  if(!desc){ document.getElementById('folder-ctx-desc').style.display='none'; document.getElementById('folder-ctx-info-btn').classList.remove('active'); }
+  // Update folder dropdown label
+  document.getElementById('dd-folder-label').textContent = name;
+  closeEditFolderModal();
+}
+
+function confirmDeleteFolder(){
+  if(confirm('Delete this folder? Reports inside will become unfiled.')){ exitFolder(); closeEditFolderModal(); }
+}
+</script>
+
+<div id="folder-delete-tip">Delete folder</div>
+<script>
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('folder-delete-btn');
+    var tip = document.getElementById('folder-delete-tip');
+    if(!btn || !tip) return;
+    btn.addEventListener('mouseenter', function(){
+      var r = btn.getBoundingClientRect();
+      tip.style.left = (r.left + r.width / 2) + 'px';
+      tip.style.top = (r.bottom + 6) + 'px';
+      tip.style.display = 'block';
+    });
+    btn.addEventListener('mouseleave', function(){
+      tip.style.display = 'none';
+    });
+  });
+})();
 </script>
 </body>
 </html>

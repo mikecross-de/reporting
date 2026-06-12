@@ -1104,7 +1104,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* ── Folder context bar ─────────────────────────────────────────────────── */
 #folder-context-bar{padding-top:0;}
-.folder-ctx-inner{display:flex;align-items:center;justify-content:space-between;padding:0 0px 16px;}
+.folder-ctx-inner{display:flex;align-items:center;justify-content:space-between;padding:0 0px 20px;}
 .folder-ctx-left{font-size:16px;color:var(--platform-80);display:flex;align-items:center;gap:12px;}
 .folder-ctx-breadcrumb-link{background:none;border:none;cursor:pointer;color:var(--crm-100);font-size:16px;font-family:var(--font);font-weight:700;padding:0;}
 .folder-ctx-breadcrumb-link:hover{text-decoration:underline;}
@@ -1368,6 +1368,21 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <svg class="nav-svg-icon" style="width:14px;height:14px;fill:currentColor;"><use href="#icon-xmark"/></svg>
               </button>
             </div>
+            <div class="dd-wrap">
+              <button class="tb-dd" id="dd-folder-btn" onclick="toggleDd('dd-folder')">
+                <span id="dd-folder-label">Folder</span>
+                <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
+              </button>
+              <div class="dd-menu right" id="dd-folder">
+                <button class="dd-item" onclick="closeAllDd();openFolderModal()">New folder</button>
+                <div class="dd-divider"></div>
+                
+                <button class="dd-item" onclick="filterFolder('development-fy26',this)">Development (FY26)</button>
+                <button class="dd-item" onclick="filterFolder('mailing-lists',this)">Mailing Lists</button>
+                <button class="dd-item" onclick="filterFolder('board',this)">Board</button>
+                <button class="dd-item" onclick="filterFolder('compliance',this)">Compliance</button>
+              </div>
+            </div>
             <div class="dd-wrap" style="margin-left:auto;">
               <button class="tb-dd" id="dd-status-btn" onclick="toggleDd('dd-status')">
                 <span id="dd-status-label">All statuses</span>
@@ -1402,21 +1417,6 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <button class="dd-item" onclick="toggleCreatorFilter('Jessica Lin',this,event)">Jessica Lin</button>
                 <button class="dd-item" onclick="toggleCreatorFilter('Heidi A.',this,event)">Heidi A.</button>
                 <button class="dd-item" onclick="toggleCreatorFilter('Cam P.',this,event)">Cam P.</button>
-              </div>
-            </div>
-            <div class="dd-wrap">
-              <button class="tb-dd" id="dd-folder-btn" onclick="toggleDd('dd-folder')">
-                <span id="dd-folder-label">Folder</span>
-                <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-caret-down"/></svg></span>
-              </button>
-              <div class="dd-menu right" id="dd-folder">
-                <button class="dd-item" onclick="closeAllDd();openFolderModal()">New folder</button>
-                <div class="dd-divider"></div>
-                
-                <button class="dd-item" onclick="filterFolder('development-fy26',this)">Development (FY26)</button>
-                <button class="dd-item" onclick="filterFolder('mailing-lists',this)">Mailing Lists</button>
-                <button class="dd-item" onclick="filterFolder('board',this)">Board</button>
-                <button class="dd-item" onclick="filterFolder('compliance',this)">Compliance</button>
               </div>
             </div>
             <button class="tb-reset-filters" id="resetFiltersBtn" onclick="resetFilters()" disabled>Reset filters</button>
@@ -3279,7 +3279,6 @@ function filterFolder(val, item){
   btn.classList.toggle('filtered', val !== 'all');
   closeAllDd();
   applyAllFilters();
-  updateResetBtn();
   // Show/hide folder context bar
   var bar = document.getElementById('folder-context-bar');
   var folderDescriptions = {
@@ -5172,17 +5171,6 @@ function resetFilters(){
   updateFilterBtnText('dd-creator-btn','Created by anyone',[]);
   updateFilterBtnText('dd-status-btn','All statuses',[]);
   document.querySelectorAll('#dd-type .dd-item, #dd-creator .dd-item, #dd-status .dd-item').forEach(function(it){ it.classList.remove('selected'); });
-  // Reset folder dropdown
-  var folderLabel = document.getElementById('dd-folder-label');
-  if(folderLabel) folderLabel.textContent = 'Folder';
-  var folderBtn = document.getElementById('dd-folder-btn');
-  if(folderBtn) folderBtn.classList.remove('filtered');
-  document.querySelectorAll('#dd-folder .dd-item').forEach(function(it){ it.classList.remove('active'); });
-  // Hide folder context bar
-  var bar = document.getElementById('folder-context-bar');
-  if(bar) bar.style.display = 'none';
-  var repView = document.getElementById('view-reports-list');
-  if(repView) repView.classList.remove('folder-active');
   // Disable reset button
   var resetBtn = document.getElementById('resetFiltersBtn');
   if(resetBtn) resetBtn.disabled = true;

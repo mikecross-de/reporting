@@ -3330,12 +3330,84 @@ function doAction(e, action, btn){
   const name = row.querySelector('.dg-name').textContent;
   closeAllDd();
   switch(action){
-    case 'view':       showView('editor'); break;
-    case 'copy':       alert('Copied "' + name + '"'); break;
+    case 'view':       openEditorRow(row); break;
+    case 'copy':
+      // Processing toast, then success, then add copy row
+      showProcessingToast('Processing…');
+      setTimeout(function(){
+        showSuccessToast('Report was copied');
+        // Clone the row and add (Copy) to the name
+        var newRow = row.cloneNode(true);
+        var newName = newRow.querySelector('.dg-name');
+        if(newName) newName.textContent = name + ' (Copy)';
+        // Update tooltip title
+        var tipTitle = newRow.querySelector('.dg-tooltip-title');
+        if(tipTitle) tipTitle.textContent = name + ' (Copy)';
+        // Clear active states on cloned dropdowns
+        newRow.querySelectorAll('.dd-menu').forEach(function(m){ m.classList.remove('open'); });
+        // Insert after current row
+        row.parentNode.insertBefore(newRow, row.nextSibling);
+        // Rebind tooltip hover on cloned row
+        var clonedWrap = newRow.querySelector('.dg-name-wrap');
+        var clonedTip = clonedWrap ? clonedWrap.querySelector('.dg-tooltip') : null;
+        var clonedIcon = clonedWrap ? clonedWrap.querySelector('.dg-info-icon') : null;
+        if(clonedWrap && clonedTip && clonedIcon){
+          var hideTimer;
+          clonedIcon.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); clonedTip.style.display='block'; });
+          clonedIcon.addEventListener('mouseleave', function(e){ if(clonedTip.contains(e.relatedTarget)) return; hideTimer=setTimeout(function(){ clonedTip.style.display='none'; },150); });
+          clonedTip.addEventListener('mouseenter', function(){ clearTimeout(hideTimer); });
+          clonedTip.addEventListener('mouseleave', function(){ hideTimer=setTimeout(function(){ clonedTip.style.display='none'; },150); });
+        }
+        // Rebind freq tooltip on cloned row
+        var scheduleMap = { 'Weekly': 'Scheduled weekly on Monday at 12:00 AM', 'Monthly': 'Scheduled monthly on the 1st at 12:00 AM' };
+        var clonedFreqTd = newRow.cells[3];
+        if(clonedFreqTd){
+          var freqSpan = clonedFreqTd.querySelector('span');
+          if(freqSpan && scheduleMap[freqSpan.textContent.trim()]){
+            var freqText = freqSpan.textContent.trim();
+            var oldTip = freqSpan.querySelector('.freq-tooltip');
+            if(oldTip) oldTip.remove();
+            var newFreqTip = document.createElement('div');
+            newFreqTip.className = 'freq-tooltip';
+            newFreqTip.textContent = scheduleMap[freqText];
+            document.body.appendChild(newFreqTip);
+            freqSpan.addEventListener('mouseenter', function(){
+              var r = freqSpan.getBoundingClientRect();
+              newFreqTip.style.left = (r.left + r.width/2) + 'px';
+              newFreqTip.style.top = (r.bottom + 4) + 'px';
+              newFreqTip.style.display = 'block';
+            });
+            freqSpan.addEventListener('mouseleave', function(){ newFreqTip.style.display='none'; });
+          }
+        }
+        // Re-apply filters to show/hide new row correctly
+        setTimeout(applyAllFilters, 50);
+      }, 1200);
+      break;
     case 'export':     exportReport(); break;
     case 'move':
       pendingMoveRow = row;
       document.getElementById('move-report-name').textContent = name;
+      // Pre-select current folder if one exists
+      var currentFolder = row.querySelectorAll('td')[4] ? row.querySelectorAll('td')[4].textContent.trim() : '';
+      var isChange = currentFolder && currentFolder !== '—';
+      document.querySelector('#modal-move-folder .modal-title').textContent = isChange ? 'Change folder' : 'Add to folder';
+      // Reset selection then pre-select current
+      document.querySelectorAll('#dd-move-folder .dd-item').forEach(function(it){ it.classList.remove('active'); });
+      pendingMoveFolder = '';
+      document.getElementById('move-folder-value').textContent = '';
+      unfloatLabel('field-move-folder');
+      if(isChange){
+        var matchItem = Array.from(document.querySelectorAll('#dd-move-folder .dd-item')).find(function(it){ return it.textContent.trim() === currentFolder; });
+        if(matchItem){
+          matchItem.classList.add('active');
+          pendingMoveFolder = currentFolder;
+          document.getElementById('move-folder-value').textContent = currentFolder;
+          // Idle float — platform-100, not green (not focused)
+          var lbl = document.getElementById('lbl-move-folder');
+          if(lbl){ lbl.classList.remove('floating'); lbl.classList.add('floating-idle'); }
+        }
+      }
       document.getElementById('modal-move-folder').classList.add('open');
       break;
     case 'deactivate':
@@ -3831,8 +3903,12 @@ function selectMoveFolder(val, item){
 }
 function confirmMoveFolder(){
   if(pendingMoveRow && pendingMoveFolder){
-    var folderCell = pendingMoveRow.querySelectorAll('td')[3];
-    if(folderCell) folderCell.textContent = pendingMoveFolder;
+    var folderCell = pendingMoveRow.querySelectorAll('td')[4];
+    if(folderCell){
+      folderCell.textContent = pendingMoveFolder;
+      folderCell.style.color = 'var(--platform-100)';
+    }
+    pendingMoveRow.dataset.folder = pendingMoveFolder.toLowerCase().replace(/\s+/g,'-');
     var actionBtn = pendingMoveRow.querySelector('.dd-item[onclick*="move"]');
     if(actionBtn) actionBtn.textContent = 'Change Folder';
   }
@@ -4012,6 +4088,23 @@ function exportReport(){
       toast.classList.remove('visible');
     }, 2000);
   }, 3500);
+}
+function showProcessingToast(text){
+  var toast = document.getElementById('export-toast');
+  var iconWrap = document.getElementById('toast-icon-wrap');
+  var msg = document.getElementById('toast-msg');
+  iconWrap.innerHTML = '<div class="toast-spinner"></div>';
+  msg.textContent = text;
+  toast.classList.add('visible');
+}
+function showSuccessToast(text){
+  var toast = document.getElementById('export-toast');
+  var iconWrap = document.getElementById('toast-icon-wrap');
+  var msg = document.getElementById('toast-msg');
+  iconWrap.innerHTML = '<i class="fa-solid fa-circle-check" style="color:#357A06;font-size:20px;"></i>';
+  msg.textContent = text;
+  toast.classList.add('visible');
+  setTimeout(function(){ toast.classList.remove('visible'); }, 2500);
 }
 function showToast(text){
   var toast = document.getElementById('export-toast');

@@ -1459,7 +1459,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <thead>
               <tr>
                 <th class="sort sorted" data-sort="asc"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Name</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
-                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Last run</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
+                <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Last viewed</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
                 <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Last modified</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
                 <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Frequency</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
                 <th class="sort"><div class="th-wrap"><div class="th-label-group"><span class="th-label" onclick="toggleSort(this.closest('th'))">Folder</span><i class="th-sort-indicator fa-solid fa-arrow-up"></i></div></div></th>
@@ -2229,7 +2229,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
             <span class="details-meta-value">Apr 21, 2026 · Mike Cross</span>
           </div>
           <div class="details-meta-row">
-            <span class="details-meta-label">Last run</span>
+            <span class="details-meta-label">Last viewed</span>
             <span class="details-meta-value">6/11/2026, 10:15 AM · Jessica Lin</span>
           </div>
         </div>
@@ -6291,7 +6291,7 @@ function toggleSort(th){
   updateSortIndicator(th, direction);
 
   var label = (th.querySelector('.th-label') || th).textContent.trim();
-  var isDate = ['Created','Last run','Last modified'].indexOf(label) > -1;
+  var isDate = ['Created','Last viewed','Last modified'].indexOf(label) > -1;
 
   var rows = Array.from(tbody.querySelectorAll('tr')).filter(function(r){ return r.style.display !== 'none'; });
   var hidden = Array.from(tbody.querySelectorAll('tr')).filter(function(r){ return r.style.display === 'none'; });

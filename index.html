@@ -150,7 +150,7 @@ input,select,textarea{font-family:var(--font);}
 /* Toolbar row 1 — search + segmented tabs + dropdowns */
 .rep-panel{background:var(--white);border-radius:10px;margin-bottom:18px;padding:0 24px 24px;}
 .rep-toolbars-wrap{background:var(--white);padding:24px 0 24px;}
-.folder-active .rep-toolbars-wrap{padding:24px 0 16px;}
+
 .rep-toolbar-1{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;}
 .tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);min-width:350px;border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:1 1 260px;max-width:350px;transition:border-color .15s;}
 .tb-search:focus-within{border-color:var(--crm-100);border-width:2px;padding:0 11px;}
@@ -232,7 +232,7 @@ input,select,textarea{font-family:var(--font);}
 .dg-name-row{display:flex;align-items:center;gap:4px;flex-wrap:wrap;margin-bottom:6px;}
 .dg-name{font-size:14px;font-weight:700;color:var(--platform-100);cursor:pointer;}
 .dg-name:hover{color:var(--crm-100);text-decoration:underline;}
-.dg-info-icon{color:var(--platform-60);font-size:14px;cursor:pointer;display:inline-flex;align-items:center;margin-left:6px;}
+.dg-info-icon{color:var(--platform-60);font-size:14px;cursor:pointer;display:inline-flex;align-items:center;margin-left:8px;}
 .dg-info-icon:hover{color:var(--platform-100);}
 .badge-recency{display:inline-flex;align-items:center;background:#D9E9CD;color:#317005;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;}
 .badge-recency.muted{background:#E9EAEA;color:#525759;}
@@ -1104,13 +1104,15 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* ── Folder context bar ─────────────────────────────────────────────────── */
 #folder-context-bar{padding-top:0;}
-.folder-ctx-inner{display:flex;align-items:center;justify-content:space-between;padding:0 0px 20px;}
+.folder-ctx-inner{display:flex;align-items:center;justify-content:space-between;padding:24px 0 0px;}
 .folder-ctx-left{font-size:16px;color:var(--platform-80);display:flex;align-items:center;gap:12px;}
 .folder-ctx-breadcrumb-link{background:none;border:none;cursor:pointer;color:var(--crm-100);font-size:16px;font-family:var(--font);font-weight:700;padding:0;}
+.folder-ctx-exit-btn{background:none;border:none;cursor:pointer;color:var(--crm-100);font-size:14px;font-family:var(--font);font-weight:400;padding:0;margin-left:0;}
+.folder-ctx-exit-btn:hover{color:var(--crm-100);text-decoration:underline;}
 .folder-ctx-breadcrumb-link:hover{text-decoration:underline;}
 .folder-ctx-sep{color:var(--platform-40);font-size:16px;}
 .folder-ctx-name{font-size:16px;font-weight:600;color:var(--platform-100);}
-.folder-name-info-group{display:inline-flex;align-items:center;gap:4px;}
+.folder-name-info-group{display:inline-flex;align-items:center;gap:6px;}
 .folder-ctx-icon-btn{background:none;border:none;cursor:pointer;color:var(--platform-60);font-size:14px;padding:2px;display:inline-flex;align-items:center;border-radius:3px;}
 .folder-ctx-icon-btn:hover{color:var(--platform-100);}
 .folder-ctx-icon-btn.active{color:var(--crm-100);}
@@ -1359,6 +1361,31 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
       </div>
 
         <div class="rep-panel">
+        <!-- Folder context bar — shown when a folder is active, above toolbar -->
+        <div id="folder-context-bar" style="display:none;">
+          <div class="folder-ctx-inner">
+            <div class="folder-ctx-left">
+              <span class="folder-name-info-group">
+                <strong class="folder-ctx-name" id="folder-ctx-name">Development (FY26)</strong>
+                <div class="folder-ctx-info-wrap" id="folder-ctx-info-wrap" style="position:relative;display:inline-flex;align-items:center;">
+                  <button class="folder-ctx-icon-btn" id="folder-ctx-info-btn" aria-label="View folder description">
+                    <i class="fa-regular fa-message-lines"></i>
+                  </button>
+                  <div class="folder-ctx-tooltip" id="folder-ctx-tooltip" style="display:none;">
+                      <div class="dg-tooltip-title" id="folder-ctx-tooltip-title"></div>
+                    <div class="dg-tooltip-desc" id="folder-ctx-tooltip-desc"></div>
+                    <div class="dg-tooltip-action"><button class="dg-tooltip-btn" id="folder-ctx-tooltip-action" onclick="openEditFolderModal()">Edit folder</button></div>
+                  </div>
+                </div>
+              </span>
+              <button class="folder-ctx-exit-btn" onclick="exitFolder()">Exit folder</button>
+            </div>
+          </div>
+          <div class="folder-ctx-desc" id="folder-ctx-desc" style="display:none;">
+            <span id="folder-ctx-desc-text"></span>
+          </div>
+        </div>
+
         <div class="rep-toolbars-wrap">
           <div class="rep-toolbar-1">
             <div class="tb-search">
@@ -1423,32 +1450,6 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
           </div>
         </div>
 
-        <!-- Folder context bar — shown when a folder is active -->
-        <div id="folder-context-bar" style="display:none;">
-          <div class="folder-ctx-inner">
-            <div class="folder-ctx-left">
-              <button class="folder-ctx-breadcrumb-link" onclick="exitFolder()">Reports</button>
-              <span class="folder-ctx-sep">/</span>
-              <span class="folder-name-info-group">
-                <strong class="folder-ctx-name" id="folder-ctx-name">Development (FY26)</strong>
-                <div class="folder-ctx-info-wrap" id="folder-ctx-info-wrap" style="position:relative;display:inline-flex;align-items:center;">
-                  <button class="folder-ctx-icon-btn" id="folder-ctx-info-btn" aria-label="View folder description">
-                    <i class="fa-regular fa-circle-info"></i>
-                  </button>
-                  <div class="folder-ctx-tooltip" id="folder-ctx-tooltip" style="display:none;">
-                      <div class="dg-tooltip-title" id="folder-ctx-tooltip-title"></div>
-                    <div class="dg-tooltip-desc" id="folder-ctx-tooltip-desc"></div>
-                    <div class="dg-tooltip-action"><button class="dg-tooltip-btn" id="folder-ctx-tooltip-action" onclick="openEditFolderModal()">Edit folder</button></div>
-                  </div>
-                </div>
-              </span>
-            </div>
-          </div>
-          <div class="folder-ctx-desc" id="folder-ctx-desc" style="display:none;">
-            <span id="folder-ctx-desc-text"></span>
-          </div>
-        </div>
-
         <div class="rep-table-card">
           <div class="rep-tabs">
             <button class="rep-tab active" onclick="switchTab(this)">All</button>
@@ -1470,7 +1471,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="yes" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="mike-cross" data-folder="development-fy26">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Major Donors FY26 YTD</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Major Donors FY26 YTD</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/28/2026 by Mike Cross</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
@@ -1509,7 +1510,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="jessica-lin" data-folder="none">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Lapsing donors $1k+</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Lapsing donors $1k+</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 3/12/2026 by Jessica Lin</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
@@ -1550,7 +1551,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="yes" data-status="active" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="mailing-lists">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Spring Appeal — Follow-up List</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Spring Appeal — Follow-up List</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 11/5/2025 by Mike Cross</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
@@ -1588,7 +1589,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Year-End Campaign Revenue</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Year-End Campaign Revenue</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 9/3/2025 by Heidi Anderson</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
@@ -1627,7 +1628,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="no" data-status="active" data-scheduled="no" data-type="transaction" data-creator="heidi-a" data-folder="development-fy26">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Recurring Gifts — Q4</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Recurring Gifts — Q4</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 2/3/2026 by Heidi Anderson</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
@@ -1666,7 +1667,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Unengaged — Last 12 Months</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Unengaged — Last 12 Months</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 8/14/2025 by Mike Cross</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
@@ -1704,7 +1705,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="no" data-status="active" data-scheduled="yes" data-type="transaction" data-creator="cam-p" data-folder="compliance">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Grant Reporting — 501(c)(3)</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Grant Reporting — 501(c)(3)</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Transaction report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 1/10/2026 by Cam Patterson</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
@@ -1743,7 +1744,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
               <tr data-recent="no" data-status="inactive" data-scheduled="no" data-type="constituent" data-creator="mike-cross" data-folder="none">
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
-                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Missing Primary Email</span><span class="dg-info-icon"><i class="fa-regular fa-circle-info"></i></span>
+                    <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Missing Primary Email</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
                     <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 10/22/2025 by Mike Cross</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">

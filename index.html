@@ -6387,8 +6387,8 @@ document.addEventListener('DOMContentLoaded', function(){
     </button>
     <div class="modal-title">Edit folder</div>
     <div style="margin-top:24px;" class="modal-field" id="field-edit-folder-name">
-      <label class="modal-label floating-idle" for="edit-folder-name" id="lbl-edit-folder-name">Folder name</label>
-      <input class="modal-input" id="edit-folder-name" type="text" onfocus="floatLabel('field-edit-folder-name')" onblur="unfloatLabel('field-edit-folder-name')">
+      <label class="modal-label floating-idle" for="edit-folder-name" id="lbl-edit-folder-name">Folder name <span>*</span></label>
+      <input class="modal-input" id="edit-folder-name" type="text" onfocus="floatLabel('field-edit-folder-name')" onblur="unfloatLabel('field-edit-folder-name')" oninput="document.getElementById('btn-save-folder').disabled=!this.value.trim()">
     </div>
     <div class="modal-field textarea-field" id="field-edit-folder-desc">
       <label class="modal-label floating-idle" for="edit-folder-desc" id="lbl-edit-folder-desc">Description (optional)</label>
@@ -6400,7 +6400,7 @@ document.addEventListener('DOMContentLoaded', function(){
       </button>
       <div style="display:flex;gap:8px;">
         <button class="btn-secondary" onclick="closeEditFolderModal()">Cancel</button>
-        <button class="btn-primary" onclick="saveEditFolder()">Save</button>
+        <button class="btn-primary" id="btn-save-folder" onclick="saveEditFolder()">Save</button>
       </div>
     </div>
   </div>
@@ -6454,6 +6454,8 @@ function openEditFolderModal(){
   var desc = document.getElementById('folder-ctx-desc-text').textContent;
   document.getElementById('edit-folder-name').value = name;
   document.getElementById('edit-folder-desc').value = desc;
+  // Save enabled only if name has content (it will, since folder name always exists)
+  document.getElementById('btn-save-folder').disabled = !name.trim();
   document.getElementById('edit-folder-modal').classList.add('open');
   setTimeout(function(){ document.getElementById('edit-folder-name').focus(); }, 50);
 }
@@ -6465,7 +6467,11 @@ function closeEditFolderModal(){
 function saveEditFolder(){
   var name = document.getElementById('edit-folder-name').value.trim();
   var desc = document.getElementById('edit-folder-desc').value.trim();
-  if(!name) return;
+  if(!name){
+    document.getElementById('edit-folder-name').style.borderColor = 'var(--red-100)';
+    return;
+  }
+  document.getElementById('edit-folder-name').style.borderColor = '';
   document.getElementById('folder-ctx-name').textContent = name;
   document.getElementById('folder-ctx-desc-text').textContent = desc;
   document.getElementById('folder-ctx-info-wrap').style.display = '';

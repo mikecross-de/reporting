@@ -186,7 +186,7 @@ input,select,textarea{font-family:var(--font);}
 
 /* Dropdown menu */
 .dd-wrap{position:relative;display:inline-flex;}
-.dd-menu{display:none;position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border:none;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);min-width:180px;z-index:100;padding:8px 0;max-height:280px;overflow-y:auto;}
+.dd-menu{position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);z-index:200;min-width:100%;padding:8px 0;display:none;}
 .dd-menu.open{display:block;}
 .dd-menu.right{left:auto;right:0;}
 .dd-divider{height:1px;background:var(--platform-20);margin:4px 0;}
@@ -880,7 +880,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* ─────────── ACTION DROPDOWN ─────────── */
 .dd-wrap{position:relative;}
-.dd-menu{display:none;position:absolute;top:calc(100% + 4px);right:0;background:var(--white);border:1px solid var(--platform-10);border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.10);min-width:180px;z-index:100;padding:4px 0;}
+.dd-menu{position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);z-index:200;min-width:100%;padding:8px 0;display:none;}
 .dd-menu.open{display:block;}
 .dd-menu.open-up{top:auto;bottom:calc(100% + 4px);}
 .dd-item{display:flex;align-items:center;gap:6px;padding:10px 16px;font-size:15px;color:var(--platform-100);cursor:pointer;white-space:nowrap;border:none;background:none;width:100%;text-align:left;font-family:var(--font);}

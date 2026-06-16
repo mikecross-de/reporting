@@ -1120,6 +1120,15 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .folder-ctx-desc{padding:0 20px 12px;font-size:14px;color:var(--platform-80);line-height:1.5;}
 .folder-ctx-tooltip{position:absolute;top:calc(100% + 6px);left:0;z-index:500;min-width:400px;max-width:450px;pointer-events:auto;background:#1a1f22;border-radius:3px;padding:8px 16px;}
 
+
+/* ── Inactive report row ─────────────────────────────────────────────────── */
+tr[data-status="inactive"] .dg-name{ color:var(--platform-60); cursor:not-allowed; pointer-events:none; }
+tr[data-status="inactive"] .dg-name:hover{ color:var(--platform-60); text-decoration:none; cursor:not-allowed; }
+tr[data-status="inactive"] button[onclick*="'view'"]{ display:none; }
+tr[data-status="inactive"] .dg-type-line{ color:var(--platform-60); }
+tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
+
+
 </style>
 </head>
 <body>
@@ -1668,7 +1677,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
                     <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Unengaged — Last 12 Months</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
-                    <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 8/14/2025 by Mike Cross</span></div>
+                    <div class="dg-type-line"><span>Inactive</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 8/14/2025 by Mike Cross</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Unengaged — Last 12 Months</div>
@@ -1745,7 +1754,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
                 <td class="dg-name-cell">
                   <div class="dg-name-wrap">
                     <span class="dg-name" onclick="openEditorRow(this.closest('tr'))">Missing Primary Email</span><span class="dg-info-icon"><i class="fa-regular fa-message-lines"></i></span>
-                    <div class="dg-type-line"><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 10/22/2025 by Mike Cross</span></div>
+                    <div class="dg-type-line"><span>Inactive</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Constituent report</span><span class="dg-dot" style="color:var(--platform-40);">·</span><span>Created 10/22/2025 by Mike Cross</span></div>
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Missing Primary Email</div>
@@ -6587,5 +6596,236 @@ function confirmDeleteFolder(){
   });
 })();
 </script>
+
+<script>
+// ── Column header menu ────────────────────────────────────────────────────────
+(function(){
+  var _activeBtn = null;
+
+  function getMenu(){ return document.getElementById('th-col-menu'); }
+
+  function closeMenu(){
+    var m = getMenu();
+    if(m) m.classList.remove('open');
+    if(_activeBtn){ _activeBtn.classList.remove('active'); _activeBtn = null; }
+  }
+
+  window.openThMenu = function(e, btn){
+    e.stopPropagation();
+    var m = getMenu();
+    if(!m) return;
+    var alreadyOpen = m.classList.contains('open') && _activeBtn === btn;
+    closeMenu();
+    if(alreadyOpen) return;
+    var th = btn.closest('th');
+    var isNumeric = ['last-gift','lifetime','lapsed-days','churn-risk'].indexOf(th.dataset.col) > -1;
+    m.querySelectorAll('.th-numeric-section').forEach(function(el){ el.style.display = isNumeric ? '' : 'none'; });
+    _activeBtn = btn;
+    btn.classList.add('active');
+    m.classList.add('open');
+    var r = btn.getBoundingClientRect();
+    m.style.top  = (r.bottom + 4) + 'px';
+    m.style.left = r.left + 'px';
+    setTimeout(function(){
+      document.addEventListener('click', function _c(ev){
+        if(!m.contains(ev.target)){ closeMenu(); document.removeEventListener('click',_c); }
+      });
+    }, 0);
+  };
+
+  function colSort(dir){
+    if(!_activeBtn) return;
+    var th = _activeBtn.closest('th');
+    document.querySelectorAll('#ed-table th.sorted').forEach(function(t){ t.classList.remove('sorted'); t.dataset.sort=''; });
+    th.classList.add('sorted');
+    th.dataset.sort = dir;
+    var ind = th.querySelector('.th-sort-indicator');
+    if(ind) ind.className = 'th-sort-indicator fa-solid ' + (dir === 'asc' ? 'fa-arrow-up' : 'fa-arrow-down');
+  }
+
+  function colAction(msg){ if(typeof showToast === 'function') showToast(msg); }
+
+  function colRenameActive(){
+    if(!_activeBtn) return;
+    var th = _activeBtn.closest('th');
+    var label = th.querySelector('.th-label');
+    var cur = label ? label.textContent.trim() : '';
+    var inp = document.createElement('input');
+    inp.className = 'th-rename-input';
+    inp.value = cur;
+    if(label){ label.textContent = ''; label.appendChild(inp); }
+    inp.focus(); inp.select();
+    function done(){ var v = inp.value.trim() || cur; if(label){ label.textContent = v; } }
+    inp.onblur = done;
+    inp.onkeydown = function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); done(); } if(ev.key==='Escape'){ inp.value=cur; done(); } };
+  }
+
+  function colDeleteActive(){
+    if(!_activeBtn) return;
+    var th = _activeBtn.closest('th');
+    var idx = Array.from(th.parentElement.children).indexOf(th);
+    th.style.display = 'none';
+    document.querySelectorAll('#ed-table tbody tr').forEach(function(row){
+      var td = row.children[idx]; if(td) td.style.display = 'none';
+    });
+  }
+
+  window.colSortToggle = function(label){
+    var th = label.closest('th');
+    var cur = th.dataset.sort || '';
+    document.querySelectorAll('#ed-table th.sorted').forEach(function(t){ t.classList.remove('sorted'); t.dataset.sort=''; });
+    th.classList.add('sorted');
+    var next = cur === 'asc' ? 'desc' : 'asc';
+    th.dataset.sort = next;
+    var ind = th.querySelector('.th-sort-indicator');
+    if(ind) ind.className = 'th-sort-indicator fa-solid ' + (next === 'asc' ? 'fa-arrow-up' : 'fa-arrow-down');
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    var m = getMenu();
+    if(!m) return;
+    m.querySelector('#thm-sort-asc').onclick  = function(){ colSort('asc');  closeMenu(); };
+    m.querySelector('#thm-sort-desc').onclick = function(){ colSort('desc'); closeMenu(); };
+    m.querySelector('#thm-filter').onclick    = function(){ colAction('Filter');  closeMenu(); };
+    m.querySelector('#thm-group').onclick = function(){
+      var th = _activeBtn ? _activeBtn.closest('th') : null;
+      var colName = th ? (th.querySelector('.th-label') || th).textContent.trim() : 'Column';
+      closeMenu();
+      openGroupModal(colName);
+    };
+    m.querySelector('#thm-rename').onclick    = function(){ colRenameActive();    closeMenu(); };
+    m.querySelector('#thm-copy').onclick      = function(){ colAction('Column copied'); closeMenu(); };
+    m.querySelector('#thm-delete').onclick    = function(){ colDeleteActive();    closeMenu(); };
+    if(m.querySelector('#thm-sum'))   m.querySelector('#thm-sum').onclick   = function(){ colAction('Sum applied');     closeMenu(); };
+    if(m.querySelector('#thm-min'))   m.querySelector('#thm-min').onclick   = function(){ colAction('Min applied');     closeMenu(); };
+    if(m.querySelector('#thm-max'))   m.querySelector('#thm-max').onclick   = function(){ colAction('Max applied');     closeMenu(); };
+    if(m.querySelector('#thm-avg'))   m.querySelector('#thm-avg').onclick   = function(){ colAction('Average applied'); closeMenu(); };
+
+    // Editor table hover
+    document.querySelectorAll('#ed-table thead th').forEach(function(th){
+      th.addEventListener('mouseenter', function(){
+        var kb = th.querySelector('.th-kebab');
+        if(kb && !kb.classList.contains('active')) kb.style.opacity='1';
+        var ind = th.querySelector('.th-sort-indicator');
+        if(ind && !th.classList.contains('sorted')){ ind.style.opacity='1'; ind.style.color='var(--platform-60)'; }
+      });
+      th.addEventListener('mouseleave', function(){
+        var kb = th.querySelector('.th-kebab');
+        if(kb && !kb.classList.contains('active')) kb.style.opacity='0';
+        var ind = th.querySelector('.th-sort-indicator');
+        if(ind && !th.classList.contains('sorted')){ ind.style.opacity='0'; ind.style.color=''; }
+      });
+      var ind = th.querySelector('.th-sort-indicator');
+      if(ind) ind.addEventListener('click', function(e){ e.stopPropagation(); if(typeof colSortToggle==='function') colSortToggle(th.querySelector('.th-label') || th); });
+    });
+  });
+})();
+</script>
+
+
+<div class="modal-overlay" id="group-modal" onclick="if(event.target===this)closeGroupModal()">
+  <div class="modal" style="max-width:480px;">
+    <button class="modal-close" onclick="closeGroupModal()" aria-label="Close">
+      <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
+    </button>
+    <div class="modal-title" id="group-modal-title">Group by Column</div>
+    <div style="margin-top:20px;">
+      <label style="font-size:14px;font-weight:600;color:var(--platform-100);display:block;margin-bottom:16px;" id="group-col-label">Grouping by: <span style="color:var(--platform-60);font-weight:400;" id="group-col-name">Name</span></label>
+
+      <!-- Sort group headers -->
+      <div style="margin-bottom:20px;">
+        <label style="font-size:14px;color:var(--platform-80);display:block;margin-bottom:10px;">Sort group headers</label>
+        <div style="display:flex;align-items:center;gap:12px;">
+          <!-- Sort by -->
+          <div class="dd-wrap" style="flex:1;">
+            <button class="tb-dd" id="group-sort-by-btn" onclick="toggleDd('dd-group-sort-by')" style="width:100%;justify-content:space-between;">
+              <span id="group-sort-by-label">By value</span>
+              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
+            </button>
+            <div class="dd-menu" id="dd-group-sort-by">
+              <button class="dd-item active" onclick="setGroupSortBy('By value',this)">By value</button>
+              <button class="dd-item" onclick="setGroupSortBy('By number of items in group',this)">By number of items in group</button>
+            </div>
+          </div>
+          <!-- Direction -->
+          <div class="dd-wrap" style="flex:1;">
+            <button class="tb-dd" id="group-sort-dir-btn" onclick="toggleDd('dd-group-sort-dir')" style="width:100%;justify-content:space-between;">
+              <span id="group-sort-dir-label">Ascending</span>
+              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
+            </button>
+            <div class="dd-menu" id="dd-group-sort-dir">
+              <button class="dd-item active" onclick="setGroupSortDir('Ascending',this)">Ascending</button>
+              <button class="dd-item" onclick="setGroupSortDir('Descending',this)">Descending</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collapse to one row -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+        <input type="checkbox" id="group-collapse-checkbox" style="width:16px;height:16px;accent-color:var(--crm-100);cursor:pointer;">
+        <label for="group-collapse-checkbox" style="font-size:14px;color:var(--platform-100);cursor:pointer;">Collapse group to one row</label>
+      </div>
+
+      <!-- Divider -->
+      <div style="height:1px;background:var(--platform-20);margin-bottom:16px;"></div>
+
+      <!-- Remove grouping -->
+      <button class="btn-secondary" onclick="removeGrouping()" style="width:100%;justify-content:center;">Remove this grouping</button>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" onclick="closeGroupModal()">Cancel</button>
+      <button class="btn-primary" onclick="applyGrouping()">Apply</button>
+    </div>
+  </div>
+</div>
+
+
+<script>
+var _groupColName = '';
+
+function openGroupModal(colName){
+  _groupColName = colName || 'Column';
+  document.getElementById('group-col-name').textContent = _groupColName;
+  document.getElementById('group-modal-title').textContent = 'Group by ' + _groupColName;
+  // Reset to defaults
+  setGroupSortBy('By value', document.querySelector('#dd-group-sort-by .dd-item'));
+  setGroupSortDir('Ascending', document.querySelector('#dd-group-sort-dir .dd-item'));
+  document.getElementById('group-collapse-checkbox').checked = false;
+  document.getElementById('group-modal').classList.add('open');
+}
+
+function closeGroupModal(){
+  document.getElementById('group-modal').classList.remove('open');
+}
+
+function setGroupSortBy(val, itemEl){
+  document.getElementById('group-sort-by-label').textContent = val;
+  document.querySelectorAll('#dd-group-sort-by .dd-item').forEach(function(it){ it.classList.remove('active'); });
+  if(itemEl) itemEl.classList.add('active');
+  closeAllDd();
+}
+
+function setGroupSortDir(val, itemEl){
+  document.getElementById('group-sort-dir-label').textContent = val;
+  document.querySelectorAll('#dd-group-sort-dir .dd-item').forEach(function(it){ it.classList.remove('active'); });
+  if(itemEl) itemEl.classList.add('active');
+  closeAllDd();
+}
+
+function applyGrouping(){
+  var sortBy = document.getElementById('group-sort-by-label').textContent;
+  var sortDir = document.getElementById('group-sort-dir-label').textContent;
+  var collapse = document.getElementById('group-collapse-checkbox').checked;
+  showToast('Grouped by ' + _groupColName);
+  closeGroupModal();
+}
+
+function removeGrouping(){
+  showToast('Grouping removed');
+  closeGroupModal();
+}
+</script>
+
 </body>
 </html>

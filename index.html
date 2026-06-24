@@ -152,10 +152,11 @@ input,select,textarea{font-family:var(--font);}
 .rep-toolbars-wrap{background:var(--white);padding:24px 0 24px;}
 
 .rep-toolbar-1{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;}
-.tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);min-width:350px;border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:1 1 260px;max-width:350px;transition:border-color .15s;}
-.tb-search:focus-within{border-color:var(--crm-100);border-width:2px;padding:0 11px;}
-.tb-search input{flex:1;border:none;outline:none;font-size:16px;color:var(--platform-100);background:transparent;}
-.tb-search input::placeholder{color:var(--platform-40);}
+.tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;flex:1 1 260px;max-width:350px;transition:border-color .15s;}
+.tb-search:hover{border-color:var(--platform-100);}
+.tb-search:focus-within{border-color:var(--crm-100);}
+.tb-search input{flex:1;border:none;outline:none;font-size:16px;line-height:1;font-family:var(--font);color:var(--platform-100);background:transparent;padding:0 0 2px;display:block;}
+.tb-search input::placeholder{color:var(--platform-60);}
 .tb-search-clear{display:none;background:none;border:none;cursor:pointer;padding:2px;color:var(--platform-60);flex-shrink:0;align-items:center;justify-content:center;transition:color .12s;}
 .tb-search-clear:hover{color:var(--platform-100);}
 .tb-pills{display:inline-flex;gap:6px;flex-shrink:0;}
@@ -395,10 +396,10 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .nr-try-icon svg{width:16px;height:16px;}
 .nr-try-text{font-size:14px;color:var(--platform-100);line-height:18px;font-weight:400;}
 
-.nr-search-dd{display:flex;align-items:center;gap:8px;border:1px solid var(--platform-40);border-radius:4px;padding:0 16px;height:56px;background:var(--white);cursor:text;transition:border-color .15s;}
+.nr-search-dd{display:flex;align-items:center;gap:8px;border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;background:var(--white);cursor:text;transition:border-color .15s;}
 .nr-search-dd:hover{border-color:var(--platform-100);}
 .nr-search-dd:focus-within{border-color:var(--crm-100);}
-.nr-search-dd input{flex:1;border:none;outline:none;font-size:16px;font-family:var(--font);color:var(--platform-100);background:transparent;min-width:0;}
+.nr-search-dd input{flex:1;border:none;outline:none;font-size:16px;line-height:1;font-family:var(--font);color:var(--platform-100);background:transparent;min-width:0;padding:0 0 2px;display:block;}
 .nr-search-dd input::placeholder{color:var(--platform-60);}
 .nr-dd-arrow{transition:transform .15s;}
 .nr-search-dd:focus-within .nr-dd-arrow{transform:rotate(180deg);}
@@ -445,6 +446,15 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .nr-blank-entity-ic.purple{color:var(--penny-200);}
 .nr-blank-entity-name{font-size:15px;font-weight:700;color:var(--platform-100);}
 .nr-blank-entity-desc{font-size:13px;color:var(--platform-60);line-height:18px;}
+.nr-pill{padding:6px 12px;font-size:14px;font-weight:400;line-height:18px;border:1px solid var(--platform-40);border-radius:39px;background:var(--white);color:var(--platform-100);cursor:pointer;transition:background .12s,border-color .12s;font-family:var(--font);display:inline-flex;align-items:center;gap:4px;}
+.nr-pill:hover{background:var(--platform-10);border-color:var(--platform-40);}
+.nr-pill.active{background:var(--crm-100);border:1px solid var(--crm-100);color:var(--white);font-weight:700;}
+.nr-tmpl-row{display:flex;flex-direction:column;gap:6px;padding:12px 16px;border:none;border-bottom:1px solid var(--platform-10);background:var(--white);cursor:pointer;text-align:left;font-family:var(--font);width:100%;transition:background .1s;}
+.nr-tmpl-row:last-child{border-bottom:none;}
+.nr-tmpl-row:hover{background:var(--platform-5);}
+.nr-tmpl-row.selected{background:var(--crm-10);}
+.nr-tmpl-name{font-size:16px;font-weight:600;color:var(--platform-100);line-height:21px;}
+.nr-tmpl-desc{font-size:14px;color:var(--platform-80);line-height:18px;}
 
 /* ═══ EDITOR ═══ */
 .ed-page{padding:24px 32px 24px;max-width:1500px;}
@@ -829,10 +839,11 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* ─────────── TOOLBAR ─────────── */
 .toolbar{background:var(--white);border-radius:4px 4px 0 0;padding:16px 20px;margin-bottom:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-.tb-search{display:flex;align-items:center;gap:8px;border:1px solid var(--platform-20);border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:0 1 280px;transition:border-color .15s;}
-.tb-search:focus-within{border-color:var(--crm-100);border-width:2px;padding:0 11px;}
-.tb-search input{flex:1;border:none;outline:none;font-size:15px;color:var(--platform-100);background:transparent;}
-.tb-search input::placeholder{color:var(--platform-40);}
+.tb-search{display:flex;align-items:center;gap:8px;border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:0 1 280px;transition:border-color .15s;}
+.tb-search:hover{border-color:var(--platform-100);}
+.tb-search:focus-within{border-color:var(--crm-100);}
+.tb-search input{flex:1;border:none;outline:none;font-size:16px;line-height:1;font-family:var(--font);color:var(--platform-100);background:transparent;padding:0 0 2px;display:block;}
+.tb-search input::placeholder{color:var(--platform-60);}
 .tb-search-clear{display:none;background:none;border:none;cursor:pointer;padding:2px;color:var(--platform-60);flex-shrink:0;align-items:center;justify-content:center;transition:color .12s;}
 .tb-search-clear:hover{color:var(--platform-100);}
 .tb-pills{display:flex;gap:6px;align-items:center;}
@@ -2145,63 +2156,174 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
 
     <!-- New Report Modal -->
     <div class="modal-overlay" id="modal-new-report">
-      <div class="modal" role="dialog" aria-labelledby="nr-modal-title" style="max-width:520px;overflow:visible;">
+      <div class="modal" role="dialog" aria-labelledby="nr-modal-title" style="max-width:700px;overflow:visible;padding:24px 24px 0;">
         <button class="modal-close" onclick="closeNewReportModal()" aria-label="Close">
           <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
         </button>
-        <div class="modal-title" style="margin-bottom:24px;">New Report</div>
-        <div style="position:relative;margin-bottom:16px;">
-          <div class="nr-search-dd" id="nr-search-dd" onclick="openNrDropdown()">
-            <svg class="nav-svg-icon" style="width:16px;height:16px;fill:var(--platform-60);flex-shrink:0;"><use href="#icon-magnifying-glass"/></svg>
-            <input type="text" id="nr-search-input" placeholder="Select a report type..." oninput="filterNrTemplates(this.value)" onfocus="openNrDropdown()" autocomplete="off">
-            <svg class="nav-svg-icon nr-dd-arrow" style="width:20px;height:20px;fill:var(--platform-60);flex-shrink:0;"><use href="#icon-caret-down"/></svg>
-          </div>
-          <div class="nr-dropdown" id="nr-dropdown">
-            <div class="nr-dd-group" data-group="scratch">Start from Scratch</div>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="People and organizations. Each row is a constituent." data-group="scratch" onclick="selectNrTemplate(this)">Constituent</button>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="Gifts, pledges, payments. Each row is a transaction." data-group="scratch" onclick="selectNrTemplate(this)">Transaction</button>
-            <button class="dd-item nr-dd-opt" data-type="Interaction" data-desc="Logged touchpoints. Each row is an interaction." data-group="scratch" onclick="selectNrTemplate(this)">Interaction</button>
-            <button class="dd-item nr-dd-opt" data-type="Task" data-desc="Tasks and to-dos. Each row is a task." data-group="scratch" onclick="selectNrTemplate(this)">Task</button>
-            <button class="dd-item nr-dd-opt" data-type="Note" data-desc="Notes and comments. Each row is a note." data-group="scratch" onclick="selectNrTemplate(this)">Note</button>
-            <div class="nr-dd-group" data-group="constituent">Constituent Templates</div>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Revenue totals and donor counts across any date range." data-group="constituent" onclick="selectNrTemplate(this)">Revenue Over Specific Timeframe With Totals</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Revenue broken down by specific campaigns and appeals." data-group="constituent" onclick="selectNrTemplate(this)">Revenue for Specific Campaigns/Appeals With Totals</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Revenue for a campaign or appeal within a specific timeframe." data-group="constituent" onclick="selectNrTemplate(this)">Combined Revenue for Campaign/Appeal</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Constituent-level data for annual campaign reporting." data-group="constituent" onclick="selectNrTemplate(this)">Annual Campaign Report (Constituent)</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Key fiscal-year revenue metrics for your constituents." data-group="constituent" onclick="selectNrTemplate(this)">Constituent Transaction Starter</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Individual donors who have given every year from 2021 to 2025." data-group="constituent" onclick="selectNrTemplate(this)">Loyal Donors</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Donors ranked by total revenue over the last 2 years." data-group="constituent" onclick="selectNrTemplate(this)">Top Donors</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="First-time donors from the last 90 days." data-group="constituent" onclick="selectNrTemplate(this)">Newest Donors</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Active recurring schedule or 12+ gifts in the last 365 days." data-group="constituent" onclick="selectNrTemplate(this)">Monthly Donors</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Donors with a high engagement or generosity score." data-group="constituent" onclick="selectNrTemplate(this)">High Potential Donors</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Default columns and filters for any call list." data-group="constituent" onclick="selectNrTemplate(this)">Call List Template</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Gave last fiscal year but not this fiscal year." data-group="constituent" onclick="selectNrTemplate(this)">LYBUNT</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Gave some fiscal year but not this fiscal year." data-group="constituent" onclick="selectNrTemplate(this)">SYBUNT</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Gave less this fiscal year than last fiscal year." data-group="constituent" onclick="selectNrTemplate(this)">Downgrades</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Average raised this and last fiscal year by household." data-group="constituent" onclick="selectNrTemplate(this)">Household Averages</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Constituents who have only given once." data-group="constituent" onclick="selectNrTemplate(this)">One-Time Donors</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Constituents with a valid mailing address on file." data-group="constituent" onclick="selectNrTemplate(this)">Mailing List - Valid Physical Addresses</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Constituents without a mailing address but with an email." data-group="constituent" onclick="selectNrTemplate(this)">Mailing List - No Physical Address, Has Email</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Constituents who are missing an email address." data-group="constituent" onclick="selectNrTemplate(this)">Mailing List - No Email Address</button>
-            <button class="dd-item nr-dd-opt" data-type="Constituent" data-desc="Missing address, email, and phone contact info." data-group="constituent" onclick="selectNrTemplate(this)">No Contact List</button>
-            <button class="dd-item nr-dd-opt" data-type="Relationship" data-desc="Employees grouped by their employer." data-group="constituent" onclick="selectNrTemplate(this)">Employer Relationships</button>
-            <div class="nr-dd-group" data-group="transaction">Transaction Templates</div>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="Transaction-level data for annual campaign reporting." data-group="transaction" onclick="selectNrTemplate(this)">Annual Campaign Report (Transaction)</button>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="Revenue gifts from donors who gave at least $250 last year." data-group="transaction" onclick="selectNrTemplate(this)">Year-End Tax Report (Revenue)</button>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="All in-kind gifts from the previous calendar year." data-group="transaction" onclick="selectNrTemplate(this)">Year-End Tax Report (In Kind)</button>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="Pledges with a payment due next month." data-group="transaction" onclick="selectNrTemplate(this)">Pledge Reminders</button>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="Outstanding pledges with payments to date." data-group="transaction" onclick="selectNrTemplate(this)">Pledge Details</button>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="Donations received from online forms." data-group="transaction" onclick="selectNrTemplate(this)">Online Donations</button>
-            <button class="dd-item nr-dd-opt" data-type="Transaction" data-desc="Pledges and recurring donations with projected revenue." data-group="transaction" onclick="selectNrTemplate(this)">Projected Cash Flow</button>
-          </div>
+        <div class="modal-title" id="nr-modal-title" style="margin-bottom:24px;">New report</div>
+
+        <!-- Search -->
+        <div class="nr-search-dd" id="nr-search-dd" style="margin-bottom:16px;">
+          <svg class="nav-svg-icon" style="width:16px;height:16px;fill:var(--platform-60);flex-shrink:0;"><use href="#icon-magnifying-glass"/></svg>
+          <input type="text" id="nr-search-input" placeholder="Search templates..." oninput="nrFilter()" autocomplete="off">
         </div>
-        <div id="nr-preview" style="display:none;margin-bottom:12px;">
-          <div style="font-size:16px;font-weight:600;color:var(--platform-100);margin-bottom:6px;" id="nr-preview-name"></div>
-          <div style="font-size:14px;color:var(--platform-80);line-height:1.5;" id="nr-preview-desc"></div>
+
+        <!-- Category pills -->
+        <div id="nr-pill-row" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;">
+          <button class="nr-pill active" data-cat="all" onclick="nrSetCat(this)"><i class="fa-solid fa-check nr-pill-check" aria-hidden="true" style="font-size:11px;flex-shrink:0;"></i>All</button>
+          <button class="nr-pill" data-cat="constituent" onclick="nrSetCat(this)">Constituent</button>
+          <button class="nr-pill" data-cat="transaction" onclick="nrSetCat(this)">Transaction</button>
+          <button class="nr-pill" data-cat="interaction" onclick="nrSetCat(this)">Interaction</button>
+          <button class="nr-pill" data-cat="note" onclick="nrSetCat(this)">Note</button>
+          <button class="nr-pill" data-cat="task" onclick="nrSetCat(this)">Task</button>
         </div>
-        <div class="modal-footer">
+
+        <!-- Template list -->
+        <div id="nr-tmpl-list" style="display:flex;flex-direction:column;gap:0;max-height:320px;overflow-y:auto;border:1px solid var(--platform-20);border-radius:4px;margin-bottom:24px;">
+          <!-- scratch -->
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Constituent (scratch)" data-desc="Focuses on constituents. Each row is a constituent or household, and you can add filters and columns for constituents, transactions, interactions, notes, and tasks." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Constituent - Profile Starter (start from scratch)</div>
+            <div class="nr-tmpl-desc">Focuses on constituents. Each row is a constituent or household, and you can add filters and columns for constituents, transactions, interactions, notes, and tasks.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Constituent transaction starter" data-desc="Review key fiscal-year revenue metrics for your constituents." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Constituent - Transaction Starter (start from scratch)</div>
+            <div class="nr-tmpl-desc">Focuses on constituents and their transaction details. Each row is a constituent or household, and you can add filters and columns for constituents, transactions, interactions, notes, and tasks.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Transaction (scratch)" data-desc="Focuses on transactions. Each row is a transaction, and you can add filters and columns for transactions and constituents." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Transaction (start from scratch)</div>
+            <div class="nr-tmpl-desc">Focuses on transactions. Each row is a transaction, and you can add filters and columns for transactions and constituents.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="interaction" data-name="Interaction (scratch)" data-desc="Focuses on interactions. Each row is an interaction, and you can add filters and columns for interactions and constituents." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Interaction (start from scratch)</div>
+            <div class="nr-tmpl-desc">Focuses on interactions. Each row is an interaction, and you can add filters and columns for interactions and constituents.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="note" data-name="Note (scratch)" data-desc="Focuses on notes. Each row is a note, and you can add filters and columns for notes and constituents." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Note (start from scratch)</div>
+            <div class="nr-tmpl-desc">Focuses on notes. Each row is a note, and you can add filters and columns for notes and constituents.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="task" data-name="Task (scratch)" data-desc="Focuses on tasks. Each row is a task, and you can add filters and columns for tasks and constituents." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Task (start from scratch)</div>
+            <div class="nr-tmpl-desc">Focuses on tasks. Each row is a task, and you can add filters and columns for tasks and constituents.</div>
+          </button>
+          <!-- templates -->
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="LYBUNT" data-desc="Constituents who gave last fiscal year but not this fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">LYBUNT</div>
+            <div class="nr-tmpl-desc">Constituents who gave last fiscal year but not this fiscal year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="SYBUNT" data-desc="Constituents who gave some fiscal year but not this fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">SYBUNT</div>
+            <div class="nr-tmpl-desc">Constituents who gave some fiscal year but not this fiscal year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Top donors" data-desc="Donors ranked by total revenue over the last 2 years." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Top donors</div>
+            <div class="nr-tmpl-desc">Donors ranked by total revenue over the last 2 years.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Loyal donors" data-desc="Revenue from individual donors who have given every year from 2021 to 2025." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Loyal donors</div>
+            <div class="nr-tmpl-desc">Revenue from individual donors who have given every year from 2021 to 2025.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Newest donors" data-desc="First-time donors from the last 90 days." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Newest donors</div>
+            <div class="nr-tmpl-desc">First-time donors from the last 90 days.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Monthly donors" data-desc="Donors with an active recurring gift schedule, or 12+ gifts in the last 365 days." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Monthly donors</div>
+            <div class="nr-tmpl-desc">Donors with an active recurring gift schedule, or 12+ gifts in the last 365 days.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="High potential donors" data-desc="Donors with either a high engagement score or a high generosity score." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">High potential donors</div>
+            <div class="nr-tmpl-desc">Donors with either a high engagement score or a high generosity score.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="One-time donors" data-desc="Constituents who have only given once." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">One-time donors</div>
+            <div class="nr-tmpl-desc">Constituents who have only given once.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Downgrades" data-desc="Constituents who gave less this fiscal year than last fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Downgrades</div>
+            <div class="nr-tmpl-desc">Constituents who gave less this fiscal year than last fiscal year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Household averages" data-desc="Average raised this fiscal year and last fiscal year by household." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Household averages</div>
+            <div class="nr-tmpl-desc">Average raised this fiscal year and last fiscal year by household.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Call list" data-desc="Default columns and filters to include in any call list. Just add your own criteria for who to call!" onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Call list</div>
+            <div class="nr-tmpl-desc">Default columns and filters to include in any call list. Just add your own criteria for who to call!</div>
+          </button>
+          <!-- revenue -->
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Revenue over specific timeframe" data-desc="Revenue totals and donor counts across any date range." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Revenue over specific timeframe</div>
+            <div class="nr-tmpl-desc">Revenue totals and donor counts across any date range.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Revenue by campaign/appeal" data-desc="Revenue broken down by specific campaigns and appeals." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Revenue by campaign/appeal</div>
+            <div class="nr-tmpl-desc">Revenue broken down by specific campaigns and appeals.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Combined revenue for campaign/appeal" data-desc="Revenue for a campaign or appeal within a specific timeframe." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Combined revenue for campaign/appeal</div>
+            <div class="nr-tmpl-desc">Revenue for a campaign or appeal within a specific timeframe.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Annual campaign report (constituent data)" data-desc="Constituent-level data for annual campaign reporting." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Annual campaign report (constituent data)</div>
+            <div class="nr-tmpl-desc">Constituent-level data for annual campaign reporting.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Annual campaign report (transaction data)" data-desc="Transaction-level data for annual campaign reporting." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Annual campaign report (transaction data)</div>
+            <div class="nr-tmpl-desc">Transaction-level data for annual campaign reporting.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Projected cash flow" data-desc="Pledges and Recurring Donations with projected revenue this fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Projected cash flow</div>
+            <div class="nr-tmpl-desc">Pledges and Recurring Donations with projected revenue this fiscal year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Online donations" data-desc="Donations received from online forms." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Online donations</div>
+            <div class="nr-tmpl-desc">Donations received from online forms.</div>
+          </button>
+          <!-- mailing -->
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — valid physical addresses" data-desc="Constituents with a valid mailing address on file." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Mailing list — valid physical addresses</div>
+            <div class="nr-tmpl-desc">Constituents with a valid mailing address on file.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — no physical address, has email" data-desc="Constituents without a mailing address but with an email." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Mailing list — no physical address, has email</div>
+            <div class="nr-tmpl-desc">Constituents without a mailing address but with an email.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — no email address" data-desc="Constituents who are missing an email address." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Mailing list — no email address</div>
+            <div class="nr-tmpl-desc">Constituents who are missing an email address.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="No contact list" data-desc="Constituent does not have Address, Email, or Phone contact information." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">No contact list</div>
+            <div class="nr-tmpl-desc">Constituent does not have Address, Email, or Phone contact information.</div>
+          </button>
+          <!-- year-end -->
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Year-end tax report (revenue)" data-desc="Prior-year revenue gifts from donors who gave at least $250 total last year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Year-end tax report (revenue)</div>
+            <div class="nr-tmpl-desc">Prior-year revenue gifts from donors who gave at least $250 total last year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Year-end tax report (in-kind)" data-desc="All in kind gifts from the previous calendar year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Year-end tax report (in-kind)</div>
+            <div class="nr-tmpl-desc">All in kind gifts from the previous calendar year.</div>
+          </button>
+          <!-- activity -->
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Pledge reminders" data-desc="Pledges with a payment due next month." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Pledge reminders</div>
+            <div class="nr-tmpl-desc">Pledges with a payment due next month.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Pledge details" data-desc="Outstanding pledges with pledge payments to date." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Pledge details</div>
+            <div class="nr-tmpl-desc">Outstanding pledges with pledge payments to date.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Employer relationships" data-desc="Employees grouped by their employer." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Employer relationships</div>
+            <div class="nr-tmpl-desc">Employees grouped by their employer.</div>
+          </button>
+          <div id="nr-empty" style="display:none;padding:24px 16px;font-size:14px;color:var(--platform-60);text-align:center;">No templates match your search.</div>
+        </div>
+
+        <div class="modal-footer" style="margin:0 -24px;padding:16px 24px;border-top:1px solid var(--platform-20);">
           <button class="btn-secondary" onclick="closeNewReportModal()">Cancel</button>
-          <button class="btn-primary" id="nr-create-btn" disabled onclick="closeNewReportModal();showView('editor')">Create Report</button>
+          <button class="btn-primary" id="nr-create-btn" disabled onclick="closeNewReportModal();showView('editor')">Create report</button>
         </div>
       </div>
     </div>
@@ -2992,63 +3114,53 @@ function toggleSub(e,id){e.preventDefault();document.getElementById(id).classLis
 function openNewReportModal(){
   document.getElementById('modal-new-report').classList.add('open');
   document.getElementById('nr-search-input').value = '';
-  document.getElementById('nr-preview').style.display = 'none';
   document.getElementById('nr-create-btn').disabled = true;
-  document.getElementById('nr-dropdown').classList.remove('open');
-  document.querySelectorAll('.nr-dd-opt').forEach(function(i){ i.classList.remove('active'); });
-  filterNrTemplates('');
+  document.querySelectorAll('.nr-tmpl-row').forEach(function(r){ r.classList.remove('selected'); });
+  var allPill = document.querySelector('.nr-pill[data-cat="all"]');
+  if(allPill) nrSetCat(allPill);
 }
-function openNrDropdown(){
-  document.getElementById('nr-dropdown').classList.add('open');
-  document.getElementById('nr-search-input').focus();
+function makeCheckIcon(){
+  var i = document.createElement('i');
+  i.className = 'fa-solid fa-check nr-pill-check';
+  i.setAttribute('aria-hidden','true');
+  i.style.fontSize = '11px';
+  i.style.flexShrink = '0';
+  return i;
 }
-function closeNrDropdown(){
-  document.getElementById('nr-dropdown').classList.remove('open');
-}
-document.addEventListener('click', function(e){
-  var dd = document.getElementById('nr-dropdown');
-  var trigger = document.getElementById('nr-search-dd');
-  if(dd && dd.classList.contains('open') && !dd.contains(e.target) && !trigger.contains(e.target)){
-    closeNrDropdown();
-  }
-});
-function toggleNrDropdown(){
-  document.getElementById('nr-dropdown').classList.toggle('open');
-}
-function filterNrTemplates(query){
-  var q = query.toLowerCase();
-  var items = document.querySelectorAll('.nr-dd-opt');
-  var groups = document.querySelectorAll('.nr-dd-group');
-  var visibleGroups = {};
-  items.forEach(function(item){
-    var match = item.textContent.toLowerCase().indexOf(q) >= 0 || item.dataset.desc.toLowerCase().indexOf(q) >= 0;
-    item.style.display = match ? '' : 'none';
-    if(match) visibleGroups[item.dataset.group] = true;
+function nrSetCat(pill){
+  if(pill.classList.contains('active')) return;
+  document.querySelectorAll('.nr-pill').forEach(function(p){
+    p.classList.remove('active');
+    var chk = p.querySelector('.nr-pill-check');
+    if(chk) chk.remove();
   });
-  groups.forEach(function(g){
-    g.style.display = visibleGroups[g.dataset.group] ? '' : 'none';
-  });
+  pill.classList.add('active');
+  pill.insertBefore(makeCheckIcon(), pill.firstChild);
+  nrFilter();
 }
-function selectNrTemplate(item){
-  var name = item.textContent.trim();
-  var type = item.dataset.type;
-  var desc = item.dataset.desc;
-  document.getElementById('nr-search-input').value = name;
-  // Show preview
-  var preview = document.getElementById('nr-preview');
-  document.getElementById('nr-preview-name').textContent = name;
-  var descEl = document.getElementById('nr-preview-desc');
-  if(desc){
-    descEl.textContent = desc;
-    descEl.style.display = '';
-  } else {
-    descEl.style.display = 'none';
-  }
-  preview.style.display = 'block';
+function nrFilter(){
+  var activePill = document.querySelector('.nr-pill.active');
+  var cat = activePill ? activePill.dataset.cat : 'all';
+  var query = (document.getElementById('nr-search-input').value || '').toLowerCase();
+  var rows = document.querySelectorAll('.nr-tmpl-row');
+  var visible = 0;
+  rows.forEach(function(row){
+    var catMatch = cat === 'all' || row.dataset.cat === cat;
+    var textMatch = !query || row.dataset.name.toLowerCase().includes(query) || row.dataset.desc.toLowerCase().includes(query);
+    var show = catMatch && textMatch;
+    row.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  var empty = document.getElementById('nr-empty');
+  if(empty) empty.style.display = visible === 0 ? '' : 'none';
+  var visibleRows = Array.from(document.querySelectorAll('.nr-tmpl-row')).filter(function(r){ return r.style.display !== 'none'; });
+  visibleRows.forEach(function(r){ r.style.borderBottom = ''; });
+  if(visibleRows.length) visibleRows[visibleRows.length - 1].style.borderBottom = 'none';
+}
+function nrSelect(row){
+  document.querySelectorAll('.nr-tmpl-row').forEach(function(r){ r.classList.remove('selected'); });
+  row.classList.add('selected');
   document.getElementById('nr-create-btn').disabled = false;
-  document.querySelectorAll('.nr-dd-opt').forEach(function(i){ i.classList.remove('active'); });
-  item.classList.add('active');
-  closeNrDropdown();
 }
 function closeNewReportModal(){
   document.getElementById('modal-new-report').classList.remove('open');

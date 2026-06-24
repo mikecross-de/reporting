@@ -337,6 +337,11 @@ textarea.modal-input:focus{padding:15px;}
 select.modal-input{-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23525759' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:12px 8px;}
 select.modal-input:focus{padding-right:39px;background-position:right 15px center;}
 .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:0;padding-top:24px;}
+.export-format-card{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border:1px solid var(--platform-40);border-radius:4px;background:var(--white);text-align:left;cursor:pointer;width:100%;transition:border-color .12s;}
+.export-format-card:hover{border-color:var(--platform-100);}
+.export-format-card.selected{border-color:var(--crm-100);border-width:2px;background:var(--crm-5);}
+.export-format-name{font-size:16px;font-weight:700;color:var(--platform-100);line-height:1.3;}
+.export-format-desc{font-size:14px;color:var(--platform-80);margin-top:2px;line-height:1.4;}
 
 /* ═══ NEW REPORT ═══ */
 .nr-page{padding:24px 32px 24px;max-width:1200px;}
@@ -1122,11 +1127,19 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 
 /* ── Inactive report row ─────────────────────────────────────────────────── */
-tr[data-status="inactive"] .dg-name{ color:var(--platform-60); cursor:not-allowed; pointer-events:none; }
-tr[data-status="inactive"] .dg-name:hover{ color:var(--platform-60); text-decoration:none; cursor:not-allowed; }
-tr[data-status="inactive"] button[onclick*="'view'"]{ display:none; }
+tr[data-status="inactive"] .dg-name{ color:var(--platform-60); }
+tr[data-status="inactive"] .dg-name:hover{ color:var(--crm-100); text-decoration:underline; }
+
 tr[data-status="inactive"] .dg-type-line{ color:var(--platform-60); }
 tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
+
+
+
+
+.cc-select:focus{border-color:var(--crm-100);}
+.cc-group-btn:hover{background:var(--platform-5);}
+.cc-group-row .dd-wrap{flex:1;}
+.cc-remove-btn:hover{background:var(--platform-5);}
 
 
 </style>
@@ -1187,6 +1200,9 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
   <symbol id="icon-user-plus" viewBox="0 0 640 512"><path d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM504 312V248H440c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V136c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H552v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></symbol>
   <symbol id="icon-group-box" viewBox="0 0 640 512"><path d="M184 88c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zM64 245.7C54.2 252.8 48 264 48 276.5v.5c0 8.8-7.2 16-16 16s-16-7.2-16-16v-.5C16 246.7 33.7 222 58.9 210.3c-3.2-5.9-5-12.5-5-19.5L53.9 184c0-39.8 32.2-72 72-72h8c39.8 0 72 32.2 72 72v6.8c0 7-1.8 13.6-5 19.5C226.3 222 244 246.7 244 276.5v.5c0 8.8-7.2 16-16 16s-16-7.2-16-16v-.5c0-12.5-6.2-23.7-16-30.8V245.7zM456 88c0 30.9 25.1 56 56 56s56-25.1 56-56s-25.1-56-56-56s-56 25.1-56 56zm120 157.7c9.8 7.1 16 18.3 16 30.8v.5c0 8.8 7.2 16 16 16s16-7.2 16-16v-.5c0-29.8-17.7-54.5-42.9-66.2c3.2-5.9 5-12.5 5-19.5V184c0-39.8-32.2-72-72-72h-8c-39.8 0-72 32.2-72 72v6.8c0 7 1.8 13.6 5 19.5C413.7 222 396 246.7 396 276.5v.5c0 8.8 7.2 16 16 16s16-7.2 16-16v-.5c0-12.5 6.2-23.7 16-30.8V245.7zM320 152c-48.6 0-88 39.4-88 88c0 48.6 39.4 88 88 88s88-39.4 88-88c0-48.6-39.4-88-88-88zm-106.7 248C183.5 400 160 428.5 160 462.4v1.6c0 8.8 7.2 16 16 16h288c8.8 0 16-7.2 16-16v-1.6c0-33.9-23.5-62.4-57.3-62.4H213.3z"/></symbol>
   <symbol id="icon-layers" viewBox="0 0 512 512"><path d="M234.5 5.7c13.9-5 29.1-5 43.1 0l192 68.6C495 83.4 512 107.5 512 134.6V377.4c0 27-17 51.2-42.5 60.3l-192 68.6c-13.9 5-29.1 5-43.1 0l-192-68.6C17 428.6 0 404.5 0 377.4V134.6c0-27 17-51.2 42.5-60.3l192-68.6zM256 66L82.3 128 256 190l173.7-62L256 66zm32 368.6l160-57.1v-188L288 246.6v188z"/></symbol>
+  <symbol id="icon-file-excel" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM155.7 250.2L192 302.1l36.3-51.9c7.6-10.9 22.6-13.5 33.4-5.9s13.5 22.6 5.9 33.4L221.3 344l46.4 66.2c7.6 10.9 5 25.8-5.9 33.4s-25.8 5-33.4-5.9L192 385.8l-36.3 51.9c-7.6 10.9-22.6 13.5-33.4 5.9s-13.5-22.6-5.9-33.4L162.7 344l-46.4-66.2c-7.6-10.9-5-25.8 5.9-33.4s25.8-5 33.4 5.9z"/></symbol>
+  <symbol id="icon-file-csv" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM80 224h16c17.7 0 32 14.3 32 32v16c0 8.8-7.2 16-16 16s-16-7.2-16-16V256H80v64h16 16c17.7 0 32 14.3 32 32v32c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V384c0-8.8 7.2-16 16-16s16 7.2 16 16v16h16V368H96 80c-17.7 0-32-14.3-32-32V256c0-17.7 14.3-32 32-32zm144 0c8.8 0 16 7.2 16 16v31.6c0 1.4-.2 2.7-.5 4l-22.1 88.4H232c8.8 0 16 7.2 16 16s-7.2 16-16 16H192c-8.8 0-16-7.2-16-16V368c0-1.4 .2-2.7 .5-4l22.1-88.4H184c-8.8 0-16-7.2-16-16V240c0-8.8 7.2-16 16-16zm80 0h32c17.7 0 32 14.3 32 32v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V256H304v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V256c0-17.7 14.3-32 32-32z"/></symbol>
+  <symbol id="icon-file-pdf" viewBox="0 0 384 512"><path d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zm192 0v128h128L256 0zM64 224c0-8.8 7.2-16 16-16h32c26.5 0 48 21.5 48 48v32c0 26.5-21.5 48-48 48H96v32c0 8.8-7.2 16-16 16s-16-7.2-16-16V224zm32 80h16c8.8 0 16-7.2 16-16V256c0-8.8-7.2-16-16-16H96v64zm96-80c0-8.8 7.2-16 16-16h32c26.5 0 48 21.5 48 48v64c0 26.5-21.5 48-48 48H208c-8.8 0-16-7.2-16-16V224zm32 112h16c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H224v80zm96-112c0-8.8 7.2-16 16-16h48c8.8 0 16 7.2 16 16s-7.2 16-16 16H336v32h32c8.8 0 16 7.2 16 16s-7.2 16-16 16H336v48c0 8.8-7.2 16-16 16s-16-7.2-16-16V224z"/></symbol>
 </svg>
 
 <!-- ═══ TOP NAV ═══ -->
@@ -1831,7 +1847,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
               <button class="btn-secondary ed-more-btn" id="btn-editor-more" onclick="toggleEditorMenu(event)">More <svg class="nav-svg-icon" style="width:12px;height:12px;fill:currentColor;"><use href="#icon-chevron-down"/></svg></button>
               <div class="dd-menu right" id="dd-editor-menu">
                 <button class="dd-item" onclick="closeAllDd();openDetailsModal()">Details</button>
-                <button class="dd-item" onclick="closeAllDd();exportReport()">Export</button>
+                <button class="dd-item" onclick="closeAllDd();openExportModal()">Export</button>
                 <button class="dd-item" id="ed-schedule-action" onclick="closeAllDd();openScheduleModal()">Schedule</button>
                 <div class="dd-divider"></div>
                 <button class="dd-item" id="ed-delete-btn" onclick="closeAllDd();openDeleteModal()">Delete</button>
@@ -2498,6 +2514,41 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
       </div>
     </div>
 
+    <!-- Export Format Modal -->
+    <div class="modal-overlay" id="modal-export" onclick="if(event.target===this)closeExportModal()">
+      <div class="modal" role="dialog" aria-labelledby="export-modal-title" style="max-width:480px;">
+        <div class="modal-title" id="export-modal-title" style="margin-bottom:4px;">Export report</div>
+        <p style="font-size:16px;color:var(--platform-60);margin:0 0 20px;">Choose a format</p>
+        <div id="export-format-cards" style="display:flex;flex-direction:column;gap:8px;">
+          <button class="export-format-card selected" data-format="csv" onclick="selectExportFormat(this)" aria-pressed="true">
+            <i class="fa-regular fa-file-csv" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
+            <div>
+              <div class="export-format-name">CSV (.csv)</div>
+              <div class="export-format-desc">Plain data — ideal for mail merge, imports, or other tools</div>
+            </div>
+          </button>
+          <button class="export-format-card" data-format="pdf" onclick="selectExportFormat(this)" aria-pressed="false">
+            <i class="fa-regular fa-file-pdf" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
+            <div>
+              <div class="export-format-name">PDF (.pdf)</div>
+              <div class="export-format-desc">Formatted for sharing with boards or archiving</div>
+            </div>
+          </button>
+          <button class="export-format-card" data-format="xlsx" onclick="selectExportFormat(this)" aria-pressed="false">
+            <i class="fa-regular fa-file-xls" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
+            <div>
+              <div class="export-format-name">Excel (.xlsx)</div>
+              <div class="export-format-desc">Best for further analysis or editing in spreadsheet software</div>
+            </div>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button class="btn-secondary" onclick="closeExportModal()">Cancel</button>
+          <button class="btn-primary" id="export-confirm-btn" onclick="confirmExport()">Export</button>
+        </div>
+      </div>
+    </div>
+
     <!-- Delete Confirmation Modal -->
     <div class="modal-overlay" id="modal-delete">
       <div class="modal" role="dialog" style="max-width:480px;">
@@ -2636,7 +2687,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
         <h1 class="rv-title" id="rvTitle">New Report</h1>
         <div class="rv-actions">
           <button class="rv-cancel" id="rvDeleteBtn" onclick="void(0)">Delete</button>
-          <div class="rv-btn-group"><button class="rv-cancel" onclick="backToList()">Cancel</button><div class="rv-save-wrap"><button class="rv-save" onclick="toggleSaveDd()">Save And <svg viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg></button><div class="rv-save-dd" id="rvSaveDd"><button class="dd-item" onclick="closeSaveDd()">Keep Editing</button><button class="dd-item" onclick="closeSaveDd()">Export</button><button class="dd-item" onclick="closeSaveDd()">Schedule Report</button><button class="dd-item" onclick="saveAndGoToList()">Go to Reports List</button></div></div></div>
+          <div class="rv-btn-group"><button class="rv-cancel" onclick="backToList()">Cancel</button><div class="rv-save-wrap"><button class="rv-save" onclick="toggleSaveDd()">Save And <svg viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg></button><div class="rv-save-dd" id="rvSaveDd"><button class="dd-item" onclick="closeSaveDd()">Keep Editing</button><button class="dd-item" onclick="closeSaveDd();openExportModal()">Export</button><button class="dd-item" onclick="closeSaveDd()">Schedule Report</button><button class="dd-item" onclick="saveAndGoToList()">Go to Reports List</button></div></div></div>
         </div>
       </div>
       <div class="rv-tabs">
@@ -3394,7 +3445,7 @@ function doAction(e, action, btn){
         setTimeout(applyAllFilters, 50);
       }, 1200);
       break;
-    case 'export':     exportReport(); break;
+    case 'export':     openExportModal(); break;
     case 'move':
       pendingMoveRow = row;
       document.getElementById('move-report-name').textContent = name;
@@ -4079,6 +4130,41 @@ function selectFolder(val, item){
   label.classList.remove('floating');
   label.classList.add('floating-idle');
   closeAllDd();
+}
+function openExportModal(){
+  document.getElementById('modal-export').classList.add('open');
+}
+function closeExportModal(){
+  document.getElementById('modal-export').classList.remove('open');
+}
+function selectExportFormat(card){
+  document.querySelectorAll('.export-format-card').forEach(function(c){
+    c.classList.remove('selected');
+    c.setAttribute('aria-pressed','false');
+  });
+  card.classList.add('selected');
+  card.setAttribute('aria-pressed','true');
+}
+function confirmExport(){
+  var selected = document.querySelector('.export-format-card.selected');
+  var format = selected ? selected.dataset.format : 'xlsx';
+  var labels = {xlsx:'Excel', csv:'CSV', pdf:'PDF'};
+  closeExportModal();
+  var toast = document.getElementById('export-toast');
+  var iconWrap = document.getElementById('toast-icon-wrap');
+  var msg = document.getElementById('toast-msg');
+  iconWrap.innerHTML = '<div class="toast-spinner"></div>';
+  msg.textContent = 'Exporting '+labels[format]+'...';
+  toast.classList.add('visible');
+  setTimeout(function(){
+    iconWrap.innerHTML = '<svg class="toast-icon" viewBox="0 0 512 512" fill="#357A06"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369.2 198.6L232.6 335.2c-12.5 12.5-32.8 12.5-45.3 0l-68.3-68.3c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L210 267.2l91.3-91.3c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3z"/></svg>';
+    msg.textContent = 'Report exported as '+labels[format];
+    var a = document.createElement('a');
+    a.href = 'data:text/plain,Report exported';
+    a.download = 'report.'+format;
+    a.click();
+    setTimeout(function(){ toast.classList.remove('visible'); }, 2000);
+  }, 2000);
 }
 function exportReport(){
   var toast = document.getElementById('export-toast');
@@ -6119,7 +6205,7 @@ function addReportToList(title){
     '<td class="td-folder">&mdash;</td>'+
     '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
     '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
-    '<td onclick="event.stopPropagation()"><div class="dd-wrap"><button class="action-btn" onclick="toggleAction(this)">Action <svg viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg></button><div class="dd-menu"><button class="dd-item">View Report</button><button class="dd-item">Copy Report</button><button class="dd-item">Export</button><button class="dd-item disabled">Move to Folder</button><button class="dd-item">Deactivate Report</button><button class="dd-item destructive">Delete Report</button></div></div></td>';
+    '<td onclick="event.stopPropagation()"><div class="dd-wrap"><button class="action-btn" onclick="toggleAction(this)">Action <svg viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg></button><div class="dd-menu"><button class="dd-item">View Report</button><button class="dd-item">Copy Report</button><button class="dd-item" onclick="closeAllDd();openExportModal()">Export</button><button class="dd-item disabled">Move to Folder</button><button class="dd-item">Deactivate Report</button><button class="dd-item destructive">Delete Report</button></div></div></td>';
 
   // Insert in alphabetical order
   var rows = Array.from(tbody.querySelectorAll('tr[data-name]'));
@@ -6229,22 +6315,15 @@ function backToList(){
 -e 
 </script>
 
-<div id="th-col-menu">
+<div id="th-col-menu" style="font-size:15px;">
   <button class="th-dd-item" id="thm-sort-asc">Sort A → Z</button>
   <button class="th-dd-item" id="thm-sort-desc">Sort Z → A</button>
   <div class="th-dd-divider"></div>
-  <button class="th-dd-item" id="thm-filter">Filter</button>
-  <button class="th-dd-item" id="thm-group">Group</button>
-  <div class="th-dd-divider"></div>
-  <button class="th-dd-item" id="thm-rename">Rename</button>
+  <button class="th-dd-item" id="thm-configure">Configure column</button>
   <button class="th-dd-item" id="thm-copy">Copy column</button>
+  <div class="th-dd-divider"></div>
   <button class="th-dd-item danger" id="thm-delete">Delete</button>
-  <div class="th-dd-divider th-numeric-section" style="display:none;"></div>
-  <div class="th-dd-item th-numeric-section" style="display:none;color:var(--platform-60);font-size:12px;padding:4px 16px 2px;cursor:default;">Numeric</div>
-  <button class="th-dd-item th-numeric-section" id="thm-sum" style="display:none;">Sum</button>
-  <button class="th-dd-item th-numeric-section" id="thm-min" style="display:none;">Min</button>
-  <button class="th-dd-item th-numeric-section" id="thm-max" style="display:none;">Max</button>
-  <button class="th-dd-item th-numeric-section" id="thm-avg" style="display:none;">Average</button>
+
 </div>
 
 
@@ -6497,6 +6576,8 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>
 </div>
 
+<div id="folder-delete-tip">Delete folder</div>
+
 
 <script>
 function toggleFolderDesc(){} // no-op, replaced by hover
@@ -6577,25 +6658,148 @@ function confirmDeleteFolder(){
 }
 </script>
 
-<div id="folder-delete-tip">Delete folder</div>
+<div id="config-col-modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:9000;align-items:center;justify-content:center;">
+  <div class="modal" style="max-width:500px;">
+    <button id="cc-close-btn" class="modal-close" aria-label="Close">
+      <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
+    </button>
+    <div class="modal-title">Configure column</div>
+    <div id="cc-orig-label" style="font-size:13px;color:var(--platform-60);margin-top:2px;min-height:18px;"></div>
+
+    <!-- Column name -->
+    <div class="modal-field" id="field-cc-col-name" style="margin-top:20px;">
+      <label class="modal-label floating-idle" for="cc-col-name" id="lbl-cc-col-name">Column name</label>
+      <input class="modal-input" id="cc-col-name" type="text"
+        onfocus="floatLabel('field-cc-col-name')"
+        onblur="unfloatLabel('field-cc-col-name')">
+    </div>
+
+    <div style="height:1px;background:var(--platform-20);margin:4px 0 20px;"></div>
+
+    <!-- Grouping -->
+    <div style="margin-bottom:20px;">
+      <div style="font-size:12px;font-weight:600;color:var(--platform-60);text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px;">Grouping</div>
+      <div id="cc-grp-off">
+        <button id="cc-grp-enable-btn" class="btn-secondary">Group by this column</button>
+      </div>
+      <div id="cc-grp-on" style="display:none;">
+        <div style="font-size:13px;color:var(--platform-60);margin-bottom:10px;">Sort group headers</div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;">
+          <div class="dd-wrap" style="flex:1;">
+            <button class="tb-dd" id="cc-sort-by-btn" onclick="toggleDd('dd-cc-sort-by')" style="width:100%;justify-content:space-between;">
+              <span id="cc-sort-by-label">By value</span>
+              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
+            </button>
+            <div class="dd-menu" id="dd-cc-sort-by">
+              <button class="dd-item active" onclick="setCCSortBy('By value',this)">By value</button>
+              <button class="dd-item" onclick="setCCSortBy('By number of items in group',this)">By number of items in group</button>
+            </div>
+          </div>
+          <div class="dd-wrap" style="flex:1;">
+            <button class="tb-dd" id="cc-sort-dir-btn" onclick="toggleDd('dd-cc-sort-dir')" style="width:100%;justify-content:space-between;">
+              <span id="cc-sort-dir-label">Ascending</span>
+              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
+            </button>
+            <div class="dd-menu" id="dd-cc-sort-dir">
+              <button class="dd-item active" onclick="setCCSortDir('Ascending',this)">Ascending</button>
+              <button class="dd-item" onclick="setCCSortDir('Descending',this)">Descending</button>
+            </div>
+          </div>
+        </div>
+        <label class="grove-check" style="margin-bottom:16px;">
+          <div class="grove-check-box"><input type="checkbox" id="cc-grp-collapse"></div>
+          Collapse group to one row
+        </label>
+        <button id="cc-grp-remove-btn" class="btn-secondary" style="width:100%;justify-content:center;">Remove this grouping</button>
+      </div>
+    </div>
+
+    <div style="height:1px;background:var(--platform-20);margin-bottom:20px;"></div>
+
+    <!-- Filter deferred -->
+    <div style="margin-bottom:8px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <div style="font-size:12px;font-weight:600;color:var(--platform-60);text-transform:uppercase;letter-spacing:.4px;">Filter</div>
+        <span style="font-size:11px;font-weight:600;background:var(--platform-10);color:var(--platform-60);border-radius:3px;padding:2px 6px;">Coming soon</span>
+      </div>
+      <div style="font-size:14px;color:var(--platform-60);line-height:1.5;">Filtering this column to specific records is coming soon.</div>
+    </div>
+
+    <div class="modal-footer">
+      <button id="cc-cancel-btn" class="btn-secondary">Cancel</button>
+      <button id="cc-apply-btn" class="btn-primary">Apply</button>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
+  var _origName = '';
+  var _savedBtn = null;
+
+  window.openConfigColModal = function(colName, btn){
+    _origName = colName || 'Column';
+    _savedBtn = btn;
+    var m = document.getElementById('config-col-modal');
+    var nameEl = document.getElementById('cc-col-name');
+    var origEl = document.getElementById('cc-orig-label');
+    if(!m) return;
+    if(nameEl){ nameEl.value = _origName; if(typeof floatLabel === 'function') floatLabel('field-cc-col-name'); }
+    if(origEl) origEl.textContent = 'Field: ' + _origName;
+    // Reset grouping
+    var off = document.getElementById('cc-grp-off');
+    var on = document.getElementById('cc-grp-on');
+    if(off) off.style.display = 'block';
+    if(on) on.style.display = 'none';
+    var collapse = document.getElementById('cc-grp-collapse');
+    if(collapse) collapse.checked = false;
+    var byEl = document.getElementById('cc-grp-by');
+    var dirEl = document.getElementById('cc-grp-dir');
+    if(byEl) byEl.selectedIndex = 0;
+    if(dirEl) dirEl.selectedIndex = 0;
+    m.style.display = 'flex';
+  };
+
+  function closeModal(){
+    var m = document.getElementById('config-col-modal');
+    if(m) m.style.display = 'none';
+    _savedBtn = null;
+  }
+
   document.addEventListener('DOMContentLoaded', function(){
-    var btn = document.getElementById('folder-delete-btn');
-    var tip = document.getElementById('folder-delete-tip');
-    if(!btn || !tip) return;
-    btn.addEventListener('mouseenter', function(){
-      var r = btn.getBoundingClientRect();
-      tip.style.left = (r.left + r.width / 2) + 'px';
-      tip.style.top = (r.bottom + 4) + 'px';
-      tip.style.display = 'block';
+    var m = document.getElementById('config-col-modal');
+    if(!m) return;
+    m.addEventListener('click', function(e){ if(e.target === m) closeModal(); });
+    var closeBtn = document.getElementById('cc-close-btn');
+    var cancelBtn = document.getElementById('cc-cancel-btn');
+    var applyBtn = document.getElementById('cc-apply-btn');
+    var grpEnableBtn = document.getElementById('cc-grp-enable-btn');
+    var grpRemoveBtn = document.getElementById('cc-grp-remove-btn');
+    if(closeBtn) closeBtn.addEventListener('click', closeModal);
+    if(cancelBtn) cancelBtn.addEventListener('click', closeModal);
+    if(applyBtn) applyBtn.addEventListener('click', function(){
+      var newName = document.getElementById('cc-col-name').value.trim();
+      if(_savedBtn && newName){
+        var th = _savedBtn.closest ? _savedBtn.closest('th') : null;
+        var label = th ? th.querySelector('.th-label') : null;
+        if(label) label.textContent = newName;
+      }
+      if(typeof showToast === 'function') showToast('Column updated');
+      closeModal();
     });
-    btn.addEventListener('mouseleave', function(){
-      tip.style.display = 'none';
+    if(grpEnableBtn) grpEnableBtn.addEventListener('click', function(){
+      document.getElementById('cc-grp-off').style.display = 'none';
+      document.getElementById('cc-grp-on').style.display = 'block';
+    });
+    if(grpRemoveBtn) grpRemoveBtn.addEventListener('click', function(){
+      document.getElementById('cc-grp-off').style.display = 'block';
+      document.getElementById('cc-grp-on').style.display = 'none';
     });
   });
 })();
 </script>
+
+
 
 <script>
 // ── Column header menu ────────────────────────────────────────────────────────
@@ -6607,7 +6811,11 @@ function confirmDeleteFolder(){
   function closeMenu(){
     var m = getMenu();
     if(m) m.classList.remove('open');
-    if(_activeBtn){ _activeBtn.classList.remove('active'); _activeBtn = null; }
+    if(_activeBtn){ 
+      _activeBtn.classList.remove('active'); 
+      _activeBtn.style.opacity = '';
+      _activeBtn = null; 
+    }
   }
 
   window.openThMenu = function(e, btn){
@@ -6618,8 +6826,6 @@ function confirmDeleteFolder(){
     closeMenu();
     if(alreadyOpen) return;
     var th = btn.closest('th');
-    var isNumeric = ['last-gift','lifetime','lapsed-days','churn-risk'].indexOf(th.dataset.col) > -1;
-    m.querySelectorAll('.th-numeric-section').forEach(function(el){ el.style.display = isNumeric ? '' : 'none'; });
     _activeBtn = btn;
     btn.classList.add('active');
     m.classList.add('open');
@@ -6686,20 +6892,9 @@ function confirmDeleteFolder(){
     if(!m) return;
     m.querySelector('#thm-sort-asc').onclick  = function(){ colSort('asc');  closeMenu(); };
     m.querySelector('#thm-sort-desc').onclick = function(){ colSort('desc'); closeMenu(); };
-    m.querySelector('#thm-filter').onclick    = function(){ colAction('Filter');  closeMenu(); };
-    m.querySelector('#thm-group').onclick = function(){
-      var th = _activeBtn ? _activeBtn.closest('th') : null;
-      var colName = th ? (th.querySelector('.th-label') || th).textContent.trim() : 'Column';
-      closeMenu();
-      openGroupModal(colName);
-    };
-    m.querySelector('#thm-rename').onclick    = function(){ colRenameActive();    closeMenu(); };
+    m.querySelector('#thm-configure').onclick = function(){ openConfigFromMenu(); };
     m.querySelector('#thm-copy').onclick      = function(){ colAction('Column copied'); closeMenu(); };
-    m.querySelector('#thm-delete').onclick    = function(){ colDeleteActive();    closeMenu(); };
-    if(m.querySelector('#thm-sum'))   m.querySelector('#thm-sum').onclick   = function(){ colAction('Sum applied');     closeMenu(); };
-    if(m.querySelector('#thm-min'))   m.querySelector('#thm-min').onclick   = function(){ colAction('Min applied');     closeMenu(); };
-    if(m.querySelector('#thm-max'))   m.querySelector('#thm-max').onclick   = function(){ colAction('Max applied');     closeMenu(); };
-    if(m.querySelector('#thm-avg'))   m.querySelector('#thm-avg').onclick   = function(){ colAction('Average applied'); closeMenu(); };
+    m.querySelector('#thm-delete').onclick    = function(){ colDeleteActive(); closeMenu(); };
 
     // Editor table hover
     document.querySelectorAll('#ed-table thead th').forEach(function(th){
@@ -6719,113 +6914,39 @@ function confirmDeleteFolder(){
       if(ind) ind.addEventListener('click', function(e){ e.stopPropagation(); if(typeof colSortToggle==='function') colSortToggle(th.querySelector('.th-label') || th); });
     });
   });
+
+
+  // ── Open Configure Column modal from menu ─────────────────────────────────
+  window.openConfigFromMenu = function(){
+    var th = _activeBtn ? _activeBtn.closest('th') : null;
+    var label = th ? th.querySelector('.th-label') : null;
+    var colName = label ? label.textContent.trim() : 'Column';
+    var savedBtn = _activeBtn;
+    closeMenu();
+    setTimeout(function(){ 
+      if(typeof openConfigColModal === 'function') openConfigColModal(colName, savedBtn); 
+    }, 10);
+  };
+
+  // ── Folder delete tooltip ──────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('folder-delete-btn');
+    var tip = document.getElementById('folder-delete-tip');
+    if(!btn || !tip) return;
+    btn.addEventListener('mouseenter', function(){
+      var r = btn.getBoundingClientRect();
+      tip.style.left = (r.left + r.width / 2) + 'px';
+      tip.style.top = (r.bottom + 4) + 'px';
+      tip.style.display = 'block';
+    });
+    btn.addEventListener('mouseleave', function(){
+      tip.style.display = 'none';
+    });
+  });
 })();
 </script>
 
 
-<div class="modal-overlay" id="group-modal" onclick="if(event.target===this)closeGroupModal()">
-  <div class="modal" style="max-width:480px;">
-    <button class="modal-close" onclick="closeGroupModal()" aria-label="Close">
-      <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
-    </button>
-    <div class="modal-title" id="group-modal-title">Group by Column</div>
-    <div style="margin-top:20px;">
-      <label style="font-size:14px;font-weight:600;color:var(--platform-100);display:block;margin-bottom:16px;" id="group-col-label">Grouping by: <span style="color:var(--platform-60);font-weight:400;" id="group-col-name">Name</span></label>
-
-      <!-- Sort group headers -->
-      <div style="margin-bottom:20px;">
-        <label style="font-size:14px;color:var(--platform-80);display:block;margin-bottom:10px;">Sort group headers</label>
-        <div style="display:flex;align-items:center;gap:12px;">
-          <!-- Sort by -->
-          <div class="dd-wrap" style="flex:1;">
-            <button class="tb-dd" id="group-sort-by-btn" onclick="toggleDd('dd-group-sort-by')" style="width:100%;justify-content:space-between;">
-              <span id="group-sort-by-label">By value</span>
-              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
-            </button>
-            <div class="dd-menu" id="dd-group-sort-by">
-              <button class="dd-item active" onclick="setGroupSortBy('By value',this)">By value</button>
-              <button class="dd-item" onclick="setGroupSortBy('By number of items in group',this)">By number of items in group</button>
-            </div>
-          </div>
-          <!-- Direction -->
-          <div class="dd-wrap" style="flex:1;">
-            <button class="tb-dd" id="group-sort-dir-btn" onclick="toggleDd('dd-group-sort-dir')" style="width:100%;justify-content:space-between;">
-              <span id="group-sort-dir-label">Ascending</span>
-              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
-            </button>
-            <div class="dd-menu" id="dd-group-sort-dir">
-              <button class="dd-item active" onclick="setGroupSortDir('Ascending',this)">Ascending</button>
-              <button class="dd-item" onclick="setGroupSortDir('Descending',this)">Descending</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Collapse to one row -->
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
-        <input type="checkbox" id="group-collapse-checkbox" style="width:16px;height:16px;accent-color:var(--crm-100);cursor:pointer;">
-        <label for="group-collapse-checkbox" style="font-size:14px;color:var(--platform-100);cursor:pointer;">Collapse group to one row</label>
-      </div>
-
-      <!-- Divider -->
-      <div style="height:1px;background:var(--platform-20);margin-bottom:16px;"></div>
-
-      <!-- Remove grouping -->
-      <button class="btn-secondary" onclick="removeGrouping()" style="width:100%;justify-content:center;">Remove this grouping</button>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeGroupModal()">Cancel</button>
-      <button class="btn-primary" onclick="applyGrouping()">Apply</button>
-    </div>
-  </div>
-</div>
-
-
-<script>
-var _groupColName = '';
-
-function openGroupModal(colName){
-  _groupColName = colName || 'Column';
-  document.getElementById('group-col-name').textContent = _groupColName;
-  document.getElementById('group-modal-title').textContent = 'Group by ' + _groupColName;
-  // Reset to defaults
-  setGroupSortBy('By value', document.querySelector('#dd-group-sort-by .dd-item'));
-  setGroupSortDir('Ascending', document.querySelector('#dd-group-sort-dir .dd-item'));
-  document.getElementById('group-collapse-checkbox').checked = false;
-  document.getElementById('group-modal').classList.add('open');
-}
-
-function closeGroupModal(){
-  document.getElementById('group-modal').classList.remove('open');
-}
-
-function setGroupSortBy(val, itemEl){
-  document.getElementById('group-sort-by-label').textContent = val;
-  document.querySelectorAll('#dd-group-sort-by .dd-item').forEach(function(it){ it.classList.remove('active'); });
-  if(itemEl) itemEl.classList.add('active');
-  closeAllDd();
-}
-
-function setGroupSortDir(val, itemEl){
-  document.getElementById('group-sort-dir-label').textContent = val;
-  document.querySelectorAll('#dd-group-sort-dir .dd-item').forEach(function(it){ it.classList.remove('active'); });
-  if(itemEl) itemEl.classList.add('active');
-  closeAllDd();
-}
-
-function applyGrouping(){
-  var sortBy = document.getElementById('group-sort-by-label').textContent;
-  var sortDir = document.getElementById('group-sort-dir-label').textContent;
-  var collapse = document.getElementById('group-collapse-checkbox').checked;
-  showToast('Grouped by ' + _groupColName);
-  closeGroupModal();
-}
-
-function removeGrouping(){
-  showToast('Grouping removed');
-  closeGroupModal();
-}
-</script>
 
 </body>
 </html>

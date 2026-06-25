@@ -643,7 +643,9 @@ select.modal-input:focus{}
 /* Labels never disabled */
 #if-root.inc-active .if-label,#if-root.exc-active .if-label{opacity:1;}
 .if-chip.active{background:#357A06;border-color:#357A06;color:var(--white);font-weight:700;}
-.if-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;line-height:21px;}
+.if-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;line-height:21px;background:none;border:none;padding:0;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;}
+.if-chip-body:focus{outline:none;}
+.if-chip-body:focus-visible{outline:2px solid #357A06;outline-offset:1px;border-radius:2px;}
 .if-chip.active .if-chip-body{color:var(--white);}
 .if-chip.active .if-chip-x{color:var(--white);}
 .if-chip-x{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--platform-60);background:none;border:none;padding:0;cursor:pointer;flex-shrink:0;border-radius:50%;transition:background .1s,color .1s;}
@@ -708,7 +710,7 @@ select.modal-input:focus{}
 .if-or-sep-row{display:flex;align-items:center;padding:2px 0;}
 .if-or-sep-row .if-label-spacer{visibility:hidden;font-size:14px;font-weight:700;white-space:nowrap;margin-right:16px;flex-shrink:0;}
 .if-or-sep-label{font-size:14px;font-weight:600;color:var(--platform-80);padding:0 10px 0 0;white-space:nowrap;line-height:21px;}
-.if-or-btn{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;margin-left:12px;}
+.if-or-btn{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;margin-left:6px;}
 .if-or-btn:hover{background:var(--platform-20);border-color:#DAD7D9;}
 /* Grove secondary disabled: white bg, #272D30 border, #7D8183 text */
 .if-or-btn:disabled,.if-or-btn[disabled]{background:var(--white);border-color:#272D30;color:#7D8183;cursor:default;pointer-events:none;}
@@ -2041,19 +2043,19 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                 <div class="if-row" id="if-inc-row">
                   <div class="if-label inc" style="align-self:flex-start;padding-top:8px;">Include</div>
                   <div class="if-chips-wrap" id="if-inc-chips">
-                    <div class="if-chip" id="if-chip-status" onclick="ifOpenL1('status',this)">
-                      <span class="if-chip-body">Status is Active</span>
-                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    <div class="if-chip" id="if-chip-status">
+                      <button class="if-chip-body" onclick="ifOpenL1('status',this)">Status is Active</button>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <span class="if-and-sep">AND</span>
-                    <div class="if-chip" id="if-chip-hoh" onclick="ifOpenL1('hoh',this)">
-                      <span class="if-chip-body">is Head of Household</span>
-                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    <div class="if-chip" id="if-chip-hoh">
+                      <button class="if-chip-body" onclick="ifOpenL1('hoh',this)">is Head of Household</button>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <span class="if-and-sep">AND</span>
-                    <div class="if-chip" id="if-chip-bday" onclick="ifOpenL1('bday',this)">
-                      <span class="if-chip-body">Birthdate is this fiscal year</span>
-                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    <div class="if-chip" id="if-chip-bday">
+                      <button class="if-chip-body" onclick="ifOpenL1('bday',this)">Birthdate is this fiscal year</button>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <span class="if-and-sep">AND</span>
                     <div class="if-chip" id="if-chip-txn"
@@ -2061,14 +2063,12 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                       role="button"
                       aria-label="Has any Transactions — click to edit, hover for details"
                       data-popover='{"include":["Amount is between $2.00 and $50.00","Fund is Unrestricted"],"exclude":[]}'
-                      onclick="ifChipClick('txn',this)"
                       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ifChipClick('txn',this);}if(event.key==='Escape')ifHidePopover();"
-                      onmouseenter="ifShowPopover(this)"
-                      onmouseleave="ifHidePopover()"
+
                       onfocus="ifShowPopover(this)"
                       onblur="ifHidePopover()">
-                      <span class="if-chip-body">Has any Transactions</span>
-                      <span class="if-chip-badge" aria-label="2 conditions">2</span>
+                      <button class="if-chip-body" onclick="ifChipClick('txn',this)">Has any Transactions</span>
+                      <span class="if-chip-badge" aria-label="2 conditions">2</button>
                       <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <button class="if-and-btn" onclick="ifOpenPicker('inc',this)">And...</button>
@@ -2079,9 +2079,9 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                 <div class="if-row if-or-row-extra">
                   <div class="if-label inc" style="visibility:hidden;align-self:flex-start;padding-top:8px;">Include</div>
                   <div class="if-chips-wrap">
-                    <div class="if-chip" onclick="ifOpenL1('bday',this)">
-                      <span class="if-chip-body">Birthdate is last week</span>
-                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    <div class="if-chip">
+                      <button class="if-chip-body" onclick="ifOpenL1('bday',this)">Birthdate is last week</button>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <button class="if-and-btn" onclick="ifOpenPicker('inc',this)">And...</button>
                     <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
@@ -5172,7 +5172,7 @@ function ifRenderL2Chips(parentType){
     el.className = 'if-chip';
     el.id = 'if-chip-' + chip.id;
     el.setAttribute('onclick', 'ifOpenL2("'+chip.type+'","'+chip.id+'",this)');
-    el.innerHTML = '<span class="if-chip-body">'+chip.label+'</span><button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>';
+    el.innerHTML = '<button class="if-chip-body" onclick="ifOpenL2(\''+chip.type+'\',\''+chip.id+'\',this.closest(\'.if-chip\'))" >'+chip.label+'</button><button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>';
     chipsWrap.appendChild(el);
   });
 
@@ -5373,7 +5373,7 @@ function ifPickField(label, type, section){
   chip.className = 'if-chip';
   chip.id = 'if-chip-' + type + '-' + Date.now();
   var chipId = chip.id;
-  chip.innerHTML = '<span class="if-chip-body">' + label + '</span><button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>';
+  chip.innerHTML = '<button class="if-chip-body" onclick="ifOpenL1(\''+type+'\',this.closest(\'.if-chip\')); " >'+label+'</button><button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>';
   chip.onclick = function(){ ifOpenL1(type, chip); };
   chipRow.insertBefore(sep, andBtn);
   chipRow.insertBefore(chip, andBtn);

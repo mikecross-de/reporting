@@ -144,7 +144,7 @@ mark.ed-hl{background:#C5E0A0;border-radius:2px;padding:0 1px;color:inherit;}
 .rep-head-actions{display:flex;gap:10px;align-items:center;flex-shrink:0;}
 
 /* Penny banner */
-.penny-banner{background:var(--white);border-radius:12px;padding:20px 24px 24px;margin-bottom:16px;}
+.penny-banner{background:var(--white);border-radius:4px;padding:20px 24px 24px;margin-bottom:16px;}
 .penny-banner-head{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
 .penny-banner-head-icon{width:17px;height:17px;color:var(--penny-100);fill:currentColor;flex-shrink:0;}
 .penny-banner-head-title{font-size:20px;font-weight:700;color:var(--platform-100);line-height:24px;}
@@ -160,7 +160,7 @@ mark.ed-hl{background:#C5E0A0;border-radius:2px;padding:0 1px;color:inherit;}
 .penny-banner-btn:disabled:hover{background:var(--penny-100);}
 
 /* Toolbar row 1 — search + segmented tabs + dropdowns */
-.rep-panel{background:var(--white);border-radius:10px;margin-bottom:18px;padding:0 24px 24px;}
+.rep-panel{background:var(--white);border-radius:4px;margin-bottom:18px;padding:0 24px 24px;}
 .rep-toolbars-wrap{background:var(--white);padding:24px 0 24px;}
 
 .rep-toolbar-1{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;}
@@ -490,7 +490,8 @@ select.modal-input:focus{}
 .ed-penny-context svg{color:var(--penny-100);}
 
 /* Editor Penny NL input */
-.ed-penny-input{display:flex;align-items:center;gap:12px;margin:4px 0 12px;}
+.ed-penny-input{display:flex;align-items:center;gap:12px;}
+.ed-penny-block{padding:20px 24px 20px;border-radius:4px;margin-bottom:16px;background:var(--white);}
 .ed-penny-field-wrap{flex:1;display:flex;align-items:center;gap:10px;border:1px solid var(--platform-40);border-radius:4px;padding:8px 16px;background:var(--white);}
 .ed-penny-field-wrap:hover{border-color:var(--platform-100);}
 .ed-penny-field-wrap:focus-within{border-color:var(--penny-100);}
@@ -820,7 +821,7 @@ select.modal-input:focus{}
 .ed-sum-btn-icon{color:var(--platform-60);font-size:13px;}
 
 /* Result table */
-.ed-result{background:var(--white);border-radius:10px;overflow:hidden;padding:0 24px 24px;}
+.ed-result{background:var(--white);border-radius:4px;overflow:hidden;padding:0 24px 24px;}
 .ed-result table{width:100%;min-width:900px;border-collapse:separate;border-spacing:0;font-size:14px;}
 .ed-result .ed-table-wrap{overflow-x:auto;}
 .ed-result thead th{text-align:left;padding:14px 16px;font-size:12px;font-weight:600;color:var(--platform-80);background:var(--white);border-bottom:1px solid var(--platform-20);white-space:nowrap;user-select:none;line-height:18px;}
@@ -2025,6 +2026,18 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
           </div>
         </div>
 
+        <div class="ed-penny-block">
+          <div class="ed-penny-input">
+            <div class="ed-penny-field-wrap">
+              <svg class="nav-svg-icon" style="width:14px;height:14px;color:var(--penny-100);fill:currentColor;flex-shrink:0;"><use href="#icon-sparkles"/></svg>
+              <input type="text" placeholder="Ask Penny to refine this report..." class="ed-penny-field" id="ed-penny-field" oninput="document.getElementById('ed-penny-send').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'){event.preventDefault();refineReport();}">
+            </div>
+            <button class="ed-penny-send" id="ed-penny-send" disabled onclick="refineReport()">
+              <svg class="nav-svg-icon" style="width:14px;height:14px;"><use href="#icon-sparkles"/></svg>
+              Refine Report
+            </button>
+          </div>
+        </div>
         <div class="ed-result">
           <div class="ed-summary">
             <div class="ed-summary-l" style="display:flex;align-items:center;gap:8px;">
@@ -2262,16 +2275,6 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
               </div>
 
             </div>
-          </div>
-          <div class="ed-penny-input">
-            <div class="ed-penny-field-wrap">
-              <svg class="nav-svg-icon" style="width:14px;height:14px;color:var(--penny-100);fill:currentColor;flex-shrink:0;"><use href="#icon-sparkles"/></svg>
-              <input type="text" placeholder="Ask Penny to refine this report..." class="ed-penny-field" id="ed-penny-field" oninput="document.getElementById('ed-penny-send').disabled=!this.value.trim()" onkeydown="if(event.key==='Enter'){event.preventDefault();refineReport();}">
-            </div>
-            <button class="ed-penny-send" id="ed-penny-send" disabled onclick="refineReport()">
-              <svg class="nav-svg-icon" style="width:14px;height:14px;"><use href="#icon-sparkles"/></svg>
-              Refine Report
-            </button>
           </div>
           <div class="ed-table-wrap">
           <table id="ed-table">

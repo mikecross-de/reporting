@@ -670,10 +670,16 @@ select.modal-input:focus{}
 .if-edit-panel#if-picker-inc,.if-edit-panel#if-picker-exc{margin-left:58px;}
 .if-chip-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--crm-20);color:var(--crm-200);border-radius:39px;font-size:12px;font-weight:700;line-height:1;padding:2px 6px;flex-shrink:0;}
 .if-chip.active .if-chip-badge{background:rgba(255,255,255,0.25);color:#fff;}
-.if-chip-popover{position:fixed;background:var(--white);border:none;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);padding:12px 16px;min-width:220px;max-width:300px;z-index:99999;pointer-events:auto;font-family:var(--font);}
+.if-chip-popover{position:fixed;background:var(--white);border:none;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);padding:12px 16px;min-width:220px;max-width:360px;z-index:99999;pointer-events:auto;font-family:var(--font);}
 .if-chip-popover-title{font-size:13px;font-weight:700;color:var(--platform-100);margin-bottom:8px;}
 .if-chip-popover-cond{display:flex;align-items:flex-start;gap:6px;font-size:14px;color:var(--platform-80);padding:2px 0;line-height:1.4;}
 .if-chip-popover-dot{width:4px;height:4px;border-radius:50%;background:var(--platform-40);flex-shrink:0;margin-top:6px;}
+.if-pop-row{font-size:14px;color:var(--platform-80);padding:2px 0;line-height:1.4;}
+.if-pop-indent{padding-left:10px;border-left:2px solid var(--platform-10);margin:4px 0 2px 2px;}
+.if-pop-sublabel{font-size:14px;font-weight:700;margin-bottom:2px;margin-top:4px;}
+.if-pop-sublabel.inc{color:var(--crm-100);}
+.if-pop-sublabel.exc{color:var(--platform-60);}
+.if-pop-subrow{font-size:14px;color:var(--platform-80);padding:1px 0;line-height:1.4;}
 .if-chip-popover-section-label{font-size:14px;font-weight:700;margin-bottom:4px;margin-top:0;}
 .if-chip-popover-section-label.inc{color:var(--crm-100);}
 .if-chip-popover-section-label.exc{color:var(--platform-60);}
@@ -2065,7 +2071,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                       tabindex="0"
                       role="button"
                       aria-label="Has any Transactions — click to edit, hover for details"
-                      data-popover='{"include":["Amount is between $2.00 and $50.00","Fund is Unrestricted"],"exclude":[]}'
+                      data-popover='{"include":[{"label":"Amount is between $2.00 and $50.00"},{"label":"Fund is Unrestricted","include":[{"label":"Fund name contains Unrestricted"},{"label":"Fund type is Operating"}],"exclude":[]}],"exclude":[]}'
                       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ifChipClick('txn',this);}if(event.key==='Escape')ifHidePopover();"
 
                       onfocus="ifShowPopover(this)"
@@ -4426,32 +4432,55 @@ function ifInitPopovers(){
 }
 document.addEventListener('DOMContentLoaded', ifInitPopovers);
 
+function ifRenderPopoverTree(items, depth){
+  if(!items || !items.length) return '';
+  var out = '';
+  items.forEach(function(item){
+    var label = typeof item === 'string' ? item : item.label;
+    var hasChildren = item.include && item.include.length || item.exclude && item.exclude.length;
+    out += '<div class="if-pop-row">' + label + (hasChildren ? '' : '') + '</div>';
+    if(hasChildren){
+      out += '<div class="if-pop-indent">';
+      if(item.include && item.include.length){
+        out += '<div class="if-pop-sublabel inc">Include</div>';
+        item.include.forEach(function(c){
+          out += '<div class="if-pop-subrow">' + (typeof c === 'string' ? c : c.label) + '</div>';
+        });
+      }
+      if(item.exclude && item.exclude.length){
+        out += '<div class="if-pop-sublabel exc">Exclude</div>';
+        item.exclude.forEach(function(c){
+          out += '<div class="if-pop-subrow">' + (typeof c === 'string' ? c : c.label) + '</div>';
+        });
+      }
+      out += '</div>';
+    }
+  });
+  return out;
+}
+
 function ifShowPopover(chip){
   var data = chip.dataset.popover;
   if(!data) return;
   var d;
   try{ d = JSON.parse(data); } catch(e){ return; }
   ifHidePopover();
-  var html = '';
+  var h = '';
   if(d.include && d.include.length){
-    html += '<div class="if-chip-popover-section-label inc">Include</div>';
-    html += d.include.map(function(c){
-      return '<div class="if-chip-popover-cond">' + c + '</div>';
-    }).join('');
+    h += '<div class="if-chip-popover-section-label inc">Include</div>';
+    h += ifRenderPopoverTree(d.include, 0);
   }
   if(d.exclude && d.exclude.length){
-    if(d.include && d.include.length) html += '<div class="if-chip-popover-sep"></div>';
-    html += '<div class="if-chip-popover-section-label exc">Exclude</div>';
-    html += d.exclude.map(function(c){
-      return '<div class="if-chip-popover-cond">' + c + '</div>';
-    }).join('');
+    if(d.include && d.include.length) h += '<div class="if-chip-popover-sep"></div>';
+    h += '<div class="if-chip-popover-section-label exc">Exclude</div>';
+    h += ifRenderPopoverTree(d.exclude, 0);
   }
-  if(!html) return;
+  if(!h) return;
   var pop = document.createElement('div');
   pop.className = 'if-chip-popover';
   pop.id = '__if-popover';
   pop.setAttribute('role','tooltip');
-  pop.innerHTML = html;
+  pop.innerHTML = h;
   document.body.appendChild(pop);
   _ifPopEl = pop;
   var r = chip.getBoundingClientRect();

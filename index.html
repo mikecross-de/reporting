@@ -152,7 +152,7 @@ input,select,textarea{font-family:var(--font);}
 .rep-toolbars-wrap{background:var(--white);padding:24px 0 24px;}
 
 .rep-toolbar-1{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;}
-.tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;flex:1 1 260px;max-width:350px;transition:border-color .15s;}
+.tb-search{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;min-width:300px;flex:1 1 300px;max-width:350px;transition:border-color .15s;}
 .tb-search:hover{border-color:var(--platform-100);}
 .tb-search:focus-within{border-color:var(--crm-100);}
 .tb-search input{flex:1;border:none;outline:none;font-size:16px;line-height:1;font-family:var(--font);color:var(--platform-100);background:transparent;padding:0 0 2px;display:block;}
@@ -474,7 +474,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .ed-penny-context svg{color:var(--penny-100);}
 
 /* Editor Penny NL input */
-.ed-penny-input{display:flex;align-items:center;gap:12px;margin:4px 0 16px;}
+.ed-penny-input{display:flex;align-items:center;gap:12px;margin:4px 0 12px;}
 .ed-penny-field-wrap{flex:1;display:flex;align-items:center;gap:10px;border:1px solid var(--platform-40);border-radius:6px;padding:4px 16px;transition:border-color .15s;background:var(--white);}
 .ed-penny-field-wrap:hover{border-color:var(--platform-100);}
 .ed-penny-field-wrap:focus-within{border-color:var(--penny-100);border-width:2px;padding:3px 15px;}
@@ -495,7 +495,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .ed-filter-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:4px 0 12px;}
 /* Filter panel (inline expandable) */
 .fd-overlay{display:none;}
-.fd-panel{display:none;padding:8px 0;}
+.fd-panel{display:none;padding:4px 0 12px;}
 .fd-panel.open{display:block;}
 .fd-nl-section{display:flex;align-items:flex-start;gap:12px;}
 .fd-nl-label{font-size:16px;font-weight:700;line-height:18px;white-space:nowrap;flex-shrink:0;padding:4px 0;}
@@ -595,19 +595,72 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .fd-chip.active::before{content:'';display:inline-block;width:14px;height:14px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' fill='white'%3E%3Cpath d='M173.9 439.4l-166.4-166.4c-10-10-10-26.2 0-36.2l36.2-36.2c10-10 26.2-10 36.2 0L192 312.7 432.1 72.6c10-10 26.2-10 36.2 0l36.2 36.2c10 10 10 26.2 0 36.2l-294.4 294.4c-10 10-26.2 10-36.2 0z'/%3E%3C/svg%3E") no-repeat center/10px 10px;}
 /* Inline controls */
 .fd-inline-controls{display:flex;gap:8px;flex:1;min-width:0;align-items:center;}
-/* Add filter picker */
-.fd-add-row{padding:12px 0;display:flex;align-items:center;gap:8px;}
-.fd-add-search-wrap{position:relative;flex:1;}
-.fd-add-search{width:100%;border:1px solid var(--platform-40);border-radius:4px;padding:8px 12px 8px 36px;font-size:14px;font-family:var(--font);color:var(--platform-100);height:40px;box-sizing:border-box;transition:border-color .15s;outline:none;}
-.fd-add-search:hover{border-color:var(--platform-100);}
-.fd-add-search:focus{border-color:var(--crm-100);border-width:2px;padding:7px 11px 7px 35px;}
-.fd-add-search-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--platform-60);pointer-events:none;}
-.fd-field-list{position:absolute;top:calc(100% + 4px);left:0;right:0;background:var(--white);border:1px solid var(--platform-20);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.12);max-height:260px;overflow-y:auto;z-index:10;padding:8px 0;}
-.fd-field-group{font-size:12px;font-weight:700;color:var(--platform-60);text-transform:uppercase;letter-spacing:.5px;padding:10px 16px 4px;}
-.fd-field-group:first-child{padding-top:8px;}
-.fd-field-item{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:14px;color:var(--platform-100);cursor:pointer;transition:background .08s;}
-.fd-field-item:hover{background:var(--platform-5);}
-.fd-field-item-type{font-size:11px;color:var(--platform-60);margin-left:auto;}
+/* ── Inline filter system ── */
+.if-row{display:flex;align-items:center;gap:0;margin-bottom:0;padding:12px 0;}
+#if-inc-row{padding-top:0;}
+#if-exc-row{padding-bottom:0;border-top:1px solid var(--platform-10);}
+.if-label{font-size:14px;font-weight:700;white-space:nowrap;margin-right:12px;display:flex;align-items:center;flex-shrink:0;line-height:18px;}
+.if-label.inc{color:#296401;}
+.if-label.inc svg{color:#296401;}
+.if-label.exc{color:var(--platform-80);}
+.if-label.exc svg{color:var(--platform-80);}
+.if-chips-wrap{display:flex;flex-wrap:wrap;gap:0;align-items:center;padding:2px 0;}
+.if-and-sep{font-size:14px;font-weight:600;color:var(--platform-80);padding:0 10px;white-space:nowrap;align-self:center;line-height:21px;}
+/* Filter chip — uses filter-chip tag+body pattern */
+.if-chip{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;cursor:pointer;font-size:14px;font-family:var(--font);transition:border-color .12s;overflow:hidden;white-space:nowrap;padding:4px 6px 4px 0;line-height:21px;box-sizing:border-box;}
+.if-chip:hover{border-color:var(--platform-40);background:var(--platform-10);}
+#if-root.panel-open .if-chip:not(.active){pointer-events:none;cursor:default;}
+.if-chip.active{border:1px solid var(--crm-100);background:var(--crm-10);}
+.if-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;padding:0 8px;line-height:21px;}
+.if-chip.active .if-chip-body{color:var(--platform-100);}
+.if-chip-x{display:inline-flex;align-items:center;justify-content:center;width:22px;height:100%;color:var(--platform-60);transition:color .1s;flex-shrink:0;width:14px;height:14px;background:none;border:none;padding:0;cursor:pointer;}
+.if-chip-x:hover{color:var(--platform-100);}
+/* And... button — matches production grey pill */
+.if-and-btn{display:inline-flex;align-items:center;background:var(--crm-100);border:none;border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--white);cursor:pointer;padding:4px 10px;margin:2px 0 2px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;}
+.if-and-btn:hover{background:var(--crm-200);}
+/* Edit panel — full-width grey bar, no border-radius per production */
+.if-edit-panel{background:none;border:1px solid var(--platform-10);margin:4px 0 16px;padding:0;border-radius:4px;overflow:hidden;}
+.if-edit-panel.l2{background:none;border:1px solid var(--platform-10);margin:4px 0 16px;padding:0;border-radius:4px;overflow:hidden;}
+.if-edit-hd{display:flex;align-items:center;justify-content:space-between;background:var(--platform-5);padding:10px 16px;min-height:44px;box-sizing:border-box;}
+.if-edit-title{font-size:14px;font-weight:600;color:var(--platform-100);display:flex;align-items:center;gap:6px;}
+
+.if-edit-btns{display:flex;gap:8px;align-items:center;}
+.if-edit-cancel{background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 8px;font-weight:700;line-height:21px;transition:background .12s;white-space:nowrap;}
+.if-edit-cancel:hover{background:var(--platform-10);}
+.if-edit-apply{background:var(--crm-100);border:none;border-radius:4px;font-size:14px;font-family:var(--font);color:var(--white);cursor:pointer;padding:4px 8px;font-weight:700;line-height:21px;transition:background .12s;white-space:nowrap;}
+.if-edit-apply:hover{background:var(--crm-200);}
+/* White inner control box */
+.if-edit-inner{background:var(--white);padding:20px 16px;margin:0;}
+.if-edit-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
+.if-edit-controls .fc-select{flex:0 0 auto;width:auto;}
+.if-edit-controls .fc-input{width:auto;}
+/* Field picker panel (Add filter) */
+.if-picker-panel{background:var(--white);border:1px solid var(--platform-20);border-radius:4px;padding:0;margin-bottom:8px;overflow:hidden;}
+.if-picker-hd{font-size:14px;font-weight:600;color:var(--platform-100);padding:12px 14px 8px;}
+.if-picker-search-wrap{padding:0 14px 10px;border-bottom:1px solid var(--platform-10);}
+.if-picker-search{width:100%;border:1px solid var(--platform-40);border-radius:4px;padding:6px 10px;font-size:14px;font-family:var(--font);color:var(--platform-100);height:36px;box-sizing:border-box;transition:border-color .15s;outline:none;line-height:normal;}
+.if-picker-search:hover{border-color:var(--platform-100);}
+.if-picker-search:focus{border-color:var(--crm-100);}
+.if-picker-search::placeholder{color:var(--platform-60);}
+.if-picker-list{max-height:220px;overflow-y:auto;}
+.if-picker-group-hd{display:flex;align-items:center;gap:6px;padding:10px 14px 6px;font-size:14px;font-weight:700;color:var(--platform-100);cursor:pointer;user-select:none;}
+.if-picker-group-hd svg{width:12px;height:12px;fill:currentColor;color:var(--platform-60);transition:transform .12s;flex-shrink:0;}
+.if-picker-group-hd.collapsed svg{transform:rotate(-90deg);}
+.if-picker-item{display:block;width:100%;text-align:left;padding:6px 14px 6px 24px;font-size:14px;font-family:var(--font);color:var(--platform-100);background:none;border:none;cursor:pointer;transition:background .08s;}
+.if-picker-item:hover{background:var(--platform-5);}
+.if-picker-item.hidden{display:none;}
+/* Or... / actions row */
+.if-or-row{padding:4px 0 0;margin-left:80px;}
+.if-or-btn{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;margin-left:10px;}
+.if-or-btn:hover{background:var(--platform-5);}
+.if-actions-row{display:flex;align-items:center;gap:12px;padding:6px 0 2px;}
+.if-add-filter-btn{background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;}
+.if-add-filter-btn:hover{background:var(--platform-5);}
+.if-exc-link{display:inline-flex;align-items:center;gap:5px;background:none;border:none;font-size:14px;font-family:var(--font);color:var(--platform-80);cursor:pointer;padding:0;font-weight:400;line-height:21px;}
+.if-and-btn:disabled,.if-or-btn:disabled,.if-add-filter-btn:disabled{opacity:0.45;cursor:default;pointer-events:none;}
+.if-and-btn:disabled{background:var(--crm-100);}
+.if-exc-link:disabled{opacity:0.45;cursor:default;pointer-events:none;}
+.if-exc-link:hover{color:var(--platform-100);}
 
 /* Column modal */
 .col-modal-body{display:flex;gap:0;min-height:380px;max-height:60vh;}
@@ -677,7 +730,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .penny-insight-dismiss:hover{background:var(--platform-10);color:var(--platform-100);}
 
 /* Result summary row */
-.ed-summary{display:flex;align-items:center;justify-content:space-between;padding:24px 0 20px;}
+.ed-summary{display:flex;align-items:center;justify-content:space-between;padding:24px 0 16px;}
 .ed-summary-l{font-size:16px;color:var(--platform-80);display:flex;align-items:center;gap:8px;}
 .ed-summary-l strong{color:var(--platform-100);font-weight:700;}
 .ed-summary-r{display:flex;align-items:center;gap:8px;}
@@ -839,7 +892,7 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 
 /* ─────────── TOOLBAR ─────────── */
 .toolbar{background:var(--white);border-radius:4px 4px 0 0;padding:16px 20px;margin-bottom:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
-.tb-search{display:flex;align-items:center;gap:8px;border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;min-width:350px;flex:0 1 280px;transition:border-color .15s;}
+.tb-search{display:flex;align-items:center;gap:8px;border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;min-width:300px;flex:0 1 300px;transition:border-color .15s;}
 .tb-search:hover{border-color:var(--platform-100);}
 .tb-search:focus-within{border-color:var(--crm-100);}
 .tb-search input{flex:1;border:none;outline:none;font-size:16px;line-height:1;font-family:var(--font);color:var(--platform-100);background:transparent;padding:0 0 2px;display:block;}
@@ -1194,6 +1247,8 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
   <symbol id="icon-share" viewBox="0 0 512 512"><path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"/></symbol>
   <symbol id="icon-sliders" viewBox="0 0 512 512"><path d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"/></symbol>
   <symbol id="icon-filter" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></symbol>
+  <symbol id="icon-plus-circle" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></symbol>
+  <symbol id="icon-minus-circle" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM184 232H328c13.3 0 24 10.7 24 24s-10.7 24-24 24H184c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></symbol>
   <symbol id="icon-chart-line" viewBox="0 0 512 512"><path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></symbol>
   <symbol id="icon-bullhorn" viewBox="0 0 512 512"><path d="M480 32c0-12.9-7.8-24.6-19.8-29.6s-25.7-2.2-34.9 6.9L381.7 53c-48 48-113.1 75-181 75H64c-35.3 0-64 28.7-64 64v96c0 35.3 28.7 64 64 64l0 64c0 17.7 14.3 32 32 32h64c17.7 0 32-14.3 32-32V352h8.7c67.9 0 133 27 181 75l43.6 43.6c9.2 9.2 22.9 11.9 34.9 6.9s19.8-16.6 19.8-29.6V322.9c18.6-8.8 32-32.5 32-66.9s-13.4-58.1-32-66.9V32zm-64 76.7V403.3C357.2 360.2 283.3 336 205.3 336H176V176h29.3c78 0 151.9-24.2 210.7-67.3z"/></symbol>
   <symbol id="icon-trophy" viewBox="0 0 576 512"><path d="M400 0H176c-26.5 0-48.1 21.8-47.1 48.2c.2 5.3 .4 10.6 .7 15.8H24C10.7 64 0 74.7 0 88c0 92.6 33.5 157 78.5 200.7c44.3 43.1 98.3 64.8 138.1 75.8c23.4 6.5 39.4 26 39.4 45.6c0 20.9-17 37.9-37.9 37.9H192c-17.7 0-32 14.3-32 32s14.3 32 32 32H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H357.9C337 448 320 431 320 410.1c0-19.6 15.9-39.2 39.4-45.6c39.9-11 93.9-32.7 138.2-75.8C542.5 245 576 180.6 576 88c0-13.3-10.7-24-24-24H446.4c.3-5.2 .5-10.4 .7-15.8C448.1 21.8 426.5 0 400 0zM48.9 112h84.4c9.1 90.1 29.2 150.3 51.9 190.6c-24.9-11-50.8-26.5-73.2-48.3c-32-31.1-58-76-63-142.3zM464.1 254.3c-22.4 21.8-48.3 37.3-73.2 48.3c22.7-40.3 42.8-100.5 51.9-190.6h84.4c-5.1 66.3-31.1 111.2-63 142.3z"/></symbol>
@@ -1913,34 +1968,210 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
               </div>
             </div>
           </div>
-          <!-- Filter NL expression view (read-only) -->
+          <!-- Inline filter system -->
           <div class="fd-panel" id="filter-panel">
-            <div class="fd-nl-section">
-              <span class="fd-nl-label" style="color:#296401;">Include</span>
-              <div class="fd-nl-col">
-                <div class="fd-nl-row">
-                  <span class="fd-nl-tok">Status is Active</span>
-                  <span class="fd-nl-plus">+</span>
-                  <span class="fd-nl-tok">is Head of Household</span>
-                  <span class="fd-nl-plus">+</span>
-                  <span class="fd-nl-tok">Birthdate is this fiscal year</span>
-                  <span class="fd-nl-or">OR</span>
-                  <span class="fd-nl-tok">has any Transactions</span>
-                  <a class="fd-nl-edit" href="javascript:void(0)" onclick="openFilterModal()">Edit filters</a>
+            <div id="if-root">
+
+              <!-- INCLUDE row -->
+              <div class="if-row" id="if-inc-row">
+                <div class="if-label inc">
+                                    Include
+                </div>
+                <div class="if-chips-wrap" id="if-inc-chips">
+                  <div class="if-chip" id="if-chip-status" onclick="ifOpenL1('status',this)">
+                    <span class="if-chip-body">Status is Active</span>
+                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                  </div>
+                  <span class="if-and-sep">AND</span>
+                  <div class="if-chip" id="if-chip-hoh" onclick="ifOpenL1('hoh',this)">
+                    <span class="if-chip-body">is Head of Household</span>
+                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                  </div>
+                  <span class="if-and-sep">AND</span>
+                  <div class="if-chip" id="if-chip-bday" onclick="ifOpenL1('bday',this)">
+                    <span class="if-chip-body">Birthdate is this fiscal year</span>
+                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                  </div>
+                  <span class="if-and-sep">AND</span>
+                  <div class="if-chip" id="if-chip-txn" onclick="ifOpenL1('txn',this)">
+                    <span class="if-chip-body">Has any Transactions</span>
+                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                  </div>
+                  <button class="if-and-btn" onclick="ifOpenPicker('inc')">And...</button>
+                  <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                 </div>
               </div>
-            </div>
-            <div style="border-top:1px solid var(--platform-10);margin:4px 0 12px;"></div>
-            <div class="fd-nl-section">
-              <span class="fd-nl-label" style="color:#525759;">Exclude</span>
-              <div class="fd-nl-col">
-                <div class="fd-nl-row">
-                  <span class="fd-nl-tok">Name contains "Smith"</span>
-                  <span class="fd-nl-plus">+</span>
-                  <span class="fd-nl-tok">Website Visits between 5 and 20</span>
-                  <a class="fd-nl-edit" href="javascript:void(0)" onclick="openFilterModal()">Edit filters</a>
+
+              <!-- Add filter picker panel (include) -->
+              <div class="if-edit-panel" id="if-picker-inc" style="display:none;">
+                <div class="if-edit-hd">
+                  <div class="if-edit-title">
+                    <svg style="width:13px;height:13px;fill:currentColor;"><use href="#icon-filter"/></svg>
+                    Add filter
+                  </div>
+                  <div class="if-edit-btns">
+                    <button class="if-edit-cancel" onclick="ifClosePicker('inc')">Cancel</button>
+                  </div>
+                </div>
+                <div class="if-picker-panel">
+                  <div class="if-picker-hd">Choose a field to include</div>
+                  <div class="if-picker-search-wrap">
+                    <input class="if-picker-search" type="text" placeholder="Search fields" oninput="ifFilterFields(this.value,'inc')" autocomplete="off">
+                  </div>
+                  <div class="if-picker-list" id="if-picker-list-inc">
+                    <div class="if-picker-group-hd" onclick="ifToggleGroup(this)">
+                      <svg viewBox="0 0 320 512"><use href="#icon-chevron-down"/></svg>
+                      Constituent fields (12)
+                    </div>
+                    <button class="if-picker-item" onclick="ifPickField('Status','status','inc')">Status</button>
+                    <button class="if-picker-item" onclick="ifPickField('Is Head of Household','hoh','inc')">Is Head of Household</button>
+                    <button class="if-picker-item" onclick="ifPickField('Birthdate','bday','inc')">Birthdate</button>
+                    <button class="if-picker-item" onclick="ifPickField('Name','name','inc')">Name</button>
+                    <button class="if-picker-item" onclick="ifPickField('Email','email','inc')">Email</button>
+                    <button class="if-picker-item" onclick="ifPickField('Phone','phone','inc')">Phone</button>
+                    <button class="if-picker-item" onclick="ifPickField('Address','address','inc')">Address</button>
+                    <button class="if-picker-item" onclick="ifPickField('Engagement Score','engagement','inc')">Engagement Score</button>
+                    <button class="if-picker-item" onclick="ifPickField('Donor Stage','stage','inc')">Donor Stage</button>
+                    <button class="if-picker-item" onclick="ifPickField('Tags','tags','inc')">Tags</button>
+                    <button class="if-picker-item" onclick="ifPickField('Custom Field 1','custom1','inc')">Custom Field 1</button>
+                    <button class="if-picker-item" onclick="ifPickField('Custom Field 2','custom2','inc')">Custom Field 2</button>
+                    <div class="if-picker-group-hd" onclick="ifToggleGroup(this)">
+                      <svg viewBox="0 0 320 512"><use href="#icon-chevron-down"/></svg>
+                      Transaction fields (8)
+                    </div>
+                    <button class="if-picker-item" onclick="ifPickField('Has Transactions','txn','inc')">Has Transactions</button>
+                    <button class="if-picker-item" onclick="ifPickField('Amount','amount','inc')">Amount</button>
+                    <button class="if-picker-item" onclick="ifPickField('Date','date','inc')">Date</button>
+                    <button class="if-picker-item" onclick="ifPickField('Fund','fund','inc')">Fund</button>
+                    <button class="if-picker-item" onclick="ifPickField('Campaign','campaign','inc')">Campaign</button>
+                    <button class="if-picker-item" onclick="ifPickField('Appeal','appeal','inc')">Appeal</button>
+                    <button class="if-picker-item" onclick="ifPickField('Gift Type','gifttype','inc')">Gift Type</button>
+                    <button class="if-picker-item" onclick="ifPickField('Payment Method','paymethod','inc')">Payment Method</button>
+                  </div>
+                </div>
+                <div class="if-or-btn-row">
+                  <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                 </div>
               </div>
+
+              <!-- L1 edit panel (hidden) -->
+              <div class="if-edit-panel" id="if-l1-panel" style="display:none;">
+                <div class="if-edit-hd">
+                  <div class="if-edit-title">
+                                        <span id="if-l1-title">Filter</span>
+                  </div>
+                  <div class="if-edit-btns">
+                    <button class="if-edit-cancel" onclick="ifCloseL1()">Cancel</button>
+                    <button class="if-edit-apply" onclick="ifApplyL1()">Apply</button>
+                  </div>
+                </div>
+                <div class="if-edit-inner" id="if-l1-inner">
+                  <div class="if-edit-controls" id="if-l1-controls"></div>
+                </div>
+
+                <!-- Sub-filter area (relational filters only) -->
+                <div id="if-l1-sub" style="display:none;">
+                  <div class="if-edit-inner" style="border-top:1px solid var(--platform-10);border-radius:0;margin:0;">
+                    <!-- Sub include row -->
+                    <div class="if-row" style="padding:8px 0 4px;">
+                      <div class="if-label inc">Include</div>
+                      <div class="if-chips-wrap" id="if-l2-chips">
+                        <!-- populated by JS -->
+                      </div>
+                    </div>
+
+                    <!-- L2 edit panel (hidden) -->
+                    <div class="if-edit-panel l2" id="if-l2-panel" style="display:none;">
+                      <div class="if-edit-hd">
+                        <div class="if-edit-title">
+                          <span id="if-l2-title">Sub-filter</span>
+                        </div>
+                        <div class="if-edit-btns">
+                          <button class="if-edit-cancel" onclick="ifCloseL2()">Cancel</button>
+                          <button class="if-edit-apply" onclick="ifApplyL2()">Apply</button>
+                        </div>
+                      </div>
+                      <div class="if-edit-inner">
+                        <div class="if-edit-controls" id="if-l2-controls"></div>
+                      </div>
+                    </div>
+
+                    <div class="if-actions-row" style="padding-top:4px;">
+                      <button class="if-exc-link" onclick="showToast('Add sub-filter')"><i class="fa-solid fa-circle-minus" style="font-size:13px;" aria-hidden="true"></i> Exclude</button>
+                      <button class="if-add-filter-btn" onclick="showToast('Add sub-filter')">Add filter</button>
+                    </div>
+                  </div>
+                </div></div>
+
+              <!-- EXCLUDE row -->
+              <div class="if-row" id="if-exc-row">
+                <div class="if-label exc">
+                                    Exclude
+                </div>
+                <div class="if-chips-wrap" id="if-exc-chips">
+                  <div class="if-chip" id="if-chip-name" onclick="ifOpenL1('name',this)">
+                    <span class="if-chip-body">Name contains "Smith"</span>
+                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                  </div>
+                  <span class="if-and-sep">AND</span>
+                  <div class="if-chip" id="if-chip-web" onclick="ifOpenL1('web',this)">
+                    <span class="if-chip-body">Website Visits between 5 and 20</span>
+                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                  </div>
+                  <button class="if-and-btn" onclick="ifOpenPicker('exc')">And...</button>
+                  <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
+                </div>
+              </div>
+
+              <!-- Add filter picker panel (exclude) -->
+              <div class="if-edit-panel" id="if-picker-exc" style="display:none;">
+                <div class="if-edit-hd">
+                  <div class="if-edit-title">
+                    <svg style="width:13px;height:13px;fill:currentColor;"><use href="#icon-filter"/></svg>
+                    Add filter
+                  </div>
+                  <div class="if-edit-btns">
+                    <button class="if-edit-cancel" onclick="ifClosePicker('exc')">Cancel</button>
+                  </div>
+                </div>
+                <div class="if-picker-panel">
+                  <div class="if-picker-hd">Choose a field to exclude</div>
+                  <div class="if-picker-search-wrap">
+                    <input class="if-picker-search" type="text" placeholder="Search fields" oninput="ifFilterFields(this.value,'exc')" autocomplete="off">
+                  </div>
+                  <div class="if-picker-list" id="if-picker-list-exc">
+                    <div class="if-picker-group-hd" onclick="ifToggleGroup(this)">
+                      <svg viewBox="0 0 320 512"><use href="#icon-chevron-down"/></svg>
+                      Constituent fields (12)
+                    </div>
+                    <button class="if-picker-item" onclick="ifPickField('Status','status','exc')">Status</button>
+                    <button class="if-picker-item" onclick="ifPickField('Is Head of Household','hoh','exc')">Is Head of Household</button>
+                    <button class="if-picker-item" onclick="ifPickField('Birthdate','bday','exc')">Birthdate</button>
+                    <button class="if-picker-item" onclick="ifPickField('Name','name','exc')">Name</button>
+                    <button class="if-picker-item" onclick="ifPickField('Email','email','exc')">Email</button>
+                    <button class="if-picker-item" onclick="ifPickField('Phone','phone','exc')">Phone</button>
+                    <button class="if-picker-item" onclick="ifPickField('Address','address','exc')">Address</button>
+                    <button class="if-picker-item" onclick="ifPickField('Engagement Score','engagement','exc')">Engagement Score</button>
+                    <button class="if-picker-item" onclick="ifPickField('Donor Stage','stage','exc')">Donor Stage</button>
+                    <button class="if-picker-item" onclick="ifPickField('Tags','tags','exc')">Tags</button>
+                    <button class="if-picker-item" onclick="ifPickField('Custom Field 1','custom1','exc')">Custom Field 1</button>
+                    <button class="if-picker-item" onclick="ifPickField('Custom Field 2','custom2','exc')">Custom Field 2</button>
+                    <div class="if-picker-group-hd" onclick="ifToggleGroup(this)">
+                      <svg viewBox="0 0 320 512"><use href="#icon-chevron-down"/></svg>
+                      Transaction fields (8)
+                    </div>
+                    <button class="if-picker-item" onclick="ifPickField('Has Transactions','txn','exc')">Has Transactions</button>
+                    <button class="if-picker-item" onclick="ifPickField('Amount','amount','exc')">Amount</button>
+                    <button class="if-picker-item" onclick="ifPickField('Date','date','exc')">Date</button>
+                    <button class="if-picker-item" onclick="ifPickField('Fund','fund','exc')">Fund</button>
+                    <button class="if-picker-item" onclick="ifPickField('Campaign','campaign','exc')">Campaign</button>
+                    <button class="if-picker-item" onclick="ifPickField('Appeal','appeal','exc')">Appeal</button>
+                    <button class="if-picker-item" onclick="ifPickField('Gift Type','gifttype','exc')">Gift Type</button>
+                    <button class="if-picker-item" onclick="ifPickField('Payment Method','paymethod','exc')">Payment Method</button>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="ed-penny-input">
@@ -2679,112 +2910,6 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
         <div class="modal-footer">
           <button class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
           <button class="btn-primary" onclick="confirmDelete()">Delete</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Advanced Filter Modal -->
-    <div class="modal-overlay" id="modal-filters">
-      <div class="modal" role="dialog" style="max-width:680px;max-height:80vh;display:flex;flex-direction:column;">
-        <button class="modal-close" onclick="closeFilterModal()" aria-label="Close">
-          <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
-        </button>
-        <div class="modal-title" style="margin-bottom:24px;">Edit filters</div>
-        <div style="flex:1;overflow-y:auto;padding-right:4px;">
-          <!-- INCLUDE -->
-          <div id="fm-section-include" data-section="include" style="margin-bottom:20px;">
-            <div style="font-size:16px;font-weight:700;color:#296401;margin-bottom:16px;">Include</div>
-            <!-- Status -->
-            <div class="fm-card">
-              <span class="fm-field">Status</span>
-              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-              <div class="fm-card-row">
-                <span class="fm-static">is</span>
-                <div class="fd-chips" data-mode="multi" style="gap:4px;display:flex;flex-wrap:wrap;">
-                  <button class="fd-chip active" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Active</button>
-                  <button class="fd-chip" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Inactive</button>
-                  <button class="fd-chip" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Deceased</button>
-                </div>
-              </div>
-            </div>
-            <div class="fm-logic">AND</div>
-            <!-- Is Head of Household -->
-            <div class="fm-card">
-              <span class="fm-field">Is Head of Household</span>
-              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-              <div class="fm-card-row">
-                <select class="fc-select" style="width:auto;"><option selected>Is</option><option>Is not</option></select>
-                <span class="fm-field">a head of household</span>
-              </div>
-            </div>
-            <div class="fm-logic">AND</div>
-            <!-- Birthdate -->
-            <div class="fm-card">
-              <span class="fm-field">Birthdate</span>
-              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-              <div class="fm-card-row" id="fm-bday-controls">
-                <span class="fm-static">is</span>
-                <select class="fc-select" style="width:auto;" onchange="var p=document.getElementById('fm-bday-controls');p.querySelector('.fm-date-between').style.display=this.value==='between'?'flex':'none';p.querySelector('.fm-date-during').style.display=this.value==='during'?'inline':'none';p.querySelector('.fm-date-daymonth').style.display=this.value==='on day or month'?'flex':'none';">
-                  <option>between</option><option selected>during</option><option>on day or month</option><option>empty</option>
-                </select>
-                <select class="fc-select fm-date-during" style="width:auto;"><option>Last fiscal year</option><option selected>This fiscal year</option><option>Next fiscal year</option><option>This year</option><option>Last year</option><option>This month</option><option>Last month</option></select>
-                <div class="fm-date-between" style="display:none;gap:8px;align-items:center;">
-                  <input class="fc-input" type="date" style="width:140px;">
-                  <span class="fm-static">and</span>
-                  <input class="fc-input" type="date" style="width:140px;">
-                </div>
-                <div class="fm-date-daymonth" style="display:none;gap:8px;align-items:center;">
-                  <select class="fc-select" style="width:auto;"><option>Day of week</option><option selected>Month</option></select>
-                  <select class="fc-select" style="width:auto;"><option>January</option><option>February</option><option>March</option><option>April</option><option>May</option><option>June</option><option>July</option><option>August</option><option>September</option><option>October</option><option>November</option><option>December</option></select>
-                </div>
-              </div>
-            </div>
-            <div class="fb-add-row"><div class="fb-add-condition" onclick="addFilterCard('include',false)">And...</div></div>
-            <div class="fb-or-sep"><span>OR</span></div>
-            <!-- Has Transactions -->
-            <div class="fm-card">
-              <span class="fm-field">Has Transactions</span>
-              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-              <div class="fm-card-row">
-                <select class="fc-select" style="width:auto;" onchange="var c=this.closest('.fm-card').querySelector('.fm-count');var needs=['Has at least','Has at most','The first','The last'];c.style.display=needs.indexOf(this.value)>=0?'inline':'none';">
-                  <option>All</option><option selected>Has any</option><option>Has no</option><option>Has at least</option><option>Has at most</option><option>The first</option><option>The last</option>
-                </select>
-                <input class="fc-input fm-count" type="number" value="1" min="1" style="width:56px;display:none;">
-                <select class="fc-select" style="width:auto;"><option selected>Transactions</option><option>Specific Transactions</option></select>
-              </div>
-            </div>
-            <div class="fb-add-row"><div class="fb-add-condition" onclick="addFilterCard('include',false)">And...</div><div class="fb-add-group" onclick="addFilterCard('include',true)">Or...</div></div>
-          </div>
-          <!-- EXCLUDE -->
-          <div id="fm-section-exclude" data-section="exclude" style="border-top:1px solid var(--platform-20);padding-top:16px;">
-            <div style="font-size:16px;font-weight:700;color:#525759;margin-bottom:16px;">Exclude</div>
-            <!-- Name -->
-            <div class="fm-card">
-              <span class="fm-field">Name</span>
-              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-              <div class="fm-card-row">
-                <select class="fc-select" style="width:auto;"><option>Is equal to</option><option selected>Contains</option><option>Starts with</option><option>Ends with</option></select>
-                <input class="fc-input" type="text" value="Smith" style="flex:1;">
-              </div>
-            </div>
-            <div class="fm-logic">AND</div>
-            <!-- Website Visits -->
-            <div class="fm-card">
-              <span class="fm-field">Website Visits Last 30 Days</span>
-              <button class="fb-remove" onclick="fmRemoveCard(this)" aria-label="Remove filter"><svg style="width:18px;height:18px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-              <div class="fm-card-row">
-                <span class="fm-static">between</span>
-                <input class="fc-input" type="number" value="5" style="width:60px;text-align:center;">
-                <span class="fm-static">and</span>
-                <input class="fc-input" type="number" value="20" style="width:60px;text-align:center;">
-              </div>
-            </div>
-            <div class="fb-add-row"><div class="fb-add-condition" onclick="addFilterCard('exclude',false)">And...</div><div class="fb-add-group" onclick="addFilterCard('exclude',true)">Or...</div></div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn-secondary" onclick="closeFilterModal()">Cancel</button>
-          <button class="btn-primary" onclick="closeFilterModal();showToast('Filters applied')">Apply filters</button>
         </div>
       </div>
     </div>
@@ -4667,11 +4792,190 @@ function toggleFilterBuilder(){
   var p=document.getElementById('filter-builder');
   if(p){var isOpen=p.style.display!=='none';p.style.display=isOpen?'none':'block';}
 }
-function openFilterModal(){
-  document.getElementById('modal-filters').classList.add('open');
+function openFilterModal(){ toggleFilterDrawer(); }
+function closeFilterModal(){ /* no-op, inline now */ }
+
+/* ── Inline filter system ── */
+var IF = {
+  activeL1: null,
+  activeL2: null,
+
+  controls: {
+    status: '<span class="fm-static" style="font-size:14px;">is</span><div class="fd-chips" style="display:inline-flex;flex-wrap:wrap;gap:4px;"><button class="fd-chip active" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Active</button><button class="fd-chip" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Inactive</button><button class="fd-chip" onclick="fdChipMulti(this)" style="height:28px;font-size:12px;">Deceased</button></div>',
+    hoh: '<select class="fc-select" style="width:auto;"><option>Is</option><option>Is not</option></select><span class="fm-static" style="font-size:14px;">a head of household</span>',
+    bday: '<span class="fm-static" style="font-size:14px;">is</span><select class="fc-select" style="width:auto;"><option>between</option><option selected>during</option><option>on day or month</option><option>empty</option></select><select class="fc-select" style="width:auto;"><option>Last fiscal year</option><option selected>This fiscal year</option><option>Next fiscal year</option><option>This month</option></select>',
+    txn: '<select class="fc-select" style="width:auto;"><option>All</option><option selected>Has any</option><option>Has no</option><option>Has at least</option><option>Has at most</option></select><select class="fc-select" style="width:auto;"><option selected>Transactions</option><option>Specific Transactions</option></select>',
+    name: '<select class="fc-select" style="width:auto;"><option>Is equal to</option><option selected>Contains</option><option>Starts with</option><option>Ends with</option></select><input class="fc-input" type="text" value="Smith" style="width:180px;">',
+    web: '<span class="fm-static" style="font-size:14px;">between</span><input class="fc-input" type="number" value="5" style="width:60px;text-align:center;"><span class="fm-static" style="font-size:14px;">and</span><input class="fc-input" type="number" value="20" style="width:60px;text-align:center;">',
+    amount: '<select class="fc-select" style="width:auto;"><option>Is equal to</option><option selected>Between</option><option>Is at least</option><option>Is at most</option></select><input class="fc-input" type="number" placeholder="From" style="width:80px;"><input class="fc-input" type="number" placeholder="To" style="width:80px;">',
+  },
+
+  titles: {
+    status:'Status', hoh:'Is Head of Household', bday:'Birthdate',
+    txn:'Has any Transactions', name:'Name', web:'Website Visits Last 30 Days', amount:'Amount',
+  },
+
+  relational: ['txn'],
+
+  subChips: {
+    txn: [{id:'txn-sub-amount', label:'Amount is between $2.00 and $50.00', type:'amount'}]
+  }
+};
+
+function ifDisableActions(){
+  document.querySelectorAll('.if-and-btn,.if-or-btn,.if-add-filter-btn,.if-exc-link').forEach(function(b){ b.disabled = true; });
+  var root = document.getElementById('if-root'); if(root) root.classList.add('panel-open');
 }
-function closeFilterModal(){
-  document.getElementById('modal-filters').classList.remove('open');
+function ifEnableActions(){
+  document.querySelectorAll('.if-and-btn,.if-or-btn,.if-add-filter-btn,.if-exc-link').forEach(function(b){ b.disabled = false; });
+  var root = document.getElementById('if-root'); if(root) root.classList.remove('panel-open');
+}
+function ifOpenL1(type, chipEl){
+  if(IF.activeL1 === type){ ifCloseL1(); return; }
+  ifCloseL2();
+  IF.activeL1 = type;
+  ifDisableActions();
+
+  document.querySelectorAll('#if-inc-chips .if-chip, #if-exc-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
+  chipEl.classList.add('active');
+
+  document.getElementById('if-l1-title').textContent = IF.titles[type] || type;
+  document.getElementById('if-l1-controls').innerHTML = IF.controls[type] || '';
+
+  var isRelational = IF.relational.indexOf(type) >= 0;
+  var sub = document.getElementById('if-l1-sub');
+  sub.style.display = isRelational ? '' : 'none';
+  if(isRelational) ifRenderL2Chips(type);
+
+  document.getElementById('if-l1-panel').style.display = '';
+}
+
+function ifCloseL1(){
+  IF.activeL1 = null;
+  ifCloseL2();
+  document.getElementById('if-l1-panel').style.display = 'none';
+  document.querySelectorAll('.if-chip').forEach(function(c){ c.classList.remove('active'); });
+  ifEnableActions();
+}
+
+function ifApplyL1(){ showToast('Filter applied'); ifCloseL1(); }
+
+function ifRenderL2Chips(parentType){
+  var chips = IF.subChips[parentType] || [];
+  var row = document.getElementById('if-l2-chips');
+  row.innerHTML = '';
+  chips.forEach(function(chip, i){
+    if(i > 0){ var sep = document.createElement('span'); sep.className='if-and-sep'; sep.textContent='AND'; row.appendChild(sep); }
+    var el = document.createElement('div');
+    el.className = 'if-chip';
+    el.id = 'if-chip-' + chip.id;
+    el.setAttribute('onclick', 'ifOpenL2("'+chip.type+'","'+chip.id+'",this)');
+    el.innerHTML = '<span class="if-chip-body">'+chip.label+'</span><button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>';
+    row.appendChild(el);
+  });
+  var andBtn = document.createElement('button');
+  andBtn.className = 'if-and-btn';
+  andBtn.textContent = 'And...';
+  andBtn.setAttribute('onclick', 'showToast("Add sub-filter")');
+  row.appendChild(andBtn);
+}
+
+function ifOpenL2(type, chipId, chipEl){
+  if(IF.activeL2 === chipId){ ifCloseL2(); return; }
+  IF.activeL2 = chipId;
+  document.querySelectorAll('#if-l2-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
+  chipEl.classList.add('active');
+  document.getElementById('if-l2-title').textContent = IF.titles[type] || type;
+  document.getElementById('if-l2-controls').innerHTML = IF.controls[type] || '';
+  document.getElementById('if-l2-panel').style.display = '';
+  var orRow = document.getElementById('if-l2-or-row');
+  if(orRow) orRow.style.display = 'none';
+}
+
+function ifCloseL2(){
+  IF.activeL2 = null;
+  var p = document.getElementById('if-l2-panel');
+  if(p) p.style.display = 'none';
+  var orRow = document.getElementById('if-l2-or-row');
+  if(orRow) orRow.style.display = '';
+  document.querySelectorAll('#if-l2-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
+}
+
+function ifApplyL2(){ showToast('Sub-filter applied'); ifCloseL2(); }
+
+function ifRemoveChip(xBtn){
+  var chip = xBtn.closest('.if-chip');
+  if(chip && IF.activeL1 && chip.id === 'if-chip-' + IF.activeL1) ifCloseL1();
+  var sep = chip.nextElementSibling;
+  if(sep && sep.classList.contains('if-and-sep')) sep.remove();
+  else { var prev = chip.previousElementSibling; if(prev && prev.classList.contains('if-and-sep')) prev.remove(); }
+  chip.remove();
+  showToast('Filter removed');
+}
+
+function searchEdResults(query){
+  var q = query.trim().toLowerCase();
+  var rows = document.querySelectorAll('#ed-table tbody tr');
+  var clearBtn = document.getElementById('edResultsSearchClear');
+  if(clearBtn) clearBtn.style.display = q ? 'flex' : 'none';
+  rows.forEach(function(row){
+    var text = row.textContent.toLowerCase();
+    row.style.display = (!q || text.includes(q)) ? '' : 'none';
+  });
+  var visRows = Array.from(rows).filter(function(r){ return r.style.display !== 'none'; });
+  rows.forEach(function(r){ r.classList.remove('last-visible'); });
+  if(visRows.length) visRows[visRows.length-1].classList.add('last-visible');
+}
+function clearEdResultsSearch(){
+  var input = document.getElementById('ed-results-search');
+  if(input){ input.value = ''; searchEdResults(''); input.focus(); }
+}
+function ifAddFilter(section){ ifOpenPicker(section); }
+function ifOpenPicker(section){
+  ifCloseL1();
+  ifDisableActions();
+  document.getElementById('if-picker-inc').style.display = section === 'inc' ? '' : 'none';
+  document.getElementById('if-picker-exc').style.display = section === 'exc' ? '' : 'none';
+  var input = document.querySelector('#if-picker-' + section + ' .if-picker-search');
+  if(input){ input.value = ''; ifFilterFields('', section); input.focus(); }
+}
+function ifClosePicker(section){
+  var panel = document.getElementById('if-picker-' + section);
+  if(panel) panel.style.display = 'none';
+  ifEnableActions();
+}
+function ifFilterFields(query, section){
+  var q = query.toLowerCase();
+  var items = document.querySelectorAll('#if-picker-list-' + section + ' .if-picker-item');
+  items.forEach(function(item){
+    item.classList.toggle('hidden', q && !item.textContent.toLowerCase().includes(q));
+  });
+}
+function ifToggleGroup(hd){
+  hd.classList.toggle('collapsed');
+  var next = hd.nextElementSibling;
+  while(next && next.classList.contains('if-picker-item')){
+    next.style.display = hd.classList.contains('collapsed') ? 'none' : '';
+    next = next.nextElementSibling;
+  }
+}
+function ifPickField(label, type, section){
+  ifClosePicker(section);
+  ifCloseL1();
+  var chipRow = document.getElementById(section === 'inc' ? 'if-inc-chips' : 'if-exc-chips');
+  var andBtn = chipRow.querySelector('.if-and-btn');
+  var sep = document.createElement('span');
+  sep.className = 'if-and-sep';
+  sep.textContent = 'AND';
+  var chip = document.createElement('div');
+  chip.className = 'if-chip';
+  chip.id = 'if-chip-' + type + '-' + Date.now();
+  var chipId = chip.id;
+  chip.innerHTML = '<span class="if-chip-body">' + label + '</span><button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>';
+  chip.onclick = function(){ ifOpenL1(type, chip); };
+  chipRow.insertBefore(sep, andBtn);
+  chipRow.insertBefore(chip, andBtn);
+  ifOpenL1(type, chip);
 }
 function removeFbRow(btn){
   var row=btn.closest('.fb-row');

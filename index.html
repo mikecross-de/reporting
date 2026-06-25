@@ -649,6 +649,9 @@ select.modal-input:focus{}
 .if-chip-x{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--platform-60);background:none;border:none;padding:0;cursor:pointer;flex-shrink:0;border-radius:50%;transition:background .1s,color .1s;}
 .if-chip-x:hover{color:var(--platform-100);background:rgba(0,0,0,0.08);}
 /* And... button — matches production grey pill */
+.if-empty-add-btn{display:none;}
+.if-chips-wrap.is-empty .if-and-btn,.if-chips-wrap.is-empty .if-or-btn{display:none;}
+.if-chips-wrap.is-empty .if-empty-add-btn{display:inline-flex;}
 .if-and-btn{display:inline-flex;align-items:center;background:var(--crm-100);border:none;border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--white);cursor:pointer;padding:4px 10px;margin:2px 0 2px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;}
 .if-and-btn:hover{background:var(--crm-200);}
 /* Grove primary disabled: #E9EAEA bg, #7D8183 text, no border */
@@ -660,7 +663,7 @@ select.modal-input:focus{}
 
 /* L2 panel itself always fully enabled */
 .if-edit-panel#if-picker-inc,.if-edit-panel#if-picker-exc{margin-left:58px;}
-.if-edit-hd{display:flex;align-items:center;justify-content:space-between;background:var(--platform-5);padding:10px 16px;min-height:44px;box-sizing:border-box;}
+.if-edit-hd{display:flex;align-items:center;justify-content:space-between;background:var(--platform-5);padding:12px 16px;min-height:44px;box-sizing:border-box;}
 .if-edit-title{font-size:16px;font-weight:600;color:var(--platform-100);display:flex;align-items:center;gap:6px;}
 
 .if-edit-btns{display:flex;gap:8px;align-items:center;}
@@ -2173,6 +2176,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     </div>
                     <button class="if-and-btn" onclick="ifOpenPicker('exc',this)">And...</button>
                     <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
+                    <button class="if-empty-add-btn if-and-btn" onclick="ifOpenPicker('exc',this)">Add filter</button>
                   </div>
                 </div>
               </div>
@@ -5156,8 +5160,16 @@ function ifRemoveChip(xBtn){
   var sep = chip.nextElementSibling;
   if(sep && sep.classList.contains('if-and-sep')) sep.remove();
   else { var prev = chip.previousElementSibling; if(prev && prev.classList.contains('if-and-sep')) prev.remove(); }
+  var chipsWrap = chip.closest('.if-chips-wrap');
   chip.remove();
+  ifCheckEmpty(chipsWrap);
   showToast('Filter removed');
+}
+function ifCheckEmpty(chipsWrap){
+  if(!chipsWrap) return;
+  var hasChips = chipsWrap.querySelector('.if-chip');
+  if(hasChips) chipsWrap.classList.remove('is-empty');
+  else chipsWrap.classList.add('is-empty');
 }
 
 function searchEdResults(query){
@@ -5261,6 +5273,7 @@ function ifPickField(label, type, section){
   chip.onclick = function(){ ifOpenL1(type, chip); };
   chipRow.insertBefore(sep, andBtn);
   chipRow.insertBefore(chip, andBtn);
+  chipRow.classList.remove('is-empty');
   ifOpenL1(type, chip);
 }
 function removeFbRow(btn){

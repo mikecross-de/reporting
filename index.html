@@ -4446,13 +4446,9 @@ function ifCountConditions(items){
   if(!items || !items.length) return 0;
   var total = 0;
   items.forEach(function(item){
-    var hasChildren = (item.include && item.include.length) || (item.exclude && item.exclude.length);
-    if(hasChildren){
-      total += ifCountConditions(item.include);
-      total += ifCountConditions(item.exclude);
-    } else {
-      total += 1;
-    }
+    total += 1;
+    if(item.include && item.include.length) total += ifCountConditions(item.include);
+    if(item.exclude && item.exclude.length) total += ifCountConditions(item.exclude);
   });
   return total;
 }

@@ -106,6 +106,8 @@ input,select,textarea{font-family:var(--font);}
 #folder-delete-tip{display:none;position:fixed;background:#1a1f22;color:white;font-size:13px;white-space:nowrap;padding:5px 10px;border-radius:3px;pointer-events:none;z-index:99999;transform:translateX(-50%);}
 .btn-danger{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:4px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);background:none;border:1px solid var(--red-100);color:var(--red-100);}
 .btn-danger:hover{background:#fff0f2;}
+.btn-danger-tertiary{display:inline-flex;align-items:center;gap:6px;padding:8px 0;border-radius:4px;font-size:14px;font-weight:600;cursor:pointer;font-family:var(--font);background:none;border:none;color:var(--red-100);}
+.btn-danger-tertiary:hover{text-decoration:underline;}
 .btn-secondary{background:var(--white);color:var(--platform-100);border:1px solid var(--platform-100);border-radius:4px;padding:8px 12px;font-size:16px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .15s,border-color .15s;line-height:21px;white-space:nowrap;}
 .btn-secondary:hover{background:var(--platform-20);border-color:#DAD7D9;}
 .ed-more-btn{gap:8px;padding:8px 12px;font-size:16px;font-weight:700;display:inline-flex;align-items:center;}
@@ -319,7 +321,9 @@ input.fc-sm{height:28px;font-size:12px;padding:4px 8px;}
 .toast-msg{padding-right:8px;}
 .toast-spinner{width:24px;height:24px;border:2.5px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .6s linear infinite;box-sizing:border-box;}
 @keyframes spin{to{transform:rotate(360deg);}}
-.modal-select{background:var(--white);border:1px solid var(--platform-40);width:100%;height:56px;font-family:var(--font);font-size:16px;color:var(--platform-100);border-radius:4px;}
+.modal-select{background:var(--white);border:1px solid var(--platform-40);width:100%;height:56px;font-family:var(--font);font-size:16px;color:var(--platform-100);border-radius:4px;transition:border-color .15s;outline:none;}
+.modal-select:hover{border-color:var(--platform-100);}
+.modal-select:focus,.modal-select.open{border-color:#357A06;}
 input[type="date"].modal-input{color:var(--platform-100);}
 input[type="date"].modal-input::-webkit-datetime-edit{color:transparent;}
 input[type="date"].modal-input:focus::-webkit-datetime-edit{color:var(--platform-100);}
@@ -328,15 +332,17 @@ input[type="date"].modal-input.has-value::-webkit-datetime-edit{color:var(--plat
 .modal-field.textarea-field .modal-label{top:20px;transform:none;}
 .modal-label.floating,.modal-field.textarea-field .modal-label.floating{top:-10px;left:12px;transform:none;font-size:12px;font-weight:400;color:#357A06;background:var(--white);padding:0 4px;}
 .modal-label.floating-idle,.modal-field.textarea-field .modal-label.floating-idle{top:-10px;left:12px;transform:none;font-size:12px;font-weight:400;color:var(--platform-100);background:var(--white);padding:0 4px;}
-.modal-input{width:100%;border:1px solid var(--platform-20);border-radius:4px;padding:16px;font-size:16px;color:var(--platform-100);background:var(--white);font-family:var(--font);transition:border-color .15s;height:56px;box-sizing:border-box;}
-.modal-input:focus{outline:none;border-color:#357A06;border-width:2px;padding:15px;}
+.modal-input{width:100%;border:1px solid var(--platform-40);border-radius:4px;padding:16px;font-size:16px;color:var(--platform-100);background:var(--white);font-family:var(--font);transition:border-color .15s;height:56px;box-sizing:border-box;}
+.modal-input:hover{border-color:var(--platform-100);}
+.modal-input:focus{outline:none;border-color:#357A06;}
 .modal-input::placeholder{color:transparent;}
 .modal-input:focus::placeholder{color:transparent;}
 .modal-field.has-value .modal-input{border-color:var(--platform-40);}
 textarea.modal-input{resize:vertical;min-height:100px;height:auto;padding:16px;}
-textarea.modal-input:focus{padding:15px;}
+textarea.modal-input:hover{border-color:var(--platform-100);}
+textarea.modal-input:focus{}
 select.modal-input{-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23525759' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:12px 8px;}
-select.modal-input:focus{padding-right:39px;background-position:right 15px center;}
+select.modal-input:focus{}
 .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:0;padding-top:24px;}
 .export-format-card{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border:1px solid var(--platform-40);border-radius:4px;background:var(--white);text-align:left;cursor:pointer;width:100%;transition:border-color .12s;}
 .export-format-card:hover{border-color:var(--platform-100);}
@@ -1290,7 +1296,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
   <symbol id="icon-download" viewBox="0 0 512 512"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H346.5l-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352H64z"/></symbol>
   <symbol id="icon-share" viewBox="0 0 512 512"><path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304C0 417.3 81.5 467.9 100.2 478.1c2.5 1.4 5.3 1.9 8.1 1.9c10.9 0 19.7-8.9 19.7-19.7c0-7.5-4.3-14.4-9.8-19.5C108.8 431.9 96 414.4 96 384c0-53 43-96 96-96h96v64c0 12.6 7.4 24.1 19 29.2s25 3 34.4-5.4l160-144c6.7-6.1 10.6-14.7 10.6-23.8s-3.8-17.7-10.6-23.8l-160-144c-9.4-8.5-22.9-10.6-34.4-5.4z"/></symbol>
   <symbol id="icon-sliders" viewBox="0 0 512 512"><path d="M0 416c0 17.7 14.3 32 32 32l54.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 448c17.7 0 32-14.3 32-32s-14.3-32-32-32l-246.7 0c-12.3-28.3-40.5-48-73.3-48s-61 19.7-73.3 48L32 384c-17.7 0-32 14.3-32 32zm128 0a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zM320 256a32 32 0 1 1 64 0 32 32 0 1 1 -64 0zm32-80c-32.8 0-61 19.7-73.3 48L32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l246.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48l54.7 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-54.7 0c-12.3-28.3-40.5-48-73.3-48zM192 128a32 32 0 1 1 0-64 32 32 0 1 1 0 64zm73.3-64C253 35.7 224.8 16 192 16s-61 19.7-73.3 48L32 64C14.3 64 0 78.3 0 96s14.3 32 32 32l86.7 0c12.3 28.3 40.5 48 73.3 48s61-19.7 73.3-48L480 128c17.7 0 32-14.3 32-32s-14.3-32-32-32L265.3 64z"/></symbol>
-  <symbol id="icon-filter" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></symbol>
+  <symbol id="icon-trash" viewBox="0 0 448 512"><path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"/></symbol><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></symbol>
   <symbol id="icon-plus-circle" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></symbol>
   <symbol id="icon-minus-circle" viewBox="0 0 512 512"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM184 232H328c13.3 0 24 10.7 24 24s-10.7 24-24 24H184c-13.3 0-24-10.7-24-24s10.7-24 24-24z"/></symbol>
   <symbol id="icon-chart-line" viewBox="0 0 512 512"><path d="M64 64c0-17.7-14.3-32-32-32S0 46.3 0 64V400c0 44.2 35.8 80 80 80H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H80c-8.8 0-16-7.2-16-16V64zm406.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L320 210.7l-57.4-57.4c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L240 221.3l57.4 57.4c12.5 12.5 32.8 12.5 45.3 0l128-128z"/></symbol>
@@ -1959,7 +1965,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                 <button class="dd-item" onclick="closeAllDd();openDetailsModal()">Details</button>
                 <button class="dd-item" onclick="closeAllDd();openExportModal()">Export</button>
                 <button class="dd-item" id="ed-schedule-action" onclick="closeAllDd();openScheduleModal()">Schedule</button>
-                <div class="dd-divider"></div>
+                <div class="dd-divider" id="ed-delete-divider"></div>
                 <button class="dd-item" id="ed-delete-btn" onclick="closeAllDd();openDeleteModal()">Delete</button>
               </div>
             </div>
@@ -2873,9 +2879,22 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
           <span class="grove-check-box"><input type="checkbox" checked></span>
           Require Bloomerang Login to view report
         </label>
-        <div class="modal-footer">
-          <button class="btn-secondary" onclick="closeScheduleModal()">Cancel</button>
-          <button class="btn-primary" onclick="closeScheduleModal()">Schedule</button>
+        <label class="grove-check" style="margin-top:12px;">
+          <span class="grove-check-box"><input type="checkbox" id="sched-no-results-check" checked></span>
+          If there are no results, don't send an email
+        </label>
+        <div class="modal-footer" style="justify-content:space-between;overflow:visible;">
+          <div style="position:relative;display:none;" id="sched-delete-wrap">
+            <button id="sched-delete-btn" onclick="deleteSchedule()" style="width:32px;height:32px;border-radius:50%;border:none;background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--platform-60);transition:background .12s,color .12s;"
+              onmouseover="this.style.background='var(--platform-10)';this.style.color='var(--platform-100)';showBtnTooltip(this,'Delete schedule');"
+              onmouseout="this.style.background='none';this.style.color='var(--platform-60)';hideBtnTooltip();">
+              <svg style="width:16px;height:16px;fill:currentColor;display:block;"><use href="#icon-trash"/></svg>
+            </button>
+          </div>
+          <div style="display:flex;gap:8px;margin-left:auto;">
+            <button class="btn-secondary" onclick="closeScheduleModal()">Cancel</button>
+            <button class="btn-primary" id="sched-save-btn" onclick="saveSchedule()">Schedule</button>
+          </div>
         </div>
       </div>
     </div>
@@ -3154,7 +3173,7 @@ function openEditorAsPenny(title, reason){
   document.querySelector('.ed-head-title').textContent = title;
   document.getElementById('ed-penny-context-text').textContent = reason;
   document.getElementById('ed-penny-context').style.display = 'flex';
-  document.getElementById('ed-delete-btn').style.display = 'none';
+  document.getElementById('ed-delete-btn').style.display = 'none'; document.getElementById('ed-delete-divider').style.display = 'none';
   setInsightForReport(title);
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.getElementById('view-editor').classList.add('active');
@@ -3186,7 +3205,7 @@ function openEditorRow(row){
     if(scheduleText) parts.push(dot + '<span>' + scheduleText + '</span>');
     metaEl.innerHTML = parts.join('');
   }
-  document.getElementById('ed-delete-btn').style.display = creator === 'mike-cross' ? '' : 'none';
+  var showDel = creator === 'mike-cross'; document.getElementById('ed-delete-btn').style.display = showDel ? '' : 'none'; document.getElementById('ed-delete-divider').style.display = showDel ? '' : 'none';
   var typeMap = {constituent:'Constituent',transaction:'Transaction',interaction:'Interaction',note:'Note',task:'Task'};
   var t = row.dataset.type || 'constituent';
 
@@ -3220,19 +3239,27 @@ function openEditorRow(row){
   // Show/hide schedule based on row data
   var schedWrap = document.getElementById('ed-schedule-wrap');
   var schedText = document.getElementById('ed-schedule-text');
-  if(schedWrap && schedText){
-    var freq = row.querySelector('.dg-freq');
-    var freqText = freq ? freq.textContent.trim() : '';
-    if(row.dataset.scheduled === 'yes' && freqText && freqText !== 'On demand'){
-      schedText.textContent = 'Scheduled weekly on Monday at 12:00 AM';
-      schedWrap.style.display = 'block';
-    } else {
-      schedWrap.style.display = 'none';
-    }
-  }
-  // Update Schedule/Edit Schedule in actions menu
   var schedAction = document.getElementById('ed-schedule-action');
-  if(schedAction) schedAction.textContent = row.dataset.scheduled === 'yes' ? 'Edit Schedule' : 'Schedule';
+  if(schedWrap && schedText){
+    var isScheduled = row.dataset.scheduled === 'yes';
+    var schedDesc = '';
+    if(isScheduled){
+      // Read from the frequency td (4th data cell) or .dg-freq element
+      var freqEl = row.querySelector('.dg-freq') || row.querySelectorAll('td')[3];
+      var freqText = freqEl ? freqEl.textContent.trim() : '';
+      var scheduleMap = {
+        'Weekly':       'Scheduled weekly on Monday at 12:00 AM',
+        'Monthly':      'Scheduled monthly on the 1st at 12:00 AM',
+        'Sends weekly': 'Scheduled weekly on Monday at 12:00 AM',
+        'Sends monthly':'Scheduled monthly on the 1st at 12:00 AM'
+      };
+      schedDesc = scheduleMap[freqText] || (freqText ? 'Scheduled ' + freqText.toLowerCase() : 'Scheduled');
+    }
+    updateScheduleSubtext(schedDesc);
+    if(schedAction) schedAction.textContent = isScheduled ? 'Edit Schedule' : 'Schedule';
+    // Sync _scheduleState so modal opens in right mode
+    window._scheduleState = isScheduled ? { set: true, freq: schedDesc } : { set: false };
+  }
   showView('editor');
   }catch(e){alert('Error: '+e.message+'\n\n'+e.stack);}
 }
@@ -3355,25 +3382,27 @@ function nrTab(id,btn){
     "First-time donors from Spring Appeal"
   ];
   var twState = { paused: false, idx: 0, pos: 0, mode: 'type', timer: null };
-  function animate(input){
-    function step(){
-      if(twState.paused || input.value) return;
-      var text = prompts[twState.idx];
-      if(twState.mode === 'type'){
-        twState.pos++;
-        input.placeholder = text.substring(0, twState.pos);
-        if(twState.pos >= text.length){ twState.mode = 'pause'; twState.timer = setTimeout(step, 1800); return; }
-        twState.timer = setTimeout(step, 28 + Math.random() * 30);
-      } else if(twState.mode === 'pause'){
-        twState.mode = 'erase';
-        twState.timer = setTimeout(step, 200);
-      } else {
-        twState.pos--;
-        input.placeholder = text.substring(0, twState.pos);
-        if(twState.pos <= 0){ twState.mode = 'type'; twState.idx = (twState.idx + 1) % prompts.length; twState.timer = setTimeout(step, 400); return; }
-        twState.timer = setTimeout(step, 14);
-      }
+  var twInput = null;
+  function step(){
+    if(!twInput || twState.paused || twInput.value) return;
+    var text = prompts[twState.idx];
+    if(twState.mode === 'type'){
+      twState.pos++;
+      twInput.placeholder = text.substring(0, twState.pos);
+      if(twState.pos >= text.length){ twState.mode = 'pause'; twState.timer = setTimeout(step, 1800); return; }
+      twState.timer = setTimeout(step, 28 + Math.random() * 30);
+    } else if(twState.mode === 'pause'){
+      twState.mode = 'erase';
+      twState.timer = setTimeout(step, 200);
+    } else {
+      twState.pos--;
+      twInput.placeholder = text.substring(0, twState.pos);
+      if(twState.pos <= 0){ twState.mode = 'type'; twState.idx = (twState.idx + 1) % prompts.length; twState.timer = setTimeout(step, 400); return; }
+      twState.timer = setTimeout(step, 14);
     }
+  }
+  function animate(input){
+    twInput = input;
     input.addEventListener('focus', function(){
       twState.paused = true;
       input.placeholder = '';
@@ -3388,20 +3417,19 @@ function nrTab(id,btn){
     });
     step();
   }
-  var twInput = document.querySelector('.penny-typewriter');
-  if(twInput) animate(twInput);
+  var el = document.querySelector('.penny-typewriter');
+  if(el) animate(el);
   window.restartTypewriter = function(){
     var input = document.getElementById('convInput');
     if(!input || input.value) return;
-    // Cancel any running timer and reset state
+    twInput = input;
     if(twState.timer) clearTimeout(twState.timer);
     twState.paused = false;
     twState.pos = 0;
     twState.mode = 'type';
     twState.idx = (twState.idx + 1) % prompts.length;
     input.placeholder = '';
-    // Small delay so the input is visible before starting
-    twState.timer = setTimeout(function(){ if(!input.value) animate(input); }, 300);
+    twState.timer = setTimeout(step, 300);
   };
 })();
 
@@ -4327,11 +4355,97 @@ function confirmDiscard(){
 function closeUnsavedModal(){
   document.getElementById('modal-unsaved').classList.remove('open');
 }
+function showBtnTooltip(el, text){
+  hideBtnTooltip();
+  var tip = document.createElement('div');
+  tip.id = '__btn-tooltip';
+  tip.textContent = text;
+  tip.style.cssText = 'position:fixed;background:#272D30;color:#fff;font-size:12px;font-weight:500;white-space:nowrap;padding:4px 8px;border-radius:4px;pointer-events:none;z-index:9999;font-family:var(--font);transition:opacity .1s;';
+  document.body.appendChild(tip);
+  var r = el.getBoundingClientRect();
+  tip.style.left = (r.left + r.width/2 - tip.offsetWidth/2) + 'px';
+  tip.style.top = (r.bottom + 6) + 'px';
+}
+function hideBtnTooltip(){
+  var t = document.getElementById('__btn-tooltip');
+  if(t) t.remove();
+}
 function openScheduleModal(){
+  var hasSchedule = window._scheduleState && window._scheduleState.set;
+  document.getElementById('schedule-modal-title').textContent = hasSchedule ? 'Edit Schedule' : 'Schedule Report';
+  document.getElementById('sched-save-btn').textContent = hasSchedule ? 'Save' : 'Schedule';
+  var delBtn = document.getElementById('sched-delete-btn');
+  var delWrap = document.getElementById('sched-delete-wrap');
+  if(delWrap) delWrap.style.display = hasSchedule ? '' : 'none';
   document.getElementById('modal-schedule').classList.add('open');
 }
 function closeScheduleModal(){
   document.getElementById('modal-schedule').classList.remove('open');
+}
+function saveSchedule(){
+  var freq = document.getElementById('sched-freq-value').textContent;
+  var recipients = document.getElementById('sched-recipients').value;
+  if(!freq){ showToast('Please select a frequency'); return; }
+  // Build schedule description
+  var desc = buildScheduleDesc(freq);
+  // Store state
+  window._scheduleState = { set: true, freq: freq, desc: desc };
+  // Update dropdown item label
+  var actionBtn = document.getElementById('ed-schedule-action');
+  if(actionBtn) actionBtn.textContent = 'Edit Schedule';
+  // Update subtext under title
+  updateScheduleSubtext(desc);
+  closeScheduleModal();
+  showToast('Schedule saved');
+}
+function deleteSchedule(){
+  window._scheduleState = { set: false };
+  var actionBtn = document.getElementById('ed-schedule-action');
+  if(actionBtn) actionBtn.textContent = 'Schedule';
+  updateScheduleSubtext('');
+  closeScheduleModal();
+  showToast('Schedule deleted');
+}
+function buildScheduleDesc(freq){
+  var desc = '';
+  if(freq === 'Daily'){
+    var time = document.getElementById('sched-time-daily-value').textContent;
+    desc = 'Daily at ' + (time || '8:00 AM') + ' ET';
+  } else if(freq === 'Weekly'){
+    var day = document.getElementById('sched-day-week-value').textContent;
+    var time = document.getElementById('sched-time-weekly-value').textContent;
+    desc = 'Weekly on ' + (day||'Monday') + ' at ' + (time||'8:00 AM') + ' ET';
+  } else if(freq === 'Monthly'){
+    var dom = document.getElementById('sched-day-month-value').textContent;
+    var time = document.getElementById('sched-time-monthly-value').textContent;
+    desc = 'Monthly on the ' + (dom||'1st') + ' at ' + (time||'8:00 AM') + ' ET';
+  } else if(freq === 'Once'){
+    var date = document.getElementById('sched-date-once').value;
+    var time = document.getElementById('sched-time-once-value').textContent;
+    desc = 'Once on ' + (date||'a scheduled date') + ' at ' + (time||'8:00 AM') + ' ET';
+  }
+  var noResults = document.getElementById('sched-no-results-check');
+  if(noResults && noResults.checked) desc += ' · Skip if no results';
+  return desc;
+}
+function updateScheduleSubtext(desc){
+  // Also update the meta line span for schedule
+  var metaEl = document.getElementById('ed-head-meta');
+  if(metaEl){
+    // Remove any existing schedule span
+    var existing = metaEl.querySelector('.ed-sched-meta');
+    if(existing) existing.remove();
+    if(desc){
+      var span = document.createElement('span');
+      span.className = 'ed-sched-meta';
+      span.style.cssText = 'display:contents;';
+      span.innerHTML = '<span class="ed-head-meta-dot">·</span><span>' + desc + '</span>';
+      metaEl.appendChild(span);
+    }
+  }
+  // Also keep the wrap hidden (no longer used separately)
+  var wrap = document.getElementById('ed-schedule-wrap');
+  if(wrap) wrap.style.display = 'none';
 }
 function selectFreq(val, item){
   document.getElementById('sched-freq-value').textContent = val;
@@ -7152,7 +7266,7 @@ document.addEventListener('DOMContentLoaded', function(){
       <label class="modal-label floating-idle" for="edit-folder-desc" id="lbl-edit-folder-desc">Description (optional)</label>
       <textarea class="modal-input" id="edit-folder-desc" rows="4" onfocus="floatLabel('field-edit-folder-desc')" onblur="unfloatLabel('field-edit-folder-desc')"></textarea>
     </div>
-    <div class="modal-footer" style="justify-content:space-between;">
+    <div class="modal-footer" style="justify-content:space-between;overflow:visible;">
       <button class="folder-delete-btn" id="folder-delete-btn" onclick="confirmDeleteFolder()" aria-label="Delete folder">
         <i class="fa-regular fa-trash-can"></i>
       </button>

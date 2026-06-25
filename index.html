@@ -5385,6 +5385,17 @@ function ifOpenPicker(section, triggerEl){
   }
 
   panel.style.display = '';
+  // Update picker title based on trigger button
+  var titleEl = panel.querySelector('.if-edit-title');
+  if(titleEl){
+    if(!triggerEl || triggerEl.classList.contains('if-empty-add-btn')){
+      titleEl.textContent = 'Add filter';
+    } else if(triggerEl.classList.contains('if-or-btn')){
+      titleEl.textContent = 'Add filter (OR)';
+    } else {
+      titleEl.textContent = 'Add filter (AND)';
+    }
+  }
   var input = panel.querySelector('.if-picker-search');
   if(input){ input.value = ''; ifFilterFields('', section); input.focus(); }
 }

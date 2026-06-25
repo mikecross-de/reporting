@@ -643,7 +643,7 @@ select.modal-input:focus{}
 /* Labels never disabled */
 #if-root.inc-active .if-label,#if-root.exc-active .if-label{opacity:1;}
 .if-chip.active{background:#357A06;border-color:#357A06;color:var(--white);font-weight:700;}
-.if-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;padding:0 8px;line-height:21px;}
+.if-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;line-height:21px;}
 .if-chip.active .if-chip-body{color:var(--white);}
 .if-chip.active .if-chip-x{color:var(--white);}
 .if-chip-x{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--platform-60);background:none;border:none;padding:0;cursor:pointer;flex-shrink:0;border-radius:50%;transition:background .1s,color .1s;}
@@ -663,6 +663,16 @@ select.modal-input:focus{}
 
 /* L2 panel itself always fully enabled */
 .if-edit-panel#if-picker-inc,.if-edit-panel#if-picker-exc{margin-left:58px;}
+.if-chip-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--crm-20);color:var(--crm-200);border-radius:39px;font-size:12px;font-weight:700;line-height:1;padding:2px 6px;flex-shrink:0;}
+.if-chip.active .if-chip-badge{background:rgba(255,255,255,0.25);color:#fff;}
+.if-chip-popover{position:fixed;background:var(--white);border:none;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);padding:12px 16px;min-width:220px;max-width:300px;z-index:99999;pointer-events:auto;font-family:var(--font);}
+.if-chip-popover-title{font-size:13px;font-weight:700;color:var(--platform-100);margin-bottom:8px;}
+.if-chip-popover-cond{display:flex;align-items:flex-start;gap:6px;font-size:14px;color:var(--platform-80);padding:2px 0;line-height:1.4;}
+.if-chip-popover-dot{width:4px;height:4px;border-radius:50%;background:var(--platform-40);flex-shrink:0;margin-top:6px;}
+.if-chip-popover-section-label{font-size:14px;font-weight:700;margin-bottom:4px;margin-top:0;}
+.if-chip-popover-section-label.inc{color:var(--crm-100);}
+.if-chip-popover-section-label.exc{color:var(--platform-60);}
+.if-chip-popover-sep{border-top:1px solid var(--platform-10);margin:8px 0;}
 .if-edit-hd{display:flex;align-items:center;justify-content:space-between;background:var(--platform-5);padding:12px 16px;min-height:44px;box-sizing:border-box;}
 .if-edit-title{font-size:16px;font-weight:600;color:var(--platform-100);display:flex;align-items:center;gap:6px;}
 
@@ -2046,8 +2056,19 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                       <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <span class="if-and-sep">AND</span>
-                    <div class="if-chip" id="if-chip-txn" onclick="ifOpenL1('txn',this)">
+                    <div class="if-chip" id="if-chip-txn"
+                      tabindex="0"
+                      role="button"
+                      aria-label="Has any Transactions — click to edit, hover for details"
+                      data-popover='{"include":["Amount is between $2.00 and $50.00","Fund is Unrestricted"],"exclude":[]}'
+                      onclick="ifChipClick('txn',this)"
+                      onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ifChipClick('txn',this);}if(event.key==='Escape')ifHidePopover();"
+                      onmouseenter="ifShowPopover(this)"
+                      onmouseleave="ifHidePopover()"
+                      onfocus="ifShowPopover(this)"
+                      onblur="ifHidePopover()">
                       <span class="if-chip-body">Has any Transactions</span>
+                      <span class="if-chip-badge" aria-label="2 conditions">2</span>
                       <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <button class="if-and-btn" onclick="ifOpenPicker('inc',this)">And...</button>
@@ -2165,16 +2186,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
               <div class="if-group" id="if-exc-group">
                 <div class="if-row" id="if-exc-row">
                   <div class="if-label exc" style="align-self:flex-start;padding-top:8px;">Exclude</div>
-                  <div class="if-chips-wrap" id="if-exc-chips">
-                    <div class="if-chip" id="if-chip-name" onclick="ifOpenL1('name',this)">
-                      <span class="if-chip-body">Name contains "Smith"</span>
-                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-                    </div>
-                    <span class="if-and-sep">AND</span>
-                    <div class="if-chip" id="if-chip-web" onclick="ifOpenL1('web',this)">
-                      <span class="if-chip-body">Website Visits between 5 and 20</span>
-                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-                    </div>
+                  <div class="if-chips-wrap is-empty" id="if-exc-chips">
                     <button class="if-and-btn" onclick="ifOpenPicker('exc',this)">And...</button>
                     <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                     <button class="if-empty-add-btn if-and-btn" onclick="ifOpenPicker('exc',this)">Add filter</button>
@@ -4388,6 +4400,73 @@ function hideBtnTooltip(){
   var t = document.getElementById('__btn-tooltip');
   if(t) t.remove();
 }
+var _ifPopTimer = null;
+var _ifPopEl = null;
+
+function ifInitPopovers(){
+  document.querySelectorAll('.if-chip[data-popover]').forEach(function(chip){
+    if(chip.dataset.popoverInit) return;
+    chip.dataset.popoverInit = '1';
+    chip.addEventListener('mouseenter', function(){ ifShowPopover(chip); });
+    chip.addEventListener('mouseleave', function(){ ifHidePopover(); });
+    chip.addEventListener('focus',      function(){ ifShowPopover(chip); });
+    chip.addEventListener('blur',       function(){ ifHidePopover(); });
+    chip.addEventListener('keydown',    function(e){
+      if(e.key==='Escape'){ ifHidePopover(); }
+    });
+  });
+}
+document.addEventListener('DOMContentLoaded', ifInitPopovers);
+
+function ifShowPopover(chip){
+  var data = chip.dataset.popover;
+  if(!data) return;
+  var d;
+  try{ d = JSON.parse(data); } catch(e){ return; }
+  ifHidePopover();
+  var html = '';
+  if(d.include && d.include.length){
+    html += '<div class="if-chip-popover-section-label inc">Include</div>';
+    html += d.include.map(function(c){
+      return '<div class="if-chip-popover-cond">' + c + '</div>';
+    }).join('');
+  }
+  if(d.exclude && d.exclude.length){
+    if(d.include && d.include.length) html += '<div class="if-chip-popover-sep"></div>';
+    html += '<div class="if-chip-popover-section-label exc">Exclude</div>';
+    html += d.exclude.map(function(c){
+      return '<div class="if-chip-popover-cond">' + c + '</div>';
+    }).join('');
+  }
+  if(!html) return;
+  var pop = document.createElement('div');
+  pop.className = 'if-chip-popover';
+  pop.id = '__if-popover';
+  pop.setAttribute('role','tooltip');
+  pop.innerHTML = html;
+  document.body.appendChild(pop);
+  _ifPopEl = pop;
+  var r = chip.getBoundingClientRect();
+  var popW = 240;
+  var left = r.left;
+  if(left + popW > window.innerWidth - 8) left = window.innerWidth - popW - 8;
+  pop.style.left = left + 'px';
+  pop.style.top = (r.bottom + 6) + 'px';
+  chip.setAttribute('aria-describedby', '__if-popover');
+}
+
+function ifHidePopover(){
+  if(_ifPopTimer){ clearTimeout(_ifPopTimer); _ifPopTimer = null; }
+  var p = document.getElementById('__if-popover');
+  if(p) p.remove();
+  _ifPopEl = null;
+}
+
+function ifChipClick(type, chipEl){
+  ifHidePopover();
+  ifOpenL1(type, chipEl);
+}
+
 function setReportType(type){
   var label = document.getElementById('ed-type-label');
   label.style.gap = '6px';

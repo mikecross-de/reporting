@@ -2077,7 +2077,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                       onfocus="ifShowPopover(this)"
                       onblur="ifHidePopover()">
                       <button class="if-chip-body" onclick="ifChipClick('txn',this)">Has any Transactions</span>
-                      <span class="if-chip-badge" aria-label="2 conditions">2</span>
+                      <span class="if-chip-badge" aria-label="4 conditions">4</span>
                       <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <button class="if-and-btn" onclick="ifOpenPicker('inc',this)">And...</button>
@@ -4419,6 +4419,16 @@ var _ifPopEl = null;
 
 function ifInitPopovers(){
   document.querySelectorAll('.if-chip[data-popover]').forEach(function(chip){
+    var badge = chip.querySelector('.if-chip-badge');
+    if(badge){
+      try{
+        var d = JSON.parse(chip.dataset.popover);
+        var total = ifCountConditions(d.include) + ifCountConditions(d.exclude);
+        if(total > 0){ badge.textContent = total; badge.setAttribute('aria-label', total + ' conditions'); }
+      } catch(e){}
+    }
+  });
+  document.querySelectorAll('.if-chip[data-popover]').forEach(function(chip){
     if(chip.dataset.popoverInit) return;
     chip.dataset.popoverInit = '1';
     chip.addEventListener('mouseenter', function(){ ifShowPopover(chip); });
@@ -4432,6 +4442,20 @@ function ifInitPopovers(){
 }
 document.addEventListener('DOMContentLoaded', ifInitPopovers);
 
+function ifCountConditions(items){
+  if(!items || !items.length) return 0;
+  var total = 0;
+  items.forEach(function(item){
+    var hasChildren = (item.include && item.include.length) || (item.exclude && item.exclude.length);
+    if(hasChildren){
+      total += ifCountConditions(item.include);
+      total += ifCountConditions(item.exclude);
+    } else {
+      total += 1;
+    }
+  });
+  return total;
+}
 function ifRenderPopoverTree(items, depth){
   if(!items || !items.length) return '';
   var out = '';

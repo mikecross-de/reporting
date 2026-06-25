@@ -607,28 +607,46 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .if-chips-wrap{display:flex;flex-wrap:wrap;gap:0;align-items:center;padding:2px 0;}
 .if-and-sep{font-size:14px;font-weight:600;color:var(--platform-80);padding:0 10px;white-space:nowrap;align-self:center;line-height:21px;}
 /* Filter chip — uses filter-chip tag+body pattern */
-.if-chip{display:inline-flex;align-items:center;cursor:pointer;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;cursor:pointer;font-size:14px;font-family:var(--font);transition:border-color .12s;overflow:hidden;white-space:nowrap;padding:4px 6px 4px 0;line-height:21px;box-sizing:border-box;}
-.if-chip:hover{border-color:var(--platform-40);background:var(--platform-10);}
-/* Dim other group entirely */
-#if-root.inc-active #if-exc-group{opacity:0.45;pointer-events:none;}
-#if-root.exc-active #if-inc-group{opacity:0.45;pointer-events:none;}
+.if-chip{display:inline-flex;align-items:center;cursor:pointer;background:var(--white);border:1px solid #A9ABAC;border-radius:39px;font-size:14px;font-family:var(--font);font-weight:400;color:#272D30;transition:background .12s,border-color .12s;white-space:nowrap;padding:6px 12px;line-height:18px;box-sizing:border-box;gap:6px;}
+.if-chip:hover{background:#E9EAEA;border-color:#A9ABAC;}
+/* When inc filter open: disable exc group chips and buttons with Grove states */
+#if-root.inc-active #if-exc-group{pointer-events:none;}
+#if-root.inc-active #if-exc-group .if-chip{background:#E9EAEA !important;border-color:transparent !important;color:#7D8183 !important;pointer-events:none;cursor:default;}
+#if-root.inc-active #if-exc-group .if-and-btn{background:#E9EAEA;color:#7D8183;border:none;pointer-events:none;}
+#if-root.inc-active #if-exc-group .if-or-btn{background:var(--white);border-color:#272D30;color:#7D8183;pointer-events:none;}
+#if-root.inc-active #if-exc-group .if-label{opacity:0.45;}
+/* When exc filter open: disable inc group chips and buttons with Grove states */
+#if-root.exc-active #if-inc-group{pointer-events:none;}
+#if-root.exc-active #if-inc-group .if-chip{background:#E9EAEA !important;border-color:transparent !important;color:#7D8183 !important;pointer-events:none;cursor:default;}
+#if-root.exc-active #if-inc-group .if-and-btn{background:#E9EAEA;color:#7D8183;border:none;pointer-events:none;}
+#if-root.exc-active #if-inc-group .if-or-btn{background:var(--white);border-color:#272D30;color:#7D8183;pointer-events:none;}
+#if-root.exc-active #if-inc-group .if-label{opacity:0.45;}
 /* Dim non-active chips in the active group's chip rows only */
-#if-root.inc-active #if-inc-chips .if-chip:not(.active){opacity:0.45;pointer-events:none;cursor:default;}
+#if-root.inc-active #if-inc-chips .if-chip:not(.active){background:#E9EAEA !important;border-color:transparent !important;color:#7D8183 !important;pointer-events:none;cursor:default;}
 #if-root.inc-active #if-inc-group .if-or-sep-row{opacity:0.45;}
-#if-root.inc-active #if-inc-group .if-or-row-extra .if-chips-wrap{opacity:0.45;pointer-events:none;}
-#if-root.exc-active #if-exc-chips .if-chip:not(.active){opacity:0.45;pointer-events:none;cursor:default;}
+#if-root.inc-active #if-inc-group .if-or-row-extra .if-chip{background:#E9EAEA !important;border-color:transparent !important;color:#7D8183 !important;pointer-events:none;cursor:default;}
+#if-root.inc-active #if-inc-group .if-or-row-extra .if-chips-wrap{pointer-events:none;}
+#if-root.inc-active #if-inc-group .if-and-btn[disabled]{background:#E9EAEA;color:#7D8183;border:none;}
+#if-root.inc-active #if-inc-group .if-or-btn[disabled]{background:var(--white);border-color:#272D30;color:#7D8183;}
+#if-root.exc-active #if-exc-chips .if-chip:not(.active){background:#E9EAEA !important;border-color:transparent !important;color:#7D8183 !important;pointer-events:none;cursor:default;}
 #if-root.exc-active #if-exc-group .if-or-sep-row{opacity:0.45;}
-#if-root.exc-active #if-exc-group .if-or-row-extra .if-chips-wrap{opacity:0.45;pointer-events:none;}
+#if-root.exc-active #if-exc-group .if-or-row-extra .if-chip{background:#E9EAEA !important;border-color:transparent !important;color:#7D8183 !important;pointer-events:none;cursor:default;}
+#if-root.exc-active #if-exc-group .if-or-row-extra .if-chips-wrap{pointer-events:none;}
+#if-root.exc-active #if-exc-group .if-and-btn[disabled]{background:#E9EAEA;color:#7D8183;border:none;}
+#if-root.exc-active #if-exc-group .if-or-btn[disabled]{background:var(--white);border-color:#272D30;color:#7D8183;}
 /* Labels never disabled */
 #if-root.inc-active .if-label,#if-root.exc-active .if-label{opacity:1;}
-.if-chip.active{border:1px solid var(--crm-100);background:var(--crm-10);}
+.if-chip.active{background:#357A06;border-color:#357A06;color:var(--white);font-weight:700;}
 .if-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;padding:0 8px;line-height:21px;}
-.if-chip.active .if-chip-body{color:var(--platform-100);}
-.if-chip-x{display:inline-flex;align-items:center;justify-content:center;width:22px;height:100%;color:var(--platform-60);transition:color .1s;flex-shrink:0;width:14px;height:14px;background:none;border:none;padding:0;cursor:pointer;}
-.if-chip-x:hover{color:var(--platform-100);}
+.if-chip.active .if-chip-body{color:var(--white);}
+.if-chip.active .if-chip-x{color:var(--white);}
+.if-chip-x{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;color:var(--platform-60);background:none;border:none;padding:0;cursor:pointer;flex-shrink:0;border-radius:50%;transition:background .1s,color .1s;}
+.if-chip-x:hover{color:var(--platform-100);background:rgba(0,0,0,0.08);}
 /* And... button — matches production grey pill */
 .if-and-btn{display:inline-flex;align-items:center;background:var(--crm-100);border:none;border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--white);cursor:pointer;padding:4px 10px;margin:2px 0 2px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;}
 .if-and-btn:hover{background:var(--crm-200);}
+/* Grove primary disabled: #E9EAEA bg, #7D8183 text, no border */
+.if-and-btn:disabled,.if-and-btn[disabled]{background:#E9EAEA;color:#7D8183;border:none;cursor:default;pointer-events:none;}
 /* Edit panel — full-width grey bar, no border-radius per production */
 .if-edit-panel{background:none;border:1px solid var(--platform-10);margin:6px 0 6px 58px;padding:0;border-radius:4px;overflow:hidden;}
 .if-edit-panel.l2{margin:12px 0 6px;}
@@ -673,11 +691,18 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .if-or-sep-label{font-size:14px;font-weight:600;color:var(--platform-80);padding:0 10px 0 0;white-space:nowrap;line-height:21px;}
 .if-or-btn{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;margin-left:10px;}
 .if-or-btn:hover{background:var(--platform-20);border-color:#DAD7D9;}
+/* Grove secondary disabled: white bg, #272D30 border, #7D8183 text */
+.if-or-btn:disabled,.if-or-btn[disabled]{background:var(--white);border-color:#272D30;color:#7D8183;cursor:default;pointer-events:none;}
+/* Grove primary disabled for Apply */
+.if-edit-apply:disabled,.if-edit-apply[disabled]{background:#E9EAEA;color:#7D8183;border:none;cursor:default;pointer-events:none;}
+/* Grove secondary disabled for Cancel */
+.if-edit-cancel:disabled,.if-edit-cancel[disabled]{background:var(--white);border-color:#272D30;color:#7D8183;cursor:default;pointer-events:none;}
+/* L1 panel controls opacity when L2 is open — done via JS inline style, not CSS */
 .if-actions-row{display:flex;align-items:center;gap:12px;padding:6px 0 2px;}
 .if-add-filter-btn{background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;}
 .if-add-filter-btn:hover{background:var(--platform-5);}
 .if-exc-link{display:inline-flex;align-items:center;gap:5px;background:none;border:none;font-size:14px;font-family:var(--font);color:var(--platform-80);cursor:pointer;padding:0;font-weight:400;line-height:21px;}
-.if-add-filter-btn:disabled{opacity:0.45;cursor:default;pointer-events:none;}
+
 .if-exc-link:disabled{opacity:0.45;cursor:default;pointer-events:none;}
 .if-exc-link:hover{color:var(--platform-100);}
 
@@ -4408,6 +4433,9 @@ function confirmExport(){
   var toast = document.getElementById('export-toast');
   var iconWrap = document.getElementById('toast-icon-wrap');
   var msg = document.getElementById('toast-msg');
+  var reportName = (document.getElementById('ed-report-title') || document.querySelector('.ed-title') || {textContent:'Report'}).textContent.trim() || 'Report';
+  var today = new Date().toISOString().slice(0,10);
+  var filename = reportName + ' ' + today + '.' + format;
   iconWrap.innerHTML = '<div class="toast-spinner"></div>';
   msg.textContent = 'Exporting '+labels[format]+'...';
   toast.classList.add('visible');
@@ -4416,7 +4444,7 @@ function confirmExport(){
     msg.textContent = 'Report exported as '+labels[format];
     var a = document.createElement('a');
     a.href = 'data:text/plain,Report exported';
-    a.download = 'report.'+format;
+    a.download = filename;
     a.click();
     setTimeout(function(){ toast.classList.remove('visible'); }, 2000);
   }, 2000);
@@ -4425,6 +4453,9 @@ function exportReport(){
   var toast = document.getElementById('export-toast');
   var iconWrap = document.getElementById('toast-icon-wrap');
   var msg = document.getElementById('toast-msg');
+  var reportName = (document.getElementById('ed-report-title') || document.querySelector('.ed-title') || {textContent:'Report'}).textContent.trim() || 'Report';
+  var today = new Date().toISOString().slice(0,10);
+  var filename = reportName + ' ' + today + '.xlsx';
   iconWrap.innerHTML = '<div class="toast-spinner"></div>';
   msg.textContent = 'Exporting report...';
   toast.classList.add('visible');
@@ -4433,11 +4464,9 @@ function exportReport(){
     msg.textContent = 'Report exported';
     var a = document.createElement('a');
     a.href = 'data:text/plain,Report exported';
-    a.download = 'report.xlsx';
+    a.download = filename;
     a.click();
-    setTimeout(function(){
-      toast.classList.remove('visible');
-    }, 2000);
+    setTimeout(function(){ toast.classList.remove('visible'); }, 2000);
   }, 3500);
 }
 function showProcessingToast(text){
@@ -4870,7 +4899,7 @@ function ifOpenL1(type, chipEl){
   // Disable And/Or buttons in the active section
   var activeSection = inInc ? 'inc' : 'exc';
   document.querySelectorAll('#if-' + activeSection + '-group .if-and-btn, #if-' + activeSection + '-group .if-or-btn').forEach(function(b){
-    b.style.opacity='0.45'; b.style.pointerEvents='none';
+    if(!b.closest('#if-l1-panel') && !b.closest('#if-l2-panel')) b.setAttribute('disabled','');
   });
 
   document.querySelectorAll('.if-chip').forEach(function(c){ c.classList.remove('active'); });
@@ -4903,7 +4932,7 @@ function ifCloseL1(){
   if(root){ root.classList.remove('inc-active','exc-active'); }
   // Restore And/Or buttons in both sections
   document.querySelectorAll('#if-inc-group .if-and-btn, #if-inc-group .if-or-btn, #if-exc-group .if-and-btn, #if-exc-group .if-or-btn').forEach(function(b){
-    b.style.opacity=''; b.style.pointerEvents='';
+    if(!b.closest('#if-l1-panel') && !b.closest('#if-l2-panel')) b.removeAttribute('disabled');
   });
   ifEnableActions();
 }
@@ -4966,30 +4995,29 @@ function ifOpenL2(type, chipId, chipEl){
 
   // Disable outer chips
   document.querySelectorAll('#if-inc-chips .if-chip, #if-exc-chips .if-chip').forEach(function(c){
-    c.style.opacity='0.45'; c.style.pointerEvents='none'; c.style.cursor='default';
+    c.classList.add('chip-disabled'); c.style.pointerEvents='none';
   });
 }
 
 function ifSetL2Disabled(disabled){
   var o = disabled ? '0.45' : '';
   var p = disabled ? 'none' : '';
-  // L1 header (Cancel/Apply/title)
-  var hd = document.querySelector('#if-l1-panel .if-edit-hd');
-  if(hd){ hd.style.opacity=o; hd.style.pointerEvents=p; }
+  // L1 header Cancel/Apply
+  var cancel = document.querySelector('#if-l1-panel .if-edit-cancel');
+  var apply = document.querySelector('#if-l1-panel .if-edit-apply');
+  if(disabled){ if(cancel) cancel.setAttribute('disabled',''); if(apply) apply.setAttribute('disabled',''); }
+  else{ if(cancel) cancel.removeAttribute('disabled'); if(apply) apply.removeAttribute('disabled'); }
   // L1 controls (Has any / Transactions dropdowns)
   var ctrl = document.getElementById('if-l1-controls');
-  if(ctrl){ ctrl.style.opacity=o; ctrl.style.pointerEvents=p; }
+  if(ctrl){ ctrl.style.opacity=o; ctrl.style.pointerEvents=p; ctrl.style.cursor = disabled ? 'default' : ''; }
   // Non-active sub chips
   document.querySelectorAll('#if-l2-chips .if-chip:not(.active)').forEach(function(el){
-    el.style.opacity=o; el.style.pointerEvents=p;
+    if(disabled) el.classList.add('chip-disabled'); else el.classList.remove('chip-disabled');
+    el.style.pointerEvents=p;
   });
-  // Include And/Or buttons
-  document.querySelectorAll('#if-l1-sub .if-and-btn, #if-l1-sub .if-or-btn').forEach(function(el){
-    el.style.opacity=o; el.style.pointerEvents=p;
-  });
-  // Exclude And/Or buttons
-  document.querySelectorAll('.if-sub-exc-row .if-and-btn, .if-sub-exc-row .if-or-btn').forEach(function(el){
-    el.style.opacity=o; el.style.pointerEvents=p;
+  // Include and Exclude And/Or buttons in sub-filter
+  document.querySelectorAll('#if-l1-sub .if-and-btn, #if-l1-sub .if-or-btn, .if-sub-exc-row .if-and-btn, .if-sub-exc-row .if-or-btn').forEach(function(el){
+    if(disabled) el.setAttribute('disabled',''); else el.removeAttribute('disabled');
   });
 }
 
@@ -5001,7 +5029,7 @@ function ifCloseL2(){
   ifSetL2Disabled(false);
   // Restore outer chips
   document.querySelectorAll('#if-inc-chips .if-chip, #if-exc-chips .if-chip').forEach(function(c){
-    c.style.opacity=''; c.style.pointerEvents=''; c.style.cursor='';
+    c.classList.remove('chip-disabled'); c.style.pointerEvents='';
   });
   document.querySelectorAll('#if-l2-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
 }
@@ -5044,14 +5072,14 @@ function ifOpenPicker(section, triggerEl){
   var otherGroup = document.getElementById('if-' + otherSec + '-group');
   if(otherGroup){ otherGroup.style.opacity='0.45'; otherGroup.style.pointerEvents='none'; }
   var sameChips = document.getElementById('if-' + section + '-chips');
-  if(sameChips){ sameChips.querySelectorAll('.if-chip').forEach(function(c){ c.style.opacity='0.45'; c.style.pointerEvents='none'; c.style.cursor='default'; }); }
+  if(sameChips){ sameChips.querySelectorAll('.if-chip').forEach(function(c){ c.classList.add('chip-disabled'); c.style.pointerEvents='none'; }); }
   var sameOrRow = document.querySelector('#if-' + section + '-group .if-or-row-extra');
   if(sameOrRow){ sameOrRow.style.opacity='0.45'; sameOrRow.style.pointerEvents='none'; }
   var sameOrSep = document.querySelector('#if-' + section + '-group .if-or-sep-row');
   if(sameOrSep){ sameOrSep.style.opacity='0.45'; }
   // Disable And/Or buttons in the same section
   document.querySelectorAll('#if-' + section + '-group .if-and-btn, #if-' + section + '-group .if-or-btn').forEach(function(b){
-    b.style.opacity='0.45'; b.style.pointerEvents='none';
+    if(!b.closest('#if-l1-panel') && !b.closest('#if-l2-panel')) b.setAttribute('disabled','');
   });
   var panel = document.getElementById('if-picker-' + section);
   var otherPanel = document.getElementById('if-picker-' + (section === 'inc' ? 'exc' : 'inc'));
@@ -5078,14 +5106,14 @@ function ifClosePicker(section){
   var otherGroup = document.getElementById('if-' + otherSec + '-group');
   if(otherGroup){ otherGroup.style.opacity=''; otherGroup.style.pointerEvents=''; }
   var sameChips = document.getElementById('if-' + section + '-chips');
-  if(sameChips){ sameChips.querySelectorAll('.if-chip').forEach(function(c){ c.style.opacity=''; c.style.pointerEvents=''; c.style.cursor=''; }); }
+  if(sameChips){ sameChips.querySelectorAll('.if-chip').forEach(function(c){ c.classList.remove('chip-disabled'); c.style.pointerEvents=''; }); }
   var sameOrRow = document.querySelector('#if-' + section + '-group .if-or-row-extra');
   if(sameOrRow){ sameOrRow.style.opacity=''; sameOrRow.style.pointerEvents=''; }
   var sameOrSep = document.querySelector('#if-' + section + '-group .if-or-sep-row');
   if(sameOrSep){ sameOrSep.style.opacity=''; }
   // Restore And/Or buttons
   document.querySelectorAll('#if-' + section + '-group .if-and-btn, #if-' + section + '-group .if-or-btn').forEach(function(b){
-    b.style.opacity=''; b.style.pointerEvents='';
+    b.style.pointerEvents=''; b.removeAttribute('disabled');
   });
 }
 function ifFilterFields(query, section){

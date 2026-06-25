@@ -596,9 +596,9 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 /* Inline controls */
 .fd-inline-controls{display:flex;gap:8px;flex:1;min-width:0;align-items:center;}
 /* ── Inline filter system ── */
-.if-row{display:flex;align-items:center;gap:0;margin-bottom:0;padding:12px 0;}
-#if-inc-row{padding-top:0;}
-#if-exc-row{padding-bottom:0;border-top:1px solid var(--platform-10);}
+.if-row{display:flex;align-items:center;gap:0;margin-bottom:0;padding:6px 0;}
+
+
 .if-label{font-size:14px;font-weight:700;white-space:nowrap;margin-right:12px;display:flex;align-items:center;flex-shrink:0;line-height:18px;}
 .if-label.inc{color:#296401;}
 .if-label.inc svg{color:#296401;}
@@ -607,9 +607,20 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .if-chips-wrap{display:flex;flex-wrap:wrap;gap:0;align-items:center;padding:2px 0;}
 .if-and-sep{font-size:14px;font-weight:600;color:var(--platform-80);padding:0 10px;white-space:nowrap;align-self:center;line-height:21px;}
 /* Filter chip — uses filter-chip tag+body pattern */
-.if-chip{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;cursor:pointer;font-size:14px;font-family:var(--font);transition:border-color .12s;overflow:hidden;white-space:nowrap;padding:4px 6px 4px 0;line-height:21px;box-sizing:border-box;}
+.if-chip{display:inline-flex;align-items:center;cursor:pointer;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;cursor:pointer;font-size:14px;font-family:var(--font);transition:border-color .12s;overflow:hidden;white-space:nowrap;padding:4px 6px 4px 0;line-height:21px;box-sizing:border-box;}
 .if-chip:hover{border-color:var(--platform-40);background:var(--platform-10);}
-#if-root.panel-open .if-chip:not(.active){pointer-events:none;cursor:default;}
+/* Dim other group entirely */
+#if-root.inc-active #if-exc-group{opacity:0.45;pointer-events:none;}
+#if-root.exc-active #if-inc-group{opacity:0.45;pointer-events:none;}
+/* Dim non-active chips in the active group's chip rows only */
+#if-root.inc-active #if-inc-chips .if-chip:not(.active){opacity:0.45;pointer-events:none;cursor:default;}
+#if-root.inc-active #if-inc-group .if-or-sep-row{opacity:0.45;}
+#if-root.inc-active #if-inc-group .if-or-row-extra .if-chips-wrap{opacity:0.45;pointer-events:none;}
+#if-root.exc-active #if-exc-chips .if-chip:not(.active){opacity:0.45;pointer-events:none;cursor:default;}
+#if-root.exc-active #if-exc-group .if-or-sep-row{opacity:0.45;}
+#if-root.exc-active #if-exc-group .if-or-row-extra .if-chips-wrap{opacity:0.45;pointer-events:none;}
+/* Labels never disabled */
+#if-root.inc-active .if-label,#if-root.exc-active .if-label{opacity:1;}
 .if-chip.active{border:1px solid var(--crm-100);background:var(--crm-10);}
 .if-chip-body{font-size:14px;color:var(--platform-80);font-weight:500;padding:0 8px;line-height:21px;}
 .if-chip.active .if-chip-body{color:var(--platform-100);}
@@ -619,10 +630,14 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .if-and-btn{display:inline-flex;align-items:center;background:var(--crm-100);border:none;border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--white);cursor:pointer;padding:4px 10px;margin:2px 0 2px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;}
 .if-and-btn:hover{background:var(--crm-200);}
 /* Edit panel — full-width grey bar, no border-radius per production */
-.if-edit-panel{background:none;border:1px solid var(--platform-10);margin:4px 0 16px;padding:0;border-radius:4px;overflow:hidden;}
-.if-edit-panel.l2{background:none;border:1px solid var(--platform-10);margin:4px 0 16px;padding:0;border-radius:4px;overflow:hidden;}
+.if-edit-panel{background:none;border:1px solid var(--platform-10);margin:6px 0 6px 58px;padding:0;border-radius:4px;overflow:hidden;}
+.if-edit-panel.l2{margin:12px 0 6px;}
+
+
+/* L2 panel itself always fully enabled */
+.if-edit-panel#if-picker-inc,.if-edit-panel#if-picker-exc{margin-left:58px;}
 .if-edit-hd{display:flex;align-items:center;justify-content:space-between;background:var(--platform-5);padding:10px 16px;min-height:44px;box-sizing:border-box;}
-.if-edit-title{font-size:14px;font-weight:600;color:var(--platform-100);display:flex;align-items:center;gap:6px;}
+.if-edit-title{font-size:16px;font-weight:600;color:var(--platform-100);display:flex;align-items:center;gap:6px;}
 
 .if-edit-btns{display:flex;gap:8px;align-items:center;}
 .if-edit-cancel{background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 8px;font-weight:700;line-height:21px;transition:background .12s;white-space:nowrap;}
@@ -633,11 +648,9 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .if-edit-inner{background:var(--white);padding:20px 16px;margin:0;}
 .if-edit-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;}
 .if-edit-controls .fc-select{flex:0 0 auto;width:auto;}
-.if-edit-controls .fc-input{width:auto;}
-/* Field picker panel (Add filter) */
-.if-picker-panel{background:var(--white);border:1px solid var(--platform-20);border-radius:4px;padding:0;margin-bottom:8px;overflow:hidden;}
-.if-picker-hd{font-size:14px;font-weight:600;color:var(--platform-100);padding:12px 14px 8px;}
-.if-picker-search-wrap{padding:0 14px 10px;border-bottom:1px solid var(--platform-10);}
+.if-edit-controls .fc-input{flex:0 0 auto;}
+.if-picker-hd{font-size:14px;font-weight:600;color:var(--platform-100);padding:12px 16px 8px;}
+.if-picker-search-wrap{padding:0 16px 10px;}
 .if-picker-search{width:100%;border:1px solid var(--platform-40);border-radius:4px;padding:6px 10px;font-size:14px;font-family:var(--font);color:var(--platform-100);height:36px;box-sizing:border-box;transition:border-color .15s;outline:none;line-height:normal;}
 .if-picker-search:hover{border-color:var(--platform-100);}
 .if-picker-search:focus{border-color:var(--crm-100);}
@@ -650,15 +663,21 @@ select.modal-input:focus{padding-right:39px;background-position:right 15px cente
 .if-picker-item:hover{background:var(--platform-5);}
 .if-picker-item.hidden{display:none;}
 /* Or... / actions row */
-.if-or-row{padding:4px 0 0;margin-left:80px;}
+.if-group{display:block;padding:6px 0;}
+#if-inc-row{padding-top:0;}
+#if-inc-group{padding-top:0;padding-bottom:6px;}
+#if-exc-group{padding-top:6px;}
+.if-or-row-extra .if-row{padding-top:0;}
+.if-or-sep-row{display:flex;align-items:center;padding:2px 0;}
+.if-or-sep-row .if-label-spacer{visibility:hidden;font-size:14px;font-weight:700;white-space:nowrap;margin-right:16px;flex-shrink:0;}
+.if-or-sep-label{font-size:14px;font-weight:600;color:var(--platform-80);padding:0 10px 0 0;white-space:nowrap;line-height:21px;}
 .if-or-btn{display:inline-flex;align-items:center;background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;margin-left:10px;}
-.if-or-btn:hover{background:var(--platform-5);}
+.if-or-btn:hover{background:var(--platform-20);border-color:#DAD7D9;}
 .if-actions-row{display:flex;align-items:center;gap:12px;padding:6px 0 2px;}
 .if-add-filter-btn{background:var(--white);border:1px solid var(--platform-100);border-radius:4px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);cursor:pointer;padding:4px 10px;transition:background .12s;line-height:21px;height:29px;box-sizing:border-box;}
 .if-add-filter-btn:hover{background:var(--platform-5);}
 .if-exc-link{display:inline-flex;align-items:center;gap:5px;background:none;border:none;font-size:14px;font-family:var(--font);color:var(--platform-80);cursor:pointer;padding:0;font-weight:400;line-height:21px;}
-.if-and-btn:disabled,.if-or-btn:disabled,.if-add-filter-btn:disabled{opacity:0.45;cursor:default;pointer-events:none;}
-.if-and-btn:disabled{background:var(--crm-100);}
+.if-add-filter-btn:disabled{opacity:0.45;cursor:default;pointer-events:none;}
 .if-exc-link:disabled{opacity:0.45;cursor:default;pointer-events:none;}
 .if-exc-link:hover{color:var(--platform-100);}
 
@@ -1972,53 +1991,61 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
           <div class="fd-panel" id="filter-panel">
             <div id="if-root">
 
-              <!-- INCLUDE row -->
-              <div class="if-row" id="if-inc-row">
-                <div class="if-label inc">
-                                    Include
+              <!-- INCLUDE rows -->
+              <div class="if-group" id="if-inc-group">
+                <div class="if-row" id="if-inc-row">
+                  <div class="if-label inc" style="align-self:flex-start;padding-top:8px;">Include</div>
+                  <div class="if-chips-wrap" id="if-inc-chips">
+                    <div class="if-chip" id="if-chip-status" onclick="ifOpenL1('status',this)">
+                      <span class="if-chip-body">Status is Active</span>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    </div>
+                    <span class="if-and-sep">AND</span>
+                    <div class="if-chip" id="if-chip-hoh" onclick="ifOpenL1('hoh',this)">
+                      <span class="if-chip-body">is Head of Household</span>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    </div>
+                    <span class="if-and-sep">AND</span>
+                    <div class="if-chip" id="if-chip-bday" onclick="ifOpenL1('bday',this)">
+                      <span class="if-chip-body">Birthdate is this fiscal year</span>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    </div>
+                    <span class="if-and-sep">AND</span>
+                    <div class="if-chip" id="if-chip-txn" onclick="ifOpenL1('txn',this)">
+                      <span class="if-chip-body">Has any Transactions</span>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    </div>
+                    <button class="if-and-btn" onclick="ifOpenPicker('inc',this)">And...</button>
+                    <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
+                  </div>
                 </div>
-                <div class="if-chips-wrap" id="if-inc-chips">
-                  <div class="if-chip" id="if-chip-status" onclick="ifOpenL1('status',this)">
-                    <span class="if-chip-body">Status is Active</span>
-                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                <div class="if-or-sep-row"><span class="if-label-spacer">Include</span><span class="if-or-sep-label">OR</span></div>
+                <div class="if-row if-or-row-extra">
+                  <div class="if-label inc" style="visibility:hidden;align-self:flex-start;padding-top:8px;">Include</div>
+                  <div class="if-chips-wrap">
+                    <div class="if-chip" onclick="ifOpenL1('bday',this)">
+                      <span class="if-chip-body">Birthdate is last week</span>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    </div>
+                    <button class="if-and-btn" onclick="ifOpenPicker('inc',this)">And...</button>
+                    <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                   </div>
-                  <span class="if-and-sep">AND</span>
-                  <div class="if-chip" id="if-chip-hoh" onclick="ifOpenL1('hoh',this)">
-                    <span class="if-chip-body">is Head of Household</span>
-                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-                  </div>
-                  <span class="if-and-sep">AND</span>
-                  <div class="if-chip" id="if-chip-bday" onclick="ifOpenL1('bday',this)">
-                    <span class="if-chip-body">Birthdate is this fiscal year</span>
-                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-                  </div>
-                  <span class="if-and-sep">AND</span>
-                  <div class="if-chip" id="if-chip-txn" onclick="ifOpenL1('txn',this)">
-                    <span class="if-chip-body">Has any Transactions</span>
-                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-                  </div>
-                  <button class="if-and-btn" onclick="ifOpenPicker('inc')">And...</button>
-                  <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                 </div>
               </div>
 
               <!-- Add filter picker panel (include) -->
               <div class="if-edit-panel" id="if-picker-inc" style="display:none;">
                 <div class="if-edit-hd">
-                  <div class="if-edit-title">
-                    <svg style="width:13px;height:13px;fill:currentColor;"><use href="#icon-filter"/></svg>
-                    Add filter
-                  </div>
+                  <div class="if-edit-title">Add filter</div>
                   <div class="if-edit-btns">
                     <button class="if-edit-cancel" onclick="ifClosePicker('inc')">Cancel</button>
                   </div>
                 </div>
-                <div class="if-picker-panel">
-                  <div class="if-picker-hd">Choose a field to include</div>
-                  <div class="if-picker-search-wrap">
-                    <input class="if-picker-search" type="text" placeholder="Search fields" oninput="ifFilterFields(this.value,'inc')" autocomplete="off">
-                  </div>
-                  <div class="if-picker-list" id="if-picker-list-inc">
+                <div class="if-picker-hd">Choose a field to include</div>
+                <div class="if-picker-search-wrap">
+                  <input class="if-picker-search" type="text" placeholder="Search fields" oninput="ifFilterFields(this.value,'inc')" autocomplete="off">
+                </div>
+                <div class="if-picker-list" id="if-picker-list-inc">
                     <div class="if-picker-group-hd" onclick="ifToggleGroup(this)">
                       <svg viewBox="0 0 320 512"><use href="#icon-chevron-down"/></svg>
                       Constituent fields (12)
@@ -2047,13 +2074,8 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <button class="if-picker-item" onclick="ifPickField('Appeal','appeal','inc')">Appeal</button>
                     <button class="if-picker-item" onclick="ifPickField('Gift Type','gifttype','inc')">Gift Type</button>
                     <button class="if-picker-item" onclick="ifPickField('Payment Method','paymethod','inc')">Payment Method</button>
-                  </div>
-                </div>
-                <div class="if-or-btn-row">
-                  <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                 </div>
               </div>
-
               <!-- L1 edit panel (hidden) -->
               <div class="if-edit-panel" id="if-l1-panel" style="display:none;">
                 <div class="if-edit-hd">
@@ -2067,25 +2089,22 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                 </div>
                 <div class="if-edit-inner" id="if-l1-inner">
                   <div class="if-edit-controls" id="if-l1-controls"></div>
-                </div>
 
-                <!-- Sub-filter area (relational filters only) -->
-                <div id="if-l1-sub" style="display:none;">
-                  <div class="if-edit-inner" style="border-top:1px solid var(--platform-10);border-radius:0;margin:0;">
-                    <!-- Sub include row -->
-                    <div class="if-row" style="padding:8px 0 4px;">
-                      <div class="if-label inc">Include</div>
-                      <div class="if-chips-wrap" id="if-l2-chips">
-                        <!-- populated by JS -->
+                  <!-- Sub-filter area (relational filters only) -->
+                  <div id="if-l1-sub" style="display:none;margin:12px 0 0;">
+                    <!-- Sub Include row -->
+                    <div style="display:flex;align-items:flex-start;padding:8px 0px 0;">
+                      <div class="if-label inc" style="margin-right:16px;padding-top:8px;flex-shrink:0;">Include</div>
+                      <div id="if-l2-chips-col" style="flex:1;">
+                        <div class="if-chips-wrap" id="if-l2-chips" style="padding:4px 0;">
+                          <!-- populated by JS -->
+                        </div>
                       </div>
                     </div>
-
-                    <!-- L2 edit panel (hidden) -->
+                    <!-- L2 edit panel — moves into if-l2-chips-col via JS -->
                     <div class="if-edit-panel l2" id="if-l2-panel" style="display:none;">
                       <div class="if-edit-hd">
-                        <div class="if-edit-title">
-                          <span id="if-l2-title">Sub-filter</span>
-                        </div>
+                        <div class="if-edit-title"><span id="if-l2-title">Sub-filter</span></div>
                         <div class="if-edit-btns">
                           <button class="if-edit-cancel" onclick="ifCloseL2()">Cancel</button>
                           <button class="if-edit-apply" onclick="ifApplyL2()">Apply</button>
@@ -2095,51 +2114,51 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                         <div class="if-edit-controls" id="if-l2-controls"></div>
                       </div>
                     </div>
-
-                    <div class="if-actions-row" style="padding-top:4px;">
-                      <button class="if-exc-link" onclick="showToast('Add sub-filter')"><i class="fa-solid fa-circle-minus" style="font-size:13px;" aria-hidden="true"></i> Exclude</button>
-                      <button class="if-add-filter-btn" onclick="showToast('Add sub-filter')">Add filter</button>
+                    <!-- Sub separator -->
+                    <div style="border-top:1px solid var(--platform-10);margin-top:10px;"></div>
+                    <!-- Sub Exclude row -->
+                    <div class="if-sub-exc-row" style="display:flex;align-items:center;padding:12px 0 0;">
+                      <div class="if-label exc" style="margin-right:16px;flex-shrink:0;">Exclude</div>
+                      <button class="if-and-btn" onclick="showToast('Add exclude sub-filter')" style="margin-left:0;">And...</button>
+                      <button class="if-or-btn" onclick="showToast('Or... exclude sub-group')" style="margin-left:10px;">Or...</button>
                     </div>
                   </div>
                 </div></div>
 
-              <!-- EXCLUDE row -->
-              <div class="if-row" id="if-exc-row">
-                <div class="if-label exc">
-                                    Exclude
-                </div>
-                <div class="if-chips-wrap" id="if-exc-chips">
-                  <div class="if-chip" id="if-chip-name" onclick="ifOpenL1('name',this)">
-                    <span class="if-chip-body">Name contains "Smith"</span>
-                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+              <div id="if-inc-exc-sep" style="border-top:1px solid var(--platform-10);margin:0;"></div>
+              <!-- EXCLUDE rows -->
+              <div class="if-group" id="if-exc-group">
+                <div class="if-row" id="if-exc-row">
+                  <div class="if-label exc" style="align-self:flex-start;padding-top:8px;">Exclude</div>
+                  <div class="if-chips-wrap" id="if-exc-chips">
+                    <div class="if-chip" id="if-chip-name" onclick="ifOpenL1('name',this)">
+                      <span class="if-chip-body">Name contains "Smith"</span>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    </div>
+                    <span class="if-and-sep">AND</span>
+                    <div class="if-chip" id="if-chip-web" onclick="ifOpenL1('web',this)">
+                      <span class="if-chip-body">Website Visits between 5 and 20</span>
+                      <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
+                    </div>
+                    <button class="if-and-btn" onclick="ifOpenPicker('exc',this)">And...</button>
+                    <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                   </div>
-                  <span class="if-and-sep">AND</span>
-                  <div class="if-chip" id="if-chip-web" onclick="ifOpenL1('web',this)">
-                    <span class="if-chip-body">Website Visits between 5 and 20</span>
-                    <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
-                  </div>
-                  <button class="if-and-btn" onclick="ifOpenPicker('exc')">And...</button>
-                  <button class="if-or-btn" onclick="showToast('Or... group')">Or...</button>
                 </div>
               </div>
 
               <!-- Add filter picker panel (exclude) -->
               <div class="if-edit-panel" id="if-picker-exc" style="display:none;">
                 <div class="if-edit-hd">
-                  <div class="if-edit-title">
-                    <svg style="width:13px;height:13px;fill:currentColor;"><use href="#icon-filter"/></svg>
-                    Add filter
-                  </div>
+                  <div class="if-edit-title">Add filter</div>
                   <div class="if-edit-btns">
                     <button class="if-edit-cancel" onclick="ifClosePicker('exc')">Cancel</button>
                   </div>
                 </div>
-                <div class="if-picker-panel">
-                  <div class="if-picker-hd">Choose a field to exclude</div>
-                  <div class="if-picker-search-wrap">
-                    <input class="if-picker-search" type="text" placeholder="Search fields" oninput="ifFilterFields(this.value,'exc')" autocomplete="off">
-                  </div>
-                  <div class="if-picker-list" id="if-picker-list-exc">
+                <div class="if-picker-hd">Choose a field to exclude</div>
+                <div class="if-picker-search-wrap">
+                  <input class="if-picker-search" type="text" placeholder="Search fields" oninput="ifFilterFields(this.value,'exc')" autocomplete="off">
+                </div>
+                <div class="if-picker-list" id="if-picker-list-exc">
                     <div class="if-picker-group-hd" onclick="ifToggleGroup(this)">
                       <svg viewBox="0 0 320 512"><use href="#icon-chevron-down"/></svg>
                       Constituent fields (12)
@@ -2169,7 +2188,6 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <button class="if-picker-item" onclick="ifPickField('Gift Type','gifttype','exc')">Gift Type</button>
                     <button class="if-picker-item" onclick="ifPickField('Payment Method','paymethod','exc')">Payment Method</button>
                   </div>
-                </div>
               </div>
 
             </div>
@@ -4808,26 +4826,30 @@ var IF = {
     name: '<select class="fc-select" style="width:auto;"><option>Is equal to</option><option selected>Contains</option><option>Starts with</option><option>Ends with</option></select><input class="fc-input" type="text" value="Smith" style="width:180px;">',
     web: '<span class="fm-static" style="font-size:14px;">between</span><input class="fc-input" type="number" value="5" style="width:60px;text-align:center;"><span class="fm-static" style="font-size:14px;">and</span><input class="fc-input" type="number" value="20" style="width:60px;text-align:center;">',
     amount: '<select class="fc-select" style="width:auto;"><option>Is equal to</option><option selected>Between</option><option>Is at least</option><option>Is at most</option></select><input class="fc-input" type="number" placeholder="From" style="width:80px;"><input class="fc-input" type="number" placeholder="To" style="width:80px;">',
+    fund: '<select class="fc-select" style="width:auto;"><option selected>Is</option><option>Is not</option><option>Contains</option></select><select class="fc-select" style="width:auto;"><option selected>Unrestricted</option><option>General Fund</option><option>Endowment</option><option>Capital Campaign</option></select>',
   },
 
   titles: {
     status:'Status', hoh:'Is Head of Household', bday:'Birthdate',
-    txn:'Has any Transactions', name:'Name', web:'Website Visits Last 30 Days', amount:'Amount',
+    txn:'Has any Transactions', name:'Name', web:'Website Visits Last 30 Days', amount:'Amount', fund:'Fund',
   },
 
   relational: ['txn'],
 
   subChips: {
-    txn: [{id:'txn-sub-amount', label:'Amount is between $2.00 and $50.00', type:'amount'}]
+    txn: [
+      {id:'txn-sub-amount', label:'Amount is between \$2.00 and \$50.00', type:'amount'},
+      {id:'txn-sub-fund', label:'Fund is Unrestricted', type:'fund'}
+    ]
   }
 };
 
 function ifDisableActions(){
-  document.querySelectorAll('.if-and-btn,.if-or-btn,.if-add-filter-btn,.if-exc-link').forEach(function(b){ b.disabled = true; });
+  document.querySelectorAll('.if-add-filter-btn').forEach(function(b){ b.disabled = true; });
   var root = document.getElementById('if-root'); if(root) root.classList.add('panel-open');
 }
 function ifEnableActions(){
-  document.querySelectorAll('.if-and-btn,.if-or-btn,.if-add-filter-btn,.if-exc-link').forEach(function(b){ b.disabled = false; });
+  document.querySelectorAll('.if-add-filter-btn').forEach(function(b){ b.disabled = false; });
   var root = document.getElementById('if-root'); if(root) root.classList.remove('panel-open');
 }
 function ifOpenL1(type, chipEl){
@@ -4835,8 +4857,23 @@ function ifOpenL1(type, chipEl){
   ifCloseL2();
   IF.activeL1 = type;
   ifDisableActions();
+  // Mark which group is active so the other group can be dimmed
+  var root = document.getElementById('if-root');
+  var incGroup = document.getElementById('if-inc-group');
+  var excGroup = document.getElementById('if-exc-group');
+  var inInc = incGroup && incGroup.contains(chipEl);
+  var inExc = excGroup && excGroup.contains(chipEl);
+  if(root){ root.classList.remove('inc-active','exc-active'); }
+  if(inInc && root) root.classList.add('inc-active');
+  if(inExc && root) root.classList.add('exc-active');
 
-  document.querySelectorAll('#if-inc-chips .if-chip, #if-exc-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
+  // Disable And/Or buttons in the active section
+  var activeSection = inInc ? 'inc' : 'exc';
+  document.querySelectorAll('#if-' + activeSection + '-group .if-and-btn, #if-' + activeSection + '-group .if-or-btn').forEach(function(b){
+    b.style.opacity='0.45'; b.style.pointerEvents='none';
+  });
+
+  document.querySelectorAll('.if-chip').forEach(function(c){ c.classList.remove('active'); });
   chipEl.classList.add('active');
 
   document.getElementById('if-l1-title').textContent = IF.titles[type] || type;
@@ -4847,7 +4884,14 @@ function ifOpenL1(type, chipEl){
   sub.style.display = isRelational ? '' : 'none';
   if(isRelational) ifRenderL2Chips(type);
 
-  document.getElementById('if-l1-panel').style.display = '';
+  // Move panel to insert directly after the if-row containing the clicked chip
+  var panel = document.getElementById('if-l1-panel');
+  var ifRow = chipEl.closest('.if-row');
+  if(ifRow && ifRow.parentNode){
+    ifRow.parentNode.insertBefore(panel, ifRow.nextSibling);
+  }
+
+  panel.style.display = '';
 }
 
 function ifCloseL1(){
@@ -4855,6 +4899,12 @@ function ifCloseL1(){
   ifCloseL2();
   document.getElementById('if-l1-panel').style.display = 'none';
   document.querySelectorAll('.if-chip').forEach(function(c){ c.classList.remove('active'); });
+  var root = document.getElementById('if-root');
+  if(root){ root.classList.remove('inc-active','exc-active'); }
+  // Restore And/Or buttons in both sections
+  document.querySelectorAll('#if-inc-group .if-and-btn, #if-inc-group .if-or-btn, #if-exc-group .if-and-btn, #if-exc-group .if-or-btn').forEach(function(b){
+    b.style.opacity=''; b.style.pointerEvents='';
+  });
   ifEnableActions();
 }
 
@@ -4862,42 +4912,97 @@ function ifApplyL1(){ showToast('Filter applied'); ifCloseL1(); }
 
 function ifRenderL2Chips(parentType){
   var chips = IF.subChips[parentType] || [];
-  var row = document.getElementById('if-l2-chips');
-  row.innerHTML = '';
+  var chipsWrap = document.getElementById('if-l2-chips');
+  chipsWrap.innerHTML = '';
+
   chips.forEach(function(chip, i){
-    if(i > 0){ var sep = document.createElement('span'); sep.className='if-and-sep'; sep.textContent='AND'; row.appendChild(sep); }
+    if(i > 0){ var sep = document.createElement('span'); sep.className='if-and-sep'; sep.textContent='AND'; chipsWrap.appendChild(sep); }
     var el = document.createElement('div');
     el.className = 'if-chip';
     el.id = 'if-chip-' + chip.id;
     el.setAttribute('onclick', 'ifOpenL2("'+chip.type+'","'+chip.id+'",this)');
     el.innerHTML = '<span class="if-chip-body">'+chip.label+'</span><button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>';
-    row.appendChild(el);
+    chipsWrap.appendChild(el);
   });
+
   var andBtn = document.createElement('button');
   andBtn.className = 'if-and-btn';
   andBtn.textContent = 'And...';
   andBtn.setAttribute('onclick', 'showToast("Add sub-filter")');
-  row.appendChild(andBtn);
+  chipsWrap.appendChild(andBtn);
+
+  var orBtn = document.createElement('button');
+  orBtn.className = 'if-or-btn';
+  orBtn.textContent = 'Or...';
+  orBtn.setAttribute('onclick', 'showToast("Or... sub-group")');
+  orBtn.style.marginLeft = '10px';
+  chipsWrap.appendChild(orBtn);
 }
 
 function ifOpenL2(type, chipId, chipEl){
+  console.log('ifOpenL2 called', type, chipId);
   if(IF.activeL2 === chipId){ ifCloseL2(); return; }
   IF.activeL2 = chipId;
+
   document.querySelectorAll('#if-l2-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
   chipEl.classList.add('active');
   document.getElementById('if-l2-title').textContent = IF.titles[type] || type;
   document.getElementById('if-l2-controls').innerHTML = IF.controls[type] || '';
-  document.getElementById('if-l2-panel').style.display = '';
-  var orRow = document.getElementById('if-l2-or-row');
-  if(orRow) orRow.style.display = 'none';
+
+  // Move L2 panel into if-l2-chips-col, after if-l2-chips
+  var panel = document.getElementById('if-l2-panel');
+  var col = document.getElementById('if-l2-chips-col');
+  var chipsWrap = document.getElementById('if-l2-chips');
+  if(col && chipsWrap && chipsWrap.parentNode === col){
+    col.insertBefore(panel, chipsWrap.nextSibling);
+  } else {
+    var sub = document.getElementById('if-l1-sub');
+    if(sub) sub.insertBefore(panel, sub.children[1] || null);
+  }
+  panel.style.display = '';
+
+  // Disable elements directly via style — CSS opacity on parent prevents child override
+  ifSetL2Disabled(true);
+
+  // Disable outer chips
+  document.querySelectorAll('#if-inc-chips .if-chip, #if-exc-chips .if-chip').forEach(function(c){
+    c.style.opacity='0.45'; c.style.pointerEvents='none'; c.style.cursor='default';
+  });
+}
+
+function ifSetL2Disabled(disabled){
+  var o = disabled ? '0.45' : '';
+  var p = disabled ? 'none' : '';
+  // L1 header (Cancel/Apply/title)
+  var hd = document.querySelector('#if-l1-panel .if-edit-hd');
+  if(hd){ hd.style.opacity=o; hd.style.pointerEvents=p; }
+  // L1 controls (Has any / Transactions dropdowns)
+  var ctrl = document.getElementById('if-l1-controls');
+  if(ctrl){ ctrl.style.opacity=o; ctrl.style.pointerEvents=p; }
+  // Non-active sub chips
+  document.querySelectorAll('#if-l2-chips .if-chip:not(.active)').forEach(function(el){
+    el.style.opacity=o; el.style.pointerEvents=p;
+  });
+  // Include And/Or buttons
+  document.querySelectorAll('#if-l1-sub .if-and-btn, #if-l1-sub .if-or-btn').forEach(function(el){
+    el.style.opacity=o; el.style.pointerEvents=p;
+  });
+  // Exclude And/Or buttons
+  document.querySelectorAll('.if-sub-exc-row .if-and-btn, .if-sub-exc-row .if-or-btn').forEach(function(el){
+    el.style.opacity=o; el.style.pointerEvents=p;
+  });
 }
 
 function ifCloseL2(){
   IF.activeL2 = null;
   var p = document.getElementById('if-l2-panel');
   if(p) p.style.display = 'none';
-  var orRow = document.getElementById('if-l2-or-row');
-  if(orRow) orRow.style.display = '';
+  // Restore all disabled elements
+  ifSetL2Disabled(false);
+  // Restore outer chips
+  document.querySelectorAll('#if-inc-chips .if-chip, #if-exc-chips .if-chip').forEach(function(c){
+    c.style.opacity=''; c.style.pointerEvents=''; c.style.cursor='';
+  });
   document.querySelectorAll('#if-l2-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
 }
 
@@ -4931,18 +5036,57 @@ function clearEdResultsSearch(){
   if(input){ input.value = ''; searchEdResults(''); input.focus(); }
 }
 function ifAddFilter(section){ ifOpenPicker(section); }
-function ifOpenPicker(section){
+function ifOpenPicker(section, triggerEl){
   ifCloseL1();
   ifDisableActions();
-  document.getElementById('if-picker-inc').style.display = section === 'inc' ? '' : 'none';
-  document.getElementById('if-picker-exc').style.display = section === 'exc' ? '' : 'none';
-  var input = document.querySelector('#if-picker-' + section + ' .if-picker-search');
+  // Disable outer chips and OR groups
+  var otherSec = section === 'inc' ? 'exc' : 'inc';
+  var otherGroup = document.getElementById('if-' + otherSec + '-group');
+  if(otherGroup){ otherGroup.style.opacity='0.45'; otherGroup.style.pointerEvents='none'; }
+  var sameChips = document.getElementById('if-' + section + '-chips');
+  if(sameChips){ sameChips.querySelectorAll('.if-chip').forEach(function(c){ c.style.opacity='0.45'; c.style.pointerEvents='none'; c.style.cursor='default'; }); }
+  var sameOrRow = document.querySelector('#if-' + section + '-group .if-or-row-extra');
+  if(sameOrRow){ sameOrRow.style.opacity='0.45'; sameOrRow.style.pointerEvents='none'; }
+  var sameOrSep = document.querySelector('#if-' + section + '-group .if-or-sep-row');
+  if(sameOrSep){ sameOrSep.style.opacity='0.45'; }
+  // Disable And/Or buttons in the same section
+  document.querySelectorAll('#if-' + section + '-group .if-and-btn, #if-' + section + '-group .if-or-btn').forEach(function(b){
+    b.style.opacity='0.45'; b.style.pointerEvents='none';
+  });
+  var panel = document.getElementById('if-picker-' + section);
+  var otherPanel = document.getElementById('if-picker-' + (section === 'inc' ? 'exc' : 'inc'));
+  if(otherPanel) otherPanel.style.display = 'none';
+
+  // Move picker panel after the if-row containing the trigger button
+  if(triggerEl){
+    var ifRow = triggerEl.closest('.if-row');
+    if(ifRow && ifRow.parentNode){
+      ifRow.parentNode.insertBefore(panel, ifRow.nextSibling);
+    }
+  }
+
+  panel.style.display = '';
+  var input = panel.querySelector('.if-picker-search');
   if(input){ input.value = ''; ifFilterFields('', section); input.focus(); }
 }
 function ifClosePicker(section){
   var panel = document.getElementById('if-picker-' + section);
   if(panel) panel.style.display = 'none';
   ifEnableActions();
+  // Restore outer chips and OR groups
+  var otherSec = section === 'inc' ? 'exc' : 'inc';
+  var otherGroup = document.getElementById('if-' + otherSec + '-group');
+  if(otherGroup){ otherGroup.style.opacity=''; otherGroup.style.pointerEvents=''; }
+  var sameChips = document.getElementById('if-' + section + '-chips');
+  if(sameChips){ sameChips.querySelectorAll('.if-chip').forEach(function(c){ c.style.opacity=''; c.style.pointerEvents=''; c.style.cursor=''; }); }
+  var sameOrRow = document.querySelector('#if-' + section + '-group .if-or-row-extra');
+  if(sameOrRow){ sameOrRow.style.opacity=''; sameOrRow.style.pointerEvents=''; }
+  var sameOrSep = document.querySelector('#if-' + section + '-group .if-or-sep-row');
+  if(sameOrSep){ sameOrSep.style.opacity=''; }
+  // Restore And/Or buttons
+  document.querySelectorAll('#if-' + section + '-group .if-and-btn, #if-' + section + '-group .if-or-btn').forEach(function(b){
+    b.style.opacity=''; b.style.pointerEvents='';
+  });
 }
 function ifFilterFields(query, section){
   var q = query.toLowerCase();

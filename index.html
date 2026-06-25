@@ -115,6 +115,9 @@ input,select,textarea{font-family:var(--font);}
 .btn-ghost-link{background:transparent;color:var(--platform-80);border:none;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;border-radius:4px;transition:background .12s;}
 .btn-ghost-link:hover{color:var(--platform-100);background:var(--platform-5);}
 .btn-tertiary{background:transparent;border:none;color:var(--crm-100);font-family:var(--font);font-size:16px;font-weight:700;padding:4px 8px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;line-height:21px;transition:background .12s;white-space:nowrap;}
+.btn-tertiary:hover{background:var(--crm-10);}
+.btn-tertiary.active{background:var(--crm-20);color:var(--crm-200);}
+.btn-tertiary.active svg,.btn-tertiary.active .nav-svg-icon{fill:var(--crm-200) !important;}
 .btn-secondary-sm{background:var(--white);border:1px solid var(--platform-100);color:var(--platform-100);font-family:var(--font);font-size:16px;font-weight:700;padding:4px 8px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;line-height:21px;transition:background .12s;white-space:nowrap;height:28px;box-sizing:border-box;}
 .btn-secondary-sm:hover{background:var(--platform-20);}
 .btn-tertiary:hover{background:var(--crm-20);}
@@ -2016,15 +2019,15 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
               <span id="ed-stat-dot" style="color:var(--platform-40);">·</span>
               <span id="ed-stat-amount"><strong>$94,250</strong> in FY25</span>
               <span style="color:var(--platform-40);">·</span>
-              <button onclick="refreshReport()" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Refresh</button>
+              <button class="btn-tertiary" onclick="refreshReport()" style="margin-left:-4px;">Refresh</button>
             </div>
-            <div class="ed-summary-r" style="gap:12px;">
-              <button id="btn-filter-toggle" onclick="toggleFilterDrawer()" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'"><svg class="nav-svg-icon" style="width:12px;height:12px;fill:var(--crm-100);"><use href="#icon-filter"/></svg> 6 filters</button>
+            <div class="ed-summary-r" style="gap:8px;align-items:center;">
+              <button id="btn-filter-toggle" class="btn-tertiary" onclick="toggleFilterDrawer()" style="gap:5px;"><svg style="width:12px;height:12px;fill:currentColor;flex-shrink:0;" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9.1 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg> 6 filters</button>
               <span style="color:var(--platform-20);">·</span>
-              <button onclick="openColModal()" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Columns</button>
+              <button class="btn-tertiary" onclick="openColModal()">Columns</button>
               <span style="color:var(--platform-20);">·</span>
               <div class="dd-wrap">
-                <button onclick="toggleActionsMenu(event,this)" style="background:none;border:none;padding:0;font-size:16px;font-weight:600;font-family:var(--font);color:var(--crm-100);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:5px;" onmouseover="this.style.textDecoration='underline'" onmouseout="this.style.textDecoration='none'">Actions <svg style="width:10px;height:10px;fill:var(--crm-100);" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></button>
+                <button class="btn-tertiary" onclick="toggleActionsMenu(event,this)" style="gap:5px;">Actions <svg style="width:10px;height:10px;fill:var(--crm-100);flex-shrink:0;" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></button>
                 <div class="dd-menu right">
                   <button class="dd-item" onclick="closeAllDd()">Add New Group</button>
                   <button class="dd-item" onclick="closeAllDd()">Add to Group</button>
@@ -2068,7 +2071,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                       onfocus="ifShowPopover(this)"
                       onblur="ifHidePopover()">
                       <button class="if-chip-body" onclick="ifChipClick('txn',this)">Has any Transactions</span>
-                      <span class="if-chip-badge" aria-label="2 conditions">2</button>
+                      <span class="if-chip-badge" aria-label="2 conditions">2</span>
                       <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
                     <button class="if-and-btn" onclick="ifOpenPicker('inc',this)">And...</button>
@@ -3482,6 +3485,7 @@ function toggleActionsMenu(e, btn){
   if(!wasOpen){
     menu.classList.add('open');
     btn.classList.add('open');
+    btn.classList.add('active');
     // Swap deactivate/activate text based on row status
     var row = btn.closest('tr');
     if(row){
@@ -3505,6 +3509,10 @@ function toggleActionsMenu(e, btn){
   }
 }
 function closeAllDd(){
+  // Remove active state from tertiary buttons tied to dropdowns
+  document.querySelectorAll('.btn-tertiary.active').forEach(function(b){
+    if(!b.id || b.id !== 'btn-filter-toggle') b.classList.remove('active');
+  });
   document.querySelectorAll('.dd-menu').forEach(function(m){
     m.classList.remove('open');
     m.style.top = '';
@@ -5027,7 +5035,11 @@ function toggleFilterDrawer(){
   var panel = document.getElementById('filter-panel');
   panel.classList.toggle('open');
   var btn = document.getElementById('btn-filter-toggle');
-  if (btn) btn.classList.toggle('active', panel.classList.contains('open'));
+  if (btn){
+    btn.classList.toggle('active', panel.classList.contains('open'));
+    var svgEl = btn.querySelector('svg');
+    if(svgEl) svgEl.style.fill = panel.classList.contains('open') ? 'var(--crm-200)' : 'var(--crm-100)';
+  }
 }
 function fdSingle(btn){ fdChipSingle(btn); }
 function fdMulti(btn){ fdChipMulti(btn); }

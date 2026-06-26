@@ -704,6 +704,11 @@ select.modal-input:focus{}
 .if-chip-popover-cond{display:flex;align-items:flex-start;gap:6px;font-size:14px;color:var(--platform-80);padding:2px 0;line-height:1.4;}
 .if-chip-popover-dot{width:4px;height:4px;border-radius:50%;background:var(--platform-40);flex-shrink:0;margin-top:6px;}
 .if-pop-row{font-size:14px;color:var(--platform-80);padding:2px 0;line-height:1.4;}
+.if-pop-op{font-size:14px;font-weight:700;color:var(--platform-80);}
+.if-pop-or-sep{display:flex;align-items:center;gap:8px;margin:6px 0;}
+.if-pop-or-line{flex:1;border-top:0.5px solid var(--platform-20);}
+.if-pop-or-label{font-size:14px;font-weight:700;color:var(--platform-80);flex-shrink:0;}
+.if-pop-row-and{display:inline;}
 .if-pop-indent{padding-left:10px;border-left:2px solid var(--platform-10);margin:4px 0 2px 2px;}
 .if-pop-sublabel{font-size:14px;font-weight:700;margin-bottom:2px;margin-top:4px;}
 .if-pop-sublabel.inc{color:var(--crm-100);}
@@ -2134,7 +2139,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                       tabindex="0"
                       role="button"
                       aria-label="Has any Transactions — click to edit, hover for details"
-                      data-popover='{"include":[{"label":"Amount is between $2.00 and $50.00"},{"label":"Fund is Unrestricted","include":[{"label":"Fund name contains Unrestricted"},{"label":"Fund type is Operating"}],"exclude":[]}],"exclude":[]}'
+                      data-popover='{"include":[{"label":"Amount is between $2.00 and $50.00"},{"label":"Fund is Unrestricted","include":[{"label":"Fund name contains Unrestricted"},{"label":"Fund type is Operating"}],"exclude":[]}],"exclude":[],"op":"OR"}'
                       onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();ifChipClick('txn',this);}if(event.key==='Escape')ifHidePopover();"
 
                       onfocus="ifShowPopover(this)"
@@ -4624,25 +4629,35 @@ function ifCountConditions(items){
   });
   return total;
 }
-function ifRenderPopoverTree(items, depth){
+function ifPopOrSep(){
+  return '<div class="if-pop-or-sep"><div class="if-pop-or-line"></div><span class="if-pop-or-label">OR</span><div class="if-pop-or-line"></div></div>';
+}
+function ifRenderPopoverTree(items, depth, op){
   if(!items || !items.length) return '';
+  op = op || 'AND';
   var out = '';
-  items.forEach(function(item){
+  items.forEach(function(item, i){
     var label = typeof item === 'string' ? item : item.label;
     var hasChildren = item.include && item.include.length || item.exclude && item.exclude.length;
-    out += '<div class="if-pop-row">' + label + (hasChildren ? '' : '') + '</div>';
+    if(i > 0){
+      if(op === 'OR') out += ifPopOrSep();
+      else out += '<span class="if-pop-op">AND</span> ';
+    }
+    out += '<div class="if-pop-row' + (i > 0 && op === 'AND' ? ' if-pop-row-and' : '') + '">' + label + '</div>';
     if(hasChildren){
       out += '<div class="if-pop-indent">';
       if(item.include && item.include.length){
         out += '<div class="if-pop-sublabel inc">Include</div>';
-        item.include.forEach(function(c){
-          out += '<div class="if-pop-subrow">' + (typeof c === 'string' ? c : c.label) + '</div>';
+        item.include.forEach(function(c, j){
+          if(j > 0) out += '<span class="if-pop-op">AND</span> ';
+          out += '<div class="if-pop-subrow' + (j > 0 ? ' if-pop-row-and' : '') + '">' + (typeof c === 'string' ? c : c.label) + '</div>';
         });
       }
       if(item.exclude && item.exclude.length){
         out += '<div class="if-pop-sublabel exc">Exclude</div>';
-        item.exclude.forEach(function(c){
-          out += '<div class="if-pop-subrow">' + (typeof c === 'string' ? c : c.label) + '</div>';
+        item.exclude.forEach(function(c, j){
+          if(j > 0) out += '<span class="if-pop-op">AND</span> ';
+          out += '<div class="if-pop-subrow' + (j > 0 ? ' if-pop-row-and' : '') + '">' + (typeof c === 'string' ? c : c.label) + '</div>';
         });
       }
       out += '</div>';
@@ -4660,12 +4675,12 @@ function ifShowPopover(chip){
   var h = '';
   if(d.include && d.include.length){
     h += '<div class="if-chip-popover-section-label inc">Include</div>';
-    h += ifRenderPopoverTree(d.include, 0);
+    h += ifRenderPopoverTree(d.include, 0, d.op || 'AND');
   }
   if(d.exclude && d.exclude.length){
     if(d.include && d.include.length) h += '<div class="if-chip-popover-sep"></div>';
     h += '<div class="if-chip-popover-section-label exc">Exclude</div>';
-    h += ifRenderPopoverTree(d.exclude, 0);
+    h += ifRenderPopoverTree(d.exclude, 0, d.op || 'AND');
   }
   if(!h) return;
   var pop = document.createElement('div');

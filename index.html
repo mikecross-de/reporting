@@ -339,7 +339,7 @@ input[type="date"].modal-input:focus::-webkit-datetime-edit{color:var(--platform
 input[type="date"].modal-input.has-value::-webkit-datetime-edit{color:var(--platform-100);}
 .modal-label{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-size:16px;font-weight:400;color:var(--platform-60);pointer-events:none;transition:all .15s;background:transparent;padding:0;z-index:1;}
 .modal-field.textarea-field .modal-label{top:20px;transform:none;}
-.modal-label.floating,.modal-field.textarea-field .modal-label.floating{top:-10px;left:12px;transform:none;font-size:12px;font-weight:400;color:#357A06;background:var(--white);padding:0 4px;}
+.modal-label.floating,.modal-field.textarea-field .modal-label.floating{top:-10px;left:12px;transform:none;font-size:12px;font-weight:400;color:var(--crm-100);background:var(--white);padding:0 4px;}
 .modal-label.floating-idle,.modal-field.textarea-field .modal-label.floating-idle{top:-10px;left:12px;transform:none;font-size:12px;font-weight:400;color:var(--platform-100);background:var(--white);padding:0 4px;}
 .modal-input{width:100%;border:1px solid var(--platform-40);border-radius:4px;padding:16px;font-size:16px;color:var(--platform-100);background:var(--white);font-family:var(--font);transition:border-color .15s;height:56px;box-sizing:border-box;}
 .modal-input:hover{border-color:var(--platform-100);}
@@ -7803,23 +7803,20 @@ function confirmDeleteFolder(){
       <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
     </button>
     <div class="modal-title">Configure column</div>
-    <div id="cc-orig-label" style="font-size:13px;color:var(--platform-60);margin-top:2px;min-height:18px;"></div>
+    <div id="cc-orig-label" style="font-size:14px;color:var(--platform-80);margin-top:6px;min-height:18px;"></div>
 
     <!-- Column name -->
-    <div class="modal-field" id="field-cc-col-name" style="margin-top:20px;">
+    <div class="modal-field" id="field-cc-col-name" style="margin-top:24px;">
       <label class="modal-label floating-idle" for="cc-col-name" id="lbl-cc-col-name">Column name</label>
       <input class="modal-input" id="cc-col-name" type="text"
         onfocus="floatLabel('field-cc-col-name')"
         onblur="unfloatLabel('field-cc-col-name')">
     </div>
 
-    <div style="height:1px;background:var(--platform-20);margin:4px 0 20px;"></div>
-
     <!-- Grouping -->
-    <div style="margin-bottom:20px;">
-      <div style="font-size:12px;font-weight:600;color:var(--platform-60);text-transform:uppercase;letter-spacing:.4px;margin-bottom:12px;">Grouping</div>
+    <div style="margin-bottom:0;">
       <div id="cc-grp-off">
-        <button id="cc-grp-enable-btn" class="btn-secondary">Group by this column</button>
+<button id="cc-grp-enable-btn" class="btn-tertiary">Group by this column</button>
       </div>
       <div id="cc-grp-on" style="display:none;">
         <div style="font-size:13px;color:var(--platform-60);margin-bottom:10px;">Sort group headers</div>
@@ -7853,17 +7850,6 @@ function confirmDeleteFolder(){
       </div>
     </div>
 
-    <div style="height:1px;background:var(--platform-20);margin-bottom:20px;"></div>
-
-    <!-- Filter deferred -->
-    <div style="margin-bottom:8px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-        <div style="font-size:12px;font-weight:600;color:var(--platform-60);text-transform:uppercase;letter-spacing:.4px;">Filter</div>
-        <span style="font-size:11px;font-weight:600;background:var(--platform-10);color:var(--platform-60);border-radius:3px;padding:2px 6px;">Coming soon</span>
-      </div>
-      <div style="font-size:14px;color:var(--platform-60);line-height:1.5;">Filtering this column to specific records is coming soon.</div>
-    </div>
-
     <div class="modal-footer">
       <button id="cc-cancel-btn" class="btn-secondary">Cancel</button>
       <button id="cc-apply-btn" class="btn-primary">Apply</button>
@@ -7883,7 +7869,7 @@ function confirmDeleteFolder(){
     var nameEl = document.getElementById('cc-col-name');
     var origEl = document.getElementById('cc-orig-label');
     if(!m) return;
-    if(nameEl){ nameEl.value = _origName; if(typeof floatLabel === 'function') floatLabel('field-cc-col-name'); }
+    if(nameEl){ nameEl.value = _origName; if(typeof unfloatLabel === 'function') unfloatLabel('field-cc-col-name'); }
     if(origEl) origEl.textContent = 'Field: ' + _origName;
     // Reset grouping
     var off = document.getElementById('cc-grp-off');

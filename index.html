@@ -677,7 +677,30 @@ select.modal-input:focus{}
 
 /* L2 panel itself always fully enabled */
 .if-edit-panel#if-picker-inc,.if-edit-panel#if-picker-exc{margin-left:58px;}
+.dd-item[data-household-disabled="true"].disabled{color:var(--platform-40);cursor:not-allowed;pointer-events:auto;position:relative;}
+.dd-item[data-household-disabled="true"].disabled{color:var(--platform-40);cursor:not-allowed;pointer-events:auto;position:relative;}
+.dd-item[data-household-disabled="true"].disabled:hover::after{content:attr(data-tooltip);position:absolute;right:100%;top:50%;transform:translateY(-50%);margin-right:8px;background:var(--platform-100);color:var(--white);font-size:12px;padding:5px 8px;border-radius:4px;white-space:nowrap;z-index:9999;pointer-events:none;line-height:1.4;}
+.if-type-dd-btn{display:inline-flex;align-items:center;gap:4px;background:none;border:none;padding:0;font-size:16px;font-weight:700;font-family:var(--font);color:var(--crm-100);cursor:pointer;}
+.if-type-dd-btn:hover{text-decoration:underline;}
+.if-type-dd-btn.open{text-decoration:underline;}
+.if-type-dd-btn svg{width:9px;height:9px;fill:var(--crm-100);flex-shrink:0;}
+.if-type-dd-menu{position:absolute;top:calc(100% + 4px);left:0;background:var(--white);border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);z-index:999;min-width:160px;padding:4px 0;display:none;}
+.if-type-dd-menu.open{display:block;}
+.if-type-dd-item{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:14px;color:var(--platform-100);cursor:pointer;white-space:nowrap;}
+.if-type-dd-item:hover{background:var(--platform-10);}
+.if-type-dd-item.active{font-weight:700;background:var(--crm-10);}
+.if-filter-hd{display:flex;align-items:center;gap:16px;padding:0 0 16px;}
+.if-filter-hd-label{font-size:16px;font-weight:700;color:var(--platform-100);}
 .if-chip-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--crm-20);color:var(--crm-200);border-radius:39px;font-size:12px;font-weight:700;line-height:1;padding:2px 6px;flex-shrink:0;}
+.if-chip.active .if-chip-badge{background:rgba(255,255,255,0.25);color:#fff;}
+.dd-item[data-household-disabled="true"].disabled{color:var(--platform-40);cursor:not-allowed;pointer-events:auto;position:relative;}display:inline-flex;flex-shrink:0;}
+.grove-btn-group-item{height:28px;padding:0 12px;font-size:14px;font-weight:700;font-family:var(--font);color:var(--platform-100);border:1px solid var(--platform-40);background:var(--white);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;margin-left:-1px;transition:background .1s;}
+.grove-btn-group-item:first-child{border-radius:4px 0 0 4px;margin-left:0;}
+.grove-btn-group-item:last-child{border-radius:0 4px 4px 0;}
+.grove-btn-group-item.active{background:#D4D5D6;}
+.grove-btn-group-item:hover:not(.active){background:#E9EAEA;}
+.if-filter-hd{display:flex;align-items:center;gap:16px;padding:0 0 16px;}
+.if-filter-hd-label{font-size:16px;font-weight:700;color:var(--platform-100);}
 .if-chip.active .if-chip-badge{background:rgba(255,255,255,0.25);color:#fff;}
 .if-chip-popover{position:fixed;background:var(--white);border:none;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);padding:12px 16px;min-width:220px;max-width:360px;z-index:99999;pointer-events:auto;font-family:var(--font);}
 .if-chip-popover-title{font-size:13px;font-weight:700;color:var(--platform-100);margin-bottom:8px;}
@@ -2059,13 +2082,13 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
               <button id="btn-filter-toggle" class="btn-tertiary" onclick="toggleFilterDrawer()" style="gap:6px;"><svg style="width:12px;height:12px;fill:currentColor;flex-shrink:0;" viewBox="0 0 512 512"><path d="M3.9 54.9C10.5 40.9 24.5 32 40 32H472c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9V448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6V320.9L9.1 97.3C-.7 85.4-2.8 68.8 3.9 54.9z"/></svg> 6 filters</button>
               <span style="color:var(--platform-20);">·</span>
               <button class="btn-tertiary" onclick="openColModal()">Columns</button>
-              <span style="color:var(--platform-20);">·</span>
-              <div class="dd-wrap">
-                <button class="btn-tertiary" onclick="toggleActionsMenu(event,this)" style="gap:5px;">Actions <svg style="width:10px;height:10px;fill:var(--crm-100);flex-shrink:0;" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></button>
+              <span id="ed-actions-sep" style="color:var(--platform-20);">·</span>
+              <div class="dd-wrap" id="ed-actions-wrap">
+                <button id="ed-actions-btn" class="btn-tertiary" onclick="toggleActionsMenu(event,this)" style="gap:5px;">Actions <svg style="width:10px;height:10px;fill:var(--crm-100);flex-shrink:0;" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></button>
                 <div class="dd-menu right">
-                  <button class="dd-item" onclick="closeAllDd()">Add New Group</button>
-                  <button class="dd-item" onclick="closeAllDd()">Add to Group</button>
-                  <button class="dd-item" onclick="closeAllDd()">Remove from Group</button>
+                  <button class="dd-item" data-household-disabled="true" data-tooltip="Disabled because household filters are set" onclick="closeAllDd()">Add New Group</button>
+                  <button class="dd-item" data-household-disabled="true" data-tooltip="Disabled because household filters are set" onclick="closeAllDd()">Add to Group</button>
+                  <button class="dd-item" data-household-disabled="true" data-tooltip="Disabled because household filters are set" onclick="closeAllDd()">Remove from Group</button>
                   <button class="dd-item" onclick="closeAllDd()">Create Bulk Task</button>
                 </div>
               </div>
@@ -2073,6 +2096,19 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
           </div>
           <!-- Inline filter system -->
           <div class="fd-panel" id="filter-panel">
+            <div class="if-filter-hd" id="if-filter-hd">
+              <span class="if-filter-hd-label">Filters</span>
+              <div class="dd-wrap" id="if-type-group" style="position:relative;">
+                <button class="if-type-dd-btn" id="if-type-dd-btn" onclick="ifToggleTypeDD()">
+                  <span id="if-type-label">Constituent</span>
+                  <svg style="width:10px;height:10px;fill:var(--crm-100);flex-shrink:0;" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                </button>
+                <div class="if-type-dd-menu" id="if-type-dd-menu">
+                  <div class="if-type-dd-item active" id="if-type-constituent" onclick="ifSetReportType('constituent')">Constituent</div>
+                  <div class="if-type-dd-item" id="if-type-household" onclick="ifSetReportType('household')">Household</div>
+                </div>
+              </div>
+            </div>
             <div id="if-root">
 
               <!-- INCLUDE rows -->
@@ -2104,7 +2140,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
 
                       onfocus="ifShowPopover(this)"
                       onblur="ifHidePopover()">
-                      <button class="if-chip-body" onclick="ifChipClick('txn',this)">Has any Transactions</span>
+                      <button class="if-chip-body" onclick="ifChipClick('txn',this)" onmouseenter="ifShowPopover(this.closest('.if-chip'))" onmouseleave="ifHidePopover()" onfocus="ifShowPopover(this.closest('.if-chip'))" onblur="ifHidePopover()">Has any Transactions</button>
                       <span class="if-chip-badge" aria-label="4 conditions">4</span>
                       <button class="if-chip-x" onclick="event.stopPropagation();ifRemoveChip(this)" aria-label="Remove"><svg style="width:14px;height:14px;fill:currentColor;display:block;"><use href="#icon-xmark"/></svg></button>
                     </div>
@@ -2172,8 +2208,18 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
               <!-- L1 edit panel (hidden) -->
               <div class="if-edit-panel" id="if-l1-panel" style="display:none;">
                 <div class="if-edit-hd">
-                  <div class="if-edit-title">
-                                        <span id="if-l1-title">Filter</span>
+                  <div class="if-edit-title" style="display:flex;align-items:center;gap:8px;">
+                    <div class="dd-wrap" id="if-l1-type-group" style="position:relative;display:none;">
+                      <button class="if-type-dd-btn" onclick="ifToggleL1TypeDD()">
+                        <span id="if-l1-type-label">Constituent</span>
+                        <svg style="width:10px;height:10px;fill:var(--crm-100);flex-shrink:0;" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
+                      </button>
+                      <div class="if-type-dd-menu" id="if-l1-type-dd-menu">
+                        <div class="if-type-dd-item active" id="if-l1-type-constituent" onclick="ifSetL1Type('constituent')">Constituent</div>
+                        <div class="if-type-dd-item" id="if-l1-type-household" onclick="ifSetL1Type('household')">Household</div>
+                      </div>
+                    </div>
+                    <span id="if-l1-title">Filter</span>
                   </div>
                   <div class="if-edit-btns">
                     <button class="if-edit-cancel" onclick="ifCloseL1()">Cancel</button>
@@ -3245,6 +3291,33 @@ function openEditorRow(row){
     var scheduleText = freqSpan ? (scheduleMap[freqSpan.textContent.trim()] || '') : '';
     var dot = '<span class="ed-head-meta-dot">·</span>';
     var isConstituent = (row.dataset.type || 'constituent') === 'constituent';
+
+    // Show/hide Actions + dot, and button group based on report type
+    var actionsSep = document.getElementById('ed-actions-sep');
+    var actionsWrap = document.getElementById('ed-actions-wrap');
+    var typeGroup = document.getElementById('if-type-group');
+    var filterHdLabel = document.querySelector('.if-filter-hd-label');
+    if(isConstituent){
+      if(actionsSep) actionsSep.style.display = '';
+      if(actionsWrap) actionsWrap.style.display = '';
+      if(typeGroup) typeGroup.style.display = '';
+      var filterHd = document.getElementById('if-filter-hd');
+      if(filterHd) filterHd.style.display = '';
+    } else {
+      if(actionsSep) actionsSep.style.display = 'none';
+      if(actionsWrap) actionsWrap.style.display = 'none';
+      if(typeGroup) typeGroup.style.display = 'none';
+      var filterHd = document.getElementById('if-filter-hd');
+      if(filterHd) filterHd.style.display = 'none';
+    }
+    // Reset household toggle back to Constituent when opening any report
+    var cItem = document.getElementById('if-type-constituent');
+    var hItem = document.getElementById('if-type-household');
+    var typeLabel = document.getElementById('if-type-label');
+    if(cItem) cItem.classList.add('active');
+    if(hItem) hItem.classList.remove('active');
+    if(typeLabel) typeLabel.textContent = 'Constituent';
+    var countEl = document.getElementById('ed-stat-count');
     var typeEl;
     if(isConstituent){
       typeEl = '<span class="ed-type-dd-wrap dd-wrap" style="display:inline-flex;align-items:center;">' +
@@ -3252,7 +3325,7 @@ function openEditorRow(row){
         '</div>' +
       '</span>';
     } else {
-      typeEl = '<span>' + typeLabel + '</span>';
+      typeEl = '<span style="font-size:16px;color:var(--platform-80);">' + (typeSpan ? typeSpan.textContent.trim() : '') + '</span>';
     }
     var parts = [typeEl];
     if(createdText) parts.push(dot + '<span>' + createdText + '</span>');
@@ -4452,6 +4525,18 @@ function hideBtnTooltip(){
 }
 var _ifPopTimer = null;
 var _ifPopEl = null;
+document.addEventListener('click', function(e){
+  var menu = document.getElementById('if-type-dd-menu');
+  var btn = document.getElementById('if-type-dd-btn');
+  if(menu && menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)){
+    menu.classList.remove('open');
+    if(btn){ btn.classList.remove('active'); btn.classList.remove('open'); }
+  }
+  var l1menu = document.getElementById('if-l1-type-dd-menu');
+  if(l1menu && l1menu.classList.contains('open') && !l1menu.contains(e.target) && !e.target.closest('.if-type-dd-btn')){
+    l1menu.classList.remove('open');
+  }
+});
 
 function ifInitPopovers(){
   document.querySelectorAll('.if-chip[data-popover]').forEach(function(chip){
@@ -4478,6 +4563,62 @@ function ifInitPopovers(){
 }
 document.addEventListener('DOMContentLoaded', ifInitPopovers);
 
+function ifToggleTypeDD(){
+  var menu = document.getElementById('if-type-dd-menu');
+  var btn = document.getElementById('if-type-dd-btn');
+  if(menu) menu.classList.toggle('open');
+  if(btn) btn.classList.toggle('open', menu && menu.classList.contains('open'));
+}
+function ifToggleL1TypeDD(){
+  var menu = document.getElementById('if-l1-type-dd-menu');
+  if(menu) menu.classList.toggle('open');
+}
+function ifSetReportType(type){
+  var cItem = document.getElementById('if-type-constituent');
+  var hItem = document.getElementById('if-type-household');
+  var label = document.getElementById('if-type-label');
+  var menu = document.getElementById('if-type-dd-menu');
+  var countEl = document.getElementById('ed-stat-count');
+  var disabledItems = document.querySelectorAll('.dd-item[data-household-disabled="true"]');
+  if(type === 'household'){
+    if(cItem){ cItem.classList.remove('active'); }
+    if(hItem){ hItem.classList.add('active'); }
+    if(label) label.textContent = 'Household';
+    if(countEl) countEl.innerHTML = '<strong>12</strong> households';
+    disabledItems.forEach(function(item){
+      item.classList.add('disabled');
+      item.onclick = function(e){ e.stopPropagation(); };
+    });
+  } else {
+    if(hItem){ hItem.classList.remove('active'); }
+    if(cItem){ cItem.classList.add('active'); }
+    if(label) label.textContent = 'Constituent';
+    if(countEl) countEl.innerHTML = '<strong>38</strong> constituents';
+    disabledItems.forEach(function(item){
+      item.classList.remove('disabled');
+      item.onclick = function(){ closeAllDd(); };
+    });
+  }
+  if(menu) menu.classList.remove('open');
+  var tBtn = document.getElementById('if-type-dd-btn');
+  if(tBtn) tBtn.classList.remove('open');
+}
+function ifSetL1Type(type){
+  var cItem = document.getElementById('if-l1-type-constituent');
+  var hItem = document.getElementById('if-l1-type-household');
+  var label = document.getElementById('if-l1-type-label');
+  var menu = document.getElementById('if-l1-type-dd-menu');
+  if(type === 'household'){
+    if(cItem) cItem.classList.remove('active');
+    if(hItem) hItem.classList.add('active');
+    if(label) label.textContent = 'Household';
+  } else {
+    if(hItem) hItem.classList.remove('active');
+    if(cItem) cItem.classList.add('active');
+    if(label) label.textContent = 'Constituent';
+  }
+  if(menu) menu.classList.remove('open');
+}
 function ifCountConditions(items){
   if(!items || !items.length) return 0;
   var total = 0;
@@ -5292,9 +5433,13 @@ function ifOpenL1(type, chipEl){
   });
 
   document.querySelectorAll('.if-chip').forEach(function(c){ c.classList.remove('active'); });
-  chipEl.classList.add('active');
+  var chipDiv = chipEl.closest('.if-chip') || chipEl;
+  chipDiv.classList.add('active');
 
   document.getElementById('if-l1-title').textContent = IF.titles[type] || type;
+  // Only show Constituent/Household toggle for filters that support it (txn for now)
+  var l1TypeGroup = document.getElementById('if-l1-type-group');
+  if(l1TypeGroup) l1TypeGroup.style.display = type === 'txn' ? '' : 'none';
   document.getElementById('if-l1-controls').innerHTML = IF.controls[type] || '';
 
   var isRelational = IF.relational.indexOf(type) >= 0;

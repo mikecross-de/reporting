@@ -7819,34 +7819,29 @@ function confirmDeleteFolder(){
 <button id="cc-grp-enable-btn" class="btn-tertiary">Group by this column</button>
       </div>
       <div id="cc-grp-on" style="display:none;">
-        <div style="font-size:13px;color:var(--platform-60);margin-bottom:10px;">Sort group headers</div>
-        <div style="display:flex;gap:12px;margin-bottom:16px;">
-          <div class="dd-wrap" style="flex:1;">
-            <button class="tb-dd" id="cc-sort-by-btn" onclick="toggleDd('dd-cc-sort-by')" style="width:100%;justify-content:space-between;">
-              <span id="cc-sort-by-label">By value</span>
-              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
-            </button>
-            <div class="dd-menu" id="dd-cc-sort-by">
-              <button class="dd-item active" onclick="setCCSortBy('By value',this)">By value</button>
-              <button class="dd-item" onclick="setCCSortBy('By number of items in group',this)">By number of items in group</button>
-            </div>
+        <div style="font-size:16px;font-weight:700;color:var(--platform-100);margin-bottom:6px;">Grouping</div>
+        <div style="font-size:14px;color:var(--platform-80);margin-bottom:24px;">Sort group headers</div>
+        <div style="display:flex;gap:12px;margin-bottom:6px;">
+          <div class="modal-field" id="cc-sort-by-field" style="flex:1;margin-top:0;">
+            <label class="modal-label floating-idle" for="cc-sort-by-select">Sort by</label>
+            <select class="modal-input" id="cc-sort-by-select" onfocus="floatLabel('cc-sort-by-field')" onblur="unfloatLabel('cc-sort-by-field')" style="cursor:pointer;">
+              <option>By value</option>
+              <option>By number of items in group</option>
+            </select>
           </div>
-          <div class="dd-wrap" style="flex:1;">
-            <button class="tb-dd" id="cc-sort-dir-btn" onclick="toggleDd('dd-cc-sort-dir')" style="width:100%;justify-content:space-between;">
-              <span id="cc-sort-dir-label">Ascending</span>
-              <span class="tb-dd-icon"><svg class="nav-svg-icon" style="width:10px;height:10px;fill:currentColor;"><use href="#icon-caret-down"/></svg></span>
-            </button>
-            <div class="dd-menu" id="dd-cc-sort-dir">
-              <button class="dd-item active" onclick="setCCSortDir('Ascending',this)">Ascending</button>
-              <button class="dd-item" onclick="setCCSortDir('Descending',this)">Descending</button>
-            </div>
+          <div class="modal-field" id="cc-sort-dir-field" style="flex:1;margin-top:0;">
+            <label class="modal-label floating-idle" for="cc-sort-dir-select">Direction</label>
+            <select class="modal-input" id="cc-sort-dir-select" onfocus="floatLabel('cc-sort-dir-field')" onblur="unfloatLabel('cc-sort-dir-field')" style="cursor:pointer;">
+              <option>Ascending</option>
+              <option>Descending</option>
+            </select>
           </div>
         </div>
         <label class="grove-check" style="margin-bottom:16px;">
           <div class="grove-check-box"><input type="checkbox" id="cc-grp-collapse"></div>
           Collapse group to one row
         </label>
-        <button id="cc-grp-remove-btn" class="btn-secondary" style="width:100%;justify-content:center;">Remove this grouping</button>
+        <button id="cc-grp-remove-btn" class="btn-tertiary">Remove this grouping</button>
       </div>
     </div>
 

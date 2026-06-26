@@ -6600,7 +6600,7 @@ function clarBuildQuestions(prompt){
   var isVolunteer = p.indexOf('volunteer') > -1;
   var isConstituent = p.indexOf('constituent') > -1 || p.indexOf('contact') > -1 || p.indexOf('person') > -1 || p.indexOf('people') > -1;
   var hasTimeframe = p.indexOf('last year') > -1 || p.indexOf('this year') > -1 || p.indexOf('90 day') > -1 || p.indexOf('12 month') > -1 || p.indexOf('fiscal') > -1 || p.indexOf('fy') > -1;
-  var hasAmount = p.indexOf('$') > -1 || p.indexOf('major') > -1 || p.indexOf('top') > -1 || p.indexOf('largest') > -1;
+  var hasAmount = p.indexOf('$') > -1 || p.indexOf('top') > -1 || p.indexOf('largest') > -1;
   var isLapsed = p.indexOf('lapsed') > -1 || p.indexOf('haven') > -1 || p.indexOf('inactive') > -1 || p.indexOf('not given') > -1 || p.indexOf('didn') > -1;
 
   var questions = [];
@@ -7017,7 +7017,7 @@ function getDemoReport(prompt){
   var p = prompt.toLowerCase();
 
   // Prompt 1: donors who gave last year but haven't donated yet this year
-  if((p.indexOf('gave') > -1 || p.indexOf('donated') > -1 || p.indexOf('donor') > -1 || p.indexOf('lapsed') > -1 || p.indexOf('lapsing') > -1 || p.indexOf('gave last year') > -1) && (p.indexOf('haven') > -1 || p.indexOf('not yet') > -1 || p.indexOf('not donated') > -1 || p.indexOf('not this year') > -1 || p.indexOf('but not') > -1 || p.indexOf('didn') > -1 || p.indexOf('did not') > -1 || p.indexOf('no gift') > -1 || p.indexOf('no donation') > -1 || (p.indexOf('last year') > -1 && p.indexOf('this year') > -1)) || (p.indexOf('lapsed') > -1 || p.indexOf('lapsing') > -1)){
+  if((p.indexOf('gave') > -1 || p.indexOf('donated') > -1 || p.indexOf('donor') > -1 || p.indexOf('lapsed') > -1 || p.indexOf('lapsing') > -1 || p.indexOf('gave last year') > -1) && (p.indexOf('haven') > -1 || p.indexOf('not yet') > -1 || p.indexOf('not donated') > -1 || p.indexOf('not this year') > -1 || p.indexOf('but not') > -1 || p.indexOf('didn') > -1 || p.indexOf('did not') > -1 || p.indexOf('no gift') > -1 || p.indexOf('no donation') > -1 || (p.indexOf('last year') > -1 && p.indexOf('this year') > -1))){
     return {
       title: 'New Report',
       includeFilters: ['Has any Specific Transactions','Has no Specific Transactions'],

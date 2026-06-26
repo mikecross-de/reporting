@@ -3248,10 +3248,7 @@ function openEditorRow(row){
     var typeEl;
     if(isConstituent){
       typeEl = '<span class="ed-type-dd-wrap dd-wrap" style="display:inline-flex;align-items:center;">' +
-        '<button class="ed-type-dd-btn" onclick="toggleDd(\'dd-report-type\')" style="background:none;border:none;padding:0;font-size:16px;color:var(--platform-80);cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color=\'var(--crm-100)\';var s=this.querySelector(\'svg\');if(s)s.style.fill=\'var(--crm-100)\';" onmouseout="this.style.color=\'var(--platform-80)\';var s=this.querySelector(\'svg\');if(s)s.style.fill=\'var(--platform-60)\';" id="ed-type-label">Constituent report <svg style="width:10px;height:10px;fill:var(--platform-60);" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg></button>' +
-        '<div class="dd-menu" id="dd-report-type" style="min-width:160px;">' +
-          '<button class="dd-item active" onclick="setReportType(\'Constituent report\')">Constituent report</button>' +
-          '<button class="dd-item" onclick="setReportType(\'Household report\')">Household report</button>' +
+        '<span id="ed-type-label" style="font-size:16px;color:var(--platform-80);">Constituent report</span>' +
         '</div>' +
       '</span>';
     } else {

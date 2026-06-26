@@ -1232,11 +1232,11 @@ select.modal-input:focus{}
 .th-wrap{display:flex;align-items:center;width:100%;}
 .th-label-group{display:inline-flex;align-items:center;gap:6px;flex:1;min-width:0;overflow:hidden;}
 .th-label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;}
-.th-kebab{opacity:0;background:none;border:none;padding:0;cursor:pointer;color:var(--platform-60);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:32px;height:32px;margin:-6px 0;transition:opacity .15s,background .1s,color .1s;position:relative;z-index:1;}
+.th-kebab{opacity:0;background:none;border:none;padding:0;cursor:pointer;color:var(--platform-60);border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;width:30px;height:30px;margin:-6px 0;transition:opacity .15s,background .1s,color .1s;position:relative;z-index:1;}
 
 #ed-table thead tr th.sorted .th-sort-indicator{opacity:1 !important;color:var(--platform-80);}
 .th-kebab.active{opacity:1;}
-.th-kebab:hover,.th-kebab.active{background:var(--platform-20);color:var(--platform-100);}
+.th-kebab:hover,.th-kebab.active{background:var(--platform-10);color:var(--platform-100);}
 
 #th-col-menu{display:none;position:fixed;background:white;border-radius:4px;box-shadow:0 4px 4px rgba(0,0,0,.25);z-index:9999;min-width:180px;padding:8px 0;}
 #th-col-menu.open{display:block;}
@@ -1249,7 +1249,9 @@ select.modal-input:focus{}
 .th-rename-input{border:none;border-bottom:1px solid var(--penny-100);outline:none;font-size:inherit;font-weight:inherit;font-family:var(--font);color:var(--platform-100);background:transparent;min-width:60px;padding:0;}
 
 
-.th-sort-indicator{font-size:11px;opacity:0;transition:opacity .15s;color:var(--platform-60);flex-shrink:0;}
+.th-sort-indicator{font-size:11px;opacity:0;transition:opacity .15s,background .1s,color .1s;color:var(--platform-60);flex-shrink:0;width:30px;height:30px;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;}
+.th-sort-indicator:hover{background:var(--platform-10);opacity:1;}
+.dg-table thead th .th-sort-indicator:hover,.ed-result thead th .th-sort-indicator:hover{color:var(--platform-100) !important;}
 
 /* ── Name cell tooltip + type sub-line ───────────────────────────────────── */
 .dg-name-cell{position:relative;}

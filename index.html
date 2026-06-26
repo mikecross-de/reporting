@@ -686,7 +686,6 @@ select.modal-input:focus{}
 .if-type-dd-menu.open{display:block;}
 .if-type-dd-item{display:flex;align-items:center;gap:8px;padding:8px 16px;font-size:14px;color:var(--platform-100);cursor:pointer;white-space:nowrap;}
 .if-type-dd-item:hover{background:var(--platform-10);}
-.if-type-dd-item.active{font-weight:700;background:var(--crm-10);}
 .if-filter-hd{display:flex;align-items:center;gap:8px;padding:0 0 16px;}
 .if-filter-hd-label{font-size:16px;font-weight:700;color:var(--platform-100);}
 .if-chip-badge{display:inline-flex;align-items:center;justify-content:center;background:var(--crm-20);color:var(--crm-200);border-radius:39px;font-size:12px;font-weight:700;line-height:1;padding:2px 6px;flex-shrink:0;}
@@ -2104,7 +2103,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                   <svg style="width:10px;height:10px;fill:var(--crm-100);flex-shrink:0;" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
                 </button>
                 <div class="if-type-dd-menu" id="if-type-dd-menu">
-                  <div class="if-type-dd-item active" id="if-type-constituent" onclick="ifSetReportType('constituent')">Constituent</div>
+                  <div class="if-type-dd-item" id="if-type-constituent" onclick="ifSetReportType('constituent')">Constituent</div>
                   <div class="if-type-dd-item" id="if-type-household" onclick="ifSetReportType('household')">Household</div>
                 </div>
               </div>
@@ -2215,7 +2214,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                         <svg style="width:10px;height:10px;fill:var(--crm-100);flex-shrink:0;" viewBox="0 0 512 512"><path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"/></svg>
                       </button>
                       <div class="if-type-dd-menu" id="if-l1-type-dd-menu">
-                        <div class="if-type-dd-item active" id="if-l1-type-constituent" onclick="ifSetL1Type('constituent')">Constituent</div>
+                        <div class="if-type-dd-item" id="if-l1-type-constituent" onclick="ifSetL1Type('constituent')">Constituent</div>
                         <div class="if-type-dd-item" id="if-l1-type-household" onclick="ifSetL1Type('household')">Household</div>
                       </div>
                     </div>
@@ -4581,8 +4580,7 @@ function ifSetReportType(type){
   var countEl = document.getElementById('ed-stat-count');
   var disabledItems = document.querySelectorAll('.dd-item[data-household-disabled="true"]');
   if(type === 'household'){
-    if(cItem){ cItem.classList.remove('active'); }
-    if(hItem){ hItem.classList.add('active'); }
+
     if(label) label.textContent = 'Household';
     if(countEl) countEl.innerHTML = '<strong>12</strong> households';
     disabledItems.forEach(function(item){
@@ -4590,8 +4588,7 @@ function ifSetReportType(type){
       item.onclick = function(e){ e.stopPropagation(); };
     });
   } else {
-    if(hItem){ hItem.classList.remove('active'); }
-    if(cItem){ cItem.classList.add('active'); }
+
     if(label) label.textContent = 'Constituent';
     if(countEl) countEl.innerHTML = '<strong>38</strong> constituents';
     disabledItems.forEach(function(item){
@@ -4609,12 +4606,10 @@ function ifSetL1Type(type){
   var label = document.getElementById('if-l1-type-label');
   var menu = document.getElementById('if-l1-type-dd-menu');
   if(type === 'household'){
-    if(cItem) cItem.classList.remove('active');
-    if(hItem) hItem.classList.add('active');
+
     if(label) label.textContent = 'Household';
   } else {
-    if(hItem) hItem.classList.remove('active');
-    if(cItem) cItem.classList.add('active');
+
     if(label) label.textContent = 'Constituent';
   }
   if(menu) menu.classList.remove('open');

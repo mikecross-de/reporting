@@ -114,7 +114,8 @@ input,select,textarea{font-family:var(--font);}
 .ed-more-btn.open{background:var(--platform-20);border-color:#DAD7D9;}
 .btn-ghost-link{background:transparent;color:var(--platform-80);border:none;padding:8px 12px;font-size:14px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;border-radius:4px;transition:background .12s;}
 .btn-ghost-link:hover{color:var(--platform-100);background:var(--platform-5);}
-mark.ed-hl{background:#C5E0A0;border-radius:2px;padding:0 1px;color:inherit;}
+mark.ed-hl{background:var(--crm-20);border-radius:2px;padding:0 1px;color:inherit;}
+mark.rep-hl{background:var(--crm-20);border-radius:2px;padding:0 1px;color:inherit;}
 .ed-search-wrap{display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--platform-40);border-radius:4px;padding:0 12px;height:40px;min-width:300px;max-width:300px;margin-right:6px;transition:border-color .15s;}
 .ed-search-wrap:hover{border-color:var(--platform-100);}
 .ed-search-wrap:focus-within{border-color:var(--crm-100);}
@@ -3559,6 +3560,7 @@ let reportsSearchQuery = '';
 
 function searchReportsList(query){
   reportsSearchQuery = query.toLowerCase().trim();
+  if(!reportsSearchQuery){ document.querySelectorAll('.rep-hl').forEach(function(h){ h.outerHTML = h.textContent; }); }
   var clearBtn = document.getElementById('reportsSearchClear');
   if(clearBtn) clearBtn.style.display = reportsSearchQuery ? 'flex' : 'none';
   applyAllFilters();
@@ -3604,6 +3606,26 @@ function applyAllFilters(){
       var nameText = name ? name.textContent.toLowerCase() : '';
       var metaText = meta ? meta.textContent.toLowerCase() : '';
       show = nameText.indexOf(reportsSearchQuery) > -1 || metaText.indexOf(reportsSearchQuery) > -1;
+    }
+    // Apply/remove highlights
+    if(name){
+      name.querySelectorAll('.rep-hl').forEach(function(h){ h.outerHTML = h.textContent; });
+      if(show && reportsSearchQuery){
+        var safeQ = reportsSearchQuery.replace(/[.*+?^=!:${}()|[\]\/\\]/g,'\\$&');
+        function hlTextNodes(node){
+          if(node.nodeType===3){
+            var v=node.nodeValue;
+            if(v.toLowerCase().indexOf(reportsSearchQuery)!==-1){
+              var w=document.createElement('span');
+              w.innerHTML=v.replace(new RegExp('('+safeQ+')','gi'),'<mark class="rep-hl">$1</mark>');
+              node.parentNode.replaceChild(w,node);
+            }
+          } else if(node.nodeType===1&&!node.classList.contains('rep-hl')){
+            Array.from(node.childNodes).forEach(hlTextNodes);
+          }
+        }
+        hlTextNodes(name);
+      }
     }
     // Tab filter
     if(show && isRecentTab) show = r.dataset.recent === 'yes';

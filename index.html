@@ -143,17 +143,17 @@ mark.rep-hl{background:var(--crm-20);border-radius:2px;padding:0 1px;color:inher
 .rep-head-actions{display:flex;gap:10px;align-items:center;flex-shrink:0;}
 
 /* Penny banner */
-.penny-banner{background:var(--white);border-radius:4px;padding:20px 24px 24px;margin-bottom:16px;}
+.penny-banner{background:var(--white);border-radius:4px;padding:16px 20px 20px;margin-bottom:16px;}
 .penny-banner-head{display:flex;align-items:center;gap:8px;margin-bottom:16px;}
 .penny-banner-head-icon{width:17px;height:17px;color:var(--penny-100);fill:currentColor;flex-shrink:0;}
 .penny-banner-head-title{font-size:20px;font-weight:700;color:var(--platform-100);line-height:24px;}
 .penny-banner-input-wrap{display:flex;align-items:center;gap:12px;}
-.penny-banner-input{flex:1;border:1px solid var(--platform-40);border-radius:4px;padding:16px;font-size:16px;color:var(--platform-100);background:var(--white);outline:none;font-family:var(--font);}
-.penny-banner-input:focus{border-color:var(--penny-100);outline:none;}
+.penny-banner-input{flex:1;border:1px solid var(--platform-40);border-radius:4px;padding:0 16px 2px 16px;height:40px;font-size:16px;line-height:1;color:var(--platform-100);background:var(--white);outline:none;font-family:var(--font);box-sizing:border-box;display:block;}
+.penny-banner-input:focus{border-color:var(--penny-100);outline:2px solid var(--penny-100);outline-offset:-1px;}
 .penny-banner-input.error{border-color:#F93A57;border-width:2px;padding:11px 13px;}
 .penny-banner-error{display:none;color:#F93A57;font-size:14px;line-height:18px;padding:4px 0 0 0;font-family:var(--font);}
 .penny-banner-input::placeholder{color:#4E5555;}
-.penny-banner-btn{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);line-height:20px;transition:background .15s;}
+.penny-banner-btn{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:0 20px;height:40px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);transition:background .15s;box-sizing:border-box;}
 .penny-banner-btn:hover{background:var(--penny-200);}
 .penny-banner-btn:disabled{opacity:.5;cursor:default;}
 .penny-banner-btn:disabled:hover{background:var(--penny-100);}
@@ -304,7 +304,7 @@ input.fc-sm{height:28px;font-size:12px;padding:4px 8px;}
 /* Modal */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--white);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:100%;max-width:480px;padding:24px;position:relative;animation:modalIn .15s ease;max-height:85vh;overflow-y:auto;overflow-x:visible;}
+.modal{background:var(--white);border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.18);width:100%;max-width:444px;padding:24px;position:relative;animation:modalIn .15s ease;max-height:85vh;overflow-y:auto;overflow-x:visible;}
 @keyframes modalIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 .modal-title{font-size:20px;font-weight:700;color:var(--platform-100);margin-bottom:4px;}
 .modal-subtitle{font-size:14px;color:var(--platform-60);margin-bottom:20px;}
@@ -353,7 +353,11 @@ textarea.modal-input:focus{}
 select.modal-input{-webkit-appearance:none;-moz-appearance:none;appearance:none;cursor:pointer;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%23525759' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:12px 8px;}
 select.modal-input:focus{}
 .modal-footer{display:flex;justify-content:flex-end;gap:8px;margin-top:0;padding-top:24px;}
-.export-format-card{display:flex;align-items:flex-start;gap:14px;padding:14px 16px;border:1px solid var(--platform-40);border-radius:4px;background:var(--white);text-align:left;cursor:pointer;width:100%;transition:border-color .12s;}
+.export-dl-link{background:none;border:none;padding:0;font-size:14px;font-weight:600;color:var(--crm-100);cursor:pointer;font-family:var(--font);text-decoration:none;display:inline-block;}
+.export-dl-link:hover{text-decoration:underline;}
+.export-spinner{width:40px;height:40px;border:3px solid var(--platform-20);border-top-color:var(--crm-100);border-radius:50%;animation:export-spin 0.8s linear infinite;}
+@keyframes export-spin{to{transform:rotate(360deg);}}
+.export-format-card{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border:1px solid var(--platform-40);border-radius:4px;background:var(--white);text-align:left;cursor:pointer;width:100%;transition:border-color .12s;}
 .export-format-card:hover{border-color:var(--platform-100);}
 .export-format-card.selected{border-color:var(--crm-100);border-width:1px;background:var(--crm-10);}
 .export-format-name{font-size:16px;font-weight:700;color:var(--platform-100);line-height:1.3;}
@@ -491,12 +495,12 @@ select.modal-input:focus{}
 /* Editor Penny NL input */
 .ed-penny-input{display:flex;align-items:center;gap:12px;}
 .ed-penny-block{padding:20px 24px 20px;border-radius:4px;margin-bottom:16px;background:var(--white);}
-.ed-penny-field-wrap{flex:1;display:flex;align-items:center;gap:10px;border:1px solid var(--platform-40);border-radius:4px;padding:8px 16px;background:var(--white);}
+.ed-penny-field-wrap{flex:1;display:flex;align-items:center;gap:10px;border:1px solid var(--platform-40);border-radius:4px;padding:0 16px;height:40px;background:var(--white);box-sizing:border-box;}
 .ed-penny-field-wrap:hover{border-color:var(--platform-100);}
 .ed-penny-field-wrap:focus-within{border-color:var(--penny-100);}
-.ed-penny-field{flex:1;border:none;outline:none;font-size:16px;color:var(--platform-100);background:transparent;padding:8px 0;min-width:0;font-family:var(--font);}
+.ed-penny-field{flex:1;border:none;outline:none;font-size:16px;line-height:1;color:var(--platform-100);background:transparent;padding:0 0 2px;min-width:0;font-family:var(--font);display:block;}
 .ed-penny-field::placeholder{color:#4E5555;}
-.ed-penny-send{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:10px 20px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);line-height:20px;transition:background .15s,opacity .15s;}
+.ed-penny-send{background:var(--penny-100);color:var(--white);border:none;border-radius:54px;padding:0 20px;height:40px;font-size:16px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:10px;white-space:nowrap;flex-shrink:0;font-family:var(--font);transition:background .15s,opacity .15s;box-sizing:border-box;}
 .ed-penny-send:hover{background:var(--penny-200);}
 .ed-penny-send:disabled{opacity:.5;cursor:default;}
 .ed-penny-send:disabled:hover{background:var(--penny-100);}
@@ -1490,16 +1494,18 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
             <h1 class="rep-title">Reports</h1>
           </div>
           <div class="rep-head-actions">
-<button class="btn-primary" onclick="openNewReportModal()">
-              New Report
-            </button>
+            <button class="btn-secondary" id="ask-penny-trigger" onclick="toggleConvPanel()" style="gap:6px;"><svg class="nav-svg-icon" style="width:13px;height:13px;fill:var(--penny-100);" aria-hidden="true"><use href="#icon-sparkles"/></svg> Build with Penny</button>
+            <button class="btn-primary" onclick="openNewReportModal()">New Report</button>
           </div>
         </div>
 
-        <div class="penny-banner" id="convPanel">
-          <div class="penny-banner-head">
-            <svg class="penny-banner-head-icon" aria-hidden="true"><use href="#icon-sparkles"/></svg>
-            <h2 class="penny-banner-head-title">Describe your report and watch it come to life</h2>
+        <div class="penny-banner" id="convPanel" style="display:none;">
+          <div class="penny-banner-head" style="justify-content:space-between;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <svg class="penny-banner-head-icon" aria-hidden="true"><use href="#icon-sparkles"/></svg>
+              <h2 class="penny-banner-head-title">Describe your report and watch it come to life</h2>
+            </div>
+            <button onclick="toggleConvPanel()" aria-label="Close Penny" style="background:none;border:none;cursor:pointer;padding:6px;color:var(--platform-60);display:flex;align-items:center;border-radius:35px;" onmouseover="this.style.background='var(--platform-10)';this.style.color='var(--platform-100)';" onmouseout="this.style.background='none';this.style.color='var(--platform-60)';"><svg style="width:16px;height:16px;fill:currentColor;"><use href="#icon-xmark"/></svg></button>
           </div>
           <div class="penny-banner-input-wrap">
             <input id="convInput" class="penny-banner-input penny-typewriter" type="text" placeholder="" aria-label="Describe your report" oninput="document.getElementById('convSubmitBtn').disabled=!this.value.trim();this.classList.remove('error');var e=document.getElementById('convError');if(e)e.style.display='none';" onkeydown="if(event.key==='Enter'){event.preventDefault();convSubmit();}">
@@ -3025,42 +3031,99 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
 
     <!-- Export Format Modal -->
     <div class="modal-overlay" id="modal-export" onclick="if(event.target===this)closeExportModal()">
-      <div class="modal" role="dialog" aria-labelledby="export-modal-title" style="max-width:480px;">
-        <div class="modal-title" id="export-modal-title" style="margin-bottom:4px;">Export report</div>
-        <p style="font-size:16px;color:var(--platform-60);margin:0 0 20px;">Choose a format</p>
-        <div id="export-format-cards" style="display:flex;flex-direction:column;gap:8px;">
-          <button class="export-format-card selected" data-format="csv" onclick="selectExportFormat(this)" aria-pressed="true">
-            <i class="fa-regular fa-file-csv" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
-            <div>
-              <div class="export-format-name">CSV (.csv)</div>
-              <div class="export-format-desc">Plain data — ideal for mail merge, imports, or other tools</div>
+      <div class="modal" role="dialog" aria-labelledby="export-modal-title" style="max-width:444px;position:relative;">
+
+        <button onclick="closeExportModal()" aria-label="Close" style="position:absolute;top:16px;right:16px;background:none;border:none;cursor:pointer;padding:6px;color:var(--platform-60);border-radius:35px;display:flex;align-items:center;" onmouseover="this.style.background='var(--platform-10)';this.style.color='var(--platform-100)';" onmouseout="this.style.background='none';this.style.color='var(--platform-60)';"><svg style="width:16px;height:16px;fill:currentColor;"><use href="#icon-xmark"/></svg></button>
+        <!-- State 1: Format selection -->
+        <div id="export-state-select">
+          <div class="modal-title" id="export-modal-title" style="margin-bottom:16px;">Export report</div>
+          <p style="font-size:16px;color:var(--platform-100);margin:0 0 20px;">Choose your format, or download the latest export.</p>
+          <!-- Previous export banner (shown if one exists) -->
+          <div id="export-prev-banner" style="display:none;background:var(--platform-5);border:1px solid var(--platform-40);border-radius:4px;padding:12px 16px;margin-bottom:12px;">
+            <div id="export-prev-filename" style="font-size:16px;font-weight:700;color:var(--platform-100);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"></div>
+            <div style="display:flex;align-items:center;gap:6px;margin-top:2px;">
+              <span id="export-prev-meta" style="font-size:14px;color:var(--platform-80);"></span>
+              <span style="color:var(--platform-80);font-size:12px;">·</span>
+              <button class="export-dl-link" onclick="downloadPrevExport()">Download</button>
             </div>
-          </button>
-          <button class="export-format-card" data-format="pdf" onclick="selectExportFormat(this)" aria-pressed="false">
-            <i class="fa-regular fa-file-pdf" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
-            <div>
-              <div class="export-format-name">PDF (.pdf)</div>
-              <div class="export-format-desc">Formatted for sharing with boards or archiving</div>
-            </div>
-          </button>
-          <button class="export-format-card" data-format="xlsx" onclick="selectExportFormat(this)" aria-pressed="false">
-            <i class="fa-regular fa-file-xls" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
-            <div>
-              <div class="export-format-name">Excel (.xlsx)</div>
-              <div class="export-format-desc">Best for further analysis or editing in spreadsheet software</div>
-            </div>
-          </button>
+          </div>
+          <div id="export-format-cards" style="display:flex;flex-direction:column;gap:12px;">
+            <button class="export-format-card selected" data-format="csv" onclick="selectExportFormat(this)" aria-pressed="true">
+              <i class="fa-regular fa-file-csv" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
+              <div>
+                <div class="export-format-name">CSV (.csv)</div>
+                <div class="export-format-desc">Best for imports, mail merge, and other tools</div>
+              </div>
+            </button>
+            <button class="export-format-card" data-format="pdf" onclick="selectExportFormat(this)" aria-pressed="false">
+              <i class="fa-regular fa-file-pdf" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
+              <div>
+                <div class="export-format-name">PDF (.pdf)</div>
+                <div class="export-format-desc">Best for sharing with boards or archiving</div>
+              </div>
+            </button>
+            <button class="export-format-card" data-format="xlsx" onclick="selectExportFormat(this)" aria-pressed="false">
+              <i class="fa-regular fa-file-xls" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
+              <div>
+                <div class="export-format-name">Excel (.xlsx)</div>
+                <div class="export-format-desc">Best for analysis and editing in a spreadsheet</div>
+              </div>
+            </button>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-secondary" onclick="closeExportModal()">Cancel</button>
+            <button class="btn-primary" id="export-confirm-btn" onclick="confirmExport()">Export</button>
+          </div>
         </div>
-        <div class="modal-footer">
-          <button class="btn-secondary" onclick="closeExportModal()">Cancel</button>
-          <button class="btn-primary" id="export-confirm-btn" onclick="confirmExport()">Export</button>
+
+        <!-- State 2: Processing -->
+        <div id="export-state-processing" style="display:none;">
+          <div class="modal-title" style="margin-bottom:16px;display:flex;align-items:center;gap:10px;">
+            <div class="export-spinner" style="width:20px;height:20px;border-width:2px;flex-shrink:0;"></div>
+            Generating your export
+          </div>
+          <p style="font-size:16px;color:var(--platform-100);margin:0 0 8px;line-height:1.5;">Your export is being prepared.</p>
+          <p style="font-size:16px;color:var(--platform-100);margin:0;line-height:1.5;">You can close this window and return to download it when it's ready.</p>
+          <div class="modal-footer">
+            <button class="btn-secondary" onclick="closeExportModal()">Close</button>
+          </div>
         </div>
+
+        <!-- State 3: Ready to download -->
+        <div id="export-state-ready" style="display:none;">
+          <div class="modal-title" style="margin-bottom:16px;">Export ready</div>
+          <p style="font-size:16px;color:var(--platform-100);margin:0 0 20px;line-height:1.5;">Your export is ready to download.</p>
+          <div style="background:var(--platform-5);border:1px solid var(--platform-20);border-radius:4px;padding:12px 16px;">
+            <div id="export-ready-filename" style="font-size:16px;font-weight:700;color:var(--platform-100);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:4px;"></div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span id="export-ready-meta" style="font-size:14px;color:var(--platform-80);"></span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn-secondary" onclick="closeExportModal()">Close</button>
+            <button class="btn-primary" onclick="downloadExport()">Download</button>
+          </div>
+        </div>
+
+        <!-- State 4: Failed -->
+        <div id="export-state-failed" style="display:none;text-align:center;padding:8px 0 16px;">
+          <div style="display:flex;justify-content:center;margin-bottom:16px;">
+            <i class="fa-regular fa-circle-xmark" style="font-size:40px;color:var(--red-100,#C0392B);" aria-hidden="true"></i>
+          </div>
+          <div style="font-size:18px;font-weight:600;color:var(--platform-100);margin-bottom:8px;">Export failed</div>
+          <div style="font-size:14px;color:var(--platform-60);line-height:1.5;margin-bottom:4px;">Something went wrong generating your export. Please try again.</div>
+          <div class="modal-footer" style="justify-content:center;gap:10px;">
+            <button class="btn-secondary" onclick="closeExportModal()">Cancel</button>
+            <button class="btn-primary" onclick="exportAnother()">Try again</button>
+          </div>
+        </div>
+
       </div>
     </div>
 
     <!-- Delete Confirmation Modal -->
     <div class="modal-overlay" id="modal-delete">
-      <div class="modal" role="dialog" style="max-width:480px;">
+      <div class="modal" role="dialog" style="max-width:444px;">
         <div class="modal-title" style="margin-bottom:16px;">Delete report</div>
         <p style="font-size:16px;color:var(--platform-100);line-height:1.5;margin:0;">Are you sure you want to delete <strong id="delete-report-name"></strong>?<br>This action cannot be undone.</p>
         <div class="modal-footer">
@@ -3280,6 +3343,7 @@ function openEditorRow(row){
   currentEditorCreator = creator;
   var name = row.querySelector('.dg-name');
   var title = name ? name.textContent : 'Report';
+  _currentReportName = title;
   document.querySelector('.ed-head-title').textContent = title;
   // Build meta sub-line
   var metaEl = document.getElementById('ed-head-meta');
@@ -3910,7 +3974,10 @@ function doAction(e, action, btn){
         setTimeout(applyAllFilters, 50);
       }, 1200);
       break;
-    case 'export':     openExportModal(); break;
+    case 'export':
+      var nameEl = btn ? btn.closest('tr') : null;
+      if(nameEl){ var dgName = nameEl.querySelector('.dg-name'); if(dgName) _currentReportName = dgName.textContent.trim(); }
+      openExportModal(); break;
     case 'move':
       pendingMoveRow = row;
       document.getElementById('move-report-name').textContent = name;
@@ -4619,6 +4686,16 @@ function ifSetL1Type(type){
   }
   if(menu) menu.classList.remove('open');
 }
+function toggleConvPanel(){
+  var panel = document.getElementById('convPanel');
+  var btn = document.getElementById('ask-penny-trigger');
+  var isVisible = panel.style.display !== 'none';
+  panel.style.display = isVisible ? 'none' : '';
+  if(btn) btn.classList.toggle('active', !isVisible);
+  if(!isVisible){
+    setTimeout(function(){ document.getElementById('convInput').focus(); }, 50);
+  }
+}
 function ifCountConditions(items){
   if(!items || !items.length) return 0;
   var total = 0;
@@ -4947,10 +5024,37 @@ function selectFolder(val, item){
   label.classList.add('floating-idle');
   closeAllDd();
 }
+var _exportState = 'select'; // 'select' | 'processing' | 'ready' | 'failed'
+var _currentReportName = 'Report_Name';
+// Clear stale export cache on load
+try { Object.keys(localStorage).filter(function(k){ return k.indexOf('lastExport_') === 0; }).forEach(function(k){ localStorage.removeItem(k); }); } catch(e){}
+
 function openExportModal(){
+  // Show the current state — don't reset if processing or ready
+  document.getElementById('export-state-select').style.display = _exportState === 'select' ? '' : 'none';
+  document.getElementById('export-state-processing').style.display = _exportState === 'processing' ? '' : 'none';
+  document.getElementById('export-state-ready').style.display = _exportState === 'ready' ? '' : 'none';
+  document.getElementById('export-state-failed').style.display = _exportState === 'failed' ? '' : 'none';
+  // Check for previous export (only shown in select state)
+  if(_exportState === 'select'){
+    var reportName = _currentReportName || 'Report_Name';
+    var prev = null;
+    try { prev = JSON.parse(localStorage.getItem('lastExport_' + reportName)); } catch(e){}
+    var banner = document.getElementById('export-prev-banner');
+    if(prev && banner){
+      document.getElementById('export-prev-filename').textContent = prev.filename;
+      var cleanMeta = (prev.meta || '').replace(/Exported by [^·]+·\s*/g, '');
+      document.getElementById('export-prev-meta').textContent = cleanMeta;
+      banner.style.display = 'block';
+    } else if(banner){
+      banner.style.display = 'none';
+    }
+    _exportData = prev;
+  }
   document.getElementById('modal-export').classList.add('open');
 }
 function closeExportModal(){
+  if(_exportState !== 'processing') _exportState = 'select';
   document.getElementById('modal-export').classList.remove('open');
 }
 function selectExportFormat(card){
@@ -4961,29 +5065,57 @@ function selectExportFormat(card){
   card.classList.add('selected');
   card.setAttribute('aria-pressed','true');
 }
-function confirmExport(){
-  var selected = document.querySelector('.export-format-card.selected');
-  var format = selected ? selected.dataset.format : 'xlsx';
-  var labels = {xlsx:'Excel', csv:'CSV', pdf:'PDF'};
+var _exportData = null; // Stores simulated export result
+
+function exportAnother(){
+  _exportData = null;
+  document.getElementById('export-state-ready').style.display = 'none';
+  document.getElementById('export-state-failed').style.display = 'none';
+  document.getElementById('export-state-select').style.display = '';
+  // Reset format selection
+  document.querySelectorAll('.export-format-card').forEach(function(c){ c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+  var first = document.querySelector('.export-format-card');
+  if(first){ first.classList.add('selected'); first.setAttribute('aria-pressed','true'); }
+}
+
+function downloadPrevExport(){
+  if(_exportData) showToast('Downloading ' + _exportData.filename);
+  else showToast('Downloading previous export…');
+}
+
+function downloadExport(){
+  if(_exportData) showToast('Downloading ' + _exportData.filename);
+  _exportState = 'select';
   closeExportModal();
-  var toast = document.getElementById('export-toast');
-  var iconWrap = document.getElementById('toast-icon-wrap');
-  var msg = document.getElementById('toast-msg');
-  var reportName = (document.getElementById('ed-report-title') || document.querySelector('.ed-title') || {textContent:'Report'}).textContent.trim() || 'Report';
-  var today = new Date().toISOString().slice(0,10);
-  var filename = reportName + ' ' + today + '.' + format;
-  iconWrap.innerHTML = '<div class="toast-spinner"></div>';
-  msg.textContent = 'Exporting '+labels[format]+'...';
-  toast.classList.add('visible');
+}
+
+function confirmExport(){
+  var fmt = document.querySelector('#export-state-select .export-format-card.selected') || document.querySelector('.export-format-card.selected');
+  if(!fmt) return;
+  var format = fmt.dataset.format;
+  var formatLabel = format === 'csv' ? 'CSV' : format === 'pdf' ? 'PDF' : 'Excel';
+  var ext = format === 'csv' ? '.csv' : format === 'pdf' ? '.pdf' : '.xlsx';
+  // Show processing state
+  _exportState = 'processing';
+  document.getElementById('export-state-select').style.display = 'none';
+  document.getElementById('export-state-processing').style.display = '';
+  // Read report name NOW at click time, not inside setTimeout
+  var reportName = _currentReportName || 'Report_Name';
+  // Simulate processing (8s delay)
   setTimeout(function(){
-    iconWrap.innerHTML = '<svg class="toast-icon" viewBox="0 0 512 512" fill="#357A06"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369.2 198.6L232.6 335.2c-12.5 12.5-32.8 12.5-45.3 0l-68.3-68.3c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L210 267.2l91.3-91.3c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3z"/></svg>';
-    msg.textContent = 'Report exported as '+labels[format];
-    var a = document.createElement('a');
-    a.href = 'data:text/plain,Report exported';
-    a.download = filename;
-    a.click();
-    setTimeout(function(){ toast.classList.remove('visible'); }, 2000);
-  }, 2000);
+    var today = new Date();
+    var dateStr = today.getFullYear() + '-' + String(today.getMonth()+1).padStart(2,'0') + '-' + String(today.getDate()).padStart(2,'0');
+    var filename = reportName.replace(/[^a-zA-Z0-9 ]/g,'').trim().replace(/ /g,'_') + '_' + dateStr + ext;
+    var timeStr = today.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    _exportData = { filename: filename, format: formatLabel, ext: ext };
+    _exportState = 'ready';
+    // Show ready state (even if modal is closed)
+    document.getElementById('export-state-processing').style.display = 'none';
+    document.getElementById('export-ready-filename').textContent = filename;
+    var exportDateStr = today.toLocaleDateString([], {month:'short',day:'numeric',year:'numeric'}); document.getElementById('export-ready-meta').textContent = formatLabel + ' · ' + exportDateStr + ' at ' + timeStr;
+    document.getElementById('export-state-ready').style.display = '';
+    try { var exportDate = today.toLocaleDateString([], {month:'short',day:'numeric',year:'numeric'}); localStorage.setItem('lastExport_' + reportName, JSON.stringify({filename:filename,format:formatLabel,meta:formatLabel+' · '+exportDate+' at '+timeStr})); } catch(e){}
+  }, 6000);
 }
 function exportReport(){
   var toast = document.getElementById('export-toast');

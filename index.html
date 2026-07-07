@@ -482,7 +482,13 @@ select.modal-input:focus{}
 .ed-head-header{margin-bottom:32px;}
 .ed-head-meta{font-size:16px;color:var(--platform-80);margin-top:6px;line-height:1.5;display:flex;align-items:center;gap:6px;flex-wrap:wrap;width:100%;}
 .ed-head-meta-dot{color:var(--platform-80);}
-.ed-head-title{font-size:36px;font-weight:700;color:var(--platform-100);line-height:1.1;letter-spacing:-0.5px;padding:0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto;}
+.ed-head-title{font-size:36px;font-weight:700;color:var(--platform-100);line-height:40px;letter-spacing:-0.5px;padding:0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto;height:40px;}
+.ed-title-wrap{display:flex;align-items:center;gap:16px;min-width:0;flex:0 1 auto;height:40px;}
+.ed-title-edit-link{font-size:16px;font-weight:600;color:var(--crm-100);background:none;border:none;cursor:pointer;padding:0;font-family:var(--font);flex-shrink:0;text-decoration:none;}
+.ed-title-edit-link:hover{text-decoration:underline;}
+.ed-title-input{font-size:16px;font-weight:400;color:var(--platform-100);line-height:1;border:1px solid var(--platform-40);border-radius:4px;outline:none;background:var(--white);font-family:var(--font);padding:0 12px 2px;margin:0;height:40px;box-sizing:border-box;min-width:400px;vertical-align:middle;}
+.ed-title-input:focus{border-color:var(--crm-100);}
+.ed-title-actions{display:flex;align-items:center;gap:8px;flex-shrink:0;}
 .chip-entity{display:inline-flex;align-items:center;background:#D9E9CD;color:#317005;font-size:14px;font-weight:700;padding:3px 6px;border-radius:4px;line-height:18px;flex-shrink:0;}
 .ed-head-spacer{flex:1;min-width:8px;}
 .ed-head-actions{display:flex;gap:10px;align-items:center;flex-shrink:0;}
@@ -2020,7 +2026,15 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
 
         <div class="ed-head-header">
         <div class="ed-head-row">
-          <h1 class="ed-head-title">Lapsing donors $1k+</h1>
+          <div class="ed-title-wrap" id="ed-title-wrap">
+            <h1 class="ed-head-title" id="ed-head-title-el">Lapsing donors $1k+</h1>
+            <button class="ed-title-edit-link" id="ed-title-edit-btn" onclick="startEditTitle()">Edit</button>
+            <input class="ed-title-input" id="ed-title-input" type="text" style="display:none;" onkeydown="if(event.key==='Enter'){event.preventDefault();commitTitle();}if(event.key==='Escape'){cancelTitle();}">
+            <div class="ed-title-actions" id="ed-title-actions" style="display:none;">
+              <button class="btn-primary" onclick="commitTitle()">Save</button>
+              <button class="btn-secondary" onclick="cancelTitle()">Cancel</button>
+            </div>
+          </div>
           <div class="ed-head-spacer"></div>
           <div class="ed-head-actions">
             <button class="btn-tertiary ed-head-back" onclick="backToReports()" style="margin-right:auto;">
@@ -2723,10 +2737,6 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
           </label>
           <span style="font-size:16px;color:var(--platform-100);line-height:21px;">Active</span>
         </div>
-        <div class="modal-field" id="field-details-name">
-          <label class="modal-label floating-idle" for="details-name" id="lbl-details-name">Name <span>*</span></label>
-          <input class="modal-input" id="details-name" type="text" value="Lapsing donors $1k+" onfocus="floatLabel('field-details-name')" onblur="unfloatLabel('field-details-name')">
-        </div>
         <div class="modal-field textarea-field" id="field-details-desc" style="margin-bottom:12px;">
           <label class="modal-label" for="details-desc" id="lbl-details-desc">Description (optional)</label>
           <textarea class="modal-input" id="details-desc" placeholder="" onfocus="floatLabel('field-details-desc')" onblur="unfloatLabel('field-details-desc')"></textarea>
@@ -2762,7 +2772,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
         </div>
         <div class="modal-footer">
           <button class="btn-secondary" onclick="closeDetailsModal()">Cancel</button>
-          <button class="btn-primary" onclick="saveDetails()">Save</button>
+          <button class="btn-primary" onclick="saveDetails()">Save details</button>
         </div>
       </div>
     </div>
@@ -2836,12 +2846,13 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
 
     <!-- Unsaved Changes Modal -->
     <div class="modal-overlay" id="modal-unsaved">
-      <div class="modal" role="dialog" style="max-width:440px;">
-        <div class="modal-title" style="margin-bottom:16px;">Discard changes?</div>
-        <p style="font-size:16px;color:var(--platform-100);line-height:1.5;margin:0;">Any changes you've made to this report will be lost.</p>
+      <div class="modal" role="dialog" style="max-width:444px;">
+        <div class="modal-title" id="modal-unsaved-title" style="margin-bottom:16px;">Are you sure?</div>
+        <p id="modal-unsaved-body" style="font-size:16px;color:var(--platform-100);line-height:1.5;margin:0;">Any changes you have made to this report will be lost.</p>
         <div class="modal-footer">
-          <button class="btn-secondary" onclick="closeUnsavedModal()">Keep editing</button>
-          <button class="btn-primary" onclick="confirmDiscard()">Discard</button>
+          <button class="btn-tertiary" style="padding:8px 12px;" onclick="closeUnsavedModal()">Keep editing</button>
+          <button class="btn-secondary" onclick="confirmDiscard()">Discard</button>
+          <button class="btn-primary" id="modal-unsaved-save" onclick="unsavedSave()">Save</button>
         </div>
       </div>
     </div>
@@ -3328,6 +3339,8 @@ function openEditorAsPenny(title, reason){
   editorHasChanges = false;
   currentEditorCreator = 'penny';
   document.querySelector('.ed-head-title').textContent = title;
+  var titleInp = document.getElementById('ed-title-input');
+  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
   document.getElementById('ed-penny-context-text').textContent = reason;
   document.getElementById('ed-penny-context').style.display = 'flex';
   document.getElementById('ed-delete-btn').style.display = 'none'; document.getElementById('ed-delete-divider').style.display = 'none';
@@ -3339,12 +3352,15 @@ function openEditorAsPenny(title, reason){
 function openEditorRow(row){
   try{
   editorHasChanges = false;
+  _isNewReport = false;
   var creator = row.dataset.creator || '';
   currentEditorCreator = creator;
   var name = row.querySelector('.dg-name');
   var title = name ? name.textContent : 'Report';
   _currentReportName = title;
   document.querySelector('.ed-head-title').textContent = title;
+  var titleInp = document.getElementById('ed-title-input');
+  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
   // Build meta sub-line
   var metaEl = document.getElementById('ed-head-meta');
   if(metaEl){
@@ -4469,6 +4485,7 @@ function dismissPennyInsight(){
 
 // ─── Report Details modal ───
 var editorHasChanges = false;
+var _isNewReport = false;
 var currentEditorCreator = '';
 var pendingDeleteRow = null;
 var pendingDeleteName = '';
@@ -4540,12 +4557,54 @@ function toggleEditorMenu(e){
     btn.classList.add('open');
   }
 }
+var _titleBeforeEdit = '';
+function startEditTitle(){
+  var h1 = document.getElementById('ed-head-title-el');
+  var inp = document.getElementById('ed-title-input');
+  var editBtn = document.getElementById('ed-title-edit-btn');
+  var actions = document.getElementById('ed-title-actions');
+  if(!h1 || !inp) return;
+  _titleBeforeEdit = h1.textContent.trim();
+  inp.value = _titleBeforeEdit;
+  h1.style.display = 'none';
+  if(editBtn) editBtn.style.display = 'none';
+  inp.style.display = '';
+  if(actions) actions.style.display = '';
+  inp.focus();
+  inp.select();
+}
+function commitTitle(){
+  var h1 = document.getElementById('ed-head-title-el');
+  var inp = document.getElementById('ed-title-input');
+  var editBtn = document.getElementById('ed-title-edit-btn');
+  var actions = document.getElementById('ed-title-actions');
+  if(!h1 || !inp) return;
+  var newTitle = inp.value.trim() || _titleBeforeEdit;
+  h1.textContent = newTitle;
+  _currentReportName = newTitle;
+  inp.style.display = 'none';
+  if(actions) actions.style.display = 'none';
+  h1.style.display = '';
+  if(editBtn) editBtn.style.display = '';
+  if(newTitle !== _titleBeforeEdit) editorHasChanges = true;
+}
+function cancelTitle(){
+  var h1 = document.getElementById('ed-head-title-el');
+  var inp = document.getElementById('ed-title-input');
+  var editBtn = document.getElementById('ed-title-edit-btn');
+  var actions = document.getElementById('ed-title-actions');
+  if(!h1 || !inp) return;
+  h1.style.display = '';
+  if(editBtn) editBtn.style.display = '';
+  inp.style.display = 'none';
+  if(actions) actions.style.display = 'none';
+}
 function backToReports(){
-  if(editorHasChanges){
-    editorHasChanges = false;
-    showToast('Report saved');
+  if(editorHasChanges || _isNewReport){
+    document.getElementById('modal-unsaved').classList.add('open');
+  } else {
+    showView('reports-list');
   }
-  showView('reports-list');
 }
 function cancelEditor(){
   if(editorHasChanges){
@@ -4570,6 +4629,15 @@ function refreshReport(){
     msg.textContent = 'Results updated';
     setTimeout(function(){ toast.classList.remove('visible'); }, 2000);
   }, 2500);
+}
+function unsavedSave(){
+  document.getElementById('modal-unsaved').classList.remove('open');
+  if(_isNewReport){
+    openDetailsModal();
+  } else {
+    saveReport();
+    showView('reports-list');
+  }
 }
 function confirmDiscard(){
   editorHasChanges = false;
@@ -5612,7 +5680,7 @@ function ifCloseL1(){
   ifEnableActions();
 }
 
-function ifApplyL1(){ showToast('Filter applied'); ifCloseL1(); }
+function ifApplyL1(){ editorHasChanges = true; showToast('Filter applied'); ifCloseL1(); }
 
 function ifRenderL2Chips(parentType){
   var chips = IF.subChips[parentType] || [];
@@ -5709,7 +5777,7 @@ function ifCloseL2(){
   document.querySelectorAll('#if-l2-chips .if-chip').forEach(function(c){ c.classList.remove('active'); });
 }
 
-function ifApplyL2(){ showToast('Sub-filter applied'); ifCloseL2(); }
+function ifApplyL2(){ editorHasChanges = true; showToast('Sub-filter applied'); ifCloseL2(); }
 
 function ifRemoveChip(xBtn){
   var chip = xBtn.closest('.if-chip');
@@ -6707,6 +6775,8 @@ async function convSubmit(){
     btn.innerHTML = origHTML;
     var title = (report.title && report.title !== 'New Report') ? report.title : 'New Constituent Report';
     document.querySelector('.ed-head-title').textContent = title;
+  var titleInp = document.getElementById('ed-title-input');
+  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
     showView('editor');
     return;
   }
@@ -7052,6 +7122,8 @@ async function clarRunBuild(){
     ? report.title
     : 'New Constituent Report';
   document.querySelector('.ed-head-title').textContent = title;
+  var titleInp = document.getElementById('ed-title-input');
+  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
   showView('editor');
 }
 
@@ -7113,6 +7185,8 @@ async function clarFinish(report){
     ? report.title
     : 'New Constituent Report';
   document.querySelector('.ed-head-title').textContent = title;
+  var titleInp = document.getElementById('ed-title-input');
+  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
   showView('editor');
 }
 

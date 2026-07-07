@@ -7845,7 +7845,7 @@ function openDescModal(e, btn){
   var titleEl = wrap.querySelector('.dg-tooltip-title');
   var descEl = wrap.querySelector('.dg-tooltip-desc');
   var currentDesc = (descEl && !descEl.classList.contains('dg-tooltip-empty')) ? descEl.textContent.trim() : '';
-  document.getElementById('desc-modal-title').textContent = 'Edit details';
+  document.getElementById('desc-modal-title').textContent = 'Report details';
   document.getElementById('desc-modal-input').value = currentDesc;
   if(currentDesc) { floatLabel('field-desc-input'); document.getElementById('field-desc-input').querySelector('.modal-label').classList.remove('floating'); document.getElementById('field-desc-input').querySelector('.modal-label').classList.add('floating-idle'); }
   document.getElementById('desc-modal').classList.add('open');
@@ -7889,7 +7889,7 @@ function saveDesc(){
     <button class="modal-close" onclick="closeDescModal()" aria-label="Close">
       <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
     </button>
-    <div class="modal-title" id="desc-modal-title" style="margin-bottom:32px;">Edit details</div>
+    <div class="modal-title" id="desc-modal-title" style="margin-bottom:32px;">Report details</div>
     <div class="modal-field" id="field-desc-name" style="margin-bottom:16px;">
       <label class="modal-label floating-idle" for="desc-modal-name" id="lbl-desc-name">Name</label>
       <input class="modal-input" id="desc-modal-name" type="text" onfocus="floatLabel('field-desc-name')" onblur="unfloatLabel('field-desc-name')">
@@ -7900,7 +7900,7 @@ function saveDesc(){
     </div>
     <div class="modal-footer">
       <button class="btn-secondary" onclick="closeDescModal()">Cancel</button>
-      <button class="btn-primary" onclick="saveDesc()">Save</button>
+      <button class="btn-primary" onclick="saveDesc()">Save details</button>
     </div>
   </div>
 </div>

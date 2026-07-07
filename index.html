@@ -483,7 +483,9 @@ select.modal-input:focus{}
 .ed-head-meta{font-size:16px;color:var(--platform-80);margin-top:6px;line-height:1.5;display:flex;align-items:center;gap:6px;flex-wrap:wrap;width:100%;}
 .ed-head-meta-dot{color:var(--platform-80);}
 .ed-head-title{font-size:36px;font-weight:700;color:var(--platform-100);line-height:40px;letter-spacing:-0.5px;padding:0;margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:0 1 auto;height:40px;}
-.ed-title-wrap{display:flex;align-items:center;gap:16px;min-width:0;flex:0 1 auto;height:40px;}
+.ed-title-wrap{display:flex;align-items:center;gap:16px;min-width:0;flex:0 1 auto;}
+.ed-title-editing{display:none;flex-direction:column;gap:4px;}
+.ed-title-editing-row{display:flex;align-items:center;gap:16px;}
 .ed-title-edit-link{font-size:16px;font-weight:600;color:var(--crm-100);background:none;border:none;cursor:pointer;padding:0;font-family:var(--font);flex-shrink:0;text-decoration:none;}
 .ed-title-edit-link:hover{text-decoration:underline;}
 .ed-title-input{font-size:16px;font-weight:400;color:var(--platform-100);line-height:1;border:1px solid var(--platform-40);border-radius:4px;outline:none;background:var(--white);font-family:var(--font);padding:0 12px 2px;margin:0;height:40px;box-sizing:border-box;min-width:400px;vertical-align:middle;}
@@ -2029,10 +2031,12 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
           <div class="ed-title-wrap" id="ed-title-wrap">
             <h1 class="ed-head-title" id="ed-head-title-el">Lapsing donors $1k+</h1>
             <button class="ed-title-edit-link" id="ed-title-edit-btn" onclick="startEditTitle()">Edit</button>
-            <input class="ed-title-input" id="ed-title-input" type="text" style="display:none;" onkeydown="if(event.key==='Enter'){event.preventDefault();commitTitle();}if(event.key==='Escape'){cancelTitle();}">
-            <div class="ed-title-actions" id="ed-title-actions" style="display:none;">
-              <button class="btn-primary" onclick="commitTitle()">Apply</button>
-              <button class="btn-secondary" onclick="cancelTitle()">Cancel</button>
+            <div id="ed-title-input-wrap" style="display:none;align-items:center;gap:16px;">
+                <input class="ed-title-input" id="ed-title-input" type="text" oninput="var e=document.getElementById('ed-title-error');if(e)e.style.display='none';this.style.borderColor='';" onkeydown="if(event.key==='Enter'){event.preventDefault();commitTitle();}if(event.key==='Escape'){cancelTitle();}">
+                <div class="ed-title-actions" id="ed-title-actions" style="display:flex;gap:8px;">
+                  <button class="btn-primary" onclick="commitTitle()">Apply</button>
+                  <button class="btn-secondary" onclick="cancelTitle()">Cancel</button>
+                </div>
             </div>
           </div>
           <div class="ed-head-spacer"></div>
@@ -2054,6 +2058,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
             <button class="btn-primary" onclick="saveReport()">Save</button>
           </div>
         </div>
+        <div id="ed-title-error" style="display:none;font-size:13px;color:var(--red-100,#C0392B);font-weight:500;margin-bottom:4px;"></div>
         <div class="ed-head-meta" id="ed-head-meta"></div>
         <!-- Penny context: only shown on Penny-generated reports -->
         <div class="ed-penny-context" id="ed-penny-context" style="display:none;">
@@ -3344,7 +3349,12 @@ function openEditorAsPenny(title, reason){
   currentEditorCreator = 'penny';
   document.querySelector('.ed-head-title').textContent = title;
   var titleInp = document.getElementById('ed-title-input');
-  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
+  var titleWrap = document.getElementById('ed-title-input-wrap');
+  if(titleInp){ titleInp.value = title; }
+  if(titleWrap) titleWrap.style.display = 'none';
+  document.querySelector('.ed-head-title').style.display = '';
+  var titleEditBtn = document.getElementById('ed-title-edit-btn'); if(titleEditBtn) titleEditBtn.style.display = '';
+
   document.getElementById('ed-penny-context-text').textContent = reason;
   document.getElementById('ed-penny-context').style.display = 'flex';
   document.getElementById('ed-delete-btn').style.display = 'none'; document.getElementById('ed-delete-divider').style.display = 'none';
@@ -3364,7 +3374,12 @@ function openEditorRow(row){
   _currentReportName = title;
   document.querySelector('.ed-head-title').textContent = title;
   var titleInp = document.getElementById('ed-title-input');
-  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
+  var titleWrap = document.getElementById('ed-title-input-wrap');
+  if(titleInp){ titleInp.value = title; }
+  if(titleWrap) titleWrap.style.display = 'none';
+  document.querySelector('.ed-head-title').style.display = '';
+  var titleEditBtn = document.getElementById('ed-title-edit-btn'); if(titleEditBtn) titleEditBtn.style.display = '';
+
   // Build meta sub-line
   var metaEl = document.getElementById('ed-head-meta');
   if(metaEl){
@@ -4572,8 +4587,8 @@ function startEditTitle(){
   inp.value = _titleBeforeEdit;
   h1.style.display = 'none';
   if(editBtn) editBtn.style.display = 'none';
-  inp.style.display = '';
-  if(actions) actions.style.display = '';
+  var inpWrap = document.getElementById('ed-title-input-wrap');
+  if(inpWrap) inpWrap.style.display = 'flex';
   inp.focus();
   inp.select();
 }
@@ -4582,12 +4597,24 @@ function commitTitle(){
   var inp = document.getElementById('ed-title-input');
   var editBtn = document.getElementById('ed-title-edit-btn');
   var actions = document.getElementById('ed-title-actions');
+  var errEl = document.getElementById('ed-title-error');
   if(!h1 || !inp) return;
-  var newTitle = inp.value.trim() || _titleBeforeEdit;
+  var newTitle = inp.value.trim();
+  if(!newTitle){ inp.style.borderColor = 'var(--red-100,#C0392B)'; if(errEl){ errEl.textContent = 'Name is required.'; errEl.style.display = ''; } return; }
+  // Check for duplicate name against all report names in the overview table
+  var existingNames = Array.from(document.querySelectorAll('.dg-name')).map(function(el){ return el.textContent.trim().toLowerCase(); });
+  if(newTitle.toLowerCase() !== _titleBeforeEdit.toLowerCase() && existingNames.indexOf(newTitle.toLowerCase()) > -1){
+    inp.style.borderColor = 'var(--red-100,#C0392B)';
+    if(errEl){ errEl.textContent = 'A report with this name already exists.'; errEl.style.display = ''; }
+    return;
+  }
+  // Clear error
+  inp.style.borderColor = '';
+  if(errEl) errEl.style.display = 'none';
   h1.textContent = newTitle;
   _currentReportName = newTitle;
-  inp.style.display = 'none';
-  if(actions) actions.style.display = 'none';
+  var inpWrap = document.getElementById('ed-title-input-wrap');
+  if(inpWrap) inpWrap.style.display = 'none';
   h1.style.display = '';
   if(editBtn) editBtn.style.display = '';
   if(newTitle !== _titleBeforeEdit) editorHasChanges = true;
@@ -4597,11 +4624,14 @@ function cancelTitle(){
   var inp = document.getElementById('ed-title-input');
   var editBtn = document.getElementById('ed-title-edit-btn');
   var actions = document.getElementById('ed-title-actions');
+  var errEl = document.getElementById('ed-title-error');
   if(!h1 || !inp) return;
+  inp.style.borderColor = '';
+  if(errEl) errEl.style.display = 'none';
   h1.style.display = '';
   if(editBtn) editBtn.style.display = '';
-  inp.style.display = 'none';
-  if(actions) actions.style.display = 'none';
+  var inpWrap = document.getElementById('ed-title-input-wrap');
+  if(inpWrap) inpWrap.style.display = 'none';
 }
 function backToReports(){
   if(editorHasChanges || _isNewReport){
@@ -6780,7 +6810,12 @@ async function convSubmit(){
     var title = (report.title && report.title !== 'New Report') ? report.title : 'New Constituent Report';
     document.querySelector('.ed-head-title').textContent = title;
   var titleInp = document.getElementById('ed-title-input');
-  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
+  var titleWrap = document.getElementById('ed-title-input-wrap');
+  if(titleInp){ titleInp.value = title; }
+  if(titleWrap) titleWrap.style.display = 'none';
+  document.querySelector('.ed-head-title').style.display = '';
+  var titleEditBtn = document.getElementById('ed-title-edit-btn'); if(titleEditBtn) titleEditBtn.style.display = '';
+
     showView('editor');
     return;
   }
@@ -7127,7 +7162,12 @@ async function clarRunBuild(){
     : 'New Constituent Report';
   document.querySelector('.ed-head-title').textContent = title;
   var titleInp = document.getElementById('ed-title-input');
-  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
+  var titleWrap = document.getElementById('ed-title-input-wrap');
+  if(titleInp){ titleInp.value = title; }
+  if(titleWrap) titleWrap.style.display = 'none';
+  document.querySelector('.ed-head-title').style.display = '';
+  var titleEditBtn = document.getElementById('ed-title-edit-btn'); if(titleEditBtn) titleEditBtn.style.display = '';
+
   showView('editor');
 }
 
@@ -7190,7 +7230,12 @@ async function clarFinish(report){
     : 'New Constituent Report';
   document.querySelector('.ed-head-title').textContent = title;
   var titleInp = document.getElementById('ed-title-input');
-  if(titleInp){ titleInp.value = title; titleInp.style.display = 'none'; document.querySelector('.ed-head-title').style.display = ''; }
+  var titleWrap = document.getElementById('ed-title-input-wrap');
+  if(titleInp){ titleInp.value = title; }
+  if(titleWrap) titleWrap.style.display = 'none';
+  document.querySelector('.ed-head-title').style.display = '';
+  var titleEditBtn = document.getElementById('ed-title-edit-btn'); if(titleEditBtn) titleEditBtn.style.display = '';
+
   showView('editor');
 }
 

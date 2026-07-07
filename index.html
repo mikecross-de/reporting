@@ -1691,7 +1691,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Major Donors FY26 YTD</div>
                       <div class="dg-tooltip-desc">Constituents who gave $1,000+ in the current fiscal year. Used for major gifts outreach and board reporting.</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -1730,7 +1730,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Lapsing donors $1k+</div>
                       <div class="dg-tooltip-desc">Donors who gave $1,000 or more last year but have not yet given this year. Priority for spring re-engagement.</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -1770,7 +1770,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Spring Appeal — Follow-up List</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Add description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -1809,7 +1809,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Year-End Campaign Revenue</div>
                       <div class="dg-tooltip-desc">All gifts received between Oct 1 and Dec 31. Filters out in-kind and soft credits. Used for board year-end summary.</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -1848,7 +1848,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Recurring Gifts — Q4</div>
                       <div class="dg-tooltip-desc">Active recurring donation schedules. Used for processor reconciliation and lapsing schedule outreach.</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -1886,7 +1886,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip">
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Unengaged — Last 12 Months</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Add description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -1925,7 +1925,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Grant Reporting — 501(c)(3)</div>
                       <div class="dg-tooltip-desc">All transactions tagged to grant funds. Used for compliance and progress reporting to funders.</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -1964,7 +1964,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                     <div class="dg-tooltip-inner">
                       <div class="dg-tooltip-title">Missing Primary Email</div>
                       <div class="dg-tooltip-desc">Active constituents with no primary email address on file. Run monthly before mass email campaigns.</div>
-                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit description</button></div>
+                      <div class="dg-tooltip-action"><button class="dg-tooltip-btn" onclick="openDescModal(event,this)">Edit details</button></div>
                     </div>
                   </div>
                   </div>
@@ -7788,18 +7788,24 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <script>
 var _descTargetRow = null;
+var _currentDescRow = null;
 function openDescModal(e, btn){
+  var row = btn ? btn.closest('tr') : null;
+  var nameEl = row ? row.querySelector('.dg-name') : null;
+  var nameInp = document.getElementById('desc-modal-name');
+  if(nameInp){ nameInp.value = nameEl ? nameEl.textContent.trim() : ''; }
+  if(nameInp && nameInp.value){ floatLabel('field-desc-name'); document.getElementById('field-desc-name').querySelector('.modal-label').classList.remove('floating'); document.getElementById('field-desc-name').querySelector('.modal-label').classList.add('floating-idle'); }
   e.stopPropagation();
   var wrap = btn.closest('.dg-name-wrap');
   _descTargetRow = wrap;
+  _currentDescRow = row;
   var titleEl = wrap.querySelector('.dg-tooltip-title');
   var descEl = wrap.querySelector('.dg-tooltip-desc');
-  var reportName = titleEl ? titleEl.textContent.trim() : '';
   var currentDesc = (descEl && !descEl.classList.contains('dg-tooltip-empty')) ? descEl.textContent.trim() : '';
-  document.getElementById('desc-modal-title').textContent = currentDesc ? 'Edit description' : 'Add description';
+  document.getElementById('desc-modal-title').textContent = 'Edit details';
   document.getElementById('desc-modal-input').value = currentDesc;
+  if(currentDesc) { floatLabel('field-desc-input'); document.getElementById('field-desc-input').querySelector('.modal-label').classList.remove('floating'); document.getElementById('field-desc-input').querySelector('.modal-label').classList.add('floating-idle'); }
   document.getElementById('desc-modal').classList.add('open');
-  setTimeout(function(){ document.getElementById('desc-modal-input').focus(); }, 50);
 }
 function closeDescModal(){
   document.getElementById('desc-modal').classList.remove('open');
@@ -7807,6 +7813,13 @@ function closeDescModal(){
 }
 function saveDesc(){
   unfloatLabel('field-desc-input');
+  var nameVal = document.getElementById('desc-modal-name') ? document.getElementById('desc-modal-name').value.trim() : '';
+  if(nameVal && _currentDescRow){
+    var nameEl = _currentDescRow.querySelector('.dg-name');
+    if(nameEl) nameEl.textContent = nameVal;
+    var tipTitle = _currentDescRow.querySelector('.dg-tooltip-title');
+    if(tipTitle) tipTitle.textContent = nameVal;
+  }
   var val = document.getElementById('desc-modal-input').value.trim();
   if(_descTargetRow){
     var descEl = _descTargetRow.querySelector('.dg-tooltip-desc');
@@ -7833,9 +7846,12 @@ function saveDesc(){
     <button class="modal-close" onclick="closeDescModal()" aria-label="Close">
       <svg class="nav-svg-icon" style="width:20px;height:20px;"><use href="#icon-xmark"/></svg>
     </button>
-    <div class="modal-title" id="desc-modal-title">Edit description</div>
-    <div class="modal-subtitle" id="desc-modal-subtitle"></div>
-    <div class="modal-field textarea-field" id="field-desc-input">
+    <div class="modal-title" id="desc-modal-title" style="margin-bottom:32px;">Edit details</div>
+    <div class="modal-field" id="field-desc-name" style="margin-bottom:16px;">
+      <label class="modal-label floating-idle" for="desc-modal-name" id="lbl-desc-name">Name</label>
+      <input class="modal-input" id="desc-modal-name" type="text" onfocus="floatLabel('field-desc-name')" onblur="unfloatLabel('field-desc-name')">
+    </div>
+    <div class="modal-field textarea-field" id="field-desc-input" style="margin-bottom:0;">
       <label class="modal-label floating-idle" for="desc-modal-input" id="lbl-desc-input">Description (optional)</label>
       <textarea class="modal-input" id="desc-modal-input" rows="4" onfocus="floatLabel('field-desc-input')" onblur="unfloatLabel('field-desc-input')"></textarea>
     </div>

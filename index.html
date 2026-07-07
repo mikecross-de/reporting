@@ -2031,7 +2031,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
             <button class="ed-title-edit-link" id="ed-title-edit-btn" onclick="startEditTitle()">Edit</button>
             <input class="ed-title-input" id="ed-title-input" type="text" style="display:none;" onkeydown="if(event.key==='Enter'){event.preventDefault();commitTitle();}if(event.key==='Escape'){cancelTitle();}">
             <div class="ed-title-actions" id="ed-title-actions" style="display:none;">
-              <button class="btn-primary" onclick="commitTitle()">Save</button>
+              <button class="btn-primary" onclick="commitTitle()">Apply</button>
               <button class="btn-secondary" onclick="cancelTitle()">Cancel</button>
             </div>
           </div>
@@ -2736,6 +2736,10 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
             <span class="toggle-knob"></span>
           </label>
           <span style="font-size:16px;color:var(--platform-100);line-height:21px;">Active</span>
+        </div>
+        <div class="modal-field" id="field-details-name">
+          <label class="modal-label floating-idle" for="details-name" id="lbl-details-name">Name <span>*</span></label>
+          <input class="modal-input" id="details-name" type="text" value="Lapsing donors $1k+" onfocus="floatLabel('field-details-name')" onblur="unfloatLabel('field-details-name')">
         </div>
         <div class="modal-field textarea-field" id="field-details-desc" style="margin-bottom:12px;">
           <label class="modal-label" for="details-desc" id="lbl-details-desc">Description (optional)</label>

@@ -2579,18 +2579,13 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
 
         <!-- Template list -->
         <div id="nr-tmpl-list" style="display:flex;flex-direction:column;gap:0;max-height:320px;overflow-y:auto;border:1px solid var(--platform-20);border-radius:4px;margin-bottom:24px;">
-          <!-- scratch -->
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Constituent (scratch)" data-desc="Focuses on constituents. Each row is a constituent or household, and you can add filters and columns for constituents, transactions, interactions, notes, and tasks." onclick="nrSelect(this)">
+                    <button class="nr-tmpl-row" data-cat="constituent" data-name="Constituent (scratch)" data-desc="Focuses on constituents. Each row is a constituent or household, and you can add filters and columns for constituents, transactions, interactions, notes, and tasks." onclick="nrSelect(this)">
             <div class="nr-tmpl-name">Constituent - Profile Starter (start from scratch)</div>
             <div class="nr-tmpl-desc">Focuses on constituents. Each row is a constituent or household, and you can add filters and columns for constituents, transactions, interactions, notes, and tasks.</div>
           </button>
           <button class="nr-tmpl-row" data-cat="constituent" data-name="Constituent transaction starter" data-desc="Review key fiscal-year revenue metrics for your constituents." onclick="nrSelect(this)">
             <div class="nr-tmpl-name">Constituent - Transaction Starter (start from scratch)</div>
             <div class="nr-tmpl-desc">Focuses on constituents and their transaction details. Each row is a constituent or household, and you can add filters and columns for constituents, transactions, interactions, notes, and tasks.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="transaction" data-name="Transaction (scratch)" data-desc="Focuses on transactions. Each row is a transaction, and you can add filters and columns for transactions and constituents." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Transaction (start from scratch)</div>
-            <div class="nr-tmpl-desc">Focuses on transactions. Each row is a transaction, and you can add filters and columns for transactions and constituents.</div>
           </button>
           <button class="nr-tmpl-row" data-cat="interaction" data-name="Interaction (scratch)" data-desc="Focuses on interactions. Each row is an interaction, and you can add filters and columns for interactions and constituents." onclick="nrSelect(this)">
             <div class="nr-tmpl-name">Interaction (start from scratch)</div>
@@ -2604,63 +2599,9 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
             <div class="nr-tmpl-name">Task (start from scratch)</div>
             <div class="nr-tmpl-desc">Focuses on tasks. Each row is a task, and you can add filters and columns for tasks and constituents.</div>
           </button>
-          <!-- templates -->
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="LYBUNT" data-desc="Constituents who gave last fiscal year but not this fiscal year." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">LYBUNT</div>
-            <div class="nr-tmpl-desc">Constituents who gave last fiscal year but not this fiscal year.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="SYBUNT" data-desc="Constituents who gave some fiscal year but not this fiscal year." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">SYBUNT</div>
-            <div class="nr-tmpl-desc">Constituents who gave some fiscal year but not this fiscal year.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Top donors" data-desc="Donors ranked by total revenue over the last 2 years." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Top donors</div>
-            <div class="nr-tmpl-desc">Donors ranked by total revenue over the last 2 years.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Loyal donors" data-desc="Revenue from individual donors who have given every year from 2021 to 2025." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Loyal donors</div>
-            <div class="nr-tmpl-desc">Revenue from individual donors who have given every year from 2021 to 2025.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Newest donors" data-desc="First-time donors from the last 90 days." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Newest donors</div>
-            <div class="nr-tmpl-desc">First-time donors from the last 90 days.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Monthly donors" data-desc="Donors with an active recurring gift schedule, or 12+ gifts in the last 365 days." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Monthly donors</div>
-            <div class="nr-tmpl-desc">Donors with an active recurring gift schedule, or 12+ gifts in the last 365 days.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="High potential donors" data-desc="Donors with either a high engagement score or a high generosity score." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">High potential donors</div>
-            <div class="nr-tmpl-desc">Donors with either a high engagement score or a high generosity score.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="One-time donors" data-desc="Constituents who have only given once." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">One-time donors</div>
-            <div class="nr-tmpl-desc">Constituents who have only given once.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Downgrades" data-desc="Constituents who gave less this fiscal year than last fiscal year." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Downgrades</div>
-            <div class="nr-tmpl-desc">Constituents who gave less this fiscal year than last fiscal year.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Household averages" data-desc="Average raised this fiscal year and last fiscal year by household." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Household averages</div>
-            <div class="nr-tmpl-desc">Average raised this fiscal year and last fiscal year by household.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Call list" data-desc="Default columns and filters to include in any call list. Just add your own criteria for who to call!" onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Call list</div>
-            <div class="nr-tmpl-desc">Default columns and filters to include in any call list. Just add your own criteria for who to call!</div>
-          </button>
-          <!-- revenue -->
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Revenue over specific timeframe" data-desc="Revenue totals and donor counts across any date range." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Revenue over specific timeframe</div>
-            <div class="nr-tmpl-desc">Revenue totals and donor counts across any date range.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Revenue by campaign/appeal" data-desc="Revenue broken down by specific campaigns and appeals." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Revenue by campaign/appeal</div>
-            <div class="nr-tmpl-desc">Revenue broken down by specific campaigns and appeals.</div>
-          </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Combined revenue for campaign/appeal" data-desc="Revenue for a campaign or appeal within a specific timeframe." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Combined revenue for campaign/appeal</div>
-            <div class="nr-tmpl-desc">Revenue for a campaign or appeal within a specific timeframe.</div>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Transaction (scratch)" data-desc="Focuses on transactions. Each row is a transaction, and you can add filters and columns for transactions and constituents." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Transaction (start from scratch)</div>
+            <div class="nr-tmpl-desc">Focuses on transactions. Each row is a transaction, and you can add filters and columns for transactions and constituents.</div>
           </button>
           <button class="nr-tmpl-row" data-cat="constituent" data-name="Annual campaign report (constituent data)" data-desc="Constituent-level data for annual campaign reporting." onclick="nrSelect(this)">
             <div class="nr-tmpl-name">Annual campaign report (constituent data)</div>
@@ -2670,52 +2611,105 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
             <div class="nr-tmpl-name">Annual campaign report (transaction data)</div>
             <div class="nr-tmpl-desc">Transaction-level data for annual campaign reporting.</div>
           </button>
-          <button class="nr-tmpl-row" data-cat="transaction" data-name="Projected cash flow" data-desc="Pledges and Recurring Donations with projected revenue this fiscal year." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Projected cash flow</div>
-            <div class="nr-tmpl-desc">Pledges and Recurring Donations with projected revenue this fiscal year.</div>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Call list" data-desc="Default columns and filters to include in any call list. Just add your own criteria for who to call!" onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Call list</div>
+            <div class="nr-tmpl-desc">Default columns and filters to include in any call list. Just add your own criteria for who to call!</div>
           </button>
-          <button class="nr-tmpl-row" data-cat="transaction" data-name="Online donations" data-desc="Donations received from online forms." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Online donations</div>
-            <div class="nr-tmpl-desc">Donations received from online forms.</div>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Combined revenue for campaign/appeal" data-desc="Revenue for a campaign or appeal within a specific timeframe." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Combined revenue for campaign/appeal</div>
+            <div class="nr-tmpl-desc">Revenue for a campaign or appeal within a specific timeframe.</div>
           </button>
-          <!-- mailing -->
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — valid physical addresses" data-desc="Constituents with a valid mailing address on file." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Mailing list — valid physical addresses</div>
-            <div class="nr-tmpl-desc">Constituents with a valid mailing address on file.</div>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Downgrades" data-desc="Constituents who gave less this fiscal year than last fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Downgrades</div>
+            <div class="nr-tmpl-desc">Constituents who gave less this fiscal year than last fiscal year.</div>
           </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — no physical address, has email" data-desc="Constituents without a mailing address but with an email." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Mailing list — no physical address, has email</div>
-            <div class="nr-tmpl-desc">Constituents without a mailing address but with an email.</div>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Employer relationships" data-desc="Employees grouped by their employer." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Employer relationships</div>
+            <div class="nr-tmpl-desc">Employees grouped by their employer.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="High potential donors" data-desc="Donors with either a high engagement score or a high generosity score." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">High potential donors</div>
+            <div class="nr-tmpl-desc">Donors with either a high engagement score or a high generosity score.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Household averages" data-desc="Average raised this fiscal year and last fiscal year by household." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Household averages</div>
+            <div class="nr-tmpl-desc">Average raised this fiscal year and last fiscal year by household.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Loyal donors" data-desc="Revenue from individual donors who have given every year from 2021 to 2025." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Loyal donors</div>
+            <div class="nr-tmpl-desc">Revenue from individual donors who have given every year from 2021 to 2025.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="LYBUNT" data-desc="Constituents who gave last fiscal year but not this fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">LYBUNT</div>
+            <div class="nr-tmpl-desc">Constituents who gave last fiscal year but not this fiscal year.</div>
           </button>
           <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — no email address" data-desc="Constituents who are missing an email address." onclick="nrSelect(this)">
             <div class="nr-tmpl-name">Mailing list — no email address</div>
             <div class="nr-tmpl-desc">Constituents who are missing an email address.</div>
           </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — no physical address, has email" data-desc="Constituents without a mailing address but with an email." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Mailing list — no physical address, has email</div>
+            <div class="nr-tmpl-desc">Constituents without a mailing address but with an email.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Mailing list — valid physical addresses" data-desc="Constituents with a valid mailing address on file." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Mailing list — valid physical addresses</div>
+            <div class="nr-tmpl-desc">Constituents with a valid mailing address on file.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Monthly donors" data-desc="Donors with an active recurring gift schedule, or 12+ gifts in the last 365 days." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Monthly donors</div>
+            <div class="nr-tmpl-desc">Donors with an active recurring gift schedule, or 12+ gifts in the last 365 days.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Newest donors" data-desc="First-time donors from the last 90 days." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Newest donors</div>
+            <div class="nr-tmpl-desc">First-time donors from the last 90 days.</div>
+          </button>
           <button class="nr-tmpl-row" data-cat="constituent" data-name="No contact list" data-desc="Constituent does not have Address, Email, or Phone contact information." onclick="nrSelect(this)">
             <div class="nr-tmpl-name">No contact list</div>
             <div class="nr-tmpl-desc">Constituent does not have Address, Email, or Phone contact information.</div>
           </button>
-          <!-- year-end -->
-          <button class="nr-tmpl-row" data-cat="transaction" data-name="Year-end tax report (revenue)" data-desc="Prior-year revenue gifts from donors who gave at least $250 total last year." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Year-end tax report (revenue)</div>
-            <div class="nr-tmpl-desc">Prior-year revenue gifts from donors who gave at least $250 total last year.</div>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="One-time donors" data-desc="Constituents who have only given once." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">One-time donors</div>
+            <div class="nr-tmpl-desc">Constituents who have only given once.</div>
           </button>
-          <button class="nr-tmpl-row" data-cat="transaction" data-name="Year-end tax report (in-kind)" data-desc="All in kind gifts from the previous calendar year." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Year-end tax report (in-kind)</div>
-            <div class="nr-tmpl-desc">All in kind gifts from the previous calendar year.</div>
-          </button>
-          <!-- activity -->
-          <button class="nr-tmpl-row" data-cat="transaction" data-name="Pledge reminders" data-desc="Pledges with a payment due next month." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Pledge reminders</div>
-            <div class="nr-tmpl-desc">Pledges with a payment due next month.</div>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Online donations" data-desc="Donations received from online forms." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Online donations</div>
+            <div class="nr-tmpl-desc">Donations received from online forms.</div>
           </button>
           <button class="nr-tmpl-row" data-cat="transaction" data-name="Pledge details" data-desc="Outstanding pledges with pledge payments to date." onclick="nrSelect(this)">
             <div class="nr-tmpl-name">Pledge details</div>
             <div class="nr-tmpl-desc">Outstanding pledges with pledge payments to date.</div>
           </button>
-          <button class="nr-tmpl-row" data-cat="constituent" data-name="Employer relationships" data-desc="Employees grouped by their employer." onclick="nrSelect(this)">
-            <div class="nr-tmpl-name">Employer relationships</div>
-            <div class="nr-tmpl-desc">Employees grouped by their employer.</div>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Pledge reminders" data-desc="Pledges with a payment due next month." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Pledge reminders</div>
+            <div class="nr-tmpl-desc">Pledges with a payment due next month.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Projected cash flow" data-desc="Pledges and Recurring Donations with projected revenue this fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Projected cash flow</div>
+            <div class="nr-tmpl-desc">Pledges and Recurring Donations with projected revenue this fiscal year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Revenue by campaign/appeal" data-desc="Revenue broken down by specific campaigns and appeals." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Revenue by campaign/appeal</div>
+            <div class="nr-tmpl-desc">Revenue broken down by specific campaigns and appeals.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Revenue over specific timeframe" data-desc="Revenue totals and donor counts across any date range." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Revenue over specific timeframe</div>
+            <div class="nr-tmpl-desc">Revenue totals and donor counts across any date range.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="SYBUNT" data-desc="Constituents who gave some fiscal year but not this fiscal year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">SYBUNT</div>
+            <div class="nr-tmpl-desc">Constituents who gave some fiscal year but not this fiscal year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="constituent" data-name="Top donors" data-desc="Donors ranked by total revenue over the last 2 years." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Top donors</div>
+            <div class="nr-tmpl-desc">Donors ranked by total revenue over the last 2 years.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Year-end tax report (in-kind)" data-desc="All in kind gifts from the previous calendar year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Year-end tax report (in-kind)</div>
+            <div class="nr-tmpl-desc">All in kind gifts from the previous calendar year.</div>
+          </button>
+          <button class="nr-tmpl-row" data-cat="transaction" data-name="Year-end tax report (revenue)" data-desc="Prior-year revenue gifts from donors who gave at least $250 total last year." onclick="nrSelect(this)">
+            <div class="nr-tmpl-name">Year-end tax report (revenue)</div>
+            <div class="nr-tmpl-desc">Prior-year revenue gifts from donors who gave at least $250 total last year.</div>
           </button>
           <div id="nr-empty" style="display:none;padding:24px 16px;font-size:14px;color:var(--platform-60);text-align:center;">No templates match your search.</div>
         </div>

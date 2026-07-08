@@ -3062,7 +3062,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
             </div>
           </div>
           <div id="export-format-cards" style="display:flex;flex-direction:column;gap:12px;">
-            <button class="export-format-card selected" data-format="csv" onclick="selectExportFormat(this)" aria-pressed="true">
+            <button class="export-format-card" data-format="csv" onclick="selectExportFormat(this)" aria-pressed="true">
               <i class="fa-regular fa-file-csv" style="font-size:22px;flex-shrink:0;margin-top:1px;color:var(--platform-100);" aria-hidden="true"></i>
               <div>
                 <div class="export-format-name">CSV (.csv)</div>
@@ -3086,17 +3086,14 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
           </div>
           <div class="modal-footer">
             <button class="btn-secondary" onclick="closeExportModal()">Cancel</button>
-            <button class="btn-primary" id="export-confirm-btn" onclick="confirmExport()">Export</button>
+            <button class="btn-primary" id="export-confirm-btn" onclick="confirmExport()" disabled style="opacity:0.5;cursor:not-allowed;">Export</button>
           </div>
         </div>
 
         <!-- State 2: Processing -->
         <div id="export-state-processing" style="display:none;">
-          <div class="modal-title" style="margin-bottom:16px;display:flex;align-items:center;gap:10px;">
-            <div class="export-spinner" style="width:20px;height:20px;border-width:2px;flex-shrink:0;"></div>
-            Generating your export
-          </div>
-          <p style="font-size:16px;color:var(--platform-100);margin:0 0 8px;line-height:1.5;">Your export is being prepared.</p>
+          <div class="modal-title" style="margin-bottom:16px;">Generating your export</div>
+          <p style="font-size:16px;color:var(--platform-100);margin:0 0 8px;line-height:1.5;display:flex;align-items:center;gap:10px;"><span class="export-spinner" style="width:20px;height:20px;border-width:2px;flex-shrink:0;display:inline-block;"></span>Your export is being prepared.</p>
           <p style="font-size:16px;color:var(--platform-100);margin:0;line-height:1.5;">Stay here and a Download button will appear when ready, or close and return later to download.</p>
           <div class="modal-footer">
             <button class="btn-secondary" onclick="closeExportModal()">Close</button>
@@ -5147,6 +5144,11 @@ function openExportModal(){
     }
     _exportData = prev;
   }
+  var exportBtn = document.getElementById('export-confirm-btn');
+  if(exportBtn && _exportState === 'select'){
+    exportBtn.disabled = true; exportBtn.style.opacity = '0.5'; exportBtn.style.cursor = 'not-allowed';
+    document.querySelectorAll('.export-format-card').forEach(function(c){ c.classList.remove('selected'); c.setAttribute('aria-pressed','false'); });
+  }
   document.getElementById('modal-export').classList.add('open');
 }
 function closeExportModal(){
@@ -5160,6 +5162,8 @@ function selectExportFormat(card){
   });
   card.classList.add('selected');
   card.setAttribute('aria-pressed','true');
+  var btn = document.getElementById('export-confirm-btn');
+  if(btn){ btn.disabled = false; btn.style.opacity = ''; btn.style.cursor = ''; }
 }
 var _exportData = null; // Stores simulated export result
 

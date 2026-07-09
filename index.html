@@ -3566,6 +3566,11 @@ function nrFilter(){
     var show = catMatch && textMatch;
     row.style.display = show ? '' : 'none';
     if(show) visible++;
+    // Highlight matching text
+    var nameEl = row.querySelector('.nr-tmpl-name');
+    var descEl = row.querySelector('.nr-tmpl-desc');
+    if(nameEl) nameEl.innerHTML = query ? nameEl.textContent.replace(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'), '<mark class="rep-hl">$1</mark>') : nameEl.textContent;
+    if(descEl) descEl.innerHTML = query ? descEl.textContent.replace(new RegExp('(' + query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'), '<mark class="rep-hl">$1</mark>') : descEl.textContent;
   });
   var empty = document.getElementById('nr-empty');
   if(empty) empty.style.display = visible === 0 ? '' : 'none';

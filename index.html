@@ -4580,6 +4580,8 @@ function startEditTitle(){
   if(editBtn) editBtn.style.display = 'none';
   var inpWrap = document.getElementById('ed-title-input-wrap');
   if(inpWrap) inpWrap.style.display = 'flex';
+  var headActions = document.querySelector('.ed-head-actions');
+  if(headActions) headActions.style.visibility = 'hidden';
   inp.focus();
   inp.select();
 }
@@ -4608,6 +4610,8 @@ function commitTitle(){
   if(inpWrap) inpWrap.style.display = 'none';
   h1.style.display = '';
   if(editBtn) editBtn.style.display = '';
+  var headActions = document.querySelector('.ed-head-actions');
+  if(headActions) headActions.style.visibility = '';
   if(newTitle !== _titleBeforeEdit) editorHasChanges = true;
 }
 function cancelTitle(){
@@ -4623,6 +4627,8 @@ function cancelTitle(){
   if(editBtn) editBtn.style.display = '';
   var inpWrap = document.getElementById('ed-title-input-wrap');
   if(inpWrap) inpWrap.style.display = 'none';
+  var headActions = document.querySelector('.ed-head-actions');
+  if(headActions) headActions.style.visibility = '';
 }
 function backToReports(){
   if(editorHasChanges || _isNewReport){

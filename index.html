@@ -1746,8 +1746,8 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                   <div class="dg-date-main">6/3/2026</div>
                   <div class="dg-date-sub">by Jessica Lin</div>
                 </td>
-                <td style="color:var(--platform-60);font-size:14px;">—</td>
-                <td style="color:var(--platform-100)">—</td>
+                <td style="color:var(--platform-60);font-size:14px;"</td>
+                <td style="color:var(--platform-100)"</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-chevron-down"/></svg></button>
@@ -1786,7 +1786,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                   <div class="dg-date-main">5/28/2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
-                <td style="color:var(--platform-60);font-size:14px;">—</td>
+                <td style="color:var(--platform-60);font-size:14px;"</td>
                 <td style="color:var(--platform-100)">Mailing Lists</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
@@ -1902,8 +1902,8 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                   <div class="dg-date-main">4/12/2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
-                <td style="color:var(--platform-60);font-size:14px;">—</td>
-                <td style="color:var(--platform-100)">—</td>
+                <td style="color:var(--platform-60);font-size:14px;"</td>
+                <td style="color:var(--platform-100)"</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-chevron-down"/></svg></button>
@@ -1980,8 +1980,8 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                   <div class="dg-date-main">3/10/2026</div>
                   <div class="dg-date-sub">by Mike Cross</div>
                 </td>
-                <td style="color:var(--platform-60);font-size:14px;">—</td>
-                <td style="color:var(--platform-100)">—</td>
+                <td style="color:var(--platform-60);font-size:14px;"</td>
+                <td style="color:var(--platform-100)"</td>
                 <td class="col-actions" onclick="event.stopPropagation()">
                   <div class="dd-wrap">
                     <button class="actions-btn" onclick="toggleActionsMenu(event, this)">Actions <svg class="nav-svg-icon" style="width:10px;height:10px;"><use href="#icon-chevron-down"/></svg></button>
@@ -2466,7 +2466,7 @@ tr[data-status="inactive"] .dg-type-line .dg-dot{ color:var(--platform-60); }
                 <td data-col="lifetime" class="right lifetime">$29,800</td>
                 <td data-col="lapsed" class="right">286d</td>
                 <td data-col="churn"><span class="risk-pill med">64%</span></td>
-                <td data-col="lastcontact">—</td>
+                <td data-col="lastcontact"</td>
               </tr>
               <tr>
                 <td data-col="name"><div class="name-cell"><span class="name-txt">Thomas Okafor</span></div></td>
@@ -3441,7 +3441,7 @@ function openEditorRow(row){
     'Grant Reporting — 501(c)(3)':  {count:'<strong>28</strong> transactions', amount:'<strong>$185,000</strong> total'},
     'Missing Primary Email':             {count:'<strong>412</strong> constituents', amount:null},
   };
-  var stats = statsMap[title] || {count:'<strong>—</strong>', amount:null};
+  var stats = statsMap[title] || {count:'<strong></strong>', amount:null};
   var countEl = document.getElementById('ed-stat-count');
   var amountEl = document.getElementById('ed-stat-amount');
   var dotEl = document.getElementById('ed-stat-dot');
@@ -7615,9 +7615,9 @@ function addReportToList(title){
   tr.dataset.status = 'active';
   tr.setAttribute('onclick', 'openListReport(this)');
   tr.innerHTML = '<td class="td-name">'+title+'</td>'+
-    '<td class="td-freq">&mdash;</td>'+
+    '<td class="td-freq"</td>'+
     ''+
-    '<td class="td-folder">&mdash;</td>'+
+    '<td class="td-folder"</td>'+
     '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
     '<td><div class="td-date">'+dateStr+'</div><div class="td-date-sub">by Dennis Fois</div></td>'+
     '<td onclick="event.stopPropagation()"><div class="dd-wrap"><button class="action-btn" onclick="toggleAction(this)">Action <svg viewBox="0 0 512 512"><use href="#icon-chevron-down"/></svg></button><div class="dd-menu"><button class="dd-item">View Report</button><button class="dd-item">Copy Report</button><button class="dd-item" onclick="closeAllDd();openExportModal()">Export</button><button class="dd-item disabled">Move to Folder</button><button class="dd-item">Deactivate Report</button><button class="dd-item destructive">Delete Report</button></div></div></td>';

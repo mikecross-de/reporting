@@ -3362,6 +3362,7 @@ function openEditorRow(row){
   try{
   editorHasChanges = false;
   _isNewReport = false;
+  _originFolder = (activeFilters && activeFilters.folder && activeFilters.folder !== 'all') ? activeFilters.folder : null;
   var creator = row.dataset.creator || '';
   currentEditorCreator = creator;
   var name = row.querySelector('.dg-name');
@@ -4505,6 +4506,7 @@ function dismissPennyInsight(){
 // ─── Report Details modal ───
 var editorHasChanges = false;
 var _isNewReport = false;
+var _originFolder = null; // folder user came from when opening a report
 var currentEditorCreator = '';
 var pendingDeleteRow = null;
 var pendingDeleteName = '';
@@ -4644,6 +4646,14 @@ function backToReports(){
     document.getElementById('modal-unsaved').classList.add('open');
   } else {
     showView('reports-list');
+    if(_originFolder){
+      // Re-apply the folder filter so user lands back in their folder
+      setTimeout(function(){
+        var folderItem = document.querySelector('#dd-folder .dd-item[data-val="' + _originFolder + '"]');
+        if(folderItem) folderItem.click();
+      }, 50);
+    }
+    _originFolder = null;
   }
 }
 function cancelEditor(){
